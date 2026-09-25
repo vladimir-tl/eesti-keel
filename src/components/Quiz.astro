@@ -1,0 +1,459 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+import type { Question } from '../data/questions';
+import { t } from '../data/questions';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  intro: string;
+  questions: Question[];
+  verdicts: readonly { min: number; text: string }[];
+  backHref?: string;
+  backLabel?: string;
+  perGroup?: number;
+  hint?: string[];
+}
+const { lang, title, intro, questions, verdicts, backHref, backLabel, perGroup = 0, hint } = Astro.props;
+const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const hintHtml = (hint ?? []).map((l) => `<p>${esc(l).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`).join('');
+const s = ui[lang];
+
+const config = {
+  ui: s,
+  verdicts,
+  perGroup,
+  questions: questions.map((q) => ({
+    prompt: t(q.prompt, lang),
+    options: q.options.map((o) => t(o, lang)),
+    answer: q.answer,
+    accept: q.accept ?? [],
+    explain: q.explain[lang],
+    group: (q as Question & { group?: string }).group ?? '',
+  })),
+};
+const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
+---
+<div class="card" id="app" data-config={JSON.stringify(config)}>
+  <section id="intro">
+    <h1>{title}</h1>
+    <p class="muted">{intro}</p>
+    <div class="row">
+      <button class="btn" id="start">{s.start}</button>
+      {backHref && <a class="muted" href={backHref}>{backLabel}</a>}
+    </div>
+  </section>
+
+  <section id="loader" hidden aria-live="polite">
+    <div class="deck" aria-hidden="true"><i></i><i></i><i></i></div>
+    <p class="muted">{s.shuffling}</p>
+  </section>
+
+  <section id="quiz" hidden>
+    <progress id="bar" value="0" max="1"></progress>
+    <div class="muted" id="counter"></div>
+    <p class="prompt" id="prompt"></p>
+    <p class="muted drag-hint" id="dragHint" hidden>{s.dragHint}</p>
+    <div class="options" id="options"></div>
+    <div id="typing" hidden>
+      <input class="field" id="text" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder={s.inputPlaceholder} />
+      <div class="letters muted">
+        {s.typeHint}
+        {letters.map((c) => <button type="button" class="letter">{c}</button>)}
+      </div>
+    </div>
+    <div class="feedback" id="feedback" aria-live="polite" hidden></div>
+    <button class="btn" id="next" disabled>{s.next}</button>
+  </section>
+
+  {hint && (
+    <details class="hint" id="hint">
+      <summary>{s.hint}</summary>
+      <div class="hint-body" set:html={hintHtml} />
+    </details>
+  )}
+
+  <section id="result" hidden>
+    <div class="muted">{s.resultTitle}</div>
+    <div class="level" id="score"></div>
+    <p id="verdict"></p>
+    <h2>{s.review}</h2>
+    <div id="review"></div>
+    <div class="row gap">
+      <button class="btn" id="retry">{s.retry}</button>
+      {backHref && <a class="muted" href={backHref}>{backLabel}</a>}
+    </div>
+  </section>
+</div>
+
+<style>
+  .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .row a { text-decoration: none; }
+  .letters { display: flex; gap: 6px; align-items: center; margin-bottom: 16px; font-size: .875rem; }
+  .hint { margin: 16px 0 0; border: 1px solid var(--line); border-radius: 10px; }
+  .hint summary { padding: 10px 14px; cursor: pointer; color: var(--accent); font-size: .9rem; }
+  .hint summary:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); border-radius: 10px; }
+  .hint-body { padding: 0 14px 4px; font-size: .9rem; }
+  .hint-body :global(p) { margin: 0 0 10px; line-height: 1.5; }
+  #loader { text-align: center; padding: 32px 0; }
+  .deck { position: relative; width: 120px; height: 84px; margin: 0 auto 16px; }
+  .deck i {
+    position: absolute; left: 50%; top: 0; width: 64px; height: 84px; margin-left: -32px;
+    border: 2px solid var(--accent); border-radius: 10px; background: var(--card);
+    animation: shuffle 1s ease-in-out infinite;
+  }
+  .deck i:nth-child(2) { animation-delay: .15s; }
+  .deck i:nth-child(3) { animation-delay: .3s; }
+  @keyframes shuffle {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-44px) rotate(-14deg); z-index: 1; }
+    50% { transform: translateX(0) rotate(0); }
+    75% { transform: translateX(44px) rotate(14deg); z-index: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .deck i { animation-duration: 2.4s; } }
+  :global(.options .opt:disabled) { cursor: default; }
+  :global(.options .opt:disabled:hover) { border-color: var(--line); background: transparent; }
+  :global(.options .opt.is-right), :global(.options .opt.is-right:hover) {
+    border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent);
+    box-shadow: 0 0 0 2px var(--ok) inset;
+  }
+  :global(.options .opt.is-wrong), :global(.options .opt.is-wrong:hover) {
+    border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent);
+    box-shadow: 0 0 0 2px var(--bad) inset;
+  }
+  :global(.options .opt.is-right::after) { content: ' ✓'; color: var(--ok); }
+  :global(.options .opt.is-wrong::after) { content: ' ✗'; color: var(--bad); }
+  .drag-hint { font-size: .85rem; margin: 8px 0 0; }
+  :global(.options.bank) { display: flex; flex-wrap: wrap; gap: 8px; }
+  :global(.options.bank .opt) { width: auto; touch-action: none; user-select: none; cursor: grab; }
+  :global(.options.bank .opt.is-away) { opacity: .35; }
+  :global(.blank) {
+    display: inline-block; min-width: 5.5em; padding: 0 10px; margin: 0 2px;
+    border-bottom: 2px dashed var(--accent); border-radius: 6px 6px 0 0;
+    text-align: center; transition: background-color .15s;
+  }
+  :global(.blank:empty::before) { content: '\00a0'; }
+  :global(.blank.over) { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+  :global(.blank.is-right) { border-bottom: 2px solid var(--ok); color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+  :global(.blank.is-wrong) { border-bottom: 2px solid var(--bad); color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent); }
+  :global(.drag-ghost) {
+    position: fixed; z-index: 10; pointer-events: none; margin: 0; width: auto;
+    background: var(--card); box-shadow: 0 6px 18px rgba(0, 0, 0, .2); transform: rotate(-2deg);
+  }
+  #text.is-right { border-color: var(--ok); box-shadow: 0 0 0 2px var(--ok) inset; }
+  #text.is-wrong { border-color: var(--bad); box-shadow: 0 0 0 2px var(--bad) inset; }
+  .feedback { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: .95rem; }
+  .feedback :global(p) { margin: 4px 0 0; }
+  .letter {
+    padding: 2px 10px; border: 1px solid var(--line); border-radius: 8px;
+    background: transparent; color: var(--fg); font: inherit; cursor: pointer;
+  }
+</style>
+
+<script>
+  interface Q { prompt: string; options: string[]; answer: number; accept: string[]; explain: string; group: string }
+  type Ans = number | string | null;
+
+  const root = document.getElementById('app')!;
+  const cfg = JSON.parse(root.dataset.config!) as {
+    ui: Record<string, any>;
+    verdicts: { min: number; text: string }[];
+    questions: Q[];
+    perGroup: number;
+  };
+  const { ui } = cfg;
+  let questions: Q[] = cfg.questions;
+
+  // Fisher–Yates shuffle, so every attempt has a new question order
+  const shuffled = <T,>(list: T[]): T[] => {
+    const a = [...list];
+    for (let k = a.length - 1; k > 0; k--) {
+      const j = Math.floor(Math.random() * (k + 1));
+      [a[k], a[j]] = [a[j], a[k]];
+    }
+    return a;
+  };
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const show = (name: 'intro' | 'loader' | 'quiz' | 'result') => {
+    (['intro', 'loader', 'quiz', 'result'] as const).forEach((n) => ($(n).hidden = n !== name));
+    const hint = document.getElementById('hint');
+    if (hint) hint.hidden = name === 'loader' || name === 'result';
+  };
+
+  const norm = (v: string) =>
+    v
+      .toLowerCase()
+      .replace(/[’‘`´ʼ]/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/[.!]+$/, '')
+      .trim();
+
+  const isCorrect = (q: Q, a: Ans) =>
+    q.answer >= 0 ? a === q.answer : typeof a === 'string' && q.accept.some((x) => norm(x) === norm(a));
+
+  let i = 0;
+  let answers: Ans[] = [];
+  let checked: boolean[] = [];
+
+  const setNext = () => {
+    const a = answers[i];
+    const next = $<HTMLButtonElement>('next');
+    next.disabled = a === null || (typeof a === 'string' && !a.trim());
+    next.textContent = !checked[i] ? ui.check : i === questions.length - 1 ? ui.finish : ui.next;
+  };
+
+  // Right after answering: colour the chosen option / field, reveal the right answer and the explanation.
+  function showFeedback() {
+    const q = questions[i];
+    const ok = isCorrect(q, answers[i]);
+    const fb = $('feedback');
+    fb.hidden = !checked[i];
+    if (!checked[i]) return;
+    if (q.options.length) {
+      const gap = $('prompt').querySelector('.blank');
+      gap?.classList.toggle('is-right', ok);
+      gap?.classList.toggle('is-wrong', !ok);
+      $('options').querySelectorAll<HTMLButtonElement>('.opt').forEach((el, k) => {
+        el.classList.remove('is-away');
+        el.disabled = true;
+        el.classList.toggle('is-right', k === q.answer);
+        el.classList.toggle('is-wrong', k === answers[i] && !ok);
+      });
+    } else {
+      const text = $<HTMLInputElement>('text');
+      text.readOnly = true;
+      text.classList.toggle('is-right', ok);
+      text.classList.toggle('is-wrong', !ok);
+    }
+    const head = document.createElement('strong');
+    head.className = ok ? 'ok' : 'bad';
+    head.textContent = ok ? `✓ ${ui.rightNow}` : `✗ ${ui.wrongNow} ${q.answer >= 0 ? q.options[q.answer] : q.accept[0]}`;
+    const ex = document.createElement('p');
+    ex.className = 'muted';
+    ex.textContent = q.explain;
+    fb.replaceChildren(head, ex);
+  }
+
+  function check() {
+    checked[i] = true;
+    showFeedback();
+    setNext();
+    $('next').focus();
+  }
+
+  // A multiple-choice prompt with exactly one "___" becomes a drag-into-the-gap exercise.
+  const gapParts = (q: Q) => {
+    const parts = q.prompt.split('___');
+    return q.options.length && parts.length === 2 ? parts : null;
+  };
+
+  function choose(idx: number) {
+    if (checked[i]) return;
+    answers[i] = idx;
+    const opts = $('options');
+    opts.querySelectorAll('.opt').forEach((el, k) => el.setAttribute('aria-pressed', String(k === idx)));
+    const gap = $('prompt').querySelector('.blank');
+    if (gap) {
+      gap.textContent = questions[i].options[idx];
+      opts.querySelectorAll('.opt').forEach((el, k) => el.classList.toggle('is-away', k === idx));
+    }
+    check();
+  }
+
+  // Pointer-based dragging (works with mouse and touch); a short press without movement counts as a tap.
+  function makeDraggable(b: HTMLButtonElement, idx: number) {
+    let ghost: HTMLElement | null = null;
+    let sx = 0, sy = 0, dx = 0, dy = 0;
+    let dragged = false;
+    const gapAt = (x: number, y: number) => document.elementFromPoint(x, y)?.closest('.blank') ?? null;
+    b.addEventListener('pointerdown', (e) => {
+      if (checked[i] || e.button !== 0) return;
+      sx = e.clientX; sy = e.clientY; dragged = false;
+      const r = b.getBoundingClientRect();
+      dx = e.clientX - r.left; dy = e.clientY - r.top;
+      b.setPointerCapture(e.pointerId);
+    });
+    b.addEventListener('pointermove', (e) => {
+      if (!b.hasPointerCapture(e.pointerId)) return;
+      if (!dragged && Math.hypot(e.clientX - sx, e.clientY - sy) < 6) return;
+      if (!ghost) {
+        dragged = true;
+        ghost = b.cloneNode(true) as HTMLElement;
+        ghost.classList.add('drag-ghost');
+        document.body.append(ghost);
+        b.classList.add('is-away');
+      }
+      ghost.style.left = `${e.clientX - dx}px`;
+      ghost.style.top = `${e.clientY - dy}px`;
+      const gap = $('prompt').querySelector('.blank');
+      gap?.classList.toggle('over', gapAt(e.clientX, e.clientY) === gap);
+    });
+    const end = (e: PointerEvent, drop: boolean) => {
+      if (!ghost) return;
+      ghost.remove();
+      ghost = null;
+      b.classList.remove('is-away');
+      $('prompt').querySelector('.blank')?.classList.remove('over');
+      if (drop && gapAt(e.clientX, e.clientY)) choose(idx);
+    };
+    b.addEventListener('pointerup', (e) => end(e, true));
+    b.addEventListener('pointercancel', (e) => end(e, false));
+    // Tap / keyboard: put the word into the gap directly. Swallow the click that follows a drag.
+    b.addEventListener('click', () => {
+      if (dragged) { dragged = false; return; }
+      choose(idx);
+    });
+  }
+
+  function renderQuestion() {
+    const q = questions[i];
+    $<HTMLProgressElement>('bar').value = i;
+    $<HTMLProgressElement>('bar').max = questions.length;
+    $('counter').textContent = `${ui.question} ${i + 1} ${ui.of} ${questions.length}`;
+    const parts = gapParts(q);
+    const prompt = $('prompt');
+    if (parts) {
+      const gap = document.createElement('span');
+      gap.className = 'blank';
+      if (typeof answers[i] === 'number') gap.textContent = q.options[answers[i] as number];
+      prompt.replaceChildren(parts[0], gap, parts[1]);
+    } else {
+      prompt.textContent = q.prompt;
+    }
+    $('dragHint').hidden = !parts;
+
+    const opts = $('options');
+    opts.classList.toggle('bank', !!parts);
+    const text = $<HTMLInputElement>('text');
+    const typing = $('typing');
+    opts.replaceChildren();
+    if (q.options.length) {
+      typing.hidden = true;
+      opts.hidden = false;
+      q.options.forEach((label, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.textContent = label;
+        b.setAttribute('aria-pressed', String(answers[i] === idx));
+        if (parts) makeDraggable(b, idx);
+        else b.onclick = () => choose(idx);
+        opts.append(b);
+      });
+    } else {
+      opts.hidden = true;
+      typing.hidden = false;
+      text.value = typeof answers[i] === 'string' ? (answers[i] as string) : '';
+      text.readOnly = false;
+      text.classList.remove('is-right', 'is-wrong');
+      text.focus();
+    }
+    showFeedback();
+    setNext();
+  }
+
+  function advance() {
+    if ($<HTMLButtonElement>('next').disabled) return;
+    if (!checked[i]) return check();
+    if (i < questions.length - 1) {
+      i++;
+      renderQuestion();
+    } else {
+      renderResult();
+    }
+  }
+
+  function renderResult() {
+    const correct = questions.filter((q, k) => isCorrect(q, answers[k])).length;
+    const hit = cfg.verdicts.find((v) => correct / questions.length >= v.min);
+    $('score').textContent = `${correct} / ${questions.length}`;
+    $('verdict').textContent = hit ? hit.text : '';
+
+    const review = $('review');
+    review.replaceChildren();
+    questions.forEach((q, k) => {
+      const ok = isCorrect(q, answers[k]);
+      const a = answers[k];
+      const given = a === null || a === '' ? ui.noAnswer : typeof a === 'number' ? q.options[a] : a;
+      const right = q.answer >= 0 ? q.options[q.answer] : q.accept[0];
+
+      const row = document.createElement('div');
+      row.className = 'rev';
+      const head = document.createElement('div');
+      head.textContent = `${k + 1}. ${q.prompt}`;
+      const line = document.createElement('div');
+      line.className = ok ? 'ok' : 'bad';
+      line.textContent = `${ok ? '✓' : '✗'} ${ui.yourAnswer}: ${given}`;
+      row.append(head, line);
+      if (!ok) {
+        const c = document.createElement('div');
+        c.className = 'ok';
+        c.textContent = `${ui.correctAnswer}: ${right}`;
+        row.append(c);
+      }
+      const ex = document.createElement('div');
+      ex.className = 'muted';
+      ex.textContent = q.explain;
+      row.append(ex);
+      review.append(row);
+    });
+    show('result');
+  }
+
+  // New random order every attempt: questions, and the options inside each question.
+  const buildRun = (): Q[] => {
+    let pool = cfg.questions;
+    if (cfg.perGroup > 0) {
+      const byGroup = new Map<string, Q[]>();
+      pool.forEach((q) => byGroup.set(q.group, [...(byGroup.get(q.group) ?? []), q]));
+      pool = [...byGroup.values()].flatMap((g) => shuffled(g).slice(0, cfg.perGroup));
+    }
+    return shuffled(pool).map((q) => {
+      if (!q.options.length) return q;
+      const order = shuffled(q.options.map((_, k) => k));
+      return { ...q, options: order.map((k) => q.options[k]), answer: order.indexOf(q.answer) };
+    });
+  };
+
+  // Short shuffling animation before the first question.
+  const LOADER_MS = matchMedia('(prefers-reduced-motion: reduce)').matches ? 800 : 2600;
+  let starting = false;
+  $('start').onclick = () => {
+    if (starting) return;
+    starting = true;
+    questions = buildRun();
+    i = 0;
+    answers = questions.map(() => null);
+    checked = questions.map(() => false);
+    show('loader');
+    setTimeout(() => {
+      starting = false;
+      show('quiz');
+      renderQuestion();
+    }, LOADER_MS);
+  };
+  document.querySelectorAll<HTMLButtonElement>('.letter').forEach((b) => {
+    b.onclick = () => {
+      if (checked[i]) return;
+      const f = $<HTMLInputElement>('text');
+      f.value += b.textContent;
+      f.focus();
+      answers[i] = f.value;
+      setNext();
+    };
+  });
+  $('next').onclick = advance;
+  $('retry').onclick = () => show('intro');
+  $<HTMLInputElement>('text').addEventListener('input', (e) => {
+    if (checked[i]) return;
+    answers[i] = (e.target as HTMLInputElement).value;
+    setNext();
+  });
+  $<HTMLInputElement>('text').addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    // Otherwise the same key press would also activate #next, which just got focus, and skip the feedback.
+    e.preventDefault();
+    advance();
+  });
+</script>

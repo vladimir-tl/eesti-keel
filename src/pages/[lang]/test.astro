@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import Quiz from '../../components/Quiz.astro';
+import { langs, ui, type Lang } from '../../i18n/ui';
+import { topicsOf } from '../../data/topics';
+
+export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
+const lang = Astro.params.lang as Lang;
+const s = ui[lang];
+// Every topic's questions go in; the quiz draws one random question per topic on each attempt.
+const questions = topicsOf('A1').flatMap((tp) => tp.questions.map((q) => ({ ...q, group: tp.id })));
+---
+<Base lang={lang} path="test" title={s.seoTestTitle} description={s.seoTestDesc}>
+  <Quiz lang={lang} title={s.introTitle} intro={s.introText} questions={questions} perGroup={1}
+    verdicts={s.verdictsTest} backHref={`/${lang}/topics`} backLabel={s.topicsTitle} />
+</Base>

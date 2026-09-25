@@ -1,0 +1,138 @@
+import { toEt, fromEt, typeEt, m, ty } from './helpers';
+import type { Question } from './questions';
+
+export const work: Question[] = [
+  fromEt('töökoht', ['рабочее место, должность', 'выходной', 'зарплата', 'начальник'], ['workplace, job', 'day off', 'salary', 'boss'], 0),
+  fromEt('ülemus', ['начальник', 'коллега', 'клиент', 'секретарь'], ['boss', 'colleague', 'customer', 'secretary'], 0),
+  typeEt('коллега', 'colleague', ['kolleeg']),
+  toEt('зарплата', 'salary', ['palk', 'puhkus', 'töö', 'raha'], 0),
+  fromEt('koosolek', ['собрание, встреча', 'обед', 'отпуск', 'экзамен'], ['meeting', 'lunch', 'holiday', 'exam'], 0),
+  fromEt('ettevõte', ['предприятие, фирма', 'предложение', 'предприниматель', 'офис'], ['company', 'offer', 'entrepreneur', 'office'], 0),
+  fromEt('klient', ['клиент', 'коллега', 'гость', 'продавец'], ['customer', 'colleague', 'guest', 'seller'], 0),
+  fromEt('kandideerima', ['претендовать, подавать заявку', 'увольняться', 'отдыхать', 'учиться'], ['to apply (for a job)', 'to resign', 'to rest', 'to study'], 0),
+  typeEt('безработный', 'unemployed', ['töötu']),
+  m('Ma otsin ___. (работу)', 'Ma otsin ___. (a job)', ['tööd', 'töö', 'tööl', 'töölt'], 0,
+    'otsima + партитив: tööd.', 'otsima + partitive: tööd.'),
+  m('Ma töötan ___. (в фирме)', 'Ma töötan ___. (at a company)', ['ettevõttes', 'ettevõte', 'ettevõttest', 'ettevõttele'], 0,
+    'ettevõte → ettevõttes («в фирме»).', 'ettevõte → ettevõttes (“at a company”).'),
+  fromEt('Mul on homme koosolek', ['У меня завтра встреча', 'У меня вчера была встреча', 'Я иду на обед', 'У меня отпуск'], ['I have a meeting tomorrow', 'I had a meeting yesterday', 'I am going to lunch', 'I am on holiday'], 0),
+];
+
+export const education: Question[] = [
+  fromEt('ülikool', ['университет', 'школа', 'детский сад', 'курс'], ['university', 'school', 'kindergarten', 'course'], 0),
+  fromEt('lasteaed', ['детский сад', 'школа', 'университет', 'библиотека'], ['kindergarten', 'school', 'university', 'library'], 0),
+  fromEt('põhikool', ['основная школа', 'гимназия', 'детский сад', 'колледж'], ['basic school', 'upper secondary school', 'kindergarten', 'college'], 0),
+  fromEt('üliõpilane', ['студент', 'ученик', 'учитель', 'преподаватель'], ['university student', 'pupil', 'teacher', 'lecturer'], 0),
+  fromEt('õppejõud', ['преподаватель вуза', 'ученик', 'директор', 'студент'], ['university lecturer', 'pupil', 'director', 'student'], 0),
+  fromEt('loeng', ['лекция', 'экзамен', 'урок', 'задание'], ['lecture', 'exam', 'lesson', 'task'], 0),
+  toEt('предмет (в школе)', 'subject', ['aine', 'ained', 'õppimine', 'tund'], 0),
+  typeEt('оценка', 'grade', ['hinne']),
+  fromEt('kursus', ['курс', 'класс', 'урок', 'экзамен'], ['course', 'class', 'lesson', 'exam'], 0),
+  m('Ma ___ ülikooli. (закончил)', 'Ma ___ ülikooli. (I graduated from)', ['lõpetasin', 'lõpetan', 'lõpetama', 'lõpetas'], 0,
+    'lõpetama → lõpetasin («закончил»).', 'lõpetama → lõpetasin (“graduated”).'),
+  m('Ma õpin ___. (в университете)', 'Ma õpin ___. (at university)', ['ülikoolis', 'ülikool', 'ülikooli', 'ülikoolist'], 0,
+    'ülikool → ülikoolis.', 'ülikool → ülikoolis.'),
+  ty('Напишите: «Я учусь в университете» (3 слова)', 'Write: “I study at university” (3 words)', ['ma õpin ülikoolis'], 'Ma õpin ülikoolis.', 'Ma õpin ülikoolis.'),
+];
+
+export const housing: Question[] = [
+  fromEt('üürima', ['снимать (жильё)', 'покупать', 'продавать', 'строить'], ['to rent (a home)', 'to buy', 'to sell', 'to build'], 0),
+  fromEt('üür', ['арендная плата', 'налог', 'цена', 'зарплата'], ['rent', 'tax', 'price', 'salary'], 0),
+  fromEt('korrus', ['этаж', 'квартира', 'лестница', 'комната'], ['floor, storey', 'flat', 'stairs', 'room'], 0),
+  typeEt('лифт', 'lift, elevator', ['lift']),
+  toEt('сосед', 'neighbour', ['naaber', 'sõber', 'sugulane', 'külaline'], 0),
+  fromEt('kolima', ['переезжать', 'жить', 'убираться', 'ремонтировать'], ['to move (house)', 'to live', 'to clean', 'to repair'], 0),
+  fromEt('remont', ['ремонт', 'мебель', 'уборка', 'аренда'], ['renovation, repair', 'furniture', 'cleaning', 'rent'], 0),
+  fromEt('elekter', ['электричество', 'вода', 'отопление', 'газ'], ['electricity', 'water', 'heating', 'gas'], 0),
+  fromEt('küte', ['отопление', 'вода', 'свет', 'окно'], ['heating', 'water', 'light', 'window'], 0),
+  fromEt('rõdu', ['балкон', 'крыша', 'подвал', 'коридор'], ['balcony', 'roof', 'basement', 'corridor'], 0),
+  m('Ma elan ___ korrusel. (на третьем)', 'Ma elan ___ korrusel. (on the third floor)', ['kolmas', 'kolmandal', 'kolmandas', 'kolm'], 1,
+    'Этаж — порядковое числительное с -l: kolmandal korrusel.', 'Floor — an ordinal with -l: kolmandal korrusel.'),
+  m('Ma ___ korteri. (снимаю)', 'Ma ___ korteri. (I rent)', ['üürin', 'üürid', 'üürib', 'üürima'], 0,
+    'üürima: üürin, üürid, üürib.', 'üürima: üürin, üürid, üürib.'),
+];
+
+export const bank: Question[] = [
+  fromEt('konto', ['счёт (в банке)', 'карта', 'чек', 'сдача'], ['account', 'card', 'receipt', 'change'], 0),
+  fromEt('pangakaart', ['банковская карта', 'кредит', 'наличные', 'паспорт'], ['bank card', 'loan', 'cash', 'passport'], 0),
+  fromEt('ülekanne', ['перевод (денег)', 'взнос', 'кредит', 'проценты'], ['transfer', 'deposit', 'loan', 'interest'], 0),
+  fromEt('laen', ['кредит, заём', 'счёт', 'наличные', 'налог'], ['loan', 'account', 'cash', 'tax'], 0),
+  fromEt('pakk', ['посылка', 'письмо', 'марка', 'адрес'], ['parcel', 'letter', 'stamp', 'address'], 0),
+  typeEt('письмо', 'letter', ['kiri']),
+  typeEt('марка (почтовая)', 'stamp', ['mark']),
+  fromEt('saatma', ['отправлять', 'получать', 'платить', 'писать'], ['to send', 'to receive', 'to pay', 'to write'], 0),
+  fromEt('pangaautomaat', ['банкомат', 'касса', 'банк', 'карта'], ['ATM', 'till', 'bank', 'card'], 0),
+  fromEt('Ma tahan konto avada', ['Я хочу открыть счёт', 'Я хочу закрыть счёт', 'Я хочу перевести деньги', 'Я хочу взять кредит'], ['I want to open an account', 'I want to close an account', 'I want to transfer money', 'I want to take a loan'], 0),
+  m('Kus on ___? (банкомат)', 'Kus on ___? (the ATM)', ['pangaautomaat', 'pakk', 'konto', 'mark'], 0,
+    'Kus on pangaautomaat? — «Где банкомат?»', 'Kus on pangaautomaat? — “Where is the ATM?”'),
+  fromEt('Ma tahan saata paki', ['Я хочу отправить посылку', 'Я хочу получить посылку', 'Я хочу купить марку', 'Я хочу открыть счёт'], ['I want to send a parcel', 'I want to receive a parcel', 'I want to buy a stamp', 'I want to open an account'], 0),
+];
+
+export const official: Question[] = [
+  fromEt('dokument', ['документ', 'заявление', 'паспорт', 'справка'], ['document', 'application', 'passport', 'certificate'], 0),
+  fromEt('avaldus', ['заявление', 'документ', 'подпись', 'анкета'], ['application (form)', 'document', 'signature', 'questionnaire'], 0),
+  fromEt('allkiri', ['подпись', 'печать', 'имя', 'адрес'], ['signature', 'stamp', 'name', 'address'], 0),
+  typeEt('паспорт', 'passport', ['pass']),
+  fromEt('isikukood', ['личный код', 'номер телефона', 'адрес', 'фамилия'], ['personal ID code', 'phone number', 'address', 'surname'], 0),
+  fromEt('elamisluba', ['вид на жительство', 'виза', 'паспорт', 'разрешение на работу'], ['residence permit', 'visa', 'passport', 'work permit'], 0),
+  fromEt('tähtaeg', ['срок, дедлайн', 'приём', 'время', 'дата'], ['deadline', 'appointment', 'time', 'date'], 0),
+  fromEt('registreerima', ['регистрировать', 'подписывать', 'платить', 'заполнять'], ['to register', 'to sign', 'to pay', 'to fill in'], 0),
+  fromEt('täitma', ['заполнять; выполнять', 'подписывать', 'терять', 'находить'], ['to fill in; to fulfil', 'to sign', 'to lose', 'to find'], 0),
+  typeEt('полиция', 'police', ['politsei']),
+  m('Ma tahaksin ___ aja. (записаться на приём)', 'Ma tahaksin ___ aja. (to book an appointment)', ['broneerida', 'broneerin', 'broneerib', 'broneerima'], 0,
+    'aja broneerima — «записаться на приём». После tahaksin — инфинитив на -da: broneerida.', 'aja broneerima — “to book an appointment”. After tahaksin — the -da infinitive: broneerida.'),
+  m('Palun ___ see vorm. (заполните)', 'Palun ___ see vorm. (fill in)', ['täitke', 'täidan', 'täidab', 'täitma'], 0,
+    'Вежливая форма: täitke.', 'Polite imperative: täitke.'),
+];
+
+export const shopping2: Question[] = [
+  fromEt('suurus', ['размер', 'цвет', 'цена', 'модель'], ['size', 'colour', 'price', 'model'], 0),
+  fromEt('proovima', ['примерять; пробовать', 'покупать', 'возвращать', 'платить'], ['to try (on)', 'to buy', 'to return', 'to pay'], 0),
+  fromEt('sobima', ['подходить, идти (о вещи)', 'покупать', 'продавать', 'носить'], ['to fit, to suit', 'to buy', 'to sell', 'to wear'], 0),
+  fromEt('tagastama', ['возвращать', 'брать', 'обменивать', 'искать'], ['to return (something)', 'to take', 'to exchange', 'to look for'], 0),
+  fromEt('allahindlus', ['скидка', 'цена', 'чек', 'касса'], ['discount', 'price', 'receipt', 'till'], 0),
+  fromEt('soodne', ['выгодный, недорогой', 'дорогой', 'красивый', 'новый'], ['affordable, good value', 'expensive', 'beautiful', 'new'], 0),
+  fromEt('proovikabiin', ['примерочная', 'касса', 'выход', 'склад'], ['fitting room', 'till', 'exit', 'storage'], 0),
+  fromEt('Kas see sobib mulle?', ['Мне это подходит?', 'Это дорого?', 'Где это?', 'Сколько это стоит?'], ['Does this suit / fit me?', 'Is this expensive?', 'Where is this?', 'How much is it?'], 0),
+  fromEt('Kas ma võin seda proovida?', ['Можно это примерить?', 'Можно это вернуть?', 'Можно заплатить картой?', 'Можно скидку?'], ['May I try this on?', 'May I return this?', 'May I pay by card?', 'May I get a discount?'], 0),
+  m('Mul on ___ numbrit vaja. (нужен побольше размер)', 'Mul on ___ numbrit vaja. (I need a bigger size)', ['suuremat', 'suurem', 'suurema', 'suurim'], 0,
+    'vaja + партитив: suuremat numbrit vaja.', 'vaja + partitive: suuremat numbrit vaja.'),
+  m('Ma tahaksin selle ___. (вернуть)', 'Ma tahaksin selle ___. (to return)', ['tagastada', 'tagastan', 'tagastab', 'tagastama'], 0,
+    'ma tahaksin + -da: tagastada.', 'ma tahaksin + -da: tagastada.'),
+  typeEt('скидка', 'discount', ['allahindlus']),
+];
+
+export const health2: Question[] = [
+  fromEt('tervislik', ['здоровый, полезный', 'больной', 'слабый', 'сильный'], ['healthy', 'ill', 'weak', 'strong'], 0),
+  fromEt('uni', ['сон', 'усталость', 'мечта', 'отдых'], ['sleep', 'tiredness', 'dream (aspiration)', 'rest'], 0),
+  fromEt('nohu', ['насморк', 'кашель', 'температура', 'боль'], ['runny nose', 'cough', 'fever', 'pain'], 0),
+  fromEt('gripp', ['грипп', 'простуда', 'аллергия', 'кашель'], ['flu', 'a cold', 'allergy', 'cough'], 0),
+  fromEt('külmetus', ['простуда', 'грипп', 'температура', 'боль'], ['a cold', 'flu', 'fever', 'pain'], 0),
+  fromEt('tablett', ['таблетка', 'лекарство', 'укол', 'капли'], ['tablet, pill', 'medicine', 'injection', 'drops'], 0),
+  fromEt('valu', ['боль', 'болезнь', 'усталость', 'кашель'], ['pain', 'illness', 'tiredness', 'cough'], 0),
+  fromEt('ravima', ['лечить', 'болеть', 'выздоравливать', 'тренироваться'], ['to treat (medically)', 'to be ill', 'to recover', 'to train'], 0),
+  typeEt('здоровье', 'health', ['tervis']),
+  m('Ma olen ___. (простудился)', 'Ma olen ___. (I have caught a cold)', ['külmetunud', 'külmetuma', 'külmetun', 'külmetus'], 0,
+    'külmetuma («простужаться») → перфект: olen külmetunud.', 'külmetuma (“to catch a cold”) → perfect: olen külmetunud.'),
+  m('Mul on ___. (насморк)', 'Mul on ___. (a runny nose)', ['nohu', 'köha', 'palavik', 'valu'], 0,
+    'Mul on nohu.', 'Mul on nohu.'),
+  fromEt('Ma pean arsti juurde minema', ['Мне нужно к врачу', 'Я хочу быть врачом', 'Врач у меня дома', 'Я был у врача'], ['I have to go to the doctor', 'I want to be a doctor', 'The doctor is at my place', 'I was at the doctor'], 0),
+];
+
+export const transport2: Question[] = [
+  fromEt('sõiduplaan', ['расписание', 'билет', 'маршрут', 'остановка'], ['timetable', 'ticket', 'route', 'stop'], 0),
+  fromEt('ümberistumine', ['пересадка', 'остановка', 'отправление', 'опоздание'], ['transfer, change', 'stop', 'departure', 'delay'], 0),
+  fromEt('perroon', ['платформа', 'станция', 'касса', 'вокзал'], ['platform', 'station', 'ticket office', 'railway station'], 0),
+  fromEt('reisija', ['пассажир', 'водитель', 'кассир', 'турист'], ['passenger', 'driver', 'cashier', 'tourist'], 0),
+  fromEt('ühissõiduk', ['общественный транспорт', 'такси', 'машина', 'велосипед'], ['public transport vehicle', 'taxi', 'car', 'bicycle'], 0),
+  fromEt('edasi-tagasi pilet', ['билет туда и обратно', 'билет в один конец', 'льготный билет', 'детский билет'], ['return ticket', 'single ticket', 'reduced ticket', 'child ticket'], 0),
+  fromEt('hilinema', ['опаздывать', 'приходить', 'ждать', 'уезжать'], ['to be late', 'to arrive', 'to wait', 'to leave'], 0),
+  m('Buss ___ kell kaheksa. (отправляется)', 'Buss ___ kell kaheksa. (departs)', ['väljub', 'saabub', 'hilineb', 'ootab'], 0,
+    'väljuma — отправляться; saabuma — прибывать.', 'väljuma — to depart; saabuma — to arrive.'),
+  m('Rong ___ kell üksteist. (прибывает)', 'Rong ___ kell üksteist. (arrives)', ['väljub', 'saabub', 'läheb', 'sõidab'], 1,
+    'saabuma — прибывать: rong saabub.', 'saabuma — to arrive: rong saabub.'),
+  fromEt('Kus ma pean ümber istuma?', ['Где мне нужно пересесть?', 'Где мне нужно выйти?', 'Когда отправление?', 'Сколько стоит билет?'], ['Where do I have to change?', 'Where do I have to get off?', 'When is departure?', 'How much is a ticket?'], 0),
+  fromEt('Rong hilineb kümme minutit', ['Поезд опаздывает на десять минут', 'Поезд отправляется через десять минут', 'Поезд едет десять минут', 'Поезд ждёт десять минут'], ['The train is ten minutes late', 'The train leaves in ten minutes', 'The train takes ten minutes', 'The train waits ten minutes'], 0),
+  m('Kas see buss läheb ___? (в центр)', 'Kas see buss läheb ___? (to the centre)', ['kesklinna', 'kesklinnas', 'kesklinnast', 'kesklinn'], 0,
+    'kesklinn → kesklinna («в центр»).', 'kesklinn → kesklinna (“to the centre”).'),
+];

@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { defaultLang, ui } from '../i18n/ui';
+
+// One page for every language: the host serves it for any unknown address.
+const s = ui[defaultLang];
+const en = ui.en;
+---
+<Base lang={defaultLang} path="404" title={`404 · ${s.siteName}`} description={s.seoHomeDesc} noindex>
+  <section class="nf">
+    <div class="code">404</div>
+    <h1>Страница не найдена</h1>
+    <p class="muted">Возможно, адрес изменился. Начните с тем или проверьте свой уровень.</p>
+    <div class="cta">
+      <a class="btn" href="/ru/topics">{s.topicsTitle}</a>
+      <a href="/ru/test">{s.introTitle}</a>
+      <a href="/ru/test-a2">{s.introTitleA2}</a>
+      <a href="/ru">{s.home}</a>
+    </div>
+    <p class="en muted" lang="en">
+      Page not found. <a href="/en/topics">{en.topicsTitle}</a> · <a href="/en/test">{en.introTitle}</a> · <a href="/en">{en.home}</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .nf { max-width: 560px; margin: 32px auto; text-align: center; }
+  .code { font-size: clamp(4rem, 18vw, 7rem); font-weight: 800; line-height: 1; color: var(--accent); }
+  h1 { margin: 8px 0 12px; }
+  .cta { display: flex; justify-content: center; align-items: center; gap: 12px 20px; flex-wrap: wrap; margin: 24px 0; }
+  .cta a:not(.btn), .en a { color: var(--accent); }
+  .en { font-size: .9rem; }
+</style>

@@ -1,0 +1,7 @@
+---
+import { defaultLang } from '../i18n/ui';
+// The root only forwards to the default language; canonical tells search engines which page to index.
+const target = new URL(`/${defaultLang}`, Astro.site).href;
+---
+<meta http-equiv="refresh" content={`0; url=/${defaultLang}`} />
+<link rel="canonical" href={target} />

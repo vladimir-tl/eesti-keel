@@ -1,0 +1,73 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Quiz from '../../../components/Quiz.astro';
+import { fill, langs, ui, type Lang } from '../../../i18n/ui';
+import { groups, topics } from '../../../data/topics';
+import { t } from '../../../data/questions';
+import { hints } from '../../../data/hints';
+
+export const getStaticPaths = () =>
+  langs.flatMap((lang) => topics.map((tp) => ({ params: { lang, topic: tp.id }, props: { tp } })));
+const lang = Astro.params.lang as Lang;
+const { tp } = Astro.props;
+const s = ui[lang];
+
+const group = groups.find((g) => g.topics.some((x) => x.id === tp.id))!;
+const title = t(tp.title, lang);
+const seo = { topic: title, level: group.level, desc: t(tp.desc, lang), n: tp.questions.length };
+const abs = (p: string) => new URL(p, Astro.site).href;
+
+// Vocabulary practised in the topic, as plain text for readers and search engines.
+// Prompt-only notes such as "(Ta kutsub …)" are dropped.
+const words = [...new Map(
+  tp.questions
+    .filter((q) => q.pair)
+    .map((q) => [q.pair!.et.toLowerCase(), { et: q.pair!.et, tr: q.pair!.tr[lang].replace(/\s*\([^)]*…[^)]*\)/g, '') }]),
+).values()];
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    [s.home, `/${lang}`],
+    [`${s.topicsTitle} ${group.level}`, `/${lang}/topics#${group.level.toLowerCase()}`],
+    [t(group.title, lang), `/${lang}/topics#${group.id}`],
+    [title, `/${lang}/topics/${tp.id}`],
+  ].map(([name, p], k) => ({ '@type': 'ListItem', position: k + 1, name, item: abs(p) })),
+};
+---
+<Base lang={lang} path={`topics/${tp.id}`} title={fill(s.seoTopicTitle, seo)} description={fill(s.seoTopicDesc, seo)} jsonLd={[breadcrumbs]}>
+  <nav class="crumbs muted" aria-label="breadcrumb">
+    <a href={`/${lang}`}>{s.home}</a>
+    <span class="sep" aria-hidden="true">›</span>
+    <a href={`/${lang}/topics#${group.level.toLowerCase()}`}>{s.topicsTitle} {group.level}</a>
+    <span class="sep" aria-hidden="true">›</span>
+    <a href={`/${lang}/topics#${group.id}`}>{t(group.title, lang)}</a>
+    <span class="sep" aria-hidden="true">›</span>
+    <span aria-current="page">{t(tp.title, lang)}</span>
+  </nav>
+
+  <Quiz lang={lang} title={t(tp.title, lang)} intro={t(tp.desc, lang)}
+    hint={hints[tp.id]?.[lang]} questions={tp.questions} verdicts={s.verdictsTopic} />
+
+  {words.length > 0 && (
+    <details class="words">
+      <summary>{s.wordsTitle} ({words.length})</summary>
+      <dl>
+        {words.map((w) => (<><dt lang="et">{w.et}</dt><dd>{w.tr}</dd></>))}
+      </dl>
+    </details>
+  )}
+
+</Base>
+
+<style>
+  .crumbs { max-width: 640px; margin: 0 auto 16px; font-size: .875rem; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+  .sep { opacity: .6; }
+  .crumbs a { color: inherit; }
+  .words { max-width: 640px; margin: 16px auto 0; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+  .words summary { padding: 14px 20px; cursor: pointer; color: var(--accent); }
+  .words dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 6px 16px; margin: 0; padding: 0 20px 16px; }
+  .words dt { font-weight: 600; }
+  .words dd { margin: 0; color: var(--muted); }
+  .crumbs [aria-current] { color: var(--fg); }
+</style>
