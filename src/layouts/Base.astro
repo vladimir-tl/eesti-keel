@@ -1,5 +1,6 @@
 ---
 import { defaultLang, langs, ui, type Lang } from '../i18n/ui';
+import { guides } from '../data/guides';
 
 interface Props {
   lang: Lang;
@@ -80,6 +81,8 @@ const nav = [
         {nav.map((n) => (
           <a href={`/${lang}/${n.id}`} aria-current={section === n.id ? 'page' : undefined}>{n.label}</a>
         ))}
+        {/* No articles index page yet: the link jumps to the article list in the footer. */}
+        <a href="#articles" aria-current={section === 'guide' ? 'page' : undefined}>{s.navArticles}</a>
       </nav>
       <nav class="lang-nav" aria-label="Language">
         {langs.map((l) => (
@@ -91,12 +94,23 @@ const nav = [
     <footer class="foot">
       <div class="foot-row">
         <a class="brand" href={`/${lang}`}>{s.siteName}</a>
-        <nav class="foot-links" aria-label="Footer">
-          <a href={`/${lang}/topics`}>{s.topicsTitle}</a>
-          <a href={`/${lang}/test`}>{s.introTitle}</a>
-          <a href={`/${lang}/test-a2`}>{s.introTitleA2}</a>
-          <a href={`/${lang}/exam-a2`}>{s.navExam}</a>
-        </nav>
+        <div class="foot-cols" id="articles">
+          <nav class="foot-links" aria-label={s.footTests}>
+            <span class="foot-h">{s.footTests}</span>
+            <a href={`/${lang}/topics`}>{s.topicsTitle}</a>
+            <a href={`/${lang}/test`}>{s.introTitle}</a>
+            <a href={`/${lang}/test-a2`}>{s.introTitleA2}</a>
+          </nav>
+          <nav class="foot-links" aria-label={s.footExam}>
+            <span class="foot-h">{s.footExam}</span>
+            <a href={`/${lang}/exam-a2`}>{s.footExamFormat}</a>
+            {guides[lang].filter((g) => g.group === 'exam').map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
+          </nav>
+          <nav class="foot-links" aria-label={s.footHelp}>
+            <span class="foot-h">{s.footHelp}</span>
+            {guides[lang].filter((g) => g.group === 'help').map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
+          </nav>
+        </div>
       </div>
       <p class="muted">© {new Date().getFullYear()} {s.siteName}<br />{s.disclaimer}</p>
     </footer>
@@ -128,9 +142,14 @@ const nav = [
   }
   * { box-sizing: border-box; }
   .foot { max-width: 920px; margin: 0 auto; padding: 24px 16px 32px; border-top: 1px solid var(--line); font-size: .875rem; }
-  .foot-row { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .foot-row { display: flex; flex-direction: column; gap: 16px; }
   .foot a { color: var(--fg); text-decoration: none; }
   .foot-links { display: flex; flex-direction: column; gap: 6px; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .foot-cols { scroll-margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 32px; }
+  @media (max-width: 560px) { .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .foot-h { color: var(--muted); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
   .foot-links a:hover { color: var(--accent); }
   .foot p { margin: 16px 0 0; font-size: .8rem; }
   body {
