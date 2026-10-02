@@ -6,8 +6,13 @@ import { langs, ui, type Lang } from '../../i18n/ui';
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
 const s = ui[lang];
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: s.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+};
 ---
-<Base lang={lang} title={s.seoHomeTitle} description={s.seoHomeDesc}>
+<Base lang={lang} title={s.seoHomeTitle} description={s.seoHomeDesc} jsonLd={[faqLd]}>
   <section class="hero">
     <div>
       <span class="badge">{s.badge}</span>
@@ -84,6 +89,16 @@ const s = ui[lang];
       <rect x="60" y="175" width="190" height="6" rx="3" fill="var(--line)" />
     </svg>
   </section>
+
+  <section class="faq-block panel">
+    <h2>{s.faqTitle}</h2>
+    {s.faq.map(([q, a]) => (
+      <details class="faq">
+        <summary><h3>{q}</h3></summary>
+        <p class="muted">{a}</p>
+      </details>
+    ))}
+  </section>
 </Base>
 
 <style>
@@ -122,6 +137,12 @@ const s = ui[lang];
   .promo p { font-size: 1.1rem; margin: 0 0 16px; max-width: 26em; }
   .promo .badge { margin-bottom: 20px; }
   .promo-art { width: 100%; max-width: 340px; margin: 0 auto; display: block; }
+  .faq-block h2 { margin-bottom: 16px; }
+  .faq { border-bottom: 1px solid var(--line); }
+  .faq:last-child { border-bottom: 0; }
+  .faq summary { padding: 14px 0; cursor: pointer; }
+  .faq summary h3 { display: inline; font-size: 1.05rem; font-weight: 600; margin: 0; }
+  .faq p { margin: 0 0 14px; line-height: 1.5; }
   @media (min-width: 760px) {
     .hero { grid-template-columns: 1.1fr 1fr; align-items: center; }
     .panel { padding: 40px; }
