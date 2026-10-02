@@ -4,17 +4,16 @@ import Quiz, { type Placement } from '../../components/Quiz.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 import { topicsOf } from '../../data/topics';
 import { t } from '../../data/questions';
-import { b1Questions } from '../../data/placement-b1';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
 const s = ui[lang];
 
-// A1 and A2 come from the topic banks (one question per drawn topic), B1 from its own small bank.
-const fromTopics = (['A1', 'A2'] as const).flatMap((level) =>
+// Every level comes from its topic banks: the test draws one question per topic, ten topics per level.
+const levels = ['A1', 'A2', 'B1'] as const;
+const questions = levels.flatMap((level) =>
   topicsOf(level).flatMap((tp) => tp.questions.map((q) => ({ ...q, level, group: tp.id }))),
 );
-const questions = [...fromTopics, ...b1Questions];
 
 const href = (p: string) => `/${lang}/${p}`;
 const placement: Placement = {
@@ -24,10 +23,10 @@ const placement: Placement = {
     { ...s.place.pre, links: [{ href: href('topics#a1'), label: s.topicsCtaA1 }, { href: href('test'), label: s.testCta }] },
     { ...s.place.a1, links: [{ href: href('topics#a2'), label: s.topicsCtaA2 }, { href: href('test-a2'), label: s.testCtaA2 }] },
     { ...s.place.a2, links: [{ href: href('exam-a2'), label: s.examCta }, { href: href('test-a2'), label: s.testCtaA2 }] },
-    { ...s.place.b1, links: [{ href: href('exam-a2'), label: s.examCta }] },
+    { ...s.place.b1, links: [{ href: href('topics#b1'), label: s.topicsCtaB1 }, { href: href('test-b1'), label: s.testCtaB1 }, { href: href('exam-b1'), label: s.examCtaB1 }] },
   ],
   topics: Object.fromEntries(
-    [...topicsOf('A1'), ...topicsOf('A2')].map((tp) => [tp.id, { href: href(`topics/${tp.id}`), title: t(tp.title, lang) }]),
+    levels.flatMap((level) => topicsOf(level)).map((tp) => [tp.id, { href: href(`topics/${tp.id}`), title: t(tp.title, lang) }]),
   ),
 };
 ---

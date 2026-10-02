@@ -740,4 +740,284 @@ export const hints: Record<string, Record<Lang, string[]>> = {
       'Kasulik: **Ootan vastust** · **Tänan kutse eest** · **Lisan manusena** · **Vabandust hilinemise pärast**.',
     ],
   },
+  impersonal: {
+    ru: [
+      'Безличная форма — действие без названного лица: «говорят», «продают», «построили». Настоящее: основа + **-takse / -dakse**: räägitakse, müüakse, süüakse, loetakse.',
+      'Прошедшее: **-ti / -di**: ehitati, avati, tehti. Перфект: **on + -tud**: on ehitatud.',
+      'Отрицание: **ei** + форма без -kse: ei räägita, ei lubata, ei suitsetata. Объект остаётся в партитиве: Poes müüakse leiba.',
+    ],
+    en: [
+      'The impersonal names no doer: “people say”, “they sell”, “was built”. Present: stem + **-takse / -dakse**: räägitakse, müüakse, süüakse, loetakse.',
+      'Past: **-ti / -di**: ehitati, avati, tehti. Perfect: **on + -tud**: on ehitatud.',
+      'Negation: **ei** + the form without -kse: ei räägita, ei lubata, ei suitsetata. The object stays in the partitive: Poes müüakse leiba.',
+    ],
+    et: [
+      'Umbisikuline tegumood ei nimeta tegijat. Olevik: tüvi + **-takse / -dakse**: räägitakse, müüakse, süüakse, loetakse.',
+      'Minevik: **-ti / -di**: ehitati, avati, tehti. Täisminevik: **on + -tud**: on ehitatud.',
+      'Eitus: **ei** + vorm ilma -kse-ta: ei räägita, ei lubata, ei suitsetata. Objekt jääb osastavasse: Poes müüakse leiba.',
+    ],
+  },
+  quotative: {
+    ru: [
+      'Косвенное наклонение передаёт чужие слова, не ручаясь за них: «говорят», «как сообщают». Форма: основа ma-формы + **-vat**.',
+      'olema → **olevat**, tulema → **tulevat**, minema → **minevat**, tegema → **tegevat**, hakkama → **hakkavat**. Прошедшее: **olevat + -nud**.',
+      'Часто в новостях и прогнозах; рядом стоят слова **kuuldavasti**, **väidetavalt**, **ilmateate järgi**.',
+    ],
+    en: [
+      'The quotative passes on someone else’s words without vouching for them: “reportedly”, “allegedly”. Form: the ma-infinitive stem + **-vat**.',
+      'olema → **olevat**, tulema → **tulevat**, minema → **minevat**, tegema → **tegevat**, hakkama → **hakkavat**. Past: **olevat + -nud**.',
+      'Common in news and forecasts, with words such as **kuuldavasti**, **väidetavalt**, **ilmateate järgi**.',
+    ],
+    et: [
+      'Kaudne kõneviis edastab teise sõnu, ilma et nende eest vastutataks. Vorm: ma-tegevusnime tüvi + **-vat**.',
+      'olema → **olevat**, tulema → **tulevat**, minema → **minevat**, tegema → **tegevat**, hakkama → **hakkavat**. Minevik: **olevat + -nud**.',
+      'Tavaline uudistes ja ilmateates; kõrval on sõnad **kuuldavasti**, **väidetavalt**, **ilmateate järgi**.',
+    ],
+  },
+  participles: {
+    ru: [
+      '**-des**: два действия одновременно, один подлежащий: õppides, tulles, naerdes («учась, возвращаясь, смеясь»).',
+      '**-mata**: «не делая»: ütlemata, joomata, mõtlemata. **-mas**: «в процессе»: ta on tegemas. **-mast**: «из процесса»: tulen jooksmast.',
+      'Причастия: **-tud** (страдательное) — praetud kala, ehitatud maja; **-v** (действующее) — elav inimene; **-nud** — läinud, tulnud.',
+    ],
+    en: [
+      '**-des**: two actions at once with one subject: õppides, tulles, naerdes (“while studying, coming, laughing”).',
+      '**-mata**: “without doing”: ütlemata, joomata, mõtlemata. **-mas**: “in the middle of”: ta on tegemas. **-mast**: “from an activity”: tulen jooksmast.',
+      'Participles: **-tud** (passive) — praetud kala, ehitatud maja; **-v** (active) — elav inimene; **-nud** — läinud, tulnud.',
+    ],
+    et: [
+      '**-des**: kaks tegevust korraga, tegija on sama: õppides, tulles, naerdes.',
+      '**-mata**: „ilma tegemata“: ütlemata, joomata, mõtlemata. **-mas**: „tegevuse sees“: ta on tegemas. **-mast**: „tegevusest“: tulen jooksmast.',
+      'Kesksõnad: **-tud** (kannatav) — praetud kala, ehitatud maja; **-v** (tegev) — elav inimene; **-nud** — läinud, tulnud.',
+    ],
+  },
+  'cond-past': {
+    ru: [
+      'Нереальное условие в настоящем: **Kui** mul **oleks** raha, ma **ostaksin** maja. Реальное условие — обычный глагол: **Kui** sajab, **jään** koju.',
+      'Прошедшее условное: **oleks / oleksin + -nud**: Kui sa oleksid helistanud, oleksin tulnud («я бы пришёл»).',
+      'Совет и просьба: **Kui ma oleksin sina, …** («на твоём месте»), **Ma tahaksin, et sa tuleksid**.',
+    ],
+    en: [
+      'An unreal condition in the present: **Kui** mul **oleks** raha, ma **ostaksin** maja. A real condition takes a plain verb: **Kui** sajab, **jään** koju.',
+      'Past conditional: **oleks / oleksin + -nud**: Kui sa oleksid helistanud, oleksin tulnud (“I would have come”).',
+      'Advice and wishes: **Kui ma oleksin sina, …** (“if I were you”), **Ma tahaksin, et sa tuleksid**.',
+    ],
+    et: [
+      'Ebatõenäoline tingimus: **Kui** mul **oleks** raha, ma **ostaksin** maja. Tõenäoline tingimus — kindel kõneviis: **Kui** sajab, **jään** koju.',
+      'Tingiva kõneviisi minevik: **oleks / oleksin + -nud**: Kui sa oleksid helistanud, oleksin tulnud.',
+      'Nõu ja soov: **Kui ma oleksin sina, …**, **Ma tahaksin, et sa tuleksid**.',
+    ],
+  },
+  government: {
+    ru: [
+      'Эстонские глаголы требуют определённого падежа, и он не всегда совпадает с русским. Выучите глагол вместе с падежом.',
+      'Партитив: **kartma** (kardan koeri), **ootama** (ootan bussi), **lootma** (loodan parimat), **usaldama** (usaldan teda).',
+      '**-st**: sõltuma (sõltun sinust), huvituma (huvitun spordist), rääkima («о чём»: räägin tööst). **-ga**: rahul olema (rahul tööga), abielluma (Mariga). **eest** + род. падеж: tänan abi eest.',
+      'Инфинитив: **hakkama + -ma** (hakkan õppima), **püüdma + -da** (püüan tulla).',
+    ],
+    en: [
+      'Estonian verbs take a fixed case, and it does not always match English or Russian. Learn each verb together with its case.',
+      'Partitive: **kartma** (kardan koeri), **ootama** (ootan bussi), **lootma** (loodan parimat), **usaldama** (usaldan teda).',
+      '**-st**: sõltuma (sõltun sinust), huvituma (huvitun spordist), rääkima (“about”: räägin tööst). **-ga**: rahul olema (rahul tööga), abielluma (Mariga). **eest** + genitive: tänan abi eest.',
+      'Infinitive: **hakkama + -ma** (hakkan õppima), **püüdma + -da** (püüan tulla).',
+    ],
+    et: [
+      'Eesti verbid nõuavad kindlat käänet. Õpi verb koos käändega.',
+      'Osastav: **kartma** (kardan koeri), **ootama** (ootan bussi), **lootma** (loodan parimat), **usaldama** (usaldan teda).',
+      '**-st**: sõltuma (sõltun sinust), huvituma (huvitun spordist), rääkima (räägin tööst). **-ga**: rahul olema (rahul tööga), abielluma (Mariga). **eest** + omastav: tänan abi eest.',
+      'Tegevusnimi: **hakkama + -ma** (hakkan õppima), **püüdma + -da** (püüan tulla).',
+    ],
+  },
+  relative: {
+    ru: [
+      'Относительные местоимения: **kes** (человек-подлежащее) — mees, kes elab siin; **mis** (предмет-подлежащее) — raamat, mis on laual; **mida / mille** — по падежу объекта; **kelle** — «чей».',
+      'Падеж определяет глагол придаточного: loen raamatut → raamat, **mida** ma loen. Usaldan teda → inimene, **keda** ma usaldan.',
+      'Союзы: **et** (что, чтобы), **sest** (потому что), **kuigi** (хотя), **kuni** (пока не), **kas** («ли»), **kui** («если», «когда»).',
+    ],
+    en: [
+      'Relative pronouns: **kes** (a person as subject) — mees, kes elab siin; **mis** (a thing as subject) — raamat, mis on laual; **mida / mille** — by the object’s case; **kelle** — “whose”.',
+      'The verb of the clause decides the case: loen raamatut → raamat, **mida** ma loen. Usaldan teda → inimene, **keda** ma usaldan.',
+      'Conjunctions: **et** (that, in order to), **sest** (because), **kuigi** (although), **kuni** (until), **kas** (“whether”), **kui** (“if”, “when”).',
+    ],
+    et: [
+      'Siduvad asesõnad: **kes** (inimene, alus) — mees, kes elab siin; **mis** (asi, alus) — raamat, mis on laual; **mida / mille** — sõltuvalt objekti käändest; **kelle** — omastav.',
+      'Käände määrab alamlause tegusõna: loen raamatut → raamat, **mida** ma loen. Usaldan teda → inimene, **keda** ma usaldan.',
+      'Sidesõnad: **et**, **sest**, **kuigi**, **kuni**, **kas**, **kui**.',
+    ],
+  },
+  opinions: {
+    ru: [
+      'Высказать мнение: **minu arvates …**, **ma arvan, et …**, **mulle tundub, et …**. Согласие: **ma olen nõus**; несогласие: **ma ei ole nõus**, мягче — **ma ei ole päris nõus**.',
+      'Сопоставить доводы: **ühelt poolt … teiselt poolt …**. Уступка: **kuigi …, siis …**; **tegelikult** («на самом деле»), **pigem** («скорее»), **kahjuks** («к сожалению»).',
+      '**eelistama** + партитив + -le: eelistan teed kohvile.',
+    ],
+    en: [
+      'Giving an opinion: **minu arvates …**, **ma arvan, et …**, **mulle tundub, et …**. Agreeing: **ma olen nõus**; disagreeing: **ma ei ole nõus**, softer — **ma ei ole päris nõus**.',
+      'Weighing arguments: **ühelt poolt … teiselt poolt …**. Concession: **kuigi …**; **tegelikult** (“actually”), **pigem** (“rather”), **kahjuks** (“unfortunately”).',
+      '**eelistama** + partitive + -le: eelistan teed kohvile.',
+    ],
+    et: [
+      'Arvamuse avaldamine: **minu arvates …**, **ma arvan, et …**, **mulle tundub, et …**. Nõustumine: **ma olen nõus**; mittenõustumine: **ma ei ole nõus**, pehmemalt — **ma ei ole päris nõus**.',
+      'Argumentide kõrvutamine: **ühelt poolt … teiselt poolt …**. Möönmine: **kuigi …**; **tegelikult**, **pigem**, **kahjuks**.',
+      '**eelistama** + osastav + -le: eelistan teed kohvile.',
+    ],
+  },
+  law: {
+    ru: [
+      'Полезные конструкции: **tuleb + da-инфинитив** («нужно»: leping tuleb allkirjastada), **saab + da-инфинитив** («можно»: kaupa saab tagastada), **jooksul** («в течение»: 14 päeva jooksul).',
+      'Объект при безличной форме. Полный объект стоит в **именительном**: **määrati trahv**, **tehti otsus**. Частичный — в партитиве: tehti tööd.',
+      'Документы: **leping**, **tööleping**, **üürileping**, **avaldus**, **kaebus**; **tähtaeg** — срок.',
+    ],
+    en: [
+      'Useful patterns: **tuleb + da-infinitive** (“has to”: leping tuleb allkirjastada), **saab + da-infinitive** (“can”: kaupa saab tagastada), **jooksul** (“within”: 14 päeva jooksul).',
+      'The object with the impersonal. A total object stays in the **nominative**: **määrati trahv**, **tehti otsus**. A partial object takes the partitive: tehti tööd.',
+      'Documents: **leping**, **tööleping**, **üürileping**, **avaldus**, **kaebus**; **tähtaeg** — deadline.',
+    ],
+    et: [
+      'Kasulikud mudelid: **tuleb + da-tegevusnimi** (leping tuleb allkirjastada), **saab + da-tegevusnimi** (kaupa saab tagastada), **jooksul** (14 päeva jooksul).',
+      'Objekt umbisikulises tegumoes. Täisobjekt on **nimetavas**: **määrati trahv**, **tehti otsus**. Osaobjekt on osastavas: tehti tööd.',
+      'Dokumendid: **leping**, **tööleping**, **üürileping**, **avaldus**, **kaebus**; **tähtaeg**.',
+    ],
+  },
+  'self-intro': {
+    ru: [
+      'Рассказ о жизни — **простое прошедшее**: Ma sündisin Narvas, kasvasin üles Tartus, 2015 kolisime Tallinna. Факт о себе — перфект: **Ma olen sündinud** Narvas.',
+      '**kui** + прошедшее — «когда»: Kui ma olin laps, elasime maal.',
+      'Знакомство: **tutvuma** («знакомиться»: me tutvusime tööl) ≠ **tutvustama** («представлять»: tutvustan sind vanematele).',
+    ],
+    en: [
+      'A life story takes the **simple past**: Ma sündisin Narvas, kasvasin üles Tartus, 2015 kolisime Tallinna. A fact about yourself — the perfect: **Ma olen sündinud** Narvas.',
+      '**kui** + past — “when”: Kui ma olin laps, elasime maal.',
+      'Meeting: **tutvuma** (“to get to know”: me tutvusime tööl) ≠ **tutvustama** (“to introduce”: tutvustan sind vanematele).',
+    ],
+    et: [
+      'Elulugu jutustatakse **lihtminevikus**: Ma sündisin Narvas, kasvasin üles Tartus, 2015 kolisime Tallinna. Fakt enda kohta — täisminevik: **Ma olen sündinud** Narvas.',
+      '**kui** + minevik: Kui ma olin laps, elasime maal.',
+      'Tutvumine: **tutvuma** (me tutvusime tööl) ≠ **tutvustama** (tutvustan sind vanematele).',
+    ],
+  },
+  studies: {
+    ru: [
+      'Учёба и падежи: **lõpetama** + родительный (lõpetasin ülikooli), **astuma** + «куда» (astus ülikooli), **saama** + родительный (sain kraadi).',
+      '**tuleb + da-инфинитив** — «нужно»: eksam tuleb sooritada.',
+      'Уровни: **põhiharidus** → **keskharidus** → **kõrgharidus** (bakalaureus, magister).',
+    ],
+    en: [
+      'Studies and cases: **lõpetama** + genitive (lõpetasin ülikooli), **astuma** + “where to” (astus ülikooli), **saama** + genitive (sain kraadi).',
+      '**tuleb + da-infinitive** — “has to”: eksam tuleb sooritada.',
+      'Levels: **põhiharidus** → **keskharidus** → **kõrgharidus** (bakalaureus, magister).',
+    ],
+    et: [
+      'Õpingud ja käänded: **lõpetama** + omastav (lõpetasin ülikooli), **astuma** + kuhu (astus ülikooli), **saama** + omastav (sain kraadi).',
+      '**tuleb + da-tegevusnimi**: eksam tuleb sooritada.',
+      'Tasemed: **põhiharidus** → **keskharidus** → **kõrgharidus** (bakalaureus, magister).',
+    ],
+  },
+  workplace: {
+    ru: [
+      'Глаголы работы и их падежи: **vastutama** + **eest** (vastutan projekti eest), **tegelema** + **-ga** (tegelen klientidega), **osalema** + **-l** (osalen koosolekul), **hakkama saama** + **-ga** (saan ülesandega hakkama).',
+      '«В команде» — **-s**: meeskonnas; «на больничном» — **-l**: haiguspuhkusel.',
+    ],
+    en: [
+      'Work verbs and their cases: **vastutama** + **eest** (vastutan projekti eest), **tegelema** + **-ga** (tegelen klientidega), **osalema** + **-l** (osalen koosolekul), **hakkama saama** + **-ga** (saan ülesandega hakkama).',
+      '“In a team” — **-s**: meeskonnas; “on sick leave” — **-l**: haiguspuhkusel.',
+    ],
+    et: [
+      'Töö verbid ja nende käänded: **vastutama** + **eest** (vastutan projekti eest), **tegelema** + **-ga** (tegelen klientidega), **osalema** + **-l** (osalen koosolekul), **hakkama saama** + **-ga** (saan ülesandega hakkama).',
+      '„Meeskonnas“ — **-s**; „haiguspuhkusel“ — **-l**.',
+    ],
+  },
+  'service-talk': {
+    ru: [
+      'Вежливый звонок: **Helistan seoses …-ga** («в связи с …»), **Mul on küsimus … kohta** («о …»), **Tahaksin teada, kas …** («хотел бы узнать, …»).',
+      'Просьбы: **Kas ma saaksin …?** + da-инфинитив (saaksin broneerida). Вежливо на «вы»: **tühistage**, **kinnitage**, **oodake** (основа + **-ge**).',
+    ],
+    en: [
+      'A polite call: **Helistan seoses …-ga** (“regarding …”), **Mul on küsimus … kohta** (“a question about …”), **Tahaksin teada, kas …** (“I would like to know whether …”).',
+      'Requests: **Kas ma saaksin …?** + da-infinitive (saaksin broneerida). Polite plural: **tühistage**, **kinnitage**, **oodake** (stem + **-ge**).',
+    ],
+    et: [
+      'Viisakas kõne: **Helistan seoses …-ga**, **Mul on küsimus … kohta**, **Tahaksin teada, kas …**.',
+      'Palved: **Kas ma saaksin …?** + da-tegevusnimi (saaksin broneerida). Viisakas käskiv: **tühistage**, **kinnitage**, **oodake** (tüvi + **-ge**).',
+    ],
+  },
+  illness: {
+    ru: [
+      '**Mul valutab** + что болит (именительный): Mul valutab pea, kõht, kurk. **Ma tunnen end halvasti / hästi** («чувствую себя»).',
+      'Болезнь: **külmetama** (простудиться), **paranema / toibuma** (поправляться), **palavik** (жар), **köha**, **iiveldus**, **pearinglus**.',
+      'Просьба врача: **soovitama + da-инфинитив** (soovitas puhata); **kirjutama** + родительный (kirjutas retsepti).',
+    ],
+    en: [
+      '**Mul valutab** + what hurts (nominative): Mul valutab pea, kõht, kurk. **Ma tunnen end halvasti / hästi** (“I feel unwell / well”).',
+      'Illness: **külmetama** (to catch a cold), **paranema / toibuma** (to recover), **palavik** (fever), **köha**, **iiveldus**, **pearinglus**.',
+      'The doctor’s advice: **soovitama + da-infinitive** (soovitas puhata); **kirjutama** + genitive (kirjutas retsepti).',
+    ],
+    et: [
+      '**Mul valutab** + mis valutab (nimetav): Mul valutab pea, kõht, kurk. **Ma tunnen end halvasti / hästi**.',
+      'Haigus: **külmetama**, **paranema / toibuma**, **palavik**, **köha**, **iiveldus**, **pearinglus**.',
+      'Arsti nõu: **soovitama + da-tegevusnimi** (soovitas puhata); **kirjutama** + omastav (kirjutas retsepti).',
+    ],
+  },
+  entertainment: {
+    ru: [
+      '**huvitama**: Mind huvitab ajalugu («меня интересует история») — то, что интересует, в именительном, человек — в партитиве (**mind**, **sind**, **teda**).',
+      '**harrastama** + партитив: harrastan ujumist. **meeldima** + da-инфинитив: Mulle meeldib lugeda. **viitsima**: ma ei viitsi — «лень, не хочется».',
+    ],
+    en: [
+      '**huvitama**: Mind huvitab ajalugu (“history interests me”) — the thing is the subject, the person takes the partitive (**mind**, **sind**, **teda**).',
+      '**harrastama** + partitive: harrastan ujumist. **meeldima** + da-infinitive: Mulle meeldib lugeda. **viitsima**: ma ei viitsi — “I cannot be bothered”.',
+    ],
+    et: [
+      '**huvitama**: Mind huvitab ajalugu — huvitav asi on alus, inimene on osastavas (**mind**, **sind**, **teda**).',
+      '**harrastama** + osastav: harrastan ujumist. **meeldima** + da-tegevusnimi: Mulle meeldib lugeda. **viitsima**: ma ei viitsi.',
+    ],
+  },
+  restaurant: {
+    ru: [
+      'Вежливо в кафе: **Tahaksin broneerida laua kolmele**, **Kas me võiksime saada arve?**, **Mida te soovitaksite?** (условное + da-инфинитив).',
+      'Блюда: **eelroog** (закуска), **pearoog** (основное), **magustoit** (десерт); «в качестве чего» — **-ks**: pearoaks, magustoiduks.',
+      'Счёт и чаевые: **Arve, palun.** · **jootraha**.',
+    ],
+    en: [
+      'Polite requests in a café: **Tahaksin broneerida laua kolmele**, **Kas me võiksime saada arve?**, **Mida te soovitaksite?** (conditional + da-infinitive).',
+      'Courses: **eelroog** (starter), **pearoog** (main), **magustoit** (dessert); “as a …” — **-ks**: pearoaks, magustoiduks.',
+      'The bill and the tip: **Arve, palun.** · **jootraha**.',
+    ],
+    et: [
+      'Viisakalt kohvikus: **Tahaksin broneerida laua kolmele**, **Kas me võiksime saada arve?**, **Mida te soovitaksite?** (tingiv + da-tegevusnimi).',
+      'Käigud: **eelroog**, **pearoog**, **magustoit**; „millena“ — **-ks**: pearoaks, magustoiduks.',
+      'Arve ja jootraha: **Arve, palun.** · **jootraha**.',
+    ],
+  },
+  environment: {
+    ru: [
+      '**peama + ma-инфинитив**: peame kaitsma («мы должны защищать»). **tuleb / tasub / saab + da-инфинитив**: tuleb sorteerida, tasub võtta.',
+      'Условное: **Kui me kasutaksime vähem plasti, oleks loodus puhtam.**',
+      '**kaitse all** («под охраной»), **… tõttu** («из-за»): üleujutuse tõttu.',
+    ],
+    en: [
+      '**peama + ma-infinitive**: peame kaitsma (“we must protect”). **tuleb / tasub / saab + da-infinitive**: tuleb sorteerida, tasub võtta.',
+      'Conditional: **Kui me kasutaksime vähem plasti, oleks loodus puhtam.**',
+      '**kaitse all** (“under protection”), **… tõttu** (“because of”): üleujutuse tõttu.',
+    ],
+    et: [
+      '**peama + ma-tegevusnimi**: peame kaitsma. **tuleb / tasub / saab + da-tegevusnimi**: tuleb sorteerida, tasub võtta.',
+      'Tingiv kõneviis: **Kui me kasutaksime vähem plasti, oleks loodus puhtam.**',
+      '**kaitse all**, **… tõttu**: üleujutuse tõttu.',
+    ],
+  },
+  'on-the-road': {
+    ru: [
+      'Проблемы в пути: **lend jäi ära** («рейс отменён»), **rong hilines** («поезд опоздал»), **ma eksisin ära** («я заблудился»), **kohver läks kaotsi** («чемодан потерялся»).',
+      'Вежливый вопрос: **Kas te juhataksite mind …?** («не подскажете, как пройти…»). На границе — безличная форма: **Passi kontrollitakse.**',
+    ],
+    en: [
+      'Problems on the way: **lend jäi ära** (“the flight was cancelled”), **rong hilines** (“the train was late”), **ma eksisin ära** (“I got lost”), **kohver läks kaotsi** (“the suitcase got lost”).',
+      'A polite question: **Kas te juhataksite mind …?** (“could you direct me to …”). At the border — the impersonal: **Passi kontrollitakse.**',
+    ],
+    et: [
+      'Probleemid teel: **lend jäi ära**, **rong hilines**, **ma eksisin ära**, **kohver läks kaotsi**.',
+      'Viisakas küsimus: **Kas te juhataksite mind …?** Piiril — umbisikuline: **Passi kontrollitakse.**',
+    ],
+  },
 };

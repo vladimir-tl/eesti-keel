@@ -1,0 +1,128 @@
+import { toEt, fromEt, typeEt } from './helpers';
+import { pick, gap } from './helpers-b1';
+import { tr } from './questions';
+import type { Question } from './questions';
+
+/** B1 blocks 10–12 of the Harno handbook: people in society, politics and current events, economy and law. */
+
+export const society: Question[] = [
+  fromEt('ühiskond', ['общество', 'государство', 'семья', 'город'], ['society', 'state', 'family', 'city'], 0),
+  fromEt('kogukond', ['сообщество', 'правительство', 'семья', 'соседство'], ['community', 'government', 'family', 'neighbourhood'], 0),
+  fromEt('vabatahtlik', ['доброволец; добровольный', 'безработный', 'платный', 'начальник'], ['volunteer; voluntary', 'unemployed', 'paid', 'boss'], 0),
+  fromEt('heategevus', ['благотворительность', 'здоровье', 'хобби', 'экономия'], ['charity', 'health', 'hobby', 'saving'], 0),
+  toEt('предрассудок', 'prejudice', ['eelarvamus', 'arvamus', 'otsus', 'erinevus'], 0),
+  fromEt('sallivus', ['терпимость', 'вежливость', 'честность', 'храбрость'], ['tolerance', 'politeness', 'honesty', 'courage'], 0),
+  fromEt('vähemus', ['меньшинство', 'большинство', 'народ', 'молодёжь'], ['minority', 'majority', 'people', 'young people'], 0),
+  fromEt('lõimumine', ['интеграция', 'переселение', 'обучение', 'выборы'], ['integration', 'moving', 'studying', 'elections'], 0),
+  fromEt('tülitsema', ['ссориться', 'договариваться', 'знакомиться', 'помогать'], ['to quarrel', 'to agree', 'to get acquainted', 'to help'], 0),
+  gap('Ma austan inimesi, ___ on minust erinevad.', 'которые', 'who', ['kes', 'mis', 'keda', 'mida'], 0,
+    ['kes — относительное местоимение для людей-подлежащих: inimesed, kes on erinevad.', 'kes — the relative pronoun for people as subject: inimesed, kes on erinevad.', 'kes — inimesi puhul, kes on alus: inimesed, kes on erinevad.']),
+  gap('Noored ja eakad peaksid üksteist ___.', 'понимать', 'to understand', ['mõistma', 'mõistes', 'mõistmas', 'mõistmata'], 0,
+    ['peaksid («должны бы») + ma-инфинитив: peaksid mõistma.', 'peaksid (“ought to”) + the ma-infinitive: peaksid mõistma.', 'peaksid + ma-tegevusnimi: peaksid mõistma.']),
+  typeEt('общество', 'society', ['ühiskond']),
+];
+
+export const opinions: Question[] = [
+  fromEt('Ma olen sinuga nõus', ['Я с тобой согласен', 'Я с тобой не согласен', 'Я тебя не знаю', 'Я иду с тобой'], ['I agree with you', 'I disagree with you', 'I do not know you', 'I am going with you'], 0),
+  fromEt('Ma ei ole sellega nõus', ['Я с этим не согласен', 'Я с этим согласен', 'Я этого не знаю', 'Мне это нравится'], ['I do not agree with that', 'I agree with that', 'I do not know that', 'I like it'], 0),
+  pick(['Как сказать «С одной стороны … с другой стороны»?', 'How do you say “On the one hand … on the other hand”?', 'Kuidas öelda “On the one hand … on the other hand”?'],
+    ['Ühelt poolt … teiselt poolt', 'Üks kord … teine kord', 'Esimene … viimane', 'Ühe aja … teise aja'], 0,
+    ['Ühelt poolt … teiselt poolt — для сопоставления доводов в рассуждении.', 'Ühelt poolt … teiselt poolt — for weighing up arguments.', 'Ühelt poolt … teiselt poolt — argumentide vastandamiseks.']),
+  gap('Minu ___ on see hea mõte.', 'по-моему', 'in my opinion', ['arvates', 'arvamus', 'arvama', 'arvan'], 0,
+    ['minu arvates — «по-моему»; ещё: ma arvan, et …, mulle tundub, et …', 'minu arvates — “in my opinion”; also: ma arvan, et …, mulle tundub, et …', 'minu arvates; ka: ma arvan, et …, mulle tundub, et …']),
+  gap('Ma ___ teed kohvile.', 'предпочитаю', 'I prefer', ['eelistan', 'eelistama', 'eelistades', 'eelistab'], 0,
+    ['eelistama + партитив + -le: eelistan teed kohvile («чай кофе»).', 'eelistama + partitive + -le: eelistan teed kohvile (“tea to coffee”).', 'eelistama + osastav + -le: eelistan teed kohvile.']),
+  gap('Ma arvan, ___ sa eksid.', 'что', 'that', ['et', 'kas', 'kuigi', 'sest'], 0,
+    ['et — «что» после глаголов мнения: ma arvan, et …', 'et — “that” after verbs of opinion: ma arvan, et …', 'et — arvamusverbide järel: ma arvan, et …']),
+  gap('___ on see kallis, ostan selle ikkagi.', 'хотя', 'although', ['Kuigi', 'Sest', 'Kui', 'Siis'], 0,
+    ['kuigi — «хотя»; ikkagi — «всё же».', 'kuigi — “although”; ikkagi — “all the same”.', 'kuigi; ikkagi.']),
+  typeEt('к сожалению', 'unfortunately', ['kahjuks']),
+  fromEt('tegelikult', ['на самом деле', 'всегда', 'иногда', 'наверное'], ['actually', 'always', 'sometimes', 'probably'], 0),
+  fromEt('pigem', ['скорее', 'почти', 'слишком', 'вместе'], ['rather', 'almost', 'too', 'together'], 0),
+  typeEt('согласен', 'in agreement', ['nõus']),
+  pick(['Как мягко возразить?', 'How do you disagree politely?', 'Kuidas viisakalt vastu vaielda?'],
+    ['Ma ei ole päris nõus.', 'Räägi vait!', 'Mind ei huvita.', 'See on rumal.'], 0,
+    ['päris nõus — «совсем согласен»; ei ole päris nõus — мягкое возражение.', 'päris nõus — “fully agree”; ei ole päris nõus is the soft way to disagree.', 'ei ole päris nõus — pehme vastuväide.']),
+];
+
+export const politics: Question[] = [
+  fromEt('valimised', ['выборы', 'закон', 'правительство', 'партия'], ['elections', 'law', 'government', 'party'], 0),
+  fromEt('hääletama', ['голосовать', 'выбирать профессию', 'говорить', 'просить'], ['to vote', 'to choose a profession', 'to speak', 'to ask'], 0),
+  fromEt('valitsus', ['правительство', 'выборы', 'депутат', 'мэрия'], ['government', 'elections', 'member of parliament', 'town hall'], 0),
+  toEt('парламент (в Эстонии)', 'parliament (in Estonia)', ['riigikogu', 'valitsus', 'president', 'volikogu'], 0),
+  fromEt('erakond', ['партия', 'выборы', 'закон', 'мнение'], ['party', 'elections', 'law', 'opinion'], 0),
+  fromEt('seadus', ['закон', 'суд', 'налог', 'выбор'], ['law', 'court', 'tax', 'choice'], 0),
+  fromEt('peaminister', ['премьер-министр', 'президент', 'мэр', 'депутат'], ['prime minister', 'president', 'mayor', 'member of parliament'], 0),
+  fromEt('rahvahääletus', ['референдум', 'выборы', 'собрание', 'закон'], ['referendum', 'elections', 'meeting', 'law'], 0),
+  typeEt('кандидат', 'candidate', ['kandidaat']),
+  gap('Eestis ___ riigikogu liikmed iga nelja aasta tagant.', 'выбирают', 'people elect', ['valitakse', 'valib', 'valiti', 'valida'], 0,
+    ['valima → valitakse: безличная форма — «выбирают».', 'valima → valitakse: the impersonal — “people elect”.', 'valima → valitakse: umbisikuline vorm.']),
+  gap('Valimistel võivad ___ kõik täisealised kodanikud.', 'голосовать', 'vote', ['hääletada', 'hääletama', 'hääletades', 'hääletab'], 0,
+    ['võima + da-инфинитив: võivad hääletada.', 'võima + the da-infinitive: võivad hääletada.', 'võima + da-tegevusnimi: võivad hääletada.']),
+  pick(['Что значит «Valimised toimuvad märtsis»?', 'What does “Valimised toimuvad märtsis” mean?', 'Mida tähendab «Valimised toimuvad märtsis»?'],
+    [tr('Выборы пройдут в марте', 'The elections will take place in March', 'Valimised on märtsis'), tr('Выборы прошли в марте', 'The elections took place in March', 'Valimised olid märtsis'),
+      tr('Выборы отменены', 'The elections are cancelled', 'Valimised jäid ära'), tr('Выборы в марте не нужны', 'Elections are not needed in March', 'Märtsis ei ole valimisi vaja')], 0,
+    ['toimuma — «проходить, состояться»; märtsis — «в марте».', 'toimuma — “to take place”; märtsis — “in March”.', 'toimuma; märtsis.']),
+];
+
+export const news: Question[] = [
+  fromEt('uudised', ['новости', 'газета', 'программа', 'письмо'], ['news', 'newspaper', 'programme', 'letter'], 0),
+  fromEt('ajakirjanik', ['журналист', 'редактор', 'читатель', 'писатель'], ['journalist', 'editor', 'reader', 'writer'], 0),
+  fromEt('sündmus', ['событие', 'новость', 'место', 'ответ'], ['event', 'piece of news', 'place', 'answer'], 0),
+  fromEt('õnnetus', ['несчастный случай', 'праздник', 'решение', 'слух'], ['accident, misfortune', 'celebration', 'decision', 'rumour'], 0),
+  fromEt('avarii', ['авария', 'пожар', 'буря', 'выставка'], ['crash', 'fire', 'storm', 'exhibition'], 0),
+  fromEt('tulekahju', ['пожар', 'авария', 'наводнение', 'выборы'], ['fire', 'crash', 'flood', 'elections'], 0),
+  typeEt('интервью', 'interview', ['intervjuu']),
+  typeEt('газета', 'newspaper', ['ajaleht']),
+  fromEt('teatama', ['сообщать', 'спрашивать', 'слушать', 'просить'], ['to announce, to report', 'to ask', 'to listen', 'to request'], 0),
+  fromEt('juhtuma', ['случаться', 'начинаться', 'проходить', 'уходить'], ['to happen', 'to begin', 'to pass', 'to leave'], 0),
+  gap('Ajalehes ___, et uus sild avatakse sügisel.', 'пишут', 'it says', ['kirjutatakse', 'kirjutab', 'kirjutas', 'kirjutama'], 0,
+    ['kirjutatakse — безличная форма: «пишут». Так часто пересказывают сообщения СМИ.', 'kirjutatakse — the impersonal: “it is written”. Common when reporting from the media.', 'kirjutatakse — umbisikuline vorm; sobib meediast edastamisel.']),
+  gap('Raadios ___ eile, et streik algab esmaspäeval.', 'сообщили', 'it was announced', ['teatati', 'teatatakse', 'teatas', 'teatada'], 0,
+    ['teatati — безличное прошедшее: «сообщили».', 'teatati — the impersonal past: “it was announced”.', 'teatati — umbisikuline minevik.']),
+  pick(['Как сказать «Говорят, завтра будет забастовка»?', 'How do you say “They say there will be a strike tomorrow”?', 'Kuidas öelda “They say there will be a strike tomorrow”?'],
+    ['Kuuldavasti toimub homme streik.', 'Eile toimus streik.', 'Homme ei toimu streiki.', 'Streik toimus homme.'], 0,
+    ['kuuldavasti — «как слышно»; toimub — настоящее время со значением будущего.', 'kuuldavasti — “from what I hear”; toimub — the present used for the future.', 'kuuldavasti; toimub.']),
+];
+
+export const economy: Question[] = [
+  fromEt('maks', ['налог', 'цена', 'зарплата', 'скидка'], ['tax', 'price', 'salary', 'discount'], 0),
+  fromEt('kallinema', ['дорожать', 'дешеветь', 'платить', 'покупать'], ['to get more expensive', 'to get cheaper', 'to pay', 'to buy'], 0),
+  fromEt('tõusma', ['расти, подниматься', 'падать', 'стоять', 'покупать'], ['to rise', 'to fall', 'to stand', 'to buy'], 0),
+  fromEt('langema', ['снижаться, падать', 'расти', 'стоять', 'платить'], ['to fall, to decrease', 'to rise', 'to stand', 'to pay'], 0),
+  fromEt('tööpuudus', ['безработица', 'зарплата', 'отпуск', 'карьера'], ['unemployment', 'salary', 'holiday', 'career'], 0),
+  fromEt('laen', ['кредит, заём', 'вклад', 'счёт', 'налог'], ['loan', 'deposit', 'account', 'tax'], 0),
+  fromEt('säästma', ['экономить, копить', 'тратить', 'красть', 'считать'], ['to save', 'to spend', 'to steal', 'to count'], 0),
+  fromEt('eelarve', ['бюджет', 'расход', 'договор', 'доход'], ['budget', 'expense', 'contract', 'income'], 0),
+  toEt('доход', 'income', ['sissetulek', 'kulu', 'maks', 'laen'], 0),
+  toEt('расход', 'expense', ['kulu', 'tulu', 'hind', 'palk'], 0),
+  gap('Hinnad on viimasel ajal ___.', 'выросли', 'have risen', ['tõusnud', 'tõusma', 'tõusmas', 'tõusmast'], 0,
+    ['Перфект: on + -nud: on tõusnud («выросли»).', 'Perfect: on + -nud: on tõusnud (“have risen”).', 'Täisminevik: on + -nud: on tõusnud.']),
+  gap('Ma tahan raha ___.', 'копить', 'to save', ['säästa', 'säästma', 'säästes', 'säästmata'], 0,
+    ['tahtma + da-инфинитив: tahan säästa.', 'tahtma + the da-infinitive: tahan säästa.', 'tahtma + da-tegevusnimi: tahan säästa.']),
+  gap('Ta võttis pangast ___.', 'кредит', 'a loan', ['laenu', 'laen', 'laenuga', 'laenust'], 0,
+    ['võttis + полный объект в родительном: võttis laenu.', 'võttis + a total object in the genitive: võttis laenu.', 'võttis + täisobjekt omastavas: võttis laenu.']),
+];
+
+export const law: Question[] = [
+  fromEt('leping', ['договор', 'закон', 'заявление', 'счёт'], ['contract', 'law', 'application', 'bill'], 0),
+  fromEt('tööleping', ['трудовой договор', 'трудовая книжка', 'зарплата', 'отпуск'], ['employment contract', 'work record', 'salary', 'holiday'], 0),
+  fromEt('üürileping', ['договор аренды', 'покупка', 'заём', 'страховка'], ['rental agreement', 'purchase', 'loan', 'insurance'], 0),
+  fromEt('kohustus', ['обязанность', 'право', 'выбор', 'штраф'], ['duty, obligation', 'right', 'choice', 'fine'], 0),
+  fromEt('õigus', ['право', 'обязанность', 'закон', 'вина'], ['right', 'duty', 'law', 'guilt'], 0),
+  fromEt('trahv', ['штраф', 'налог', 'премия', 'скидка'], ['fine', 'tax', 'bonus', 'discount'], 0),
+  fromEt('kohus', ['суд', 'закон', 'адвокат', 'полиция'], ['court', 'law', 'lawyer', 'police'], 0),
+  fromEt('advokaat', ['адвокат', 'судья', 'свидетель', 'полицейский'], ['lawyer', 'judge', 'witness', 'police officer'], 0),
+  fromEt('allkirjastama', ['подписывать', 'читать', 'отправлять', 'оплачивать'], ['to sign', 'to read', 'to send', 'to pay'], 0),
+  fromEt('tähtaeg', ['срок', 'задание', 'паспорт', 'договор'], ['deadline', 'task', 'passport', 'contract'], 0),
+  typeEt('жалоба', 'complaint', ['kaebus']),
+  fromEt('tagastama', ['возвращать', 'покупать', 'терять', 'получать'], ['to return', 'to buy', 'to lose', 'to receive'], 0),
+  gap('Leping tuleb ___ kahe nädala jooksul.', 'подписать', 'to sign', ['allkirjastada', 'allkirjastama', 'allkirjastades', 'allkirjastamata'], 0,
+    ['tuleb («нужно») + da-инфинитив: tuleb allkirjastada.', 'tuleb (“has to”) + the da-infinitive: tuleb allkirjastada.', 'tuleb + da-tegevusnimi: tuleb allkirjastada.']),
+  gap('Autojuhile määrati ___.', 'штраф', 'a fine', ['trahv', 'trahvi', 'trahvile', 'trahviga'], 0,
+    ['После безличной формы полный объект стоит в именительном: määrati trahv (не trahvi).', 'After the impersonal a total object stays in the nominative: määrati trahv (not trahvi).', 'Umbisikulise tegumoe järel on täisobjekt nimetavas: määrati trahv.']),
+  pick(['Что значит «Kaupa saab tagastada 14 päeva jooksul»?', 'What does “Kaupa saab tagastada 14 päeva jooksul” mean?', 'Mida tähendab «Kaupa saab tagastada 14 päeva jooksul»?'],
+    [tr('Товар можно вернуть в течение 14 дней', 'Goods can be returned within 14 days', 'Kauba võib 14 päeva jooksul tagasi anda'), tr('Товар нужно оплатить за 14 дней', 'Goods must be paid for within 14 days', 'Kaup tuleb 14 päevaga ära maksta'),
+      tr('Товар придёт через 14 дней', 'Goods will arrive in 14 days', 'Kaup jõuab kohale 14 päevaga'), tr('Товар нельзя вернуть', 'Goods cannot be returned', 'Kaupa ei saa tagastada')], 0,
+    ['saab + da-инфинитив — «можно»; jooksul — «в течение».', 'saab + the da-infinitive — “can”; jooksul — “within”.', 'saab + da-tegevusnimi; jooksul.']),
+];

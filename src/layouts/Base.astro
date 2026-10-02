@@ -34,6 +34,7 @@ const nav = [
   { id: 'topics', label: s.topicsTitle },
   { id: 'test', label: s.introTitle },
   { id: 'test-a2', label: s.introTitleA2 },
+  { id: 'test-b1', label: s.introTitleB1 },
 ];
 ---
 <!doctype html>
@@ -100,10 +101,12 @@ const nav = [
             <a href={`/${lang}/topics`}>{s.topicsTitle}</a>
             <a href={`/${lang}/test`}>{s.introTitle}</a>
             <a href={`/${lang}/test-a2`}>{s.introTitleA2}</a>
+            <a href={`/${lang}/test-b1`}>{s.introTitleB1}</a>
           </nav>
           <nav class="foot-links" aria-label={s.navArticles}>
             <a class="foot-h" href={`/${lang}/guide`}>{s.navArticles}</a>
             <a href={`/${lang}/exam-a2`}>{s.footExamFormat}</a>
+            <a href={`/${lang}/exam-b1`}>{s.footExamFormatB1}</a>
             {guides[lang].map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
           </nav>
         </div>
@@ -160,9 +163,10 @@ const nav = [
   .top, .foot { width: 100%; }
   main { max-width: 920px; margin: 0 auto; padding: 0 16px 48px; }
   .top {
-    max-width: 920px; margin: 0 auto 24px; padding: 14px 16px;
+    position: sticky; top: 0; z-index: 10;
+    max-width: none; margin: 0 0 24px; padding: 14px max(16px, calc((100% - 920px) / 2));
     display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap;
-    border-bottom: 1px solid var(--line);
+    background: var(--bg); border-bottom: 1px solid var(--line);
   }
   .top a { color: var(--fg); text-decoration: none; }
   .brand { font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }

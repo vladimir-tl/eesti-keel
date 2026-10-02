@@ -8,9 +8,10 @@ export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
 const s = ui[lang];
 
-const levels: { level: Level; label: string; test: string; testTitle: string; testText: string }[] = [
+const levels: { level: Level; label: string; test?: string; testTitle?: string; testText?: string }[] = [
   { level: 'A1', label: s.levelA1, test: `/${lang}/test`, testTitle: s.introTitle, testText: s.introText },
   { level: 'A2', label: s.levelA2, test: `/${lang}/test-a2`, testTitle: s.introTitleA2, testText: s.introTextA2 },
+  { level: 'B1', label: s.levelB1, test: `/${lang}/test-b1`, testTitle: s.introTitleB1, testText: s.introTextB1 },
 ];
 const number = (level: Level, id: string) =>
   groupsOf(level).flatMap((g) => g.topics).findIndex((x) => x.id === id) + 1;
@@ -25,6 +26,7 @@ const number = (level: Level, id: string) =>
     <section class="level" id={lv.level.toLowerCase()}>
       <h2 class="level-title"><span class="chip">{lv.level}</span> {lv.label}</h2>
       {lv.level === 'A2' && <p class="muted note">{s.a2Note} <a href={`/${lang}/exam-a2`}>{s.examCta} →</a></p>}
+      {lv.level === 'B1' && <p class="muted note">{s.b1Note} <a href={`/${lang}/exam-b1`}>{s.examCtaB1} →</a></p>}
       {groupsOf(lv.level).map((g) => (
         <section class="group" id={g.id}>
           <h3 class="group-title"><a class="anchor" href={`#${g.id}`}>{t(g.title, lang)}</a> <span class="muted small">{g.topics.length} {s.topicsCount}</span></h3>
@@ -39,14 +41,16 @@ const number = (level: Level, id: string) =>
           </div>
         </section>
       ))}
-      <section class="group">
-        <h3 class="group-title">{lv.level === 'A1' ? s.testCta : s.testCtaA2}</h3>
-        <a class="card topic" href={lv.test}>
-          <span class="num">★</span>
-          <h4>{lv.testTitle}</h4>
-          <p class="muted">{lv.testText}</p>
-        </a>
-      </section>
+      {lv.test && <section class="group">
+        <h3 class="group-title">{lv.level === 'A1' ? s.testCta : lv.level === 'A2' ? s.testCtaA2 : s.testCtaB1}</h3>
+        <div class="grid">
+          <a class="card topic" href={lv.test}>
+            <span class="num">★</span>
+            <h4>{lv.testTitle}</h4>
+            <p class="muted">{lv.testText}</p>
+          </a>
+        </div>
+      </section>}
     </section>
   ))}
 </Base>

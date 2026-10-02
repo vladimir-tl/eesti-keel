@@ -7,7 +7,7 @@ const { lang, labels } = Astro.props;
 const rows = [
   { level: 'A1', y: 24, active: true, href: `/${lang}/topics#a1` },
   { level: 'A2', y: 108, active: true, href: `/${lang}/topics#a2` },
-  { level: 'B1', y: 192, active: false, href: '' },
+  { level: 'B1', y: 192, active: true, href: `/${lang}/topics#b1` },
 ];
 ---
 <svg viewBox="0 0 360 280" width="100%" role="img" aria-label={labels.join(', ')}>

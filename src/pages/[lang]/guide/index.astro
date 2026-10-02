@@ -3,6 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import { langs, ui, type Lang } from '../../../i18n/ui';
 import { guides } from '../../../data/guides';
 import { examA2 } from '../../../data/exam-a2';
+import { examB1 } from '../../../data/exam-b1';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
@@ -15,6 +16,7 @@ const groups = [
     title: s.footExam,
     items: [
       { href: `/${lang}/exam-a2`, h: s.examCta, desc: examA2[lang].description },
+      { href: `/${lang}/exam-b1`, h: s.examCtaB1, desc: examB1[lang].description },
       ...guides[lang].filter((g) => g.group === 'exam').map((g) => ({ href: `/${lang}/guide/${g.slug}`, h: g.h1, desc: g.description })),
     ],
   },

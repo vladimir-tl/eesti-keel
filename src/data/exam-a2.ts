@@ -17,7 +17,7 @@ interface Part {
   tasks: string[];
 }
 
-interface ExamPage {
+export interface ExamPage {
   title: string;
   description: string;
   h1: string;

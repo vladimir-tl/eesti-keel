@@ -24,8 +24,10 @@ const faqLd = {
         {[
           { href: 'test', label: s.testCta, note: s.testCtaNote },
           { href: 'test-a2', label: s.testCtaA2, note: s.testCtaA2Note },
+          { href: 'test-b1', label: s.testCtaB1, note: s.testCtaB1Note },
           { href: 'topics#a1', label: s.topicsCtaA1, note: s.topicsCtaA1Note },
           { href: 'topics#a2', label: s.topicsCtaA2, note: s.topicsCtaA2Note },
+          { href: 'topics#b1', label: s.topicsCtaB1, note: s.topicsCtaB1Note },
         ].map((l) => (
           <a href={`/${lang}/${l.href}`}>
             <span class="hero-link-label">{l.label}</span>
@@ -109,9 +111,9 @@ const faqLd = {
   .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .hero-cta { padding: 14px 32px; font-size: 1.15rem; font-weight: 600; margin-top: 8px; }
   .hero-note { margin: 8px 0 0; font-size: .875rem; }
-  .hero-links { display: grid; gap: 12px 24px; margin-top: 24px; }
+  .hero-links { display: grid; gap: 28px 32px; margin-top: 32px; }
   @media (min-width: 560px) { .hero-links { grid-template-columns: repeat(2, 1fr); } }
-  .hero-links a { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+  .hero-links a { display: flex; flex-direction: column; gap: 6px; text-decoration: none; }
   .hero-link-label { color: var(--accent); font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
   .hero-link-note { font-size: .85rem; }
   .art { max-width: 360px; width: 100%; margin: 0 auto; }

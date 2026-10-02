@@ -94,7 +94,6 @@ const ru: Guide[] = [
           'Проверки письменных текстов.',
           'Заданий на говорение и диалог.',
           'Пробного экзамена в формате Harno с ограничением по времени.',
-          'Уровня B1 (он в работе).',
         ],
       },
       {
@@ -527,7 +526,6 @@ const en: Guide[] = [
           'Checking of written texts.',
           'Speaking and dialogue tasks.',
           'A timed mock exam in the Harno format.',
-          'Level B1 (in progress).',
         ],
       },
       {
@@ -961,7 +959,6 @@ const et: Guide[] = [
           'Kirjutatud tekstide kontroll.',
           'Rääkimis- ja dialoogiülesanded.',
           'Ajaga proovieksam Harno formaadis.',
-          'B1 tase (tulekul).',
         ],
       },
       {

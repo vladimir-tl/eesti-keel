@@ -15,6 +15,12 @@ import { context } from './content-a2-context';
 import { genitive, pronouns, comitative, translative, comparison, imperative, past2, perfect, conditional, future, verbs3, infinitive, object, kaima, plural2, postpos, complex, timeExpr, numbers2 } from './content-a2-grammar';
 import { work, education, housing, bank, official, shopping2, health2, transport2 } from './content-a2-life';
 import { aboutMe, education2, work2, services, dailyRoutine, body2, pharmacy, hobbies2, quantities, meals, social, city, route, languages, sightseeing } from './content-a2-harno';
+import { entertainment, sportMedia, consumer, onlineShop, foodHabits, restaurant } from './content-b1-free';
+import { environment, weatherPlaces, traditions, languageLearning, tripPlanning, onTheRoad } from './content-b1-world';
+import { serviceTalk, complaints, homePlace, housekeeping, illness, healthcare } from './content-b1-daily';
+import { selfIntro, character, studies, schoolLife, career, workplace } from './content-b1-life';
+import { society, opinions, politics, news, economy, law } from './content-b1-society';
+import { impersonal, quotative, participles, condPast, government, relative } from './content-b1-grammar';
 import { travel, cooking, forecast, family2, describing, leisure, culture, tech, letters, phrases } from './content-a2-world';
 
 export interface Topic {
@@ -284,15 +290,151 @@ const a2Groups: Omit<Group, 'level'>[] = [
   },
 ];
 
+const b1Groups: Omit<Group, 'level'>[] = [
+  {
+    id: 'b1-grammar',
+    title: tr('Грамматика B1', 'B1 grammar', 'B1 grammatika'),
+    topics: [
+      topic('impersonal', tr('Безличная форма: räägitakse, ehitati', 'Impersonal: räägitakse, ehitati', 'Umbisikuline tegumood: räägitakse, ehitati'), 'räägitakse, müüakse, avati, ei lubata', impersonal),
+      topic('quotative', tr('Косвенное наклонение: -vat', 'Quotative: -vat', 'Kaudne kõneviis: -vat'), 'olevat, tulevat, hakkavat, kuuldavasti', quotative),
+      topic('participles', tr('Формы -des, -mata, -mast, -tud', 'Forms -des, -mata, -mast, -tud', 'Vormid -des, -mata, -mast, -tud'), 'õppides, ütlemata, jooksmast, praetud', participles),
+      topic('cond-past', tr('Условное: kui oleks, oleksin tulnud', 'Conditional: kui oleks, oleksin tulnud', 'Tingiv kõneviis: kui oleks, oleksin tulnud'), 'läheksime, oleks jäänud, kui ma oleksin sina', condPast),
+      topic('government', tr('Управление глаголов: kartma, sõltuma', 'Verb government: kartma, sõltuma', 'Verbide rektsioon: kartma, sõltuma'), 'kardan koeri, sõltun sinust, rahul tööga', government),
+      topic('relative', tr('Придаточные: kes, mida, kuigi, kuni', 'Subordinate clauses: kes, mida, kuigi, kuni', 'Rindlause ja alamlause: kes, mida, kuigi, kuni'), 'mees, kes · raamat, mida · kuigi, kuni, sest', relative),
+    ],
+  },
+  // The 15 thematic blocks of the Harno B1 handbook (Iseseisev keelekasutaja, ch. 4.2). Blocks without topics stay hidden until they are filled.
+  {
+    id: 'b1-people',
+    title: tr('1. О себе и других', '1. About yourself and others', '1. Endast ja teistest rääkimine'),
+    topics: [
+      topic('self-intro', tr('Рассказ о себе и семье', 'Telling about yourself and your family', 'Endast ja perest rääkimine'), 'sündinud, kasvasin üles, kolis, elukaaslane, sugulane', selfIntro),
+      topic('character', tr('Характер и отношения', 'Personality and relationships', 'Iseloom ja suhted'), 'kannatlik, jonnakas, saan läbi, sarnaneb isale', character),
+    ],
+  },
+  {
+    id: 'b1-education',
+    title: tr('2. Образование', '2. Education', '2. Haridus'),
+    topics: [
+      topic('studies', tr('Образование и учёба', 'Education and studies', 'Haridus ja õpingud'), 'eriala, kõrgharidus, lõpetasin ülikooli, stipendium', studies),
+      topic('school-life', tr('Школа, курсы, планы', 'School, courses, plans', 'Kool, kursused, plaanid'), 'tunnistus, täiendkoolitus, kursustel, õpetab lastele', schoolLife),
+    ],
+  },
+  {
+    id: 'b1-work',
+    title: tr('3. Профессия и работа', '3. Profession and work', '3. Elukutse, amet ja töö'),
+    topics: [
+      topic('career', tr('Карьера и поиск работы', 'Career and job hunting', 'Karjäär ja töö otsimine'), 'töövestlus, motivatsioonikiri, kandideerin, võeti tööle', career),
+      topic('workplace', tr('На работе: задачи и проблемы', 'At work: tasks and problems', 'Tööl: ülesanded ja probleemid'), 'ületunnitöö, vastutan, tegelen, osalen, saan hakkama', workplace),
+    ],
+  },
+  {
+    id: 'b1-services',
+    title: tr('4. Услуги и обслуживание', '4. Services', '4. Teenindus'),
+    topics: [
+      topic('service-talk', tr('Услуги: звонок, запись, вопросы', 'Services: calls, bookings, questions', 'Teenused: kõned, broneeringud, küsimused'), 'seoses, kohta, saaksin broneerida, tühistage', serviceTalk),
+      topic('complaints', tr('Жалоба и решение проблемы', 'Complaints and solving problems', 'Kaebus ja probleemi lahendamine'), 'vigane, vahetage, hüvitis, garantii, rahul', complaints),
+    ],
+  },
+  {
+    id: 'b1-home',
+    title: tr('5. Повседневная жизнь, дом и родные места', '5. Daily life, home and hometown', '5. Igapäevaelu, kodu ja kodukoht'),
+    topics: [
+      topic('home-place', tr('Дом, район, родные места', 'Home, neighbourhood, hometown', 'Kodu, naabruskond, kodukoht'), 'eeslinn, eramaja, asub, plussid ja miinused', homePlace),
+      topic('housekeeping', tr('Быт и гости', 'Housework and guests', 'Majapidamine ja külalised'), 'tolmuimeja, külla kutsuma, külas käima, remont pooleli', housekeeping),
+    ],
+  },
+  {
+    id: 'b1-health',
+    title: tr('6. Самочувствие и здоровье', '6. Health and wellbeing', '6. Enesetunne ja tervis'),
+    topics: [
+      topic('illness', tr('Самочувствие и симптомы', 'Feeling ill and symptoms', 'Enesetunne ja sümptomid'), 'palavik, pearinglus, mul valutab, tunnen end halvasti', illness),
+      topic('healthcare', tr('Врач, больница, здоровый образ жизни', 'Doctor, hospital, healthy living', 'Arst, haigla, tervislik eluviis'), 'perearst, saatekiri, haigekassa, kiirabi, loobuma', healthcare),
+    ],
+  },
+  {
+    id: 'b1-leisure',
+    title: tr('7. Свободное время и развлечения', '7. Free time and entertainment', '7. Vaba aeg ja meelelahutus'),
+    topics: [
+      topic('entertainment', tr('Развлечения и увлечения', 'Entertainment and interests', 'Meelelahutus ja huvid'), 'etendus, huvitab, harrastan, viitsima, aega veeta', entertainment),
+      topic('sport-media', tr('Спорт, медиа, интернет', 'Sport, media, the internet', 'Sport, meedia, internet'), 'võistkond, võitis, viik, jälgima, alla laadima', sportMedia),
+    ],
+  },
+  {
+    id: 'b1-shopping',
+    title: tr('8. Покупки и цены', '8. Shopping and prices', '8. Sisseostud, hinnad'),
+    topics: [
+      topic('consumer', tr('Выбор товара и сравнение', 'Choosing and comparing goods', 'Valik ja võrdlemine'), 'soodne, mida kallim seda parem, enne ostmist, tšekk', consumer),
+      topic('online-shop', tr('Интернет-магазин и доставка', 'Online shopping and delivery', 'Veebipood ja tarne'), 'ostukorv, pakiautomaat, kuller, järelmaks, tagastada', onlineShop),
+    ],
+  },
+  {
+    id: 'b1-food',
+    title: tr('9. Еда и напитки', '9. Food and drink', '9. Söök ja jook'),
+    topics: [
+      topic('food-habits', tr('Питание и вкус', 'Eating habits and taste', 'Toitumine ja maitse'), 'toitev, maitseb, taimetoitlane, kõht tühi', foodHabits),
+      topic('restaurant', tr('Кафе и ресторан', 'Café and restaurant', 'Kohvik ja restoran'), 'eelroog, pearoog, soovitaksite, jootraha, arve', restaurant),
+    ],
+  },
+  {
+    id: 'b1-society',
+    title: tr('10. Отношения людей в обществе', '10. Relations between people in society', '10. Inimeste suhted ühiskonnas'),
+    topics: [
+      topic('society', tr('Общество и люди', 'Society and people', 'Ühiskond ja inimesed'), 'ühiskond, kogukond, vabatahtlik, sallivus, vähemus', society),
+      topic('opinions', tr('Мнение и спор', 'Opinions and arguing', 'Arvamus ja vaidlus'), 'minu arvates, ühelt poolt, ma olen nõus, kahjuks', opinions),
+    ],
+  },
+  {
+    id: 'b1-politics',
+    title: tr('11. Политика и текущие события', '11. Politics and current events', '11. Poliitika, aktuaalsed sündmused'),
+    topics: [
+      topic('politics', tr('Политика и выборы', 'Politics and elections', 'Poliitika ja valimised'), 'valimised, valitsus, riigikogu, erakond, hääletama', politics),
+      topic('news', tr('Новости и события', 'News and events', 'Uudised ja sündmused'), 'uudised, ajakirjanik, avarii, teatati, kuuldavasti', news),
+    ],
+  },
+  {
+    id: 'b1-economy',
+    title: tr('12. Экономика и право', '12. Economy and law', '12. Majandus- ja õigussuhted'),
+    topics: [
+      topic('economy', tr('Деньги и экономика', 'Money and the economy', 'Raha ja majandus'), 'maks, laen, tõusma, säästma, eelarve', economy),
+      topic('law', tr('Договоры, права, штрафы', 'Contracts, rights, fines', 'Lepingud, õigused, trahvid'), 'leping, kohustus, trahv, kohus, tagastama', law),
+    ],
+  },
+  {
+    id: 'b1-environment',
+    title: tr('13. Окружающая среда, места, природа, погода', '13. Environment, places, nature and weather', '13. Keskkond, kohad, loodus, ilm'),
+    topics: [
+      topic('environment', tr('Окружающая среда', 'The environment', 'Keskkond'), 'saaste, jäätmed, sorteerima, kliimamuutus, taastuvenergia', environment),
+      topic('weather-places', tr('Погода и природные явления', 'Weather and natural events', 'Ilm ja loodusnähtused'), 'äike, udu, üleujutus, oodatakse, kohati', weatherPlaces),
+    ],
+  },
+  {
+    id: 'b1-culture',
+    title: tr('14. Культура и языки, изучение языков', '14. Culture and languages, learning languages', '14. Kultuur ja keeled, keelte õppimine'),
+    topics: [
+      topic('traditions', tr('Традиции и культура', 'Traditions and culture', 'Kombed ja kultuur'), 'komme, rahvariided, on kombeks, tuntud poolest', traditions),
+      topic('language-learning', tr('Изучение языков', 'Learning languages', 'Keelte õppimine'), 'võõrkeel, sõnavara, valdama, sujuvalt, tõlkima', languageLearning),
+    ],
+  },
+  {
+    id: 'b1-travel',
+    title: tr('15. Путешествия, транспорт, достопримечательности', '15. Travel, transport, sights', '15. Reisimine, transport, vaatamisväärsused'),
+    topics: [
+      topic('trip-planning', tr('Планирование поездки', 'Planning a trip', 'Reisi planeerimine'), 'marsruut, majutus, viisa, ööbima, edasi-tagasi', tripPlanning),
+      topic('on-the-road', tr('В пути: проблемы и достопримечательности', 'On the road: problems and sights', 'Teel: probleemid ja vaatamisväärsused'), 'hilinema, ära jääma, eksima, kaotsi minema, juhatama', onTheRoad),
+    ],
+  },
+];
+
 const withLevel = (level: Level, list: Omit<Group, 'level'>[]): Group[] =>
-  list.map((g) => ({
+  list.filter((g) => g.topics.length > 0).map((g) => ({
     ...g,
     level,
     topics: g.topics.map((tp) => ({ ...tp, questions: tp.questions.map((q) => ({ ...q, level })) })),
   }));
 
-/** Course structure: groups in study order (A1, then A2), topics inside each group. */
-export const groups: Group[] = [...withLevel('A1', a1Groups), ...withLevel('A2', a2Groups)];
+/** Course structure: groups in study order (A1, A2, then B1), topics inside each group. */
+export const groups: Group[] = [...withLevel('A1', a1Groups), ...withLevel('A2', a2Groups), ...withLevel('B1', b1Groups)];
 
 /** Groups and topics of one level. */
 export const groupsOf = (level: Level): Group[] => groups.filter((g) => g.level === level);
