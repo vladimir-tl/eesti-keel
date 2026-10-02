@@ -213,6 +213,9 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     placement: Placement | null;
   };
   const LEVELS = ['A1', 'A2', 'B1'];
+  // Analytics events (the helper is defined in Base.astro and sends only after consent).
+  const track = (name: string, params: Record<string, unknown>) => (window as any).track?.(name, params);
+  const quizId = location.pathname.split('/').filter(Boolean).slice(1).join('/') || 'home';
   // "I don't know" in the level test: counts as a wrong answer.
   const SKIPPED = -2;
   const { ui } = cfg;
@@ -485,6 +488,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     $('score').textContent = `${correct} / ${questions.length}`;
     $('verdict').textContent = hit ? hit.text : '';
     if (cfg.placement) renderPlacement(cfg.placement);
+    track('quiz_complete', { quiz: quizId, score: correct, total: questions.length, result: cfg.placement ? $('score').textContent : undefined });
 
     const review = $('review');
     review.replaceChildren();
@@ -550,6 +554,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     if (starting) return;
     starting = true;
     questions = buildRun();
+    track('quiz_start', { quiz: quizId });
     i = 0;
     answers = questions.map(() => null);
     checked = questions.map(() => false);

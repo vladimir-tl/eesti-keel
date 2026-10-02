@@ -65,6 +65,36 @@ const nav = [
     <meta property="og:locale" content={locales[lang]} />
     {langs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={locales[l]} />)}
     <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline define:vars={{ gaId: 'G-KKMTP30ZL2' }}>
+      // GA4 loads only after consent (Consent Mode v2: everything denied by default).
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+      var consent = null;
+      try { consent = localStorage.getItem('cookie-consent'); } catch (e) {}
+      var loaded = false;
+      function grantAnalytics() {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        if (loaded) return;
+        loaded = true;
+        var el = document.createElement('script');
+        el.async = true;
+        el.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+        document.head.appendChild(el);
+        gtag('js', new Date());
+        gtag('config', gaId);
+      }
+      window.setConsent = function (value) {
+        try { localStorage.setItem('cookie-consent', value); } catch (e) {}
+        if (value === 'granted') grantAnalytics();
+        else if (loaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+      };
+      // Simple events: sent only when analytics is allowed.
+      window.track = function (name, params) {
+        if (loaded) gtag('event', name, params || {});
+      };
+      if (consent === 'granted') grantAnalytics();
+    </script>
     {structured.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
   </head>
   <body>
@@ -111,8 +141,29 @@ const nav = [
           </nav>
         </div>
       </div>
+      <p class="muted"><button type="button" class="link-btn" id="cookie-settings">{s.cookieSettings}</button></p>
       <p class="muted">© {new Date().getFullYear()} {s.siteName}<br />{s.disclaimer}</p>
     </footer>
+    <div class="cookie" id="cookie" role="dialog" aria-label={s.cookieSettings} hidden>
+      <p>{s.cookieText}</p>
+      <div class="cookie-btns">
+        <button type="button" class="btn" data-consent="granted">{s.cookieAccept}</button>
+        <button type="button" class="btn ghost" data-consent="denied">{s.cookieReject}</button>
+      </div>
+    </div>
+    <script>
+      const banner = document.getElementById('cookie')!;
+      let stored: string | null = null;
+      try { stored = localStorage.getItem('cookie-consent'); } catch {}
+      banner.hidden = stored !== null;
+      banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((b) =>
+        b.addEventListener('click', () => {
+          (window as any).setConsent(b.dataset.consent);
+          banner.hidden = true;
+        }),
+      );
+      document.getElementById('cookie-settings')?.addEventListener('click', () => (banner.hidden = false));
+    </script>
   </body>
 </html>
 
@@ -224,4 +275,16 @@ const nav = [
   .ok { color: var(--ok); }
   .bad { color: var(--bad); }
   [hidden] { display: none !important; }
+  .cookie {
+    position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 20;
+    max-width: 560px; margin: 0 auto; padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+    border: 1px solid var(--line); border-radius: 14px; background: var(--card);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .18); font-size: .9rem;
+  }
+  .cookie p { margin: 0; }
+  .cookie-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+  .btn.ghost:not(:disabled):hover { background: color-mix(in srgb, var(--accent) 8%, transparent); box-shadow: none; }
+  #cookie-settings { padding: 0; border: 0; background: none; color: var(--muted); font: inherit; text-decoration: underline; cursor: pointer; }
 </style>
