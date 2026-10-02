@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, m, ty } from './helpers';
+import { toEt, fromEt, typeEt, m, ty, mc } from './helpers';
+import { tr } from './questions';
 import type { Question } from './questions';
 
 export const genitive: Question[] = [
@@ -86,8 +87,9 @@ export const translative: Question[] = [
   m('Ma õpin ___. (на учителя)', 'Ma õpin ___. (to become a teacher)', ['õpetaja', 'õpetajaks', 'õpetajana', 'õpetajat'], 1,
     'õppima + -ks: «учиться на кого-то».', 'õppima + -ks: “to study to be something”.'),
   ty('Впишите: Ma olen kodus ___. (к вечеру) Форма слова õhtu.', 'Type: Ma olen kodus ___. (by evening) Form of õhtu.', ['õhtuks'], 'õhtu → õhtuks.', 'õhtu → õhtuks.'),
-  m('Lapsena ma elasin Tartus. Что значит «lapsena»?', 'Lapsena ma elasin Tartus. What does “lapsena” mean?', ['ребёнком, в детстве', 'для ребёнка', 'с ребёнком', 'у ребёнка'], 0,
-    '-na = «в роли / в качестве»: lapsena (ребёнком).', '-na = “as”: lapsena (as a child).'),
+  mc(tr('Lapsena ma elasin Tartus. Что значит «lapsena»?', 'Lapsena ma elasin Tartus. What does “lapsena” mean?'),
+    [tr('ребёнком, в детстве', 'as a child', 'as a child'), tr('для ребёнка', 'for a child', 'for a child'), tr('с ребёнком', 'with a child', 'with a child'), tr('у ребёнка', 'at the child’s place', 'at the child’s place')], 0,
+    tr('-na = «в роли / в качестве»: lapsena (ребёнком).', '-na = “as”: lapsena (as a child).')),
   ty('Впишите: Ma töötan ___. (поваром) Форма слова kokk с -na.', 'Type: Ma töötan ___. (as a cook) Form of kokk with -na.', ['kokana'], 'kokk → koka → kokana.', 'kokk → koka → kokana.'),
   fromEt('kaheks nädalaks', ['на две недели', 'две недели назад', 'через две недели', 'две недели подряд'], ['for two weeks', 'two weeks ago', 'in two weeks', 'two weeks in a row'], 0),
   fromEt('Ma tahan saada õpetajaks', ['Я хочу стать учителем', 'Я работаю учителем', 'Я учусь у учителя', 'Я был учителем'], ['I want to become a teacher', 'I work as a teacher', 'I study with a teacher', 'I was a teacher'], 0),

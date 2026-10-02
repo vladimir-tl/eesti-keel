@@ -28,7 +28,7 @@ const config = {
     options: q.options.map((o) => t(o, lang)),
     answer: q.answer,
     accept: q.accept ?? [],
-    explain: q.explain[lang],
+    explain: t(q.explain, lang),
     group: (q as Question & { group?: string }).group ?? '',
   })),
 };

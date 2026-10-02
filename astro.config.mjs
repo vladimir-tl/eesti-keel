@@ -13,7 +13,7 @@ export default defineConfig({
     sitemap({
       // The root page only redirects to /ru.
       filter: (page) => page !== site && page !== `${site}/`,
-      i18n: { defaultLocale: 'ru', locales: { ru: 'ru', en: 'en' } },
+      i18n: { defaultLocale: 'ru', locales: { ru: 'ru', en: 'en', et: 'et' } },
     }),
   ],
 });

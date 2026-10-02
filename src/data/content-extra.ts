@@ -12,8 +12,9 @@ export const extra: Record<string, Question[]> = {
   greetings: [
     fromEt('Meeldiv tutvuda', ['Приятно познакомиться', 'Добрый день', 'До встречи', 'Как дела?'], ['Nice to meet you', 'Good day', 'See you', 'How are you?'], 0),
     typeEt('До встречи! (неформально)', 'See you! (informal)', ['nägemist']),
-    m('Tere päevast! Когда это говорят?', 'Tere päevast! When is it said?', ['Днём', 'Утром', 'Вечером', 'Ночью'], 0,
-      'Tere hommikust — утром, Tere päevast — днём, Tere õhtust — вечером.', 'Tere hommikust — morning, Tere päevast — daytime, Tere õhtust — evening.'),
+    mc(tr('Tere päevast! Когда это говорят?', 'Tere päevast! When is it said?'),
+      [tr('Днём', 'In the daytime', 'Päeval'), tr('Утром', 'In the morning', 'Hommikul'), tr('Вечером', 'In the evening', 'Õhtul'), tr('Ночью', 'At night', 'Öösel')], 0,
+      tr('Tere hommikust — утром, Tere päevast — днём, Tere õhtust — вечером.', 'Tere hommikust — morning, Tere päevast — daytime, Tere õhtust — evening.')),
   ],
   family: [
     fromEt('vanaema', ['бабушка', 'мама', 'тётя', 'сестра'], ['grandmother', 'mum', 'aunt', 'sister'], 0),

@@ -17,7 +17,7 @@ const article = {
   inLanguage: lang,
   dateModified: '2026-09-25',
   mainEntityOfPage: abs(`/${lang}/exam-a2`),
-  about: { '@type': 'Thing', name: lang === 'ru' ? 'Экзамен A2 по эстонскому языку' : 'Estonian A2 proficiency exam' },
+  about: { '@type': 'Thing', name: { ru: 'Экзамен A2 по эстонскому языку', en: 'Estonian A2 proficiency exam', et: 'Eesti keele A2-taseme eksam' }[lang] },
 };
 const faq = {
   '@context': 'https://schema.org',
@@ -66,7 +66,7 @@ const breadcrumbs = {
               <h3>{p.name}</h3>
               <span class="chips">
                 <span class="chip" title={e.colTime}>{p.time}</span>
-                <span class="chip" title={e.colPoints}>{p.points} {lang === 'ru' ? 'б.' : 'pts'}</span>
+                <span class="chip" title={e.colPoints}>{p.points} {{ ru: 'б.', en: 'pts', et: 'p' }[lang]}</span>
               </span>
             </div>
             <ul>{p.tasks.map((x) => <li>{x}</li>)}</ul>

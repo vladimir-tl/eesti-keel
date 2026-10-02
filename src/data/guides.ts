@@ -45,7 +45,7 @@ const sources = {
   harnoB1: 'https://harno.ee/sites/default/files/documents/2021-06/Iseseisev-keelekasutaja.pdf',
 };
 
-// Estonian samples are shared by both languages.
+// Estonian samples are shared by all languages.
 const card = {
   et: 'Anna Mets töötab juuksurina. Ta töötab salongis Lokk. Salong asub Tallinnas, Tartu maanteel 15. Anna töötab esmaspäevast reedeni kella kümnest hommikul kuni seitsmeni õhtul. Temaga saab kontakti telefoni teel. Tema telefoninumber on 5123 4567.',
   card: 'Salong Lokk, Anna Mets, juuksur, Tartu mnt 15, Tallinn, E–R 10–19, tel 5123 4567',
@@ -921,4 +921,438 @@ const en: Guide[] = [
   },
 ];
 
-export const guides: Record<Lang, Guide[]> = { ru, en };
+// Estonian: the text is in Estonian; translations of samples and phrases stay in English, as in the quizzes.
+const et: Guide[] = [
+  {
+    slug: 'coverage',
+    nav: 'Mida sait ei kata',
+    group: 'help',
+    title: 'Mida see sait katab ja mida siin veel ei ole',
+    description: 'Siinsed küsimustikud harjutavad grammatikat, sõnavara ja lühikesi vastuseid. Kuulamis-, kirjutamis- ja rääkimisülesandeid veel ei ole. Sellel lehel on kirjas, kuidas valmistuda A2 eksami nendeks osadeks.',
+    h1: 'Mida see sait katab ja mida siin veel ei ole',
+    lead: 'A2 eksamil on neli osa: kirjutamine, kuulamine, lugemine ja rääkimine. Igat osa hinnatakse 20 punktiga. Selle saidi küsimustikud aitavad mõne osa juures, aga mitte kõigi.',
+    sections: [
+      {
+        h: 'Eksami osad ja ülesanded saidil',
+        table: {
+          head: ['Eksami osa', 'Punktid', 'Sellel saidil'],
+          rows: [
+            ['Lugemine', '20', 'Osaliselt. On lühikesed valikvastustega küsimused, repliigid olukordades ja lüngad lausetes. Pikki tekste ja teateid on veel vähe.'],
+            ['Kuulamine', '20', 'Veel ei ole.'],
+            ['Kirjutamine', '20', 'Veel ei ole. Saidil kirjutad ainult üksikuid sõnu.'],
+            ['Rääkimine', '20', 'Veel ei ole.'],
+            ['Grammatika ja sõnavara', '—', 'Saidi põhiosa: käänded, verbid, sõnad A2 13 teema kohta.'],
+          ],
+        },
+        after: ['Eksamil ei ole eraldi grammatikaosa. Grammatikat ja sõnavara on vaja kõigis neljas osas, nii et küsimustikud aitavad, kuid ei asenda eksamiks valmistumist.'],
+      },
+      {
+        h: 'Küsimustike tulemustest',
+        list: [
+          'Kui A2 küsimustikud lähevad hästi, tunned selle taseme grammatikat ja sõnavara.',
+          'Küsimustikud ei kontrolli kuulamist, kirjutamist ega rääkimist.',
+          'Eksam on sooritatud 48 punktiga 80-st, kui ükski osa ei ole 0 punkti. Seega tuleb valmistuda kõigiks neljaks osaks.',
+        ],
+      },
+      {
+        h: 'Mida saidil veel ei ole',
+        list: [
+          'Kuulamisülesanded.',
+          'Kirjutatud tekstide kontroll.',
+          'Rääkimis- ja dialoogiülesanded.',
+          'Ajaga proovieksam Harno formaadis.',
+          'B1 tase (tulekul).',
+        ],
+      },
+      {
+        h: 'Kuidas valmistuda teisteks osadeks',
+        list: [
+          'Kirjutamine. Vaata ülesandetüüpe ja kirjuta 2–3 lühikest teksti nädalas. Hea, kui keegi neid kontrollib.',
+          'Rääkimine. Vasta eksami teemade küsimustele valjusti ja salvesta end telefoniga.',
+          'Kuulamine. Kuula eesti keelt iga päev ja pane tähele arve, kellaaegu ja nädalapäevi.',
+          'Harno vihikus on kõigi nelja osa näidisülesanded koos vastustega.',
+        ],
+        links: [
+          ['Kirjutamine A2 eksamil', 'guide/a2-writing'],
+          ['Rääkimine A2 eksamil', 'guide/a2-speaking'],
+          ['Kuulamine ja lugemine A2 eksamil', 'guide/a2-listening-reading'],
+          ['Tasuta kursused ja materjalid', 'guide/resources'],
+          ['Harno A2 näidisülesannete vihik (PDF)', booklet],
+        ],
+      },
+      {
+        h: 'Plaanid',
+        p: ['Edaspidi plaanime lisada kuulamisülesanded, kirjutamisülesanded, rääkimisolukorrad ja B1 taseme.'],
+      },
+    ],
+  },
+  {
+    slug: 'who-needs-a2',
+    nav: 'Kellele on A2 vaja',
+    group: 'exam',
+    title: 'Kellele on eesti keele A2 eksam vajalik',
+    description: 'Millal on A2 ametlikult nõutud: teatud ametikohad Vabariigi Valitsuse määruse nr 84 järgi ja töötamiseks antud elamisloa pikendamine. Mille poolest A2 erineb B1-st ja millal on vaja B1.',
+    h1: 'Kellele on A2 eksam vajalik',
+    lead: 'A2 tase on ametlikult nõutud kahel juhul: teatud ametikohtadel ja töötamiseks antud elamisloa pikendamisel. Kodakondsuse ja pikaajalise elaniku elamisloa jaoks on vaja B1 taset. Üksikasjad ja viited ametlikele allikatele on allpool.',
+    sections: [
+      {
+        h: 'Mida tähendab A2 tase',
+        p: [
+          'Eesti keele oskustasemed järgivad Euroopa keeleõppe raamdokumenti (CEFR). Harno korraldab eksameid neljal tasemel: A2, B1, B2 ja C1.',
+          'Sellel skaalal kuuluvad A1 ja A2 algaja keelekasutaja ning B1 ja B2 iseseisva keelekasutaja tasemele. Ka Harno käsiraamatud on nii nimetatud: „Algaja keelekasutaja“ A2 jaoks ja „Iseseisev keelekasutaja“ B1 ja B2 jaoks. A2 lõpetab algtaseme; järgmine samm on B1.',
+          'A2 tasemel saab inimene aru lihtsatest fraasidest tuttavatel teemadel (isiku- ja pereandmed, ostlemine, kodu, töö), tuleb toime lihtsates igapäevaolukordades ja oskab lühidalt kirjeldada ennast, oma perekonda ja elutingimusi.',
+        ],
+      },
+      {
+        h: 'Töö',
+        p: ['Keelenõuded tööl on kehtestatud Vabariigi Valitsuse 20.06.2011 määrusega nr 84 „Ametniku, töötaja ning füüsilisest isikust ettevõtja eesti keele oskuse ja kasutamise nõuded“. A2 taset nõutakse:'],
+        list: [
+          'riigiasutuste töötajatelt, kes teevad tehnilist või abitööd, näiteks autojuhid, kütjad, paljundusmasina operaatorid jms;',
+          'vedurijuhtidelt ja rongijuhtidelt;',
+          'valvuritelt, piletikontrolöridelt, garderoobitöötajatelt, uksehoidjatelt ja kulleritelt.',
+        ],
+        after: [
+          'See on miinimum. Tööandja võib nõuda kõrgemat taset, kuid mitte kõrgemat kui C1.',
+          'Sama määrus nõuab paljudel ametikohtadel B1 taset, näiteks teenindus- ja müügitöötajatelt, kes teenindavad kliente regulaarselt, ühistranspordi juhtidelt ja hooldustöötajatelt.',
+          'Harno andmetel ei pea eksamit tegema, kui oled lõpetanud põhikooli, gümnaasiumi või kõrgkooli, kus vähemalt 60% õppest toimus eesti keeles.',
+        ],
+      },
+      {
+        h: 'Töötamiseks antud elamisluba',
+        p: [
+          'Politsei- ja Piirivalveameti (PPA) andmetel kehtib eesti keele A2 nõue alates 15. juulist 2018. See puudutab inimesi, kes on elanud Eestis 5 aastat 16.07.2018 või hiljem antud tähtajalise elamisloaga töötamiseks ja taotlevad selle pikendamist või uut töötamiseks antud elamisluba.',
+          'Kontrolli üksikasju PPA kodulehelt või rändenõustajalt.',
+        ],
+      },
+      {
+        h: 'Millal on vaja B1',
+        list: [
+          'Eesti kodakondsus. Tuleb sooritada vähemalt B1 taseme eksam.',
+          'Pikaajalise elaniku elamisluba. Vaja on vähemalt B1 taseme eesti keelt ja integratsiooninõude täitmist. PPA andmetel ei kehti keelenõue alla 15-aastastele, üle 65-aastastele ja piiratud teovõimega inimestele ning eksamit ei pea tegema need, kes on omandanud põhi-, kesk- või kõrghariduse eesti keeles.',
+          'Paljud ametikohad määruse nr 84 järgi, eriti töö klientidega.',
+        ],
+        after: ['Kui sul läheb hiljem vaja B1, on A2 ettevalmistus ikkagi kasulik: A2 sõnavara ja grammatika on B1 alus.'],
+      },
+      {
+        h: 'Eksami sooritamine',
+        p: ['Eksam on tasuta ja registreerimine toimub EIS-is. Ülesehitus, punktid ja registreerimine on kirjas eraldi lehel.'],
+        links: [
+          ['Kuidas A2 eksam käib', 'exam-a2'],
+          ['EIS, eksamile registreerimine', harnoLinks.eis],
+        ],
+      },
+      {
+        h: 'Allikad',
+        links: [
+          ['Riigi Teataja: Vabariigi Valitsuse määrus nr 84, kehtiv redaktsioon', sources.regulation84],
+          ['PPA: elamisluba töötamiseks (inglise keeles)', sources.ppaEmployment],
+          ['PPA: pikaajalise elaniku elamisluba (inglise keeles)', sources.ppaLongTerm],
+          ['Harno: eesti keele tasemeeksamid (inglise keeles)', harnoLinks.exams],
+          ['Harno: käsiraamat „Iseseisev keelekasutaja. B1- ja B2-taseme eesti keele oskus“ (PDF)', sources.harnoB1],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'a2-writing',
+    nav: 'Kirjutamine',
+    group: 'exam',
+    title: 'Eesti keele A2 eksami kirjutamisosa',
+    description: 'A2 eksami kirjutamisosa ülesanded: tekst visiitkaardi põhjal ja lühike teade või kirjeldus. Näidistekstid tõlkega ja kasulikud fraasid.',
+    h1: 'Kirjutamine A2 eksamil',
+    lead: 'Kirjutamisosa on esimene ja kestab 30 minutit. Selles on kaks ülesannet, kokku 20 punkti. Ülesannete kirjeldused on Harno vihikust, näidistekstid on meie omad.',
+    sections: [
+      {
+        h: '1. ülesanne',
+        p: ['Kirjutad inimese või asutuse visiitkaardi põhjal teksti, vähemalt 25 sõna. Ülesandes on küsimused. Inimese kaardi puhul on need:'],
+        phrases: [
+          ['Kellena ta töötab?', 'What does he or she work as?'],
+          ['Kus ta töötab?', 'Where does he or she work?'],
+          ['Millal ta töötab?', 'When does he or she work?'],
+          ['Kuidas saab temaga kontakti?', 'How can you contact him or her?'],
+        ],
+        after: [
+          'Kui kaart kuulub asutusele, on küsimused teised: Mis asutus see on? Kus see asub? Mida seal teha saab? Kuidas saab kontakti?',
+          'Kaartidel on sageli lühendid. E, T, K, N, R, L, P on nädalapäevad esmaspäevast pühapäevani. mnt tähendab maantee, tn tähendab tänav, pst tähendab puiestee.',
+        ],
+        samples: [
+          {
+            label: `Näide. Kaardil on kirjas: ${card.card}`,
+            et: card.et,
+            tr: 'Anna Mets works as a hairdresser. She works at the Lokk salon. The salon is in Tallinn, at Tartu maantee 15. Anna works from Monday to Friday from ten in the morning to seven in the evening. You can contact her by phone. Her number is 5123 4567.',
+          },
+        ],
+      },
+      {
+        h: '2. ülesanne',
+        p: ['Tekst peab olema vähemalt 30 sõna. See võib olla märkus, teade või kutse. Vihikus on näiteks olukord, kus leidsid oma kodust sõbra rahakoti ja kirjutad talle, kus see oli, milline see välja näeb ja kuidas selle tagasi saab. Või on see kirjeldus etteantud teemal, näiteks „Minu nädalavahetus“. Ka selles ülesandes on küsimused ja igale tuleb vastata.'],
+        samples: [
+          {
+            label: 'Näidiskutse',
+            et: invitation,
+            tr: 'Hi Mari!\nIt’s my birthday on Saturday and I’m inviting you over. The party starts at six in the evening at my place, Pärnu maantee 10, flat 5. We’ll eat cake and play board games. Please let me know if you can come. My phone is 5555 1234.\nSee you!\nOlga',
+          },
+          {
+            label: 'Näidiskirjeldus teemal „Minu nädalavahetus“',
+            et: weekend,
+            tr: 'On Saturday morning I went to the market and bought vegetables. After lunch I cleaned the house. In the evening I met a friend at a café and we talked for a long time. On Sunday my family and I drove to the countryside to see my grandmother. The weather was nice there and we walked in the forest. In the evening I was tired but happy.',
+          },
+        ],
+      },
+      {
+        h: 'Kasulikud fraasid',
+        phrases: [
+          ['Tere, Mari! / Kallis Mari!', 'Tuttava tervitamine'],
+          ['Lugupeetud härra Tamm!', 'Ametlik pöördumine'],
+          ['Kirjutan sulle, sest …', 'I’m writing to you because …'],
+          ['Kas sa saad … tulla?', 'Can you come …?'],
+          ['Palun helista mulle. / Palun anna teada.', 'Please call me. / Please let me know.'],
+          ['Kõigepealt … Siis … Pärast seda …', 'First … Then … After that …'],
+          ['…, sest … / …, aga …', '…, because … / …, but …'],
+          ['Tervitades / Lugupidamisega', 'Mitteametlik / ametlik lõpetus'],
+          ['Kohtumiseni!', 'See you!'],
+        ],
+      },
+      {
+        h: 'Nõuanded',
+        list: [
+          'Vasta kõigile ülesande küsimustele.',
+          'Jälgi sõnade arvu: 25 ja 30 sõna on miinimum. Kirjuta lauseid, mitte loetelu.',
+          'Kasuta lihtsaid lauseid, milles oled kindel.',
+          'Jäta paar minutit verbilõppude, käänete ja ajamääruste kontrollimiseks.',
+          'Kirjuta loetavalt, musta või sinise pastakaga.',
+          'Harjutamiseks kirjuta 2–3 teksti nädalas ja palu kellelgi neid kontrollida.',
+        ],
+        links: [
+          ['Teema „Kirjad ja sõnumid“', 'topics/letters'],
+          ['Harno näidisülesannete vihik (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'a2-speaking',
+    nav: 'Rääkimine',
+    group: 'exam',
+    title: 'Eesti keele A2 eksami rääkimisosa',
+    description: 'Kuidas käib A2 eksami rääkimisosa: pildi kirjeldamine, eksamineerija küsimused ja vestlus paarilisega. Näidisküsimused ja fraasid tõlkega.',
+    h1: 'Rääkimine A2 eksamil',
+    lead: 'Rääkimisosa kestab umbes 12 minutit. Teed seda paaris teise eksaminandiga, samal päeval kui kirjalikku osa. Selles on kaks ülesannet, kokku 20 punkti. Vastused salvestatakse.',
+    sections: [
+      {
+        h: '1. ülesanne',
+        p: ['Umbes 6–7 minutit. Ülesanne põhineb igapäevasel teemal; Harno vihikus on see „Pere ja sugulased“. Kõigepealt räägid, mis on pildil, seejärel vastad eksamineerija küsimustele. Fraasid pildi kirjeldamiseks:'],
+        phrases: [
+          ['Pildil on …', 'In the picture there is …'],
+          ['Pildil ma näen …', 'In the picture I can see …'],
+          ['Vasakul / paremal / keskel on …', 'On the left / on the right / in the middle there is …'],
+          ['Nad istuvad / söövad / räägivad.', 'They are sitting / eating / talking.'],
+          ['Minu arvates on see …', 'I think this is …'],
+          ['Tundub, et neil on hea tuju.', 'They seem to be in a good mood.'],
+        ],
+      },
+      {
+        h: 'Eksamineerija näidisküsimused',
+        p: ['Küsimused on Harno vihikust.'],
+        phrases: [
+          ['Kui suur on teie pere?', 'How big is your family?'],
+          ['Kes on teie pereliikmed?', 'Who is in your family?'],
+          ['Mida te koos perega nädalavahetusel teete?', 'What do you do with your family at the weekend?'],
+          ['Kus teie sugulased elavad?', 'Where do your relatives live?'],
+          ['Kui sageli te oma sugulastega kohtute?', 'How often do you see your relatives?'],
+          ['Mida sugulased teile tavaliselt kingivad?', 'What do your relatives usually give you?'],
+        ],
+        samples: [
+          {
+            label: 'Näidisvastus küsimusele „Mida te koos perega nädalavahetusel teete?“',
+            et: familyAnswer,
+            tr: 'On Saturday we usually go shopping and clean the house. On Sunday we sometimes drive to the countryside, because my mother lives there. In summer we go swimming together.',
+          },
+        ],
+      },
+      {
+        h: '2. ülesanne',
+        p: ['Umbes 5–6 minutit. Eksaminandid saavad teema ja piltidega kaardi (ideekaart) ning esitavad teineteisele küsimusi. Vihikus on kaks näidet. „Söök“: mida ja millal paariline sööb. „Igapäevane elu“: mida ta teeb poes, teeninduspunktis, tervisekeskuses ja kui tihti. Tuleb nii küsida kui ka vastata. Küsisõnad:'],
+        phrases: [
+          ['Mida sa … ?', 'What do you …?'],
+          ['Millal? / Mis kell?', 'When? / What time?'],
+          ['Kui tihti? / Kui sageli?', 'How often?'],
+          ['Kus? Kellega? Miks?', 'Where? With whom? Why?'],
+          ['Kas sa … ?', 'Jah/ei-küsimus'],
+          ['Aga sina?', 'And you?'],
+        ],
+        samples: [
+          {
+            label: 'Näidisdialoog kaardi „Söök“ põhjal',
+            et: dialogue,
+            tr: 'A: What do you eat in the morning?\nB: Usually porridge, and I drink coffee. And you?\nA: I have a sandwich. Where do you have lunch?\nB: At work, in the canteen. The hot food there is cheap.\nA: Do you often have dessert?\nB: No, only on Sundays. Then I bake a cake with my family.',
+          },
+        ],
+      },
+      {
+        h: 'Kui sa ei saanud aru või ei tea sõna',
+        phrases: [
+          ['Vabandust, ma ei saanud aru.', 'Sorry, I didn’t understand.'],
+          ['Kas te saate korrata?', 'Could you repeat that?'],
+          ['Palun rääkige aeglasemalt.', 'Please speak more slowly.'],
+          ['Mida see sõna tähendab?', 'What does this word mean?'],
+          ['Ma ei mäleta, kuidas see eesti keeles on.', 'I can’t remember how to say it in Estonian.'],
+          ['Hetkeke, ma mõtlen.', 'Just a moment, let me think.'],
+        ],
+      },
+      {
+        h: 'Nõuanded',
+        list: [
+          'Vasta kahe-kolme lausega, mitte ühe sõnaga.',
+          'Ära õpi monoloogi pähe: küsimused ei pruugi sobida ettevalmistatud tekstiga.',
+          '2. ülesandes küsi paariliselt kaardi iga punkti kohta ja vasta tema küsimustele.',
+          'Harjuta valjusti ja salvesta end telefoniga.',
+          'Kui teed vea, ära jää seisma, räägi edasi.',
+        ],
+        links: [
+          ['A2 teemad sellel saidil', 'topics#a2'],
+          ['Harno vihik piltide ja kaartidega (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'a2-listening-reading',
+    nav: 'Kuulamine ja lugemine',
+    group: 'exam',
+    title: 'Kuulamine ja lugemine eesti keele A2 eksamil',
+    description: 'A2 eksami kuulamis- ja lugemisosa ülesandetüübid ning millele ettevalmistusel tähelepanu pöörata.',
+    h1: 'Kuulamine ja lugemine A2 eksamil',
+    lead: 'Kuulamine kestab 30 minutit ja lugemine 50 minutit. Igat osa hinnatakse 20 punktiga. Igas ülesandes valid vastuse või kirjutad sõna või arvu.',
+    sections: [
+      {
+        h: 'Kuulamisülesanded',
+        list: [
+          'Vali pilt, arv või sõna. Näiteks küsimus „Mis kell väljub Tallinna–Tartu rong?“ vastusevariantidega 20.05, 20.15 ja 20.25.',
+          'Otsusta, kas väide on õige või vale.',
+          'Kirjuta sõna või arv, näiteks vastus küsimusele „Mitu tundi reis kestab?“.',
+          'Seosta nädalapäevad tegevustega. Kaks varianti jääb üle.',
+        ],
+        after: ['Vihiku vastustes lühivastusega ülesande juures sobivad nii number kui ka sõna (4 või neli) ning sõna eri vormid (pannkook, pannkooke).'],
+      },
+      {
+        h: 'Millele tähelepanu pöörata',
+        list: [
+          'Loe küsimused läbi enne salvestuse algust.',
+          'Korda, kuidas öeldakse kellaaegu: pool viis (4.30), veerand kuus (5.15), kolmveerand seitse (6.45).',
+          'Kuula lõpuni. Sõnad ei, mitte, aga ja hoopis võivad tähendust muuta.',
+          'Õige/vale-ülesandes võib väite sõna salvestuses esineda, kuigi tähendus on teine.',
+          'Abiks on iga päev eesti keele kuulamine: raadio, ERR-i saated, Keeleklikki videod.',
+        ],
+      },
+      {
+        h: 'Lugemisülesanded',
+        list: [
+          'Vali õige repliik. Näiteks „Pole viga.“ on vastus küsimusele „Kuidas sul läheb?“',
+          'Otsusta, millise kolmest tekstist kohta väide käib.',
+          'Seosta sildid ja teated selgitustega. Näiteks „Libe põrand!“ tähendab „Siin peab olema väga ettevaatlik.“',
+          'Loe teksti ja vasta küsimustele, valides A, B või C.',
+          'Täida kirjas lüngad, valides kolmest sõnast ühe.',
+        ],
+      },
+      {
+        h: 'Sagedased repliigid',
+        phrases: [
+          ['Pole viga.', 'Not bad.'],
+          ['Palju õnne!', 'Congratulations!'],
+          ['Jõudu!', 'Good luck!'],
+          ['Anna andeks! / Vabandust!', 'Sorry! / Excuse me!'],
+          ['Olgu (nii).', 'OK, fine.'],
+          ['Ole terve!', 'Bless you!'],
+          ['Pole vaja.', 'No need.'],
+          ['Muidugi!', 'Of course!'],
+          ['Head aega! / Nägemiseni!', 'Goodbye!'],
+        ],
+      },
+      {
+        h: 'Sildid ja teated',
+        phrases: [
+          ['Avatud / Suletud', 'Open / Closed'],
+          ['Tõmba / Lükka', 'Pull / Push'],
+          ['Sissepääs / Väljapääs', 'Entrance / Exit'],
+          ['Tasuta', 'Free'],
+          ['Keelatud', 'Forbidden'],
+          ['Libe!', 'Slippery!'],
+          ['Märg värv', 'Wet paint'],
+          ['Mitte suitsetada', 'No smoking'],
+          ['Hoia pilet alles!', 'Keep your ticket!'],
+        ],
+      },
+      {
+        h: 'Nõuanded lugemiseks',
+        list: [
+          'Vihikus on 30 küsimust 50 minuti jooksul, umbes poolteist minutit küsimuse kohta. Kui küsimus on raske, tule selle juurde hiljem tagasi.',
+          'Lünkade puhul vaata naabersõnu. Näiteks lauses „Eile ___ ootamatult haigeks“ on vastus jäin, sest väljend on haigeks jääma.',
+          'Kui variante on rohkem kui vaja, vali kõigepealt need, milles oled kindel.',
+          'Kirjuta vastusetähed suurtähtedega: A, B, C.',
+        ],
+        links: [
+          ['A2 lõputest', 'test-a2'],
+          ['Kus eesti keelt kuulata', 'guide/resources'],
+          ['Harno vihik näidiste ja vastustega (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'resources',
+    nav: 'Tasuta materjalid',
+    group: 'help',
+    title: 'Tasuta materjalid eesti keele õppimiseks',
+    description: 'Tasuta eesti keele kursused ja materjalid tasemetele A1–B1: Keeleklikk, Keeletee, Settle in Estonia, Eesti keele maja, Sõnaveeb, ERR ja Harno vihik.',
+    h1: 'Tasuta materjalid eesti keele õppimiseks',
+    lead: 'Tasuta kursused ja materjalid. Need aitavad selle juures, mida see sait ei kata: kuulamine, kirjutamine ja rääkimine.',
+    sections: [
+      {
+        h: 'E-kursused',
+        links: [
+          ['Keeleklikk', 'https://www.keeleklikk.ee/', 'E-kursus algajatele kuni A2 tasemeni. Animatsioonid, grammatikavideod, umbes 1200 harjutust. Juhised inglise, vene ja ukraina keeles.'],
+          ['Keeletee', 'https://www.keeletee.ee/', 'Keeleklikki jätk, A2-st B1-ni. Intervjuud, videod ja testid. Juhised inglise ja vene keeles.'],
+        ],
+      },
+      {
+        h: 'Kursused ja nõustamine',
+        links: [
+          ['Settle in Estonia', 'https://settleinestonia.ee/', 'Kohanemisprogramm. Tasuta A1, A2 ja B1 kursused inimestele, kes on elanud Eestis alla viie aasta. Tingimused on kirjas saidil.'],
+          ['Eesti keele maja', 'https://www.integratsioon.ee/eestikeelemaja', 'Integratsiooni Sihtasutuse eesti keele maja. Tasuta nõustamine Tallinnas ja Narvas, kursused ja üritused.'],
+        ],
+      },
+      {
+        h: 'Sõnaraamat',
+        links: [
+          ['Sõnaveeb', 'https://sonaveeb.ee/', 'Eesti Keele Instituudi (EKI) sõnaraamat. Tähendused, näited ja sõnavormid, kasulik käänete kontrollimiseks.'],
+        ],
+      },
+      {
+        h: 'Raadio ja TV',
+        links: [
+          ['ERR Jupiter', 'https://jupiter.err.ee/', 'Eesti Rahvusringhäälingu saated, filmid ja raadio. Hea algus on uudised ja lastesaated.'],
+        ],
+      },
+      {
+        h: 'Harno materjalid',
+        links: [
+          ['Eesti keele tasemeeksamid (inglise keeles)', harnoLinks.exams],
+          ['A2 näidisülesannete ja vastustega vihik (PDF)', booklet],
+          ['EIS, eksamile registreerimine', harnoLinks.eis],
+        ],
+      },
+      {
+        h: 'Sellel saidil',
+        links: [
+          ['Kuidas A2 eksam käib', 'exam-a2'],
+          ['Mida see sait katab ja mida siin veel ei ole', 'guide/coverage'],
+          ['A2 teemad', 'topics#a2'],
+          ['A2 lõputest', 'test-a2'],
+        ],
+      },
+    ],
+  },
+];
+
+export const guides: Record<Lang, Guide[]> = { ru, en, et };

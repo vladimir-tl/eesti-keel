@@ -30,7 +30,7 @@ const abs = (p: string) => new URL(p, Astro.site).href;
 const words = [...new Map(
   tp.questions
     .filter((q) => q.pair)
-    .map((q) => [q.pair!.et.toLowerCase(), { et: q.pair!.et, tr: q.pair!.tr[lang].replace(/\s*\([^)]*…[^)]*\)/g, '') }]),
+    .map((q) => [q.pair!.et.toLowerCase(), { et: q.pair!.et, tr: t(q.pair!.tr, lang).replace(/\s*\([^)]*…[^)]*\)/g, '') }]),
 ).values()];
 const breadcrumbs = {
   '@context': 'https://schema.org',

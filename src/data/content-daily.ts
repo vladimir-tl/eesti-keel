@@ -14,7 +14,7 @@ export const food: Question[] = [
   typeEt('яблоко', 'apple', ['õun']),
   fromEt('supp', ['суп', 'сахар', 'соль', 'картофель'], ['soup', 'sugar', 'salt', 'potato'], 0),
   fromEt('Maitsev!', ['Вкусно!', 'Дорого!', 'Горячо!', 'Спасибо!'], ['Tasty!', 'Expensive!', 'Hot!', 'Thanks!'], 0),
-  mc(tr('Что значит «Ma tahan kohvi»?', 'What does “Ma tahan kohvi” mean?'), ['Я хочу кофе', 'Я пью кофе', 'У меня нет кофе', 'Кофе дорогой'], 0,
+  mc(tr('Что значит «Ma tahan kohvi»?', 'What does “Ma tahan kohvi” mean?'), [tr('Я хочу кофе', 'I want coffee', 'I want coffee'), tr('Я пью кофе', 'I am drinking coffee', 'I am drinking coffee'), tr('У меня нет кофе', 'I have no coffee', 'I have no coffee'), tr('Кофе дорогой', 'Coffee is expensive', 'Coffee is expensive')], 0,
     tr('Ma tahan … — «Я хочу …». После tahan слово стоит в особой форме: kohvi, teed, leiba, piima.', 'Ma tahan … — “I want …”. After tahan the noun takes a special form: kohvi, teed, leiba, piima.')),
 ];
 
@@ -24,7 +24,7 @@ export const shopping: Question[] = [
   toEt('цена', 'price', ['raha', 'hind', 'pood', 'kassa'], 1),
   fromEt('Kui palju see maksab?', ['Сколько это стоит?', 'Где это?', 'Что это?', 'Кто это?'], ['How much does it cost?', 'Where is it?', 'What is it?', 'Who is it?'], 0),
   fromEt('kassa', ['касса', 'магазин', 'цена', 'чек'], ['till', 'shop', 'price', 'receipt'], 0),
-  mc(tr('Leib maksab kaks eurot. Сколько стоит хлеб?', 'Leib maksab kaks eurot. How much is the bread?'), ['2 евро', '20 евро', '12 евро', '200 евро'], 0,
+  mc(tr('Leib maksab kaks eurot. Сколько стоит хлеб?', 'Leib maksab kaks eurot. How much is the bread?'), [tr('2 евро', '€2', '2 €'), tr('20 евро', '€20', '20 €'), tr('12 евро', '€12', '12 €'), tr('200 евро', '€200', '200 €')], 0,
     tr('kaks = 2. Kaks eurot — два евро.', 'kaks = 2. Kaks eurot — two euros.')),
   typeEt('платить', 'to pay', ['maksma']),
   typeEt('покупать', 'to buy', ['ostma']),

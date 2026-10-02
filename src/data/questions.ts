@@ -1,8 +1,11 @@
 import type { Lang } from '../i18n/ui';
+import { etText } from './et';
 
 export type Level = 'A1' | 'A2';
+/** Translated text. Estonian is optional here: a missing `et` comes from the dictionary in et.ts. */
+export type Tr = { ru: string; en: string; et?: string };
 /** Text that is either identical in every language or translated. */
-export type L = string | Record<Lang, string>;
+export type L = string | Tr;
 
 export interface Question {
   level: Level;
@@ -10,13 +13,28 @@ export interface Question {
   options: L[]; // empty array for a typed answer
   answer: number; // option index; -1 for a typed answer
   accept?: string[]; // accepted typed answers
-  explain: Record<Lang, string>;
-  pair?: { et: string; tr: Record<Lang, string> }; // the word or phrase being practised, for the topic word list
+  explain: Tr;
+  pair?: { et: string; tr: Tr }; // the word or phrase being practised, for the topic word list
 }
 
-export const t = (v: L, lang: Lang): string => (typeof v === 'string' ? v : v[lang]);
+export const t = (v: L, lang: Lang): string => {
+  if (typeof v === 'string') return v;
+  if (lang !== 'et') return v[lang];
+  const et = v.et ?? etText[v.en];
+  // Fail the build rather than publish an Estonian page with English text in it.
+  if (et === undefined) throw new Error(`Missing Estonian text for: ${v.en}`);
+  return et;
+};
 
-export const tr = (ru: string, en: string) => ({ ru, en });
+/** Same text in Russian and English (Estonian examples, numbers), or an Estonian sentence that differs only by its gloss in brackets. */
+const neutral = (ru: string, en: string) => {
+  if (ru === en) return true;
+  const head = (s: string) => s.match(/^(.+?)\s*\([^()]*\)\s*$/)?.[1];
+  return head(ru) !== undefined && head(ru) === head(en);
+};
+
+// Neutral text keeps the English version in Estonian: glosses stay English, as in the translation questions.
+export const tr = (ru: string, en: string, et?: string): Tr => ({ ru, en, et: et ?? (neutral(ru, en) ? en : undefined) });
 
 export const a1: Question[] = [
   {

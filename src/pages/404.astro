@@ -5,6 +5,7 @@ import { defaultLang, ui } from '../i18n/ui';
 // One page for every language: the host serves it for any unknown address.
 const s = ui[defaultLang];
 const en = ui.en;
+const et = ui.et;
 ---
 <Base lang={defaultLang} path="404" title={`404 · ${s.siteName}`} description={s.seoHomeDesc} noindex>
   <section class="nf">
@@ -19,6 +20,9 @@ const en = ui.en;
     </div>
     <p class="en muted" lang="en">
       Page not found. <a href="/en/topics">{en.topicsTitle}</a> · <a href="/en/test">{en.introTitle}</a> · <a href="/en">{en.home}</a>
+    </p>
+    <p class="en muted" lang="et">
+      Lehte ei leitud. <a href="/et/topics">{et.topicsTitle}</a> · <a href="/et/test">{et.introTitle}</a> · <a href="/et">{et.home}</a>
     </p>
   </section>
 </Base>

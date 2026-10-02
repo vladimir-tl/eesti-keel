@@ -16,7 +16,7 @@ const s = ui[lang];
 const urlOf = (l: Lang) => new URL(`/${l}${path ? `/${path}` : ''}`, Astro.site).href;
 const url = urlOf(lang);
 const ogImage = new URL(`/og-${lang}.png`, Astro.site).href;
-const locales: Record<Lang, string> = { ru: 'ru_RU', en: 'en_US' };
+const locales: Record<Lang, string> = { ru: 'ru_RU', en: 'en_US', et: 'et_EE' };
 const website = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
