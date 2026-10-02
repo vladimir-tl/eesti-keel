@@ -13,11 +13,11 @@ const s = ui[lang];
       <span class="badge">{s.badge}</span>
       <h1>{s.heroBefore} <em>{s.heroAccent}</em></h1>
       <p class="muted">{s.heroSub}</p>
-      <div class="hero-btns">
-        <a class="btn" href={`/${lang}/topics#a1`}>{s.topicsCtaA1}</a>{' '}
-        <a class="btn" href={`/${lang}/topics#a2`}>{s.topicsCtaA2}</a>{' '}
-        <a class="btn" href={`/${lang}/test`}>{s.testCta}</a>{' '}
-        <a class="btn" href={`/${lang}/test-a2`}>{s.testCtaA2}</a>
+      <a class="btn hero-cta" href={`/${lang}/test`}>{s.promoCta}</a>
+      <div class="hero-links">
+        <a href={`/${lang}/test-a2`}>{s.testCtaA2}</a>
+        <a href={`/${lang}/topics#a1`}>{s.topicsCtaA1}</a>
+        <a href={`/${lang}/topics#a2`}>{s.topicsCtaA2}</a>
       </div>
     </div>
     <div class="art">
@@ -83,8 +83,9 @@ const s = ui[lang];
   h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); line-height: 1.12; margin: 16px 0; }
   h1 em { font-style: normal; color: var(--accent); }
   .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .hero-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 460px; }
-  .hero-btns .btn { text-align: center; }
+  .hero-cta { padding: 14px 32px; font-size: 1.15rem; font-weight: 600; margin-top: 8px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: .95rem; }
+  .hero-links a { color: var(--accent); text-underline-offset: 3px; }
   .art { max-width: 360px; width: 100%; margin: 0 auto; }
   /* Shared look of the tinted home blocks ("Who it is for", "Check your Estonian"). */
   .panel {

@@ -1,0 +1,72 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { langs, ui, type Lang } from '../../../i18n/ui';
+import { guides } from '../../../data/guides';
+import { examA2 } from '../../../data/exam-a2';
+
+export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
+const lang = Astro.params.lang as Lang;
+const s = ui[lang];
+const abs = (p: string) => new URL(p, Astro.site).href;
+
+// Same two columns as the footer; the exam format page leads the exam group.
+const groups = [
+  {
+    title: s.footExam,
+    items: [
+      { href: `/${lang}/exam-a2`, h: s.examCta, desc: examA2[lang].description },
+      ...guides[lang].filter((g) => g.group === 'exam').map((g) => ({ href: `/${lang}/guide/${g.slug}`, h: g.h1, desc: g.description })),
+    ],
+  },
+  {
+    title: s.footHelp,
+    items: guides[lang].filter((g) => g.group === 'help').map((g) => ({ href: `/${lang}/guide/${g.slug}`, h: g.h1, desc: g.description })),
+  },
+];
+
+const breadcrumbs = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    [s.home, `/${lang}`],
+    [s.navArticles, `/${lang}/guide`],
+  ].map(([name, p], k) => ({ '@type': 'ListItem', position: k + 1, name, item: abs(p) })),
+};
+---
+<Base lang={lang} path="guide" title={s.seoArticlesTitle} description={s.seoArticlesDesc} jsonLd={[breadcrumbs]}>
+  <div class="head">
+    <h1>{s.navArticles}</h1>
+    <p class="muted">{s.articlesSub}</p>
+  </div>
+
+  {groups.map((g) => (
+    <section class="group">
+      <h2 class="group-title">{g.title}</h2>
+      <div class="grid">
+        {g.items.map((x) => (
+          <a class="card item" href={x.href}>
+            <h3>{x.h}</h3>
+            <p class="muted">{x.desc}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .head { margin: 0 0 24px; }
+  .group { margin-bottom: 32px; }
+  .group-title { font-size: 1.35rem; font-weight: 700; margin: 0 0 14px; }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .item { max-width: none; margin: 0; padding: 16px; color: inherit; text-decoration: none; }
+  .item { transition: transform .15s, border-color .15s, box-shadow .15s, background-color .15s; }
+  .item:hover, .item:focus-visible {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+    background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  }
+  @media (prefers-reduced-motion: reduce) { .item { transition: none; } .item:hover { transform: none; } }
+  .item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .item p { margin: 0; font-size: .875rem; }
+</style>

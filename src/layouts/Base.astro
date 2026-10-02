@@ -81,8 +81,7 @@ const nav = [
         {nav.map((n) => (
           <a href={`/${lang}/${n.id}`} aria-current={section === n.id ? 'page' : undefined}>{n.label}</a>
         ))}
-        {/* No articles index page yet: the link jumps to the article list in the footer. */}
-        <a href="#articles" aria-current={section === 'guide' ? 'page' : undefined}>{s.navArticles}</a>
+        <a href={`/${lang}/guide`} aria-current={section === 'guide' ? 'page' : undefined}>{s.navArticles}</a>
       </nav>
       <nav class="lang-nav" aria-label="Language">
         {langs.map((l) => (
@@ -94,7 +93,7 @@ const nav = [
     <footer class="foot">
       <div class="foot-row">
         <a class="brand" href={`/${lang}`}>{s.siteName}</a>
-        <div class="foot-cols" id="articles">
+        <div class="foot-cols">
           <nav class="foot-links" aria-label={s.footTests}>
             <span class="foot-h">{s.footTests}</span>
             <a href={`/${lang}/topics`}>{s.topicsTitle}</a>
