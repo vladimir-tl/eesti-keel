@@ -13,11 +13,20 @@ const s = ui[lang];
       <span class="badge">{s.badge}</span>
       <h1>{s.heroBefore} <em>{s.heroAccent}</em></h1>
       <p class="muted">{s.heroSub}</p>
-      <a class="btn hero-cta" href={`/${lang}/test`}>{s.promoCta}</a>
+      <a class="btn hero-cta" href={`/${lang}/level-test`}>{s.promoCta}</a>
+      <p class="hero-note muted">{s.promoCtaNote}</p>
       <div class="hero-links">
-        <a href={`/${lang}/test-a2`}>{s.testCtaA2}</a>
-        <a href={`/${lang}/topics#a1`}>{s.topicsCtaA1}</a>
-        <a href={`/${lang}/topics#a2`}>{s.topicsCtaA2}</a>
+        {[
+          { href: 'test', label: s.testCta, note: s.testCtaNote },
+          { href: 'test-a2', label: s.testCtaA2, note: s.testCtaA2Note },
+          { href: 'topics#a1', label: s.topicsCtaA1, note: s.topicsCtaA1Note },
+          { href: 'topics#a2', label: s.topicsCtaA2, note: s.topicsCtaA2Note },
+        ].map((l) => (
+          <a href={`/${lang}/${l.href}`}>
+            <span class="hero-link-label">{l.label}</span>
+            <span class="hero-link-note muted">{l.note}</span>
+          </a>
+        ))}
       </div>
     </div>
     <div class="art">
@@ -49,7 +58,7 @@ const s = ui[lang];
       <p class="muted">{s.promoSub}</p>
       <span class="badge">{s.promoBadge}</span>
       <div class="cta">
-        <a class="btn" href={`/${lang}/test`}>{s.promoCta}</a>
+        <a class="btn" href={`/${lang}/level-test`}>{s.promoCta}</a>
         <a class="muted" href={`/${lang}/test-a2`}>{s.promoA2}</a>
       </div>
     </div>
@@ -84,8 +93,12 @@ const s = ui[lang];
   h1 em { font-style: normal; color: var(--accent); }
   .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
   .hero-cta { padding: 14px 32px; font-size: 1.15rem; font-weight: 600; margin-top: 8px; }
-  .hero-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: .95rem; }
-  .hero-links a { color: var(--accent); text-underline-offset: 3px; }
+  .hero-note { margin: 8px 0 0; font-size: .875rem; }
+  .hero-links { display: grid; gap: 12px 24px; margin-top: 24px; }
+  @media (min-width: 560px) { .hero-links { grid-template-columns: repeat(2, 1fr); } }
+  .hero-links a { display: flex; flex-direction: column; gap: 2px; text-decoration: none; }
+  .hero-link-label { color: var(--accent); font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
+  .hero-link-note { font-size: .85rem; }
   .art { max-width: 360px; width: 100%; margin: 0 auto; }
   /* Shared look of the tinted home blocks ("Who it is for", "Check your Estonian"). */
   .panel {

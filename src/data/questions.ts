@@ -1,7 +1,7 @@
 import type { Lang } from '../i18n/ui';
 import { etText } from './et';
 
-export type Level = 'A1' | 'A2';
+export type Level = 'A1' | 'A2' | 'B1';
 /** Translated text. Estonian is optional here: a missing `et` comes from the dictionary in et.ts. */
 export type Tr = { ru: string; en: string; et?: string };
 /** Text that is either identical in every language or translated. */

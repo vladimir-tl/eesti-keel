@@ -30,6 +30,7 @@ const structured = path ? jsonLd : [website, ...jsonLd];
 // Main sections; a topic page (topics/…) highlights "Topics".
 const section = path.split('/')[0];
 const nav = [
+  { id: 'level-test', label: s.navLevelTest },
   { id: 'topics', label: s.topicsTitle },
   { id: 'test', label: s.introTitle },
   { id: 'test-a2', label: s.introTitleA2 },
@@ -96,18 +97,15 @@ const nav = [
         <div class="foot-cols">
           <nav class="foot-links" aria-label={s.footTests}>
             <span class="foot-h">{s.footTests}</span>
+            <a href={`/${lang}/level-test`}>{s.navLevelTest}</a>
             <a href={`/${lang}/topics`}>{s.topicsTitle}</a>
             <a href={`/${lang}/test`}>{s.introTitle}</a>
             <a href={`/${lang}/test-a2`}>{s.introTitleA2}</a>
           </nav>
-          <nav class="foot-links" aria-label={s.footExam}>
-            <span class="foot-h">{s.footExam}</span>
+          <nav class="foot-links" aria-label={s.navArticles}>
+            <a class="foot-h" href={`/${lang}/guide`}>{s.navArticles}</a>
             <a href={`/${lang}/exam-a2`}>{s.footExamFormat}</a>
-            {guides[lang].filter((g) => g.group === 'exam').map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
-          </nav>
-          <nav class="foot-links" aria-label={s.footHelp}>
-            <span class="foot-h">{s.footHelp}</span>
-            {guides[lang].filter((g) => g.group === 'help').map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
+            {guides[lang].map((g) => <a href={`/${lang}/guide/${g.slug}`}>{g.nav}</a>)}
           </nav>
         </div>
       </div>
@@ -146,9 +144,9 @@ const nav = [
   .foot-links { display: flex; flex-direction: column; gap: 6px; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  .foot-cols { scroll-margin-top: 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 32px; }
-  @media (max-width: 560px) { .foot-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .foot-cols { scroll-margin-top: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 32px; }
   .foot-h { color: var(--muted); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+  .foot-links a.foot-h { color: var(--muted); }
   .foot-links a:hover { color: var(--accent); }
   .foot p { margin: 16px 0 0; font-size: .8rem; }
   body {

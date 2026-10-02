@@ -188,7 +188,7 @@ const ru: Guide[] = [
   },
   {
     slug: 'a2-writing',
-    nav: 'Письмо',
+    nav: 'A2: письмо',
     group: 'exam',
     title: 'Письменная часть экзамена A2 по эстонскому языку',
     description: 'Какие задания бывают в письменной части экзамена A2: текст по визитке и короткое сообщение или описание. Примеры текстов с переводом и полезные фразы.',
@@ -265,7 +265,7 @@ const ru: Guide[] = [
   },
   {
     slug: 'a2-speaking',
-    nav: 'Говорение',
+    nav: 'A2: говорение',
     group: 'exam',
     title: 'Устная часть экзамена A2 по эстонскому языку',
     description: 'Как проходит устная часть экзамена A2: рассказ по картинке, вопросы экзаменатора и разговор с партнёром. Примеры вопросов и фраз с переводом.',
@@ -351,7 +351,7 @@ const ru: Guide[] = [
   },
   {
     slug: 'a2-listening-reading',
-    nav: 'Аудирование и чтение',
+    nav: 'A2: аудирование и чтение',
     group: 'exam',
     title: 'Аудирование и чтение на экзамене A2 по эстонскому языку',
     description: 'Какие задания бывают в аудировании и чтении на экзамене A2 и на что обратить внимание при подготовке.',
@@ -621,7 +621,7 @@ const en: Guide[] = [
   },
   {
     slug: 'a2-writing',
-    nav: 'Writing',
+    nav: 'A2: writing',
     group: 'exam',
     title: 'The writing part of the Estonian A2 exam',
     description: 'The tasks in the writing part of the A2 exam: a text based on a business card and a short message or description. Sample texts with translations and useful phrases.',
@@ -698,7 +698,7 @@ const en: Guide[] = [
   },
   {
     slug: 'a2-speaking',
-    nav: 'Speaking',
+    nav: 'A2: speaking',
     group: 'exam',
     title: 'The speaking part of the Estonian A2 exam',
     description: 'How the speaking part of the A2 exam works: talking about a picture, the examiner’s questions and a conversation with a partner. Sample questions and phrases with translations.',
@@ -784,7 +784,7 @@ const en: Guide[] = [
   },
   {
     slug: 'a2-listening-reading',
-    nav: 'Listening and reading',
+    nav: 'A2: listening and reading',
     group: 'exam',
     title: 'Listening and reading in the Estonian A2 exam',
     description: 'The task types in the listening and reading parts of the A2 exam and what to pay attention to when preparing.',
@@ -1055,7 +1055,7 @@ const et: Guide[] = [
   },
   {
     slug: 'a2-writing',
-    nav: 'Kirjutamine',
+    nav: 'A2: kirjutamine',
     group: 'exam',
     title: 'Eesti keele A2 eksami kirjutamisosa',
     description: 'A2 eksami kirjutamisosa ülesanded: tekst visiitkaardi põhjal ja lühike teade või kirjeldus. Näidistekstid tõlkega ja kasulikud fraasid.',
@@ -1132,7 +1132,7 @@ const et: Guide[] = [
   },
   {
     slug: 'a2-speaking',
-    nav: 'Rääkimine',
+    nav: 'A2: rääkimine',
     group: 'exam',
     title: 'Eesti keele A2 eksami rääkimisosa',
     description: 'Kuidas käib A2 eksami rääkimisosa: pildi kirjeldamine, eksamineerija küsimused ja vestlus paarilisega. Näidisküsimused ja fraasid tõlkega.',
@@ -1218,7 +1218,7 @@ const et: Guide[] = [
   },
   {
     slug: 'a2-listening-reading',
-    nav: 'Kuulamine ja lugemine',
+    nav: 'A2: kuulamine ja lugemine',
     group: 'exam',
     title: 'Kuulamine ja lugemine eesti keele A2 eksamil',
     description: 'A2 eksami kuulamis- ja lugemisosa ülesandetüübid ning millele ettevalmistusel tähelepanu pöörata.',

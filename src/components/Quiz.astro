@@ -13,8 +13,17 @@ interface Props {
   backLabel?: string;
   perGroup?: number;
   hint?: string[];
+  placement?: Placement;
 }
-const { lang, title, intro, questions, verdicts, backHref, backLabel, perGroup = 0, hint } = Astro.props;
+/** Level test: questions go from A1 to B1, and the result names a level and the topics to review. */
+export interface Placement {
+  perLevel: number; // questions drawn per level, one per topic
+  pass: number; // share of right answers that counts a level as passed
+  /** Outcome by the number of levels passed in a row: 0 — not yet A1, 1 — A1, 2 — A2, 3 — B1. */
+  outcomes: { level: string; text: string; links: { href: string; label: string }[] }[];
+  topics: Record<string, { href: string; title: string }>; // topic id → its page, for "what to review"
+}
+const { lang, title, intro, questions, verdicts, backHref, backLabel, perGroup = 0, hint, placement } = Astro.props;
 const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const hintHtml = (hint ?? []).map((l) => `<p>${esc(l).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')}</p>`).join('');
 const s = ui[lang];
@@ -23,7 +32,9 @@ const config = {
   ui: s,
   verdicts,
   perGroup,
+  placement: placement ?? null,
   questions: questions.map((q) => ({
+    level: q.level,
     prompt: t(q.prompt, lang),
     options: q.options.map((o) => t(o, lang)),
     answer: q.answer,
@@ -63,7 +74,10 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       </div>
     </div>
     <div class="feedback" id="feedback" aria-live="polite" hidden></div>
-    <button class="btn" id="next" disabled>{s.next}</button>
+    <div class="row">
+      <button class="btn" id="next" disabled>{s.next}</button>
+      {placement && <button type="button" class="link-btn" id="skip">{s.dontKnow}</button>}
+    </div>
   </section>
 
   {hint && (
@@ -77,6 +91,16 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     <div class="muted">{s.resultTitle}</div>
     <div class="level" id="score"></div>
     <p id="verdict"></p>
+    {placement && (
+      <div class="place">
+        <div class="levels" id="levels"></div>
+        <div class="next-links row" id="nextLinks"></div>
+        <div id="weak" hidden>
+          <h2>{s.placeWeak}</h2>
+          <ul class="weak" id="weakList"></ul>
+        </div>
+      </div>
+    )}
     <h2>{s.review}</h2>
     <div id="review"></div>
     <div class="row gap">
@@ -144,6 +168,26 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   #text.is-wrong { border-color: var(--bad); box-shadow: 0 0 0 2px var(--bad) inset; }
   .feedback { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: .95rem; }
   .feedback :global(p) { margin: 4px 0 0; }
+  .link-btn {
+    padding: 0; border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .link-btn:hover { color: var(--accent); }
+  .link-btn:disabled { visibility: hidden; }
+  .place { margin: 8px 0 24px; }
+  .levels { display: grid; gap: 10px; margin: 16px 0 20px; }
+  :global(.lv) { display: grid; grid-template-columns: 2.5em 1fr 3.5em; align-items: center; gap: 12px; }
+  :global(.lv b) { font-size: 1.05rem; }
+  :global(.lv .track) { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+  :global(.lv .fill) { height: 100%; border-radius: 5px; background: var(--bad); }
+  :global(.lv.pass .fill) { background: var(--ok); }
+  :global(.lv span:last-child) { text-align: right; font-variant-numeric: tabular-nums; }
+  .next-links { margin-bottom: 8px; }
+  :global(.next-links .btn:not(:first-child)) {
+    background: transparent; color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent);
+  }
+  .weak { margin: 0 0 8px; padding-left: 1.2em; line-height: 1.8; }
+  :global(.weak a) { color: var(--accent); text-underline-offset: 3px; }
   .letter {
     padding: 2px 10px; border: 1px solid var(--line); border-radius: 8px;
     background: transparent; color: var(--fg); font: inherit; cursor: pointer;
@@ -151,7 +195,13 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
 </style>
 
 <script>
-  interface Q { prompt: string; options: string[]; answer: number; accept: string[]; explain: string; group: string }
+  interface Q { level: string; prompt: string; options: string[]; answer: number; accept: string[]; explain: string; group: string }
+  interface Placement {
+    perLevel: number;
+    pass: number;
+    outcomes: { level: string; text: string; links: { href: string; label: string }[] }[];
+    topics: Record<string, { href: string; title: string }>;
+  }
   type Ans = number | string | null;
 
   const root = document.getElementById('app')!;
@@ -160,7 +210,11 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     verdicts: { min: number; text: string }[];
     questions: Q[];
     perGroup: number;
+    placement: Placement | null;
   };
+  const LEVELS = ['A1', 'A2', 'B1'];
+  // "I don't know" in the level test: counts as a wrong answer.
+  const SKIPPED = -2;
   const { ui } = cfg;
   let questions: Q[] = cfg.questions;
 
@@ -201,19 +255,24 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     const next = $<HTMLButtonElement>('next');
     next.disabled = a === null || (typeof a === 'string' && !a.trim());
     next.textContent = !checked[i] ? ui.check : i === questions.length - 1 ? ui.finish : ui.next;
+    const skip = document.getElementById('skip') as HTMLButtonElement | null;
+    if (skip) skip.disabled = checked[i];
   };
 
   // Right after answering: colour the chosen option / field, reveal the right answer and the explanation.
   function showFeedback() {
     const q = questions[i];
     const ok = isCorrect(q, answers[i]);
+    // "I don't know" is not a mistake: just show the right answer, without the red marks.
+    const skipped = answers[i] === SKIPPED;
+    const bad = !ok && !skipped;
     const fb = $('feedback');
     fb.hidden = !checked[i];
     if (!checked[i]) return;
     if (q.options.length) {
       const gap = $('prompt').querySelector('.blank');
       gap?.classList.toggle('is-right', ok);
-      gap?.classList.toggle('is-wrong', !ok);
+      gap?.classList.toggle('is-wrong', bad);
       $('options').querySelectorAll<HTMLButtonElement>('.opt').forEach((el, k) => {
         el.classList.remove('is-away');
         el.disabled = true;
@@ -224,11 +283,12 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       const text = $<HTMLInputElement>('text');
       text.readOnly = true;
       text.classList.toggle('is-right', ok);
-      text.classList.toggle('is-wrong', !ok);
+      text.classList.toggle('is-wrong', bad);
     }
     const head = document.createElement('strong');
-    head.className = ok ? 'ok' : 'bad';
-    head.textContent = ok ? `✓ ${ui.rightNow}` : `✗ ${ui.wrongNow} ${q.answer >= 0 ? q.options[q.answer] : q.accept[0]}`;
+    const right = q.answer >= 0 ? q.options[q.answer] : q.accept[0];
+    head.className = ok ? 'ok' : skipped ? '' : 'bad';
+    head.textContent = ok ? `✓ ${ui.rightNow}` : skipped ? `${ui.answerIs} ${right}` : `✗ ${ui.wrongNow} ${right}`;
     const ex = document.createElement('p');
     ex.className = 'muted';
     ex.textContent = q.explain;
@@ -364,18 +424,74 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     }
   }
 
+  // Level test result: score per level, the level reached, next steps and the topics with mistakes.
+  function renderPlacement(p: Placement) {
+    const rows = LEVELS.map((level) => {
+      const ks = questions.map((q, k) => (q.level === level ? k : -1)).filter((k) => k >= 0);
+      const right = ks.filter((k) => isCorrect(questions[k], answers[k])).length;
+      return { level, right, total: ks.length, pass: ks.length > 0 && right / ks.length >= p.pass };
+    });
+    // A level counts only when every level below it is passed too.
+    let reached = 0;
+    while (reached < rows.length && rows[reached].pass) reached++;
+    const out = p.outcomes[reached];
+    $('score').textContent = out.level;
+    $('verdict').textContent = out.text;
+
+    $('levels').replaceChildren(...rows.map((r) => {
+      const row = document.createElement('div');
+      row.className = `lv${r.pass ? ' pass' : ''}`;
+      const name = document.createElement('b');
+      name.textContent = r.level;
+      const track = document.createElement('div');
+      track.className = 'track';
+      const fill = document.createElement('div');
+      fill.className = 'fill';
+      fill.style.width = `${r.total ? (r.right / r.total) * 100 : 0}%`;
+      track.append(fill);
+      const n = document.createElement('span');
+      n.textContent = `${r.right} / ${r.total}`;
+      row.append(name, track, n);
+      return row;
+    }));
+
+    $('nextLinks').replaceChildren(...out.links.map((l) => {
+      const a = document.createElement('a');
+      a.className = 'btn';
+      a.href = l.href;
+      a.textContent = l.label;
+      return a;
+    }));
+
+    // Topics with mistakes, lowest level first — the place to continue from.
+    const weak = [...new Set(questions.filter((q, k) => !isCorrect(q, answers[k])).map((q) => q.group))]
+      .map((id) => p.topics[id])
+      .filter(Boolean)
+      .slice(0, 8);
+    $('weak').hidden = !weak.length;
+    $('weakList').replaceChildren(...weak.map((tp) => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = tp.href;
+      a.textContent = tp.title;
+      li.append(a);
+      return li;
+    }));
+  }
+
   function renderResult() {
     const correct = questions.filter((q, k) => isCorrect(q, answers[k])).length;
     const hit = cfg.verdicts.find((v) => correct / questions.length >= v.min);
     $('score').textContent = `${correct} / ${questions.length}`;
     $('verdict').textContent = hit ? hit.text : '';
+    if (cfg.placement) renderPlacement(cfg.placement);
 
     const review = $('review');
     review.replaceChildren();
     questions.forEach((q, k) => {
       const ok = isCorrect(q, answers[k]);
       const a = answers[k];
-      const given = a === null || a === '' ? ui.noAnswer : typeof a === 'number' ? q.options[a] : a;
+      const given = a === null || a === '' || a === SKIPPED ? ui.noAnswer : typeof a === 'number' ? q.options[a] : a;
       const right = q.answer >= 0 ? q.options[q.answer] : q.accept[0];
 
       const row = document.createElement('div');
@@ -402,18 +518,29 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   }
 
   // New random order every attempt: questions, and the options inside each question.
+  const shuffleOptions = (q: Q): Q => {
+    if (!q.options.length) return q;
+    const order = shuffled(q.options.map((_, k) => k));
+    return { ...q, options: order.map((k) => q.options[k]), answer: order.indexOf(q.answer) };
+  };
+
+  // Level test: a few random topics per level, one question each; levels go in order, easiest first.
+  const buildPlacement = (p: Placement): Q[] =>
+    LEVELS.flatMap((level) => {
+      const byGroup = new Map<string, Q[]>();
+      cfg.questions.filter((q) => q.level === level).forEach((q) => byGroup.set(q.group, [...(byGroup.get(q.group) ?? []), q]));
+      return shuffled([...byGroup.values()]).slice(0, p.perLevel).map((g) => shuffled(g)[0]);
+    }).map(shuffleOptions);
+
   const buildRun = (): Q[] => {
+    if (cfg.placement) return buildPlacement(cfg.placement);
     let pool = cfg.questions;
     if (cfg.perGroup > 0) {
       const byGroup = new Map<string, Q[]>();
       pool.forEach((q) => byGroup.set(q.group, [...(byGroup.get(q.group) ?? []), q]));
       pool = [...byGroup.values()].flatMap((g) => shuffled(g).slice(0, cfg.perGroup));
     }
-    return shuffled(pool).map((q) => {
-      if (!q.options.length) return q;
-      const order = shuffled(q.options.map((_, k) => k));
-      return { ...q, options: order.map((k) => q.options[k]), answer: order.indexOf(q.answer) };
-    });
+    return shuffled(pool).map(shuffleOptions);
   };
 
   // Short shuffling animation before the first question.
@@ -444,6 +571,12 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     };
   });
   $('next').onclick = advance;
+  const skip = document.getElementById('skip');
+  if (skip) skip.onclick = () => {
+    if (checked[i]) return;
+    answers[i] = SKIPPED;
+    check();
+  };
   $('retry').onclick = () => show('intro');
   $<HTMLInputElement>('text').addEventListener('input', (e) => {
     if (checked[i]) return;
