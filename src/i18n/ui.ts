@@ -98,6 +98,7 @@ export const ui = {
     footExamFormatB1: 'B1: формат и регистрация',
     navArticles: 'Статьи',
     footTests: 'Тесты',
+    menu: 'Меню',
     footExam: 'Экзамен A2',
     footExamFormat: 'A2: формат и регистрация',
     footHelp: 'Полезное',
@@ -149,6 +150,7 @@ export const ui = {
     levelTestTitle: 'Тест на уровень: A1, A2 или B1?',
     levelTestIntro: '30 вопросов от простого к сложному: по 10 на уровни A1, A2 и B1. Если не знаете ответа, нажмите «Не знаю», а не угадывайте, — так результат будет точнее. В конце вы увидите свой уровень, результат по каждой ступени и темы, с которых стоит продолжить.',
     dontKnow: 'Не знаю',
+    slower: 'Медленнее',
     placeWeak: 'Что повторить',
     place: {
       pre: { level: 'Начало A1', text: 'Основы A1 ещё не освоены. Начните с тем A1 по порядку — приветствия, глагол olla, числа — и вернитесь к тесту через пару недель.' },
@@ -252,6 +254,7 @@ export const ui = {
     footExamFormatB1: 'B1: format and registration',
     navArticles: 'Articles',
     footTests: 'Tests',
+    menu: 'Menu',
     footExam: 'A2 exam',
     footExamFormat: 'A2: format and registration',
     footHelp: 'Useful',
@@ -303,6 +306,7 @@ export const ui = {
     levelTestTitle: 'Level test: A1, A2 or B1?',
     levelTestIntro: '30 questions from easy to hard: 10 each at A1, A2 and B1. If you don’t know an answer, press “I don’t know” instead of guessing — the result will be more accurate. At the end you will see your level, your score at each level and the topics to continue with.',
     dontKnow: 'I don’t know',
+    slower: 'Slower',
     placeWeak: 'What to review',
     place: {
       pre: { level: 'Early A1', text: 'The A1 basics are not there yet. Work through the A1 topics in order — greetings, the verb olla, numbers — and come back to the test in a couple of weeks.' },
@@ -406,6 +410,7 @@ export const ui = {
     footExamFormatB1: 'B1: ülesehitus ja registreerimine',
     navArticles: 'Artiklid',
     footTests: 'Testid',
+    menu: 'Menüü',
     footExam: 'A2 eksam',
     footExamFormat: 'A2: ülesehitus ja registreerimine',
     footHelp: 'Kasulik',
@@ -457,6 +462,7 @@ export const ui = {
     levelTestTitle: 'Tasemetest: A1, A2 või B1?',
     levelTestIntro: '30 küsimust kergemast raskemani: 10 nii A1, A2 kui ka B1 tasemel. Kui sa vastust ei tea, vajuta „Ei tea“, mitte ära arva — nii on tulemus täpsem. Lõpus näed oma taset, tulemust iga taseme kohta ja teemasid, millega jätkata.',
     dontKnow: 'Ei tea',
+    slower: 'Aeglasemalt',
     placeWeak: 'Mida korrata',
     place: {
       pre: { level: 'A1 algus', text: 'A1 põhitõed pole veel selged. Läbi A1 teemad järjest — tervitused, verb olla, arvud — ja tee test paari nädala pärast uuesti.' },

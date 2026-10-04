@@ -14,6 +14,7 @@ export interface Question {
   answer: number; // option index; -1 for a typed answer
   accept?: string[]; // accepted typed answers
   explain: Tr;
+  audio?: string; // listening question: file under /audio, played above the prompt
   pair?: { et: string; tr: Tr }; // the word or phrase being practised, for the topic word list
 }
 

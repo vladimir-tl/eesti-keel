@@ -40,6 +40,7 @@ const config = {
     answer: q.answer,
     accept: q.accept ?? [],
     explain: t(q.explain, lang),
+    audio: q.audio ?? '',
     group: (q as Question & { group?: string }).group ?? '',
   })),
 };
@@ -63,6 +64,10 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   <section id="quiz" hidden>
     <progress id="bar" value="0" max="1"></progress>
     <div class="muted" id="counter"></div>
+    <div class="player" id="player" hidden>
+      <audio id="audio" controls preload="none"></audio>
+      <button type="button" class="letter" id="slow" aria-pressed="false">🐢 {s.slower}</button>
+    </div>
     <p class="prompt" id="prompt"></p>
     <p class="muted drag-hint" id="dragHint" hidden>{s.dragHint}</p>
     <div class="options" id="options"></div>
@@ -147,6 +152,9 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   }
   :global(.options .opt.is-right::after) { content: ' ✓'; color: var(--ok); }
   :global(.options .opt.is-wrong::after) { content: ' ✗'; color: var(--bad); }
+  .player { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+  #audio { flex: 1; min-width: 0; }
+  #slow[aria-pressed='true'] { border-color: var(--accent); color: var(--accent); }
   .drag-hint { font-size: .85rem; margin: 8px 0 0; }
   :global(.options.bank) { display: flex; flex-wrap: wrap; gap: 8px; }
   :global(.options.bank .opt) { width: auto; touch-action: none; user-select: none; cursor: grab; }
@@ -195,7 +203,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
 </style>
 
 <script>
-  interface Q { level: string; prompt: string; options: string[]; answer: number; accept: string[]; explain: string; group: string }
+  interface Q { level: string; prompt: string; options: string[]; answer: number; accept: string[]; explain: string; audio: string; group: string }
   interface Placement {
     perLevel: number;
     pass: number;
@@ -385,6 +393,11 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       prompt.textContent = q.prompt;
     }
     $('dragHint').hidden = !parts;
+    const audio = $<HTMLAudioElement>('audio');
+    audio.pause();
+    $('player').hidden = !q.audio;
+    if (q.audio) audio.src = q.audio;
+    else audio.removeAttribute('src');
 
     const opts = $('options');
     opts.classList.toggle('bank', !!parts);
@@ -574,6 +587,17 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       answers[i] = f.value;
       setNext();
     };
+  });
+  // "Slower" plays the same file at 0.75×; browsers keep the pitch, so the voice stays natural.
+  const slow = $<HTMLButtonElement>('slow');
+  slow.onclick = () => {
+    const on = slow.getAttribute('aria-pressed') !== 'true';
+    slow.setAttribute('aria-pressed', String(on));
+    $<HTMLAudioElement>('audio').playbackRate = on ? 0.75 : 1;
+  };
+  // Setting src resets the rate in some browsers, so re-apply it whenever a new file loads.
+  $<HTMLAudioElement>('audio').addEventListener('loadstart', (e) => {
+    (e.target as HTMLAudioElement).playbackRate = slow.getAttribute('aria-pressed') === 'true' ? 0.75 : 1;
   });
   $('next').onclick = advance;
   const skip = document.getElementById('skip');
