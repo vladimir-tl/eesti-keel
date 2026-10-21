@@ -12,6 +12,7 @@ import { connectors, pointing, verbs2, feelings, school, nature, holidays, furni
 import { kuhu } from './content-kuhu';
 import { extra } from './content-extra';
 import { context } from './content-a2-context';
+import { pictures } from './content-pictures';
 import { genitive, pronouns, comitative, translative, comparison, imperative, past2, perfect, conditional, future, verbs3, infinitive, object, kaima, plural2, postpos, complex, timeExpr, numbers2 } from './content-a2-grammar';
 import { work, education, housing, bank, official, shopping2, health2, transport2 } from './content-a2-life';
 import { aboutMe, education2, work2, services, dailyRoutine, body2, pharmacy, hobbies2, quantities, meals, social, city, route, languages, sightseeing } from './content-a2-harno';
@@ -41,7 +42,7 @@ const topic = (id: string, title: L, desc: string, questions: Question[]): Topic
   id,
   title,
   desc,
-  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? [])],
+  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? []), ...(pictures[id] ?? [])],
 });
 
 const a1Groups: Omit<Group, 'level'>[] = [

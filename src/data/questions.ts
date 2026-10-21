@@ -15,6 +15,8 @@ export interface Question {
   accept?: string[]; // accepted typed answers
   explain: Tr;
   audio?: string; // listening question: file under /audio, played above the prompt
+  image?: string; // picture shown above the prompt: markup from pictures.ts
+  pics?: string[]; // picture options, one per option; `options` then hold their captions, shown after checking
   pair?: { et: string; tr: Tr }; // the word or phrase being practised, for the topic word list
 }
 
