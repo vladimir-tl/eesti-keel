@@ -6,6 +6,7 @@ import { groups, topics } from '../../../data/topics';
 import { t } from '../../../data/questions';
 import { hints } from '../../../data/hints';
 import { topicSeo } from '../../../data/topic-seo';
+import { topicNotes } from '../../../data/topic-notes';
 
 export const getStaticPaths = () =>
   langs.flatMap((lang) => topics.map((tp) => ({ params: { lang, topic: tp.id }, props: { tp } })));
@@ -26,6 +27,12 @@ const relatedTopics = group.topics
 const seo = { topic: title, level: group.level, desc: t(tp.desc, lang), n: tp.questions.length };
 const snippet = topicSeo[tp.id]?.[lang] ?? { title: s.seoTopicTitle, desc: s.seoTopicDesc };
 const abs = (p: string) => new URL(p, Astro.site).href;
+
+// The written-out rule under the quiz; **bold** marks Estonian forms, as in the hints.
+const notes = topicNotes[tp.id]?.[lang] ?? [];
+const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const md = (x: string) => esc(x).replace(/\*\*(.+?)\*\*/g, '<strong lang="et">$1</strong>');
+const topicById = (id: string) => topics.find((x) => x.id === id)!;
 
 // Vocabulary practised in the topic, as plain text for readers and search engines.
 // Prompt-only notes such as "(Ta kutsub …)" are dropped.
@@ -59,6 +66,36 @@ const breadcrumbs = {
   <Quiz lang={lang} title={t(tp.title, lang)} intro={t(tp.desc, lang)}
     hint={hints[tp.id]?.[lang]} questions={tp.questions} verdicts={s.verdictsTopic} />
 
+  {notes.length > 0 && (
+    <article class="notes">
+      {notes.map((sec) => (
+        <section>
+          <h2>{sec.h}</h2>
+          {sec.p?.map((x) => <p set:html={md(x)} />)}
+          {sec.table && (
+            <div class="table-wrap">
+              <table lang="et">
+                <thead><tr>{sec.table.head.map((x) => <th scope="col">{x}</th>)}</tr></thead>
+                <tbody>{sec.table.rows.map(([first, ...rest]) => (
+                  <tr><th scope="row">{first}</th>{rest.map((x) => <td>{x}</td>)}</tr>
+                ))}</tbody>
+              </table>
+            </div>
+          )}
+          {sec.examples && (
+            <dl class="examples">
+              {sec.examples.map(([et, tr]) => (<><dt lang="et">{et}</dt><dd>{tr}</dd></>))}
+            </dl>
+          )}
+          {sec.list && <ul>{sec.list.map((x) => <li set:html={md(x)} />)}</ul>}
+          {sec.links && (
+            <ul>{sec.links.map((id) => <li><a href={`/${lang}/topics/${id}`}>{t(topicById(id).title, lang)}</a></li>)}</ul>
+          )}
+        </section>
+      ))}
+    </article>
+  )}
+
   {words.length > 0 && (
     <details class="words">
       <summary>{s.wordsTitle} ({words.length})</summary>
@@ -91,6 +128,27 @@ const breadcrumbs = {
   .words dt { font-weight: 600; }
   .words dd { margin: 0; color: var(--muted); }
   .crumbs [aria-current] { color: var(--fg); }
+  .notes { max-width: 640px; margin: 24px auto 0; padding: 4px 24px 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+  .notes h2 { margin: 20px 0 10px; font-size: 1.15rem; }
+  .notes p, .notes li { line-height: 1.55; }
+  .notes p { margin: 0 0 10px; }
+  .notes ul { margin: 0; padding-left: 20px; }
+  .notes li + li { margin-top: 8px; }
+  .notes a { color: var(--accent); }
+  .table-wrap { overflow-x: auto; }
+  .notes table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .notes th, .notes td { text-align: left; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+  .notes thead th { color: var(--muted); font-weight: 600; font-size: .85rem; }
+  .examples { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 16px; margin: 0; }
+  .examples dt, .examples dd { margin: 0; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .examples dt { font-weight: 600; }
+  .examples dd { color: var(--muted); }
+  @media (max-width: 520px) {
+    .notes { padding: 4px 16px 16px; }
+    .examples { grid-template-columns: 1fr; }
+    .examples dt { border-bottom: 0; padding-bottom: 0; }
+    .examples dd { padding-top: 2px; }
+  }
   .related { max-width: 640px; margin: 24px auto 0; padding: 20px 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
   .related h2 { margin: 0 0 12px; font-size: 1.15rem; }
   .related ul { margin: 0; padding-left: 20px; }
