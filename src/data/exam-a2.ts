@@ -50,7 +50,7 @@ export interface ExamPage {
 
 export const examA2: Record<Lang, ExamPage> = {
   ru: {
-    title: 'Экзамен A2 по эстонскому языку: формат, баллы, регистрация и подготовка',
+    title: 'Экзамен A2 по эстонскому языку (Harno): формат, проходной балл 48/80, регистрация',
     description: 'Как устроен экзамен A2 по эстонскому языку в Harno: письмо, аудирование, чтение и говорение, время и баллы, проходной балл 48 из 80, регистрация в EIS и как готовиться бесплатно.',
     h1: 'Экзамен A2 по эстонскому языку',
     lead: 'Государственный экзамен на уровень A2 (tasemeeksam) проводит Haridus- ja Noorteamet (Harno). Здесь коротко: из чего он состоит, сколько баллов нужно и как подготовиться.',
@@ -165,7 +165,7 @@ export const examA2: Record<Lang, ExamPage> = {
     ],
   },
   en: {
-    title: 'Estonian A2 exam: format, points, registration and preparation',
+    title: 'Estonian A2 exam (Harno): format, pass mark 48/80, how to register',
     description: 'How the Harno A2 Estonian exam works: writing, listening, reading and speaking, timing and points, the 48/80 pass mark, registering in EIS and how to prepare for free.',
     h1: 'The Estonian A2 exam',
     lead: 'The state A2 proficiency exam (tasemeeksam) is run by Haridus- ja Noorteamet (Harno). In short: what it consists of, how many points you need and how to prepare.',
@@ -280,7 +280,7 @@ export const examA2: Record<Lang, ExamPage> = {
     ],
   },
   et: {
-    title: 'Eesti keele A2 tasemeeksam: osad, punktid, registreerimine ja ettevalmistus',
+    title: 'Eesti keele A2 tasemeeksam (Harno): osad, läbimise piir 48/80, registreerimine',
     description: 'Kuidas käib Harno eesti keele A2 tasemeeksam: kirjutamine, kuulamine, lugemine ja rääkimine, aeg ja punktid, läbimise piir 48/80, registreerimine EIS-is ja tasuta ettevalmistus.',
     h1: 'Eesti keele A2 tasemeeksam',
     lead: 'Riiklikku A2-taseme eesti keele eksamit korraldab Haridus- ja Noorteamet (Harno). Lühidalt: millest eksam koosneb, mitu punkti on vaja ja kuidas valmistuda.',

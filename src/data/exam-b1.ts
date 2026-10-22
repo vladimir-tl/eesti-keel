@@ -17,7 +17,7 @@ const links = {
 
 export const examB1: Record<Lang, ExamPage> = {
   ru: {
-    title: 'Экзамен B1 по эстонскому языку: формат, баллы, регистрация и подготовка',
+    title: 'Экзамен B1 по эстонскому языку (Harno): формат, проходной балл 60/100, регистрация',
     description: 'Как устроен экзамен B1 по эстонскому языку в Harno: письмо, аудирование, чтение и говорение, время и баллы, проходной балл 60 из 100, регистрация в EIS и как готовиться бесплатно.',
     h1: 'Экзамен B1 по эстонскому языку',
     lead: 'Государственный экзамен на уровень B1 (tasemeeksam) проводит Haridus- ja Noorteamet (Harno). Здесь коротко: из чего он состоит, сколько баллов нужно и как подготовиться.',
@@ -139,7 +139,7 @@ export const examB1: Record<Lang, ExamPage> = {
     ],
   },
   en: {
-    title: 'Estonian B1 exam: format, points, registration and preparation',
+    title: 'Estonian B1 exam (Harno): format, pass mark 60/100, how to register',
     description: 'How the Harno B1 Estonian exam works: writing, listening, reading and speaking, timing and points, the 60/100 pass mark, registering in EIS and how to prepare for free.',
     h1: 'The Estonian B1 exam',
     lead: 'The state B1 proficiency exam (tasemeeksam) is run by Haridus- ja Noorteamet (Harno). In short: what it consists of, how many points you need and how to prepare.',
@@ -261,7 +261,7 @@ export const examB1: Record<Lang, ExamPage> = {
     ],
   },
   et: {
-    title: 'Eesti keele B1-taseme eksam: ülesehitus, punktid, registreerimine ja ettevalmistus',
+    title: 'Eesti keele B1 tasemeeksam (Harno): osad, läbimise piir 60/100, registreerimine',
     description: 'Kuidas Harno eesti keele B1-taseme eksam käib: kirjutamine, kuulamine, lugemine ja rääkimine, aeg ja punktid, läbimiseks vaja 60 punkti 100-st, registreerimine EIS-is ja tasuta ettevalmistus.',
     h1: 'Eesti keele B1-taseme eksam',
     lead: 'Riikliku B1-taseme eksami (tasemeeksami) korraldab Haridus- ja Noorteamet (Harno). Lühidalt: millest eksam koosneb, kui palju punkte on vaja ja kuidas valmistuda.',
