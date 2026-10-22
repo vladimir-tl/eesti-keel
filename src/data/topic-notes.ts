@@ -2,7 +2,7 @@ import type { Lang } from '../i18n/ui';
 
 /**
  * The rule behind a topic, written out under the quiz so readers and search engines get more
- * than the short hint. `**bold**` marks Estonian forms. `links` are topic ids.
+ * than the short hint. `**bold**` marks Estonian forms. `links` are topic ids, `pages` other site pages.
  * Topics not listed here show only the quiz.
  */
 export interface NoteSection {
@@ -12,6 +12,7 @@ export interface NoteSection {
   examples?: [string, string][]; // Estonian sentence, translation or note
   list?: string[];
   links?: string[];
+  pages?: [string, string][]; // label, path after the language, e.g. exam-b1
 }
 
 export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {

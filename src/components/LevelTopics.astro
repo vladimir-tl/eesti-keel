@@ -1,0 +1,31 @@
+---
+import type { Lang } from '../i18n/ui';
+import { groupsOf } from '../data/topics';
+import { t, type Level } from '../data/questions';
+
+/** Every topic of a level, grouped as on the topics page, as plain links for readers and crawlers. */
+interface Props {
+  lang: Lang;
+  level: Level;
+  title?: string; // h2 above the list; leave out when the surrounding section has one
+}
+const { lang, level, title } = Astro.props;
+---
+<div class="level-topics">
+  {title && <h2>{title}</h2>}
+  {groupsOf(level).map((g) => (
+    <div class="group">
+      <h3><a href={`/${lang}/topics#${g.id}`}>{t(g.title, lang)}</a></h3>
+      <ul>{g.topics.map((tp) => <li><a href={`/${lang}/topics/${tp.id}`}>{t(tp.title, lang)}</a></li>)}</ul>
+    </div>
+  ))}
+</div>
+
+<style>
+  .group + .group { margin-top: 14px; }
+  h3 { margin: 0 0 6px; font-size: 1rem; }
+  h3 a { color: inherit; }
+  ul { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0; padding: 0; list-style: none; }
+  li a { display: inline-block; padding: 3px 10px; border: 1px solid var(--line); border-radius: 10px; font-size: .9rem; color: var(--accent); text-decoration: none; }
+  li a:hover { border-color: var(--accent); }
+</style>

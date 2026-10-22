@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import { ui, type Lang } from '../i18n/ui';
 import type { ExamPage } from '../data/exam-a2';
+import type { Level } from '../data/questions';
+import LevelTopics from './LevelTopics.astro';
 
 interface Props {
   lang: Lang;
@@ -11,8 +13,9 @@ interface Props {
   topicsPath: string; // topics page with the level anchor
   about: string;
   modified: string;
+  level: Level; // the topics of this level are linked under the exam topics
 }
-const { lang, e, slug, testPath, topicsPath, about, modified } = Astro.props;
+const { lang, e, slug, testPath, topicsPath, about, modified, level } = Astro.props;
 const s = ui[lang];
 const abs = (p: string) => new URL(p, Astro.site).href;
 
@@ -100,6 +103,7 @@ const breadcrumbs = {
     <section>
       <h2>{e.topicsTitle}</h2>
       <p>{e.topicsText}</p>
+      <LevelTopics lang={lang} level={level} />
     </section>
 
     <section>
