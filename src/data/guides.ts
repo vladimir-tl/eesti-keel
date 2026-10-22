@@ -32,7 +32,7 @@ export interface Guide {
   sections: Section[];
 }
 
-export const guidesUpdated = '2026-09-26';
+export const guidesUpdated = '2026-10-22';
 
 const booklet = harnoLinks.booklet;
 
@@ -54,6 +54,29 @@ const invitation = 'Tere, Mari!\nMul on laupäeval sünnipäev ja ma kutsun sind
 const weekend = 'Laupäeval käisin hommikul turul ja ostsin köögivilju. Pärast lõunat koristasin kodu. Õhtul kohtusin sõbrannaga kohvikus ja me rääkisime kaua. Pühapäeval sõitsime perega maale vanaema juurde. Seal oli ilus ilm ja me jalutasime metsas. Õhtul olin väsinud, aga rõõmus.';
 const familyAnswer = 'Laupäeval käime tavaliselt poes ja koristame kodu. Pühapäeval sõidame vahel maale, sest seal elab minu ema. Suvel käime koos ujumas.';
 const dialogue = 'A: Mida sa hommikul sööd?\nB: Tavaliselt söön putru ja joon kohvi. Aga sina?\nA: Mina söön võileiba. Kus sa lõunat sööd?\nB: Tööl, sööklas. Seal on soe toit odav.\nA: Kas sa sööd tihti magustoitu?\nB: Ei, ainult pühapäeviti. Siis küpsetan perega kooki.';
+
+// B1 writing: the task descriptions and the "well done" criteria come from Harno's B1 booklet and its
+// writing sample with examiner notes (B1-taseme-sooritusnaidis.pdf); the sample texts are ours.
+const harnoB1Sample = 'https://harno.ee/sites/default/files/documents/2021-07/B1-taseme-sooritusnaidis.pdf';
+const harnoB1Booklet = 'https://harno.ee/sites/default/files/documents/2026-01/B1_konsultatsioon_2021_arvutis_t2itmiseks.pdf';
+const b1Note = 'Head kolleegid!\nKahjuks pean täna töölt varem lahkuma, sest mu poeg jäi haigeks ja pean temaga arsti juurde minema. Lähen ära kell kaks. Minu asemel võtab kliente vastu Kati, ta teab kõiki tänaseid kokkuleppeid. Kui midagi on vaja, helistage mulle numbril 5123 4567. Homme olen tööl tavalisel ajal.\nTervitades\nOlga';
+const b1Letter = 'Tere, Mari!\nAitäh sinu kirja eest! Tahan sulle rääkida oma uuest tuttavast. Tema nimi on Liis. Me tutvusime kuu aega tagasi eesti keele kursustel, sest istusime kõrvuti. Liis elab Tartus, aga töötab Tallinnas raamatupidajana, seepärast sõidab ta iga päev rongiga. Ta on rõõmsameelne ja abivalmis inimene: kui ma millestki aru ei saa, selgitab ta mulle kõik rahulikult. Vabal ajal käib Liis ujumas ja loeb palju. Eelmisel nädalavahetusel käisime koos kinos ja pärast seda jõime kohvi. Ma arvan, et meist saavad head sõbrad. Kuidas sinul läheb? Kirjuta mulle!\nSinu Olga';
+const b1Story = 'Tervislik elu\nMa püüan elada tervislikult. Hommikul söön tavaliselt putru ja joon teed, lõunaks söön suppi või salatit. Magusat söön harva, ainult nädalavahetusel.\nSporti teen kolm korda nädalas: kaks korda käin ujumas ja laupäeval jalutan pikalt metsas. Talvel suusatan, kui on lund.\nHaiguste eest kaitsen end nii, et magan piisavalt, riietun ilma järgi ja pesen tihti käsi.\nKui ma siiski haigeks jään, jään koju ja joon kuuma teed mee ja sidruniga. Kui palavik ei lange, lähen arsti juurde.\nMinu arvates on tervis kõige tähtsam.';
+const b1Phrases: [string, string, string][] = [
+  // Estonian, Russian, English
+  ['Tere, Mari! / Kallis Mari!', 'Обращение к знакомому', 'Greeting someone you know'],
+  ['Lugupeetud härra Tamm!', 'Официальное обращение', 'Formal greeting'],
+  ['Aitäh sinu kirja eest!', 'Спасибо за письмо!', 'Thanks for your letter!'],
+  ['Kahjuks pean …, sest …', 'К сожалению, мне нужно …, потому что …', 'Unfortunately I have to …, because …'],
+  ['Esiteks … Teiseks … Lõpuks …', 'Во-первых … Во-вторых … Наконец …', 'First … Second … Finally …'],
+  ['Peale selle … / Lisaks …', 'Кроме того …', 'Besides … / In addition …'],
+  ['…, seepärast … / …, sellepärast et …', '…, поэтому … / …, потому что …', '…, so … / …, because …'],
+  ['Kuigi …, …', 'Хотя …, …', 'Although …, …'],
+  ['Minu arvates … / Ma arvan, et …', 'По-моему … / Я думаю, что …', 'In my opinion … / I think that …'],
+  ['Kui sul on küsimusi, helista mulle.', 'Если будут вопросы, позвони мне.', 'If you have any questions, call me.'],
+  ['Kirjuta mulle! / Ootan sinu vastust.', 'Напиши мне! / Жду ответа.', 'Write to me! / I look forward to your reply.'],
+  ['Tervitades / Lugupidamisega', 'С приветом / С уважением', 'Best wishes / Yours sincerely'],
+];
 
 const ru: Guide[] = [
   {
@@ -189,7 +212,7 @@ const ru: Guide[] = [
     slug: 'a2-writing',
     nav: 'A2: письмо',
     group: 'exam',
-    title: 'Письменная часть экзамена A2 по эстонскому языку',
+    title: 'Письмо на экзамене A2 по эстонскому: задания, образцы текстов и фразы',
     description: 'Какие задания бывают в письменной части экзамена A2: текст по визитке и короткое сообщение или описание. Примеры текстов с переводом и полезные фразы.',
     h1: 'Письмо на экзамене A2',
     lead: 'Письменная часть идёт первой и длится 30 минут. В ней два задания, всего 20 баллов. Описание заданий взято из буклета Harno, примеры текстов составлены нами.',
@@ -257,7 +280,76 @@ const ru: Guide[] = [
         ],
         links: [
           ['Тема «Письма и сообщения»', 'topics/letters'],
+          ['Письмо на экзамене B1', 'guide/b1-writing'],
           ['Буклет Harno с примерами заданий (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'b1-writing',
+    nav: 'B1: письмо',
+    group: 'exam',
+    title: 'Письмо на экзамене B1 по эстонскому: задания, критерии и образцы текстов',
+    description: 'Как написать записку на 50 слов и письмо или рассказ на 100 слов на экзамене B1: что требует Harno, как оценивают текст, образцы с переводом и полезные фразы.',
+    h1: 'Письмо на экзамене B1',
+    lead: 'Письменная часть идёт первой и длится 35 минут. В ней два задания, всего 25 баллов. Описание заданий и критерии взяты из материалов Harno, образцы текстов составлены нами.',
+    sections: [
+      {
+        h: 'Первое задание: записка или анкета',
+        p: ['Нужно заполнить анкету или написать записку — около 50 слов. В буклете Harno пример такой: вы уходите с работы раньше и оставляете коллегам сообщение. В задании есть пункты, и на каждый нужно ответить:'],
+        list: ['почему вы уходите раньше;', 'во сколько уходите;', 'кто вас заменит;', 'как с вами связаться.'],
+        samples: [{ label: 'Образец записки (≈ 50 слов)', et: b1Note, tr: 'Уважаемые коллеги!\nК сожалению, сегодня мне нужно уйти с работы раньше: мой сын заболел, и я должна сходить с ним к врачу. Я ухожу в два часа. Вместо меня клиентов примет Кати, она знает обо всех сегодняшних договорённостях. Если что-то понадобится, звоните мне по номеру 5123 4567. Завтра я на работе в обычное время.\nС приветом,\nОльга' }],
+      },
+      {
+        h: 'Второе задание: рассказ или личное письмо',
+        p: ['Текст около 100 слов: рассказ на заданную тему или личное письмо. В задании снова есть вопросы. В буклете Harno, например, нужно написать о новом знакомом: где вы познакомились, где он живёт и работает, какой у него характер, какие у него хобби. В официальном образце Harno тема — «Tervislik elu» (здоровый образ жизни): что вы едите, занимаетесь ли спортом, как защищаетесь от болезней и как лечитесь.'],
+        samples: [
+          { label: 'Образец письма о новом знакомом (≈ 100 слов)', et: b1Letter, tr: 'Привет, Мари!\nСпасибо за письмо! Хочу рассказать тебе о моей новой знакомой. Её зовут Лийс. Мы познакомились месяц назад на курсах эстонского, потому что сидели рядом. Лийс живёт в Тарту, а работает в Таллинне бухгалтером, поэтому каждый день ездит на поезде. Она весёлый и отзывчивый человек: если я что-то не понимаю, она всё спокойно объясняет. В свободное время Лийс плавает и много читает. В прошлые выходные мы вместе ходили в кино, а потом пили кофе. Думаю, мы станем хорошими подругами. Как у тебя дела? Напиши мне!\nТвоя Ольга' },
+          { label: 'Образец рассказа на тему «Tervislik elu» (≈ 100 слов)', et: b1Story, tr: 'Здоровый образ жизни\nЯ стараюсь жить здорово. Утром я обычно ем кашу и пью чай, на обед — суп или салат. Сладкое ем редко, только по выходным.\nСпортом занимаюсь три раза в неделю: два раза плаваю, а в субботу долго гуляю в лесу. Зимой катаюсь на лыжах, если есть снег.\nОт болезней защищаюсь так: высыпаюсь, одеваюсь по погоде и часто мою руки.\nЕсли я всё-таки заболеваю, остаюсь дома и пью горячий чай с мёдом и лимоном. Если температура не спадает, иду к врачу.\nПо-моему, здоровье важнее всего.' },
+        ],
+      },
+      {
+        h: 'Как оценивают текст',
+        p: ['По материалам Harno задание B1 выполнено хорошо, если:'],
+        list: [
+          'текст по теме и полностью охватывает все пункты задания;',
+          'задание понято, и нужная информация передана;',
+          'текст складывается в логичное целое, и его легко понять;',
+          'ошибки в грамматике и орфографии есть, но не мешают понять мысль.',
+        ],
+        after: [
+          'Обратите внимание на последний пункт: в официальных образцах Harno, которые приведены как тексты уровня B1, есть ошибки — например, «suval» вместо suvel или «kui ma haigen» вместо kui ma olen haige. Значит, важнее всего ответить на каждый пункт и связать текст, а не написать его без единой ошибки.',
+        ],
+      },
+      {
+        h: 'Как построить текст на 100 слов',
+        list: [
+          'Начало — одно предложение: обращение в письме или вводная фраза в рассказе.',
+          'Затем по 1–2 предложения на каждый пункт задания, в том же порядке, что в задании. Так проверяющему легко увидеть, что вы ответили на всё.',
+          'Связывайте предложения: sest, seepärast, aga, kuigi, kui, peale selle. Именно связность отличает B1 от A2.',
+          'Концовка — одно предложение: вывод, мнение или прощание.',
+          'В письме выберите sina или teie и держитесь его до конца.',
+        ],
+      },
+      { h: 'Полезные фразы', phrases: b1Phrases.map(([et, ru]) => [et, ru] as [string, string]) },
+      {
+        h: 'Советы',
+        list: [
+          'Сначала отметьте в задании все пункты, потом пишите. После текста проверьте, что ответили на каждый.',
+          'Объём «около 50» и «около 100» слов: заметно короче — риск не раскрыть пункты, заметно длиннее — больше места для ошибок.',
+          'Оставьте 5 минут на проверку: окончания глаголов, падежи после чисел и предлогов, порядок слов.',
+          'Пишите письменными (не печатными) буквами и разборчиво: неразборчивое место считается ошибкой.',
+          'Тренируйтесь на темах экзамена: пишите по одному тексту на 100 слов в неделю и просите кого-нибудь проверить.',
+        ],
+        links: [
+          ['Тема «Письма и сообщения»', 'topics/letters'],
+          ['Тема «Рассказ о себе и семье»', 'topics/self-intro'],
+          ['Союзы и наречия', 'topics/connectors'],
+          ['Письмо на экзамене A2', 'guide/a2-writing'],
+          ['Как устроен экзамен B1', 'exam-b1'],
+          ['Harno: образцы письменных работ B1 с критериями (PDF)', harnoB1Sample],
+          ['Harno: буклет с примерами заданий B1 (PDF)', harnoB1Booklet],
         ],
       },
     ],
@@ -621,7 +713,7 @@ const en: Guide[] = [
     slug: 'a2-writing',
     nav: 'A2: writing',
     group: 'exam',
-    title: 'The writing part of the Estonian A2 exam',
+    title: 'Writing in the Estonian A2 exam: tasks, sample texts and phrases',
     description: 'The tasks in the writing part of the A2 exam: a text based on a business card and a short message or description. Sample texts with translations and useful phrases.',
     h1: 'Writing in the A2 exam',
     lead: 'The writing part comes first and lasts 30 minutes. It has two tasks worth 20 points in total. The task descriptions are from the Harno booklet; the sample texts are our own.',
@@ -689,7 +781,76 @@ const en: Guide[] = [
         ],
         links: [
           ['The “Letters and messages” topic', 'topics/letters'],
+          ['Writing in the B1 exam', 'guide/b1-writing'],
           ['Harno booklet with sample tasks (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'b1-writing',
+    nav: 'B1: writing',
+    group: 'exam',
+    title: 'Writing in the Estonian B1 exam: tasks, criteria and sample texts',
+    description: 'How to write the 50-word note and the 100-word letter or story in the B1 exam: what Harno asks for, how texts are assessed, samples with translations and useful phrases.',
+    h1: 'Writing in the B1 exam',
+    lead: 'The writing part comes first and takes 35 minutes. It has two tasks worth 25 points in total. The task descriptions and criteria come from Harno’s materials; the sample texts are ours.',
+    sections: [
+      {
+        h: 'Task 1: a note or a form',
+        p: ['Fill in a form or write a note of about 50 words. The Harno booklet example: you leave work early and leave your colleagues a message. The task lists points, and you must answer each one:'],
+        list: ['why you are leaving early;', 'what time you are leaving;', 'who will cover for you;', 'how to reach you.'],
+        samples: [{ label: 'Sample note (≈ 50 words)', et: b1Note, tr: 'Dear colleagues,\nUnfortunately I have to leave work early today: my son is ill and I need to take him to the doctor. I’m leaving at two. Kati will see the clients instead of me; she knows about all of today’s appointments. If you need anything, call me on 5123 4567. I’ll be at work at the usual time tomorrow.\nBest wishes,\nOlga' }],
+      },
+      {
+        h: 'Task 2: a story or a personal letter',
+        p: ['A text of about 100 words: a story on a given topic or a personal letter. Again the task comes with questions. In the Harno booklet, for example, you write about someone new you met: where you met, where they live and work, what they are like, what their hobbies are. In Harno’s official writing sample the topic is “Tervislik elu” (a healthy life): what you eat, whether you do sport, how you protect yourself from illness and how you treat it.'],
+        samples: [
+          { label: 'Sample letter about a new friend (≈ 100 words)', et: b1Letter, tr: 'Hi Mari!\nThanks for your letter! I want to tell you about someone new I’ve met. Her name is Liis. We met a month ago at an Estonian course because we sat next to each other. Liis lives in Tartu but works in Tallinn as an accountant, so she takes the train every day. She is cheerful and helpful: if I don’t understand something, she calmly explains it all. In her free time Liis goes swimming and reads a lot. Last weekend we went to the cinema together and had coffee afterwards. I think we’ll become good friends. How are you? Write to me!\nYours, Olga' },
+          { label: 'Sample story on “Tervislik elu” (≈ 100 words)', et: b1Story, tr: 'A healthy life\nI try to live healthily. In the morning I usually eat porridge and drink tea; for lunch I have soup or a salad. I rarely eat sweets, only at the weekend.\nI do sport three times a week: I go swimming twice and on Saturday I take a long walk in the forest. In winter I ski if there is snow.\nI protect myself from illness by getting enough sleep, dressing for the weather and washing my hands often.\nIf I do fall ill, I stay at home and drink hot tea with honey and lemon. If the fever doesn’t go down, I see a doctor.\nIn my opinion, health is the most important thing.' },
+        ],
+      },
+      {
+        h: 'How the text is assessed',
+        p: ['According to Harno, a B1 writing task is done well when:'],
+        list: [
+          'the text is on topic and fully covers every point of the task;',
+          'the task has been understood and the necessary information is given;',
+          'the text forms a logical whole and is easy to follow;',
+          'there are grammar and spelling mistakes, but they don’t get in the way of the meaning.',
+        ],
+        after: [
+          'Note the last point: Harno’s official samples, presented as B1-level texts, contain mistakes — such as “suval” instead of suvel or “kui ma haigen” instead of kui ma olen haige. Answering every point and linking your sentences matters more than writing without a single error.',
+        ],
+      },
+      {
+        h: 'How to build a 100-word text',
+        list: [
+          'Opening — one sentence: a greeting in a letter, an opening line in a story.',
+          'Then 1–2 sentences per task point, in the order the task gives them. That makes it easy for the examiner to see you covered everything.',
+          'Link your sentences: sest, seepärast, aga, kuigi, kui, peale selle. Connected text is what sets B1 apart from A2.',
+          'Ending — one sentence: a conclusion, an opinion or a sign-off.',
+          'In a letter, choose sina or teie and keep to it.',
+        ],
+      },
+      { h: 'Useful phrases', phrases: b1Phrases.map(([et, , en]) => [et, en] as [string, string]) },
+      {
+        h: 'Tips',
+        list: [
+          'Mark every point in the task before you write, and check afterwards that you answered each one.',
+          '“About 50” and “about 100” words: much shorter risks missing points; much longer leaves more room for mistakes.',
+          'Leave 5 minutes to check verb endings, cases after numbers and postpositions, and word order.',
+          'Write in joined-up handwriting, not block capitals, and legibly: anything unreadable counts as a mistake.',
+          'Practise on the exam topics: write one 100-word text a week and ask someone to check it.',
+        ],
+        links: [
+          ['Topic: letters and messages', 'topics/letters'],
+          ['Topic: telling about yourself and your family', 'topics/self-intro'],
+          ['Conjunctions and adverbs', 'topics/connectors'],
+          ['Writing in the A2 exam', 'guide/a2-writing'],
+          ['How the B1 exam works', 'exam-b1'],
+          ['Harno: B1 writing samples with criteria (PDF)', harnoB1Sample],
+          ['Harno: B1 booklet with sample tasks (PDF)', harnoB1Booklet],
         ],
       },
     ],
@@ -1054,7 +1215,7 @@ const et: Guide[] = [
     slug: 'a2-writing',
     nav: 'A2: kirjutamine',
     group: 'exam',
-    title: 'Eesti keele A2 eksami kirjutamisosa',
+    title: 'Kirjutamine eesti keele A2 eksamil: ülesanded, näidistekstid ja fraasid',
     description: 'A2 eksami kirjutamisosa ülesanded: tekst visiitkaardi põhjal ja lühike teade või kirjeldus. Näidistekstid tõlkega ja kasulikud fraasid.',
     h1: 'Kirjutamine A2 eksamil',
     lead: 'Kirjutamisosa on esimene ja kestab 30 minutit. Selles on kaks ülesannet, kokku 20 punkti. Ülesannete kirjeldused on Harno vihikust, näidistekstid on meie omad.',
@@ -1122,7 +1283,76 @@ const et: Guide[] = [
         ],
         links: [
           ['Teema „Kirjad ja sõnumid“', 'topics/letters'],
+          ['Kirjutamine B1 eksamil', 'guide/b1-writing'],
           ['Harno näidisülesannete vihik (PDF)', booklet],
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'b1-writing',
+    nav: 'B1: kirjutamine',
+    group: 'exam',
+    title: 'Kirjutamine eesti keele B1 eksamil: ülesanded, hindamine ja näidistekstid',
+    description: 'Kuidas kirjutada B1 eksamil 50-sõnaline teade ja 100-sõnaline kiri või jutt: mida Harno nõuab, kuidas teksti hinnatakse, näidistekstid tõlkega ja kasulikud fraasid.',
+    h1: 'Kirjutamine B1 eksamil',
+    lead: 'Kirjutamisosa on esimene ja kestab 35 minutit. Selles on kaks ülesannet, kokku 25 punkti. Ülesannete kirjeldused ja hindamise põhimõtted on Harno materjalidest, näidistekstid on meie omad.',
+    sections: [
+      {
+        h: '1. ülesanne: teade või küsimustik',
+        p: ['Täida küsimustik või kirjuta umbes 50-sõnaline teade. Harno vihiku näide: lahkud töölt varem ja jätad kolleegidele teate. Ülesandes on punktid ja igaühele tuleb vastata:'],
+        list: ['miks lahkud varem;', 'mis kell lähed;', 'kes sind asendab;', 'kuidas sinuga kontakti saab.'],
+        samples: [{ label: 'Näidisteade (≈ 50 sõna)', et: b1Note, tr: 'Dear colleagues,\nUnfortunately I have to leave work early today: my son is ill and I need to take him to the doctor. I’m leaving at two. Kati will see the clients instead of me; she knows about all of today’s appointments. If you need anything, call me on 5123 4567. I’ll be at work at the usual time tomorrow.\nBest wishes,\nOlga' }],
+      },
+      {
+        h: '2. ülesanne: jutt või isiklik kiri',
+        p: ['Umbes 100-sõnaline tekst: jutt etteantud teemal või isiklik kiri. Ka siin on ülesandes küsimused. Harno vihikus tuleb näiteks kirjutada uuest tuttavast: kus te tuttavaks saite, kus ta elab ja töötab, milline iseloom tal on, millised on ta hobid. Harno ametlikus sooritusnäidises on teema „Tervislik elu“: mida sa sööd, kas teed sporti, kuidas end haiguste eest kaitsed ja kuidas end ravid.'],
+        samples: [
+          { label: 'Näidiskiri uuest tuttavast (≈ 100 sõna)', et: b1Letter, tr: 'Hi Mari!\nThanks for your letter! I want to tell you about someone new I’ve met. Her name is Liis. We met a month ago at an Estonian course because we sat next to each other. Liis lives in Tartu but works in Tallinn as an accountant, so she takes the train every day. She is cheerful and helpful: if I don’t understand something, she calmly explains it all. In her free time Liis goes swimming and reads a lot. Last weekend we went to the cinema together and had coffee afterwards. I think we’ll become good friends. How are you? Write to me!\nYours, Olga' },
+          { label: 'Näidisjutt teemal „Tervislik elu“ (≈ 100 sõna)', et: b1Story, tr: 'A healthy life\nI try to live healthily. In the morning I usually eat porridge and drink tea; for lunch I have soup or a salad. I rarely eat sweets, only at the weekend.\nI do sport three times a week: I go swimming twice and on Saturday I take a long walk in the forest. In winter I ski if there is snow.\nI protect myself from illness by getting enough sleep, dressing for the weather and washing my hands often.\nIf I do fall ill, I stay at home and drink hot tea with honey and lemon. If the fever doesn’t go down, I see a doctor.\nIn my opinion, health is the most important thing.' },
+        ],
+      },
+      {
+        h: 'Kuidas teksti hinnatakse',
+        p: ['Harno järgi on B1-taseme kirjutamisülesanne hästi täidetud, kui:'],
+        list: [
+          'tekst on teemakohane ja katab etteantud sisupunkte täielikult;',
+          'ülesandest on aru saadud ja vajalik info edasi antud;',
+          'tekst moodustab loogilise terviku ja sellest arusaamine ei nõua pingutust;',
+          'tekstis on grammatika- ja õigekirjavigu, mis ei sega mõttest arusaamist.',
+        ],
+        after: [
+          'Pane tähele viimast punkti: Harno ametlikes näidistes, mis on esitatud B1-taseme tekstidena, on vigu — näiteks „suval“ sõna suvel asemel või „kui ma haigen“ lause kui ma olen haige asemel. Tähtsam on vastata igale punktile ja siduda laused tervikuks kui kirjutada täiesti veatult.',
+        ],
+      },
+      {
+        h: 'Kuidas 100-sõnalist teksti üles ehitada',
+        list: [
+          'Algus — üks lause: pöördumine kirjas või sissejuhatav lause jutus.',
+          'Seejärel 1–2 lauset iga ülesande punkti kohta samas järjekorras nagu ülesandes. Nii näeb hindaja kohe, et oled kõigele vastanud.',
+          'Seo laused: sest, seepärast, aga, kuigi, kui, peale selle. Just seotud tekst eristab B1 taset A2-st.',
+          'Lõpp — üks lause: kokkuvõte, arvamus või hüvastijätt.',
+          'Kirjas vali sina või teie ja jää selle juurde.',
+        ],
+      },
+      { h: 'Kasulikud fraasid', phrases: b1Phrases.map(([et, , en]) => [et, en] as [string, string]) },
+      {
+        h: 'Nõuanded',
+        list: [
+          'Märgi enne kirjutamist ülesandes kõik punktid ja kontrolli pärast, et vastasid igaühele.',
+          '„Umbes 50“ ja „umbes 100“ sõna: palju lühem tekst võib jätta punkte katmata, palju pikem jätab rohkem ruumi vigadele.',
+          'Jäta 5 minutit kontrolliks: verbilõpud, käänded arvsõnade ja kaassõnade järel, sõnajärg.',
+          'Kirjuta kirjatähtedega, mitte trükitähtedega, ja loetavalt: loetamatu koht loetakse veaks.',
+          'Harjuta eksamiteemadel: kirjuta nädalas üks 100-sõnaline tekst ja palu kellelgi seda kontrollida.',
+        ],
+        links: [
+          ['Teema: kirjad ja teated', 'topics/letters'],
+          ['Teema: endast ja perest rääkimine', 'topics/self-intro'],
+          ['Sidesõnad ja määrsõnad', 'topics/connectors'],
+          ['Kirjutamine A2 eksamil', 'guide/a2-writing'],
+          ['Kuidas B1 eksam käib', 'exam-b1'],
+          ['Harno: B1 kirjutamisosa sooritusnäidised (PDF)', harnoB1Sample],
+          ['Harno: B1 konsultatsioonivihik ülesannete näidetega (PDF)', harnoB1Booklet],
         ],
       },
     ],
