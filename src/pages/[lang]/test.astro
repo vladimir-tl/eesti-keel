@@ -17,7 +17,7 @@ const notes = testNotes.A1[lang];
 <Base lang={lang} path="test" title={s.seoTestTitle} description={s.seoTestDesc}>
   <Quiz lang={lang} title={s.introTitle} intro={s.introText} questions={questions} perGroup={1}
     verdicts={s.verdictsTest} backHref={`/${lang}/topics`} backLabel={s.topicsTitle} />
-  <Notes lang={lang} sections={notes.sections}>
+  <Notes lang={lang} sections={notes.sections} hideInQuiz>
     <LevelTopics lang={lang} level="A1" title={notes.topicsTitle} />
   </Notes>
 </Base>
