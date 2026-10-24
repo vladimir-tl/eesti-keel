@@ -5,7 +5,7 @@ import Notes from '../../components/Notes.astro';
 import LevelTopics from '../../components/LevelTopics.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 import { topicsOf } from '../../data/topics';
-import { testNotes } from '../../data/test-notes';
+import { notesFaq, testNotes } from '../../data/test-notes';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
@@ -14,7 +14,7 @@ const s = ui[lang];
 const questions = topicsOf('A1').flatMap((tp) => tp.questions.map((q) => ({ ...q, group: tp.id })));
 const notes = testNotes.A1[lang];
 ---
-<Base lang={lang} path="test" title={s.seoTestTitle} description={s.seoTestDesc}>
+<Base lang={lang} path="test" title={s.seoTestTitle} description={s.seoTestDesc} jsonLd={[notesFaq(notes.sections)]}>
   <Quiz lang={lang} title={s.introTitle} intro={s.introText} questions={questions} perGroup={1}
     verdicts={s.verdictsTest} backHref={`/${lang}/topics`} backLabel={s.topicsTitle} />
   <Notes lang={lang} sections={notes.sections} hideInQuiz>
