@@ -423,3 +423,19 @@ export const levelTestNotes: Record<Lang, NoteSection[]> = {
     },
   ],
 };
+
+/** FAQPage schema from note sections: each heading is a question, its text, list and table the answer. */
+export const notesFaq = (sections: NoteSection[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: sections.map((sec) => ({
+    '@type': 'Question',
+    name: sec.h,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: [...(sec.p ?? []), ...(sec.list ?? []), ...(sec.table?.rows.map((r) => r.join(' — ')) ?? [])]
+        .join(' ')
+        .replace(/\*\*(.+?)\*\*/g, '$1'),
+    },
+  })),
+});

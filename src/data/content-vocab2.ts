@@ -31,12 +31,12 @@ export const pointing: Question[] = [
   fromEt('need', ['эти, те', 'этот', 'тот', 'здесь'], ['these / those', 'this', 'that', 'here'], 0),
   m('___ on minu raamat. (Это моя книга.)', '___ on minu raamat. (This is my book.)', ['See', 'Need', 'Kes', 'Kus'], 0,
     'see — единственное число, need — множественное.', 'see — singular, need — plural.'),
-  m('___ on minu raamatud. (Это мои книги.)', '___ on minu raamatud. (These are my books.)', ['See', 'Need', 'Too', 'Kes'], 1,
-    'need — мн. число: need raamatud.', 'need — plural: need raamatud.'),
+  m('___ on minu sõbrad. (Это мои друзья.)', '___ on minu sõbrad. (These are my friends.)', ['See', 'Need', 'Too', 'Kes'], 1,
+    'need — мн. число: need sõbrad.', 'need — plural: need sõbrad.'),
   fromEt('Mitu?', ['Сколько? (о числе)', 'Когда?', 'Где?', 'Как?'], ['How many?', 'When?', 'Where?', 'How?'], 0),
   fromEt('Milline?', ['Какой?', 'Который час?', 'Сколько?', 'Где?'], ['Which / what kind?', 'What time?', 'How much?', 'Where?'], 0),
   fromEt('Kelle raamat see on?', ['Чья это книга?', 'Где книга?', 'Какая книга?', 'Кто читает?'], ['Whose book is this?', 'Where is the book?', 'What kind of book?', 'Who reads?'], 0),
-  typeEt('Почему?', 'Why?', ['miks']),
+  typeEt('Как долго?', 'How long?', ['kui kaua', 'kaua']),
   m('Как спросить «Чья это сумка?»', 'How do you ask “Whose bag is this?”', ['Kelle kott see on?', 'Kes kott see on?', 'Kus kott see on?', 'Mis kott see on?'], 0,
     'Kelle? — «чей?»: Kelle kott see on? — «Чья это сумка?»', 'Kelle? — “whose?”: Kelle kott see on? — “Whose bag is this?”'),
   m('Как спросить «Сколько у тебя детей?»', 'How do you ask “How many children do you have?”', ['Mitu last sul on?', 'Kui palju last?', 'Kes sul on?', 'Kus sul on last?'], 0,
@@ -46,8 +46,8 @@ export const pointing: Question[] = [
 ];
 
 export const verbs2: Question[] = [
-  m('Ma ___ koju. (Я иду домой.)', 'Ma ___ koju. (I am going home.)', ['lähen', 'tulen', 'käin', 'teen'], 0,
-    'minema: lähen, lähed, läheb, läheme, lähete, lähevad.', 'minema: lähen, lähed, läheb, läheme, lähete, lähevad.'),
+  m('Me ___ õhtul telerit. (Вечером мы смотрим телевизор.)', 'Me ___ õhtul telerit. (In the evening we watch TV.)', ['vaatame', 'vaatan', 'vaatab', 'vaatavad'], 0,
+    'vaatama: vaatan, vaatad, vaatab, vaatame, vaatate, vaatavad.', 'vaatama: vaatan, vaatad, vaatab, vaatame, vaatate, vaatavad.'),
   m('Ta ___ homme. (Он придёт завтра.)', 'Ta ___ homme. (He will come tomorrow.)', ['tuleb', 'tulen', 'tuled', 'tuleme'], 0,
     'tulema: tulen, tuled, tuleb, tuleme, tulete, tulevad.', 'tulema: tulen, tuled, tuleb, tuleme, tulete, tulevad.'),
   m('Mida sa ___? (Что ты делаешь?)', 'Mida sa ___? (What are you doing?)', ['teed', 'teen', 'teeb', 'teeme'], 0,
@@ -61,9 +61,9 @@ export const verbs2: Question[] = [
   fromEt('ärkama', ['просыпаться', 'засыпать', 'вставать', 'мыться'], ['to wake up', 'to fall asleep', 'to get up', 'to wash'], 0),
   fromEt('tõusma', ['вставать', 'ложиться', 'мыться', 'идти'], ['to get up', 'to lie down', 'to wash', 'to go'], 0),
   typeEt('мыться', 'to wash oneself', ['pesema', 'end pesema']),
-  fromEt('Ma käin iga päev tööl', ['Я хожу на работу каждый день', 'Я иду на работу сегодня', 'Я работаю дома', 'Я не хожу на работу'], ['I go to work every day', 'I am going to work today', 'I work at home', 'I do not go to work'], 0),
-  fromEt('Mida sa teed?', ['Что ты делаешь?', 'Где ты?', 'Кто ты?', 'Когда ты?'], ['What are you doing?', 'Where are you?', 'Who are you?', 'When are you?'], 0),
-  typeEt('идти домой (я иду домой)', 'I am going home', ['ma lähen koju']),
+  fromEt('Ma lähen magama', ['Я иду спать', 'Я сплю', 'Я просыпаюсь', 'Я иду домой'], ['I am going to bed', 'I am sleeping', 'I am waking up', 'I am going home'], 0),
+  fromEt('Me sööme koos', ['Мы едим вместе', 'Мы готовим вместе', 'Мы едим одни', 'Мы идём в кафе'], ['We eat together', 'We cook together', 'We eat alone', 'We are going to a café'], 0),
+  typeEt('я пишу', 'I am writing', ['ma kirjutan']),
 ];
 
 export const feelings: Question[] = [

@@ -32,6 +32,6 @@ export const kuhu: Question[] = [
   m('Ma lähen ___. (в библиотеку)', 'Ma lähen ___. (to the library)', ['raamatukogus', 'raamatukogust', 'raamatukokku', 'raamatukogu'], 2,
     'raamatukogu → raamatukokku («в библиотеку»), raamatukogus («в библиотеке»).', 'raamatukogu → raamatukokku (“to the library”), raamatukogus (“in the library”).'),
   fromEt('Ma sõidan Tallinna', ['Я еду в Таллинн', 'Я живу в Таллинне', 'Я из Таллинна', 'Я работаю в Таллинне'], ['I am going to Tallinn', 'I live in Tallinn', 'I am from Tallinn', 'I work in Tallinn'], 0),
-  ty('Напишите: «Я иду в школу» (3 слова)', 'Write: “I am going to school” (3 words)', ['ma lähen kooli', 'ma lähen koolisse'], 'Ma lähen kooli.', 'Ma lähen kooli.'),
-  ty('Напишите: «Я иду домой» (3 слова)', 'Write: “I am going home” (3 words)', ['ma lähen koju'], 'Ma lähen koju.', 'Ma lähen koju.'),
+  ty('Напишите: «Я иду в театр» (3 слова)', 'Write: “I am going to the theatre” (3 words)', ['ma lähen teatrisse'], 'Ma lähen teatrisse.', 'Ma lähen teatrisse.'),
+  ty('Напишите: «Я иду в больницу» (3 слова)', 'Write: “I am going to the hospital” (3 words)', ['ma lähen haiglasse'], 'Ma lähen haiglasse.', 'Ma lähen haiglasse.'),
 ];

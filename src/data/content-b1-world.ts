@@ -31,18 +31,18 @@ export const environment: Question[] = [
 ];
 
 export const weatherPlaces: Question[] = [
-  fromEt('äike', ['гроза', 'буря', 'град', 'туман'], ['thunderstorm', 'storm', 'hail', 'fog'], 0),
+  fromEt('tuisk', ['метель', 'гроза', 'туман', 'ливень'], ['blizzard', 'thunderstorm', 'fog', 'downpour'], 0),
   fromEt('torm', ['буря, шторм', 'гроза', 'ветер', 'дождь'], ['storm', 'thunderstorm', 'wind', 'rain'], 0),
   fromEt('udu', ['туман', 'град', 'дождь', 'ветер'], ['fog', 'hail', 'rain', 'wind'], 0),
   fromEt('rahe', ['град', 'снег', 'гроза', 'иней'], ['hail', 'snow', 'thunderstorm', 'frost'], 0),
   fromEt('üleujutus', ['наводнение', 'засуха', 'пожар', 'буря'], ['flood', 'drought', 'fire', 'storm'], 0),
   fromEt('põud', ['засуха', 'наводнение', 'жара', 'дождь'], ['drought', 'flood', 'heat', 'rain'], 0),
   fromEt('rannik', ['побережье', 'остров', 'озеро', 'болото'], ['coast', 'island', 'lake', 'bog'], 0),
-  fromEt('libe', ['скользко', 'холодно', 'тихо', 'мокро'], ['slippery', 'cold', 'quiet', 'wet'], 0),
+  fromEt('pakane', ['мороз', 'оттепель', 'жара', 'сырость'], ['hard frost', 'thaw', 'heat', 'damp'], 0),
   gap('Homme ___ äikest.', 'ожидается', 'is expected', ['oodatakse', 'ootab', 'ootama', 'ootas'], 0,
     ['ootama → oodatakse: безличная форма. Объект — в партитиве: äikest.', 'ootama → oodatakse: the impersonal. The object takes the partitive: äikest.', 'ootama → oodatakse + osastav.']),
-  gap('Ilm läheb ___.', 'теплее', 'warmer', ['soojemaks', 'soojem', 'soojemat', 'soojemas'], 0,
-    ['minema + -ks — «становиться»: ilm läheb soojemaks.', 'minema + -ks — “to become”: ilm läheb soojemaks.', 'minema + -ks: ilm läheb soojemaks.']),
+  gap('Ilmateade ___, et homme sajab lund.', 'обещает', 'says', ['lubab', 'lubama', 'lubada', 'lubatud'], 0,
+    ['lubama — «обещать»; о прогнозе: ilmateade lubab vihma, lund.', 'lubama — “to promise”; of a forecast: ilmateade lubab vihma, lund.', 'lubama: ilmateade lubab lund.']),
   gap('Hommikul oli nii paks udu, et ei ___ midagi näha.', 'можно было', 'it was possible', ['saanud', 'saa', 'saaks', 'saama'], 0,
     ['ei saanud — отрицательное прошедшее: ei + -nud. Далее da-инфинитив: näha.', 'ei saanud — the negative past: ei + -nud. Then the da-infinitive: näha.', 'ei saanud + da-tegevusnimi.']),
   gap('Temperatuur ___ öösel nulli alla.', 'упадёт', 'will fall', ['langeb', 'langema', 'langeda', 'langes'], 0,
@@ -88,7 +88,7 @@ export const traditions: Question[] = [
 ];
 
 export const languageLearning: Question[] = [
-  fromEt('võõrkeel', ['иностранный язык', 'родной язык', 'диалект', 'акцент'], ['foreign language', 'mother tongue', 'dialect', 'accent'], 0),
+  fromEt('õigekiri', ['правописание', 'произношение', 'почерк', 'перевод'], ['spelling', 'pronunciation', 'handwriting', 'translation'], 0),
   fromEt('kakskeelne', ['двуязычный', 'многоязычный', 'немой', 'иностранный'], ['bilingual', 'multilingual', 'mute', 'foreign'], 0),
   fromEt('sõnavara', ['словарный запас', 'словарь', 'произношение', 'грамматика'], ['vocabulary', 'dictionary', 'pronunciation', 'grammar'], 0),
   fromEt('murre', ['диалект', 'акцент', 'язык', 'слово'], ['dialect', 'accent', 'language', 'word'], 0),
@@ -116,7 +116,7 @@ export const tripPlanning: Question[] = [
   fromEt('marsruut', ['маршрут', 'карта', 'расписание', 'билет'], ['route', 'map', 'timetable', 'ticket'], 0),
   fromEt('majutus', ['размещение, жильё', 'питание', 'транспорт', 'экскурсия'], ['accommodation', 'meals', 'transport', 'excursion'], 0),
   fromEt('broneering', ['бронирование', 'отмена', 'оплата', 'билет'], ['booking, reservation', 'cancellation', 'payment', 'ticket'], 0),
-  fromEt('viisa', ['виза', 'паспорт', 'билет', 'страховка'], ['visa', 'passport', 'ticket', 'insurance'], 0),
+  fromEt('sihtkoht', ['пункт назначения', 'место отправления', 'пересадка', 'остановка'], ['destination', 'point of departure', 'transfer', 'stop'], 0),
   fromEt('reisikindlustus', ['туристическая страховка', 'багаж', 'виза', 'билет'], ['travel insurance', 'luggage', 'visa', 'ticket'], 0),
   fromEt('ööbima', ['ночевать', 'отдыхать', 'гулять', 'ужинать'], ['to stay overnight', 'to rest', 'to walk', 'to have dinner'], 0),
   fromEt('soodustus', ['скидка, льгота', 'надбавка', 'штраф', 'налог'], ['concession, discount', 'surcharge', 'fine', 'tax'], 0),
@@ -142,13 +142,13 @@ export const tripPlanning: Question[] = [
 ];
 
 export const onTheRoad: Question[] = [
-  fromEt('hilinema', ['опаздывать', 'приезжать', 'ждать', 'уезжать'], ['to be late', 'to arrive', 'to wait', 'to leave'], 0),
+  fromEt('ootesaal', ['зал ожидания', 'камера хранения', 'касса', 'перрон'], ['waiting room', 'left-luggage office', 'ticket office', 'platform'], 0),
   fromEt('toll', ['таможня', 'граница', 'паспорт', 'налог'], ['customs', 'border', 'passport', 'tax'], 0),
   fromEt('piir', ['граница', 'таможня', 'стена', 'дорога'], ['border', 'customs', 'wall', 'road'], 0),
   fromEt('kaotsi minema', ['потеряться', 'найтись', 'отправиться', 'сломаться'], ['to get lost (of things)', 'to be found', 'to set off', 'to break'], 0),
   fromEt('eksima', ['заблудиться, ошибаться', 'найти дорогу', 'опаздывать', 'торопиться'], ['to get lost, to err', 'to find the way', 'to be late', 'to hurry'], 0),
   fromEt('juhatama', ['показать дорогу, направить', 'ехать', 'идти', 'спрашивать'], ['to show the way, to direct', 'to drive', 'to walk', 'to ask'], 0),
-  fromEt('vaatamisväärsus', ['достопримечательность', 'вид из окна', 'маршрут', 'экскурсия'], ['sight, attraction', 'view from the window', 'route', 'excursion'], 0),
+  fromEt('teekond', ['путь, дорога (поездка)', 'карта', 'остановка', 'гостиница'], ['journey, way', 'map', 'stop', 'hotel'], 0),
   gap('Meie lend ___ udu tõttu ära.', 'был отменён', 'was cancelled', ['jäi', 'jääb', 'jääda', 'jäänud'], 0,
     ['ära jääma — «отмениться, не состояться»: lend jäi ära.', 'ära jääma — “to be cancelled, not to take place”: lend jäi ära.', 'ära jääma: lend jäi ära.']),
   gap('Rong ___ pool tundi.', 'опоздал на', 'was late by', ['hilines', 'hilinema', 'hilineda', 'hilinemas'], 0,

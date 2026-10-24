@@ -104,14 +104,14 @@ export const cafe: Question[] = [
 ];
 
 export const doctor: Question[] = [
-  fromEt('arst', ['врач', 'аптека', 'больница', 'лекарство'], ['doctor', 'pharmacy', 'hospital', 'medicine'], 0),
+  fromEt('haav', ['рана', 'боль', 'кашель', 'жар'], ['wound', 'pain', 'cough', 'fever'], 0),
   fromEt('ravim', ['лекарство', 'врач', 'болезнь', 'температура'], ['medicine', 'doctor', 'illness', 'temperature'], 0),
   fromEt('palavik', ['жар, температура', 'кашель', 'насморк', 'боль'], ['fever', 'cough', 'runny nose', 'pain'], 0),
   fromEt('köha', ['кашель', 'температура', 'боль', 'аллергия'], ['cough', 'fever', 'pain', 'allergy'], 0),
   m('Как сказать «У меня болит живот»?', 'How do you say “I have a stomach ache”?', ['Mul valutab kõht', 'Mul on kõht', 'Ma olen kõht', 'Ma valutan kõht'], 0,
     'Mul valutab + часть тела: pea (голова), kõht (живот), hammas (зуб), selg (спина).', 'Mul valutab + body part: pea (head), kõht (stomach), hammas (tooth), selg (back).'),
-  fromEt('Mul on palavik', ['У меня температура', 'У меня кашель', 'У меня болит голова', 'Я здоров'], ['I have a fever', 'I have a cough', 'I have a headache', 'I am healthy'], 0),
-  typeEt('У меня болит голова', 'I have a headache', ['mul valutab pea']),
+  fromEt('Mul on kurk haige', ['У меня болит горло', 'У меня болит живот', 'У меня температура', 'Я здоров'], ['I have a sore throat', 'I have a stomach ache', 'I have a fever', 'I am healthy'], 0),
+  typeEt('У меня болит зуб', 'I have a toothache', ['mul valutab hammas']),
   m('Ma vajan ___. (Мне нужен врач.)', 'Ma vajan ___. (I need a doctor.)', ['arsti', 'arst', 'arstis', 'arstil'], 0,
     'vajama + партитив: ma vajan arsti.', 'vajama + partitive: ma vajan arsti.'),
   fromEt('Kuidas sa ennast tunned?', ['Как ты себя чувствуешь?', 'Как тебя зовут?', 'Где болит?', 'Сколько тебе лет?'], ['How do you feel?', 'What is your name?', 'Where does it hurt?', 'How old are you?'], 0),
@@ -126,7 +126,7 @@ export const doctor: Question[] = [
 export const phone: Question[] = [
   fromEt('Halloo', ['Алло', 'Пока', 'Спасибо', 'Извините'], ['Hello (phone)', 'Bye', 'Thanks', 'Sorry'], 0),
   fromEt('Kes räägib?', ['Кто говорит?', 'Что вы говорите?', 'Где вы?', 'Кто это?'], ['Who is speaking?', 'What are you saying?', 'Where are you?', 'Who is that?'], 0),
-  fromEt('Ma helistan sulle homme', ['Я позвоню тебе завтра', 'Я звонил вчера', 'Ты позвонишь мне', 'Я не звоню'], ['I will call you tomorrow', 'I called yesterday', 'You will call me', 'I am not calling'], 0),
+  fromEt('Vale number', ['Неправильный номер', 'Новый номер', 'Мой номер', 'Нет связи'], ['Wrong number', 'New number', 'My number', 'No signal'], 0),
   fromEt('Ma ei kuule', ['Я не слышу', 'Я не вижу', 'Я не знаю', 'Я не могу'], ['I cannot hear', 'I cannot see', 'I do not know', 'I cannot'], 0),
   typeEt('Минуточку, пожалуйста', 'One moment, please', ['hetk, palun', 'üks hetk, palun']),
   m('Как попросить позвать Анну?', 'How do you ask to speak to Anna?', ['Kas ma saan rääkida Annaga?', 'Kas ma saan rääkida Anna?', 'Kes on Anna?', 'Kus on Anna?'], 0,
@@ -137,7 +137,7 @@ export const phone: Question[] = [
     'kahjuks — «к сожалению».', 'kahjuks — “unfortunately”.'),
   fromEt('Vabandust, ma hilinen', ['Извините, я опаздываю', 'Извините, я ухожу', 'Извините, я не знаю', 'Извините, я болею'], ['Sorry, I am late', 'Sorry, I am leaving', 'Sorry, I do not know', 'Sorry, I am ill'], 0),
   fromEt('Mitte midagi', ['Ничего страшного', 'Ничего нет', 'Никогда', 'Не за что'], ['Never mind', 'There is nothing', 'Never', 'Not at all'], 0),
-  typeEt('Пожалуйста (в ответ на «спасибо»)', 'You are welcome', ['palun', 'palun väga']),
+  typeEt('звонок (по телефону)', 'phone call', ['kõne', 'telefonikõne']),
   fromEt('sõnum', ['сообщение', 'звонок', 'письмо', 'номер'], ['message', 'call', 'letter', 'number'], 0),
 ];
 

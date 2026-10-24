@@ -50,6 +50,6 @@ export const professions: Question[] = [
     tr('töötama: ma töötan, sa töötad, ta töötab, me töötame, te töötate, nad töötavad.', 'töötama: ma töötan, sa töötad, ta töötab, me töötame, te töötate, nad töötavad.')),
   mc(tr('Mis sinu amet on? — Выберите ответ.', 'Mis sinu amet on? — Choose a reply.'), ['Ma olen arst', 'Ma olen Mari', 'Ma elan Tartus', 'Ma olen kolm'], 0,
     tr('amet — профессия. Ma olen arst — «Я врач».', 'amet — profession. Ma olen arst — “I am a doctor”.')),
-  fromEt('Ma õpin ülikoolis', ['Я учусь в университете', 'Я работаю в университете', 'Я живу в университете', 'Я преподаю в школе'], ['I study at university', 'I work at a university', 'I live at a university', 'I teach at school'], 0),
+  fromEt('Ma töötan kontoris', ['Я работаю в офисе', 'Я учусь в офисе', 'Я иду в офис', 'Я ищу работу'], ['I work in an office', 'I study in an office', 'I am going to the office', 'I am looking for work'], 0),
   typed(tr('Ma ___ arst. (Я врач.) Впишите форму глагола olla.', 'Ma ___ arst. (I am a doctor.) Type the form of “olla”.'), ['olen'], 'ma olen.'),
 ];

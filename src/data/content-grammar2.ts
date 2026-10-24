@@ -116,7 +116,7 @@ export const modal: Question[] = [
     'magama → «magada» после tahan. Но: ma pean magama.', 'magama → “magada” after tahan. But: ma pean magama.'),
   m('Ma pean ___. (учиться)', 'Ma pean ___. (to study)', ['õppima', 'õppida', 'õpin', 'õpid'], 0,
     'После pean — инфинитив на -ma: õppima.', 'After pean — the -ma infinitive: õppima.'),
-  ty('Напишите: «Мне нужно работать» (3 слова)', 'Write: “I have to work” (3 words)', ['ma pean töötama'], 'Ma pean töötama.', 'Ma pean töötama.'),
+  ty('Напишите: «Я умею читать» (3 слова)', 'Write: “I can read” (3 words)', ['ma oskan lugeda'], 'Ma oskan lugeda.', 'Ma oskan lugeda.'),
   fromEt('Ma ei saa tulla', ['Я не могу прийти', 'Я не хочу приходить', 'Я не пришёл', 'Я не умею приходить'], ['I cannot come', 'I do not want to come', 'I did not come', 'I do not know how to come'], 0),
   fromEt('Kas ma tohin?', ['Можно мне?', 'Ты можешь?', 'Мне нужно?', 'Я хочу?'], ['May I?', 'Can you?', 'Do I need to?', 'Do I want to?'], 0),
   m('Ta ___ hästi eesti keelt rääkida. (Он хорошо умеет говорить по-эстонски.)', 'Ta ___ hästi eesti keelt rääkida. (He speaks Estonian well.)', ['oskan', 'oskab', 'oskad', 'oskavad'], 1,

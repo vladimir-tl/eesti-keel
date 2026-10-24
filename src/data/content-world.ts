@@ -46,7 +46,7 @@ export const body: Question[] = [
   fromEt('haige', ['больной', 'здоровый', 'усталый', 'голодный'], ['ill', 'healthy', 'tired', 'hungry'], 0),
   typeEt('здоровый', 'healthy', ['terve']),
   fromEt('Mul valutab pea', ['У меня болит голова', 'У меня болит рука', 'Я здоров', 'Мне холодно'], ['My head hurts', 'My hand hurts', 'I am healthy', 'I am cold'], 0),
-  typed(tr('Напишите по-эстонски: «Мне холодно»', 'Write in Estonian: “I am cold”'), ['mul on külm'], 'Mul on külm.'),
+  typed(tr('Напишите по-эстонски: «Мне жарко»', 'Write in Estonian: “I am hot”', 'Kirjuta eesti keeles: “I am hot”'), ['mul on palav', 'mul on kuum'], 'Mul on palav.'),
 ];
 
 export const clothes: Question[] = [

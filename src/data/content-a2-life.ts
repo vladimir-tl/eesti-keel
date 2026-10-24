@@ -30,8 +30,8 @@ export const education: Question[] = [
   fromEt('kursus', ['курс', 'класс', 'урок', 'экзамен'], ['course', 'class', 'lesson', 'exam'], 0),
   m('Ma ___ ülikooli. (закончил)', 'Ma ___ ülikooli. (I graduated from)', ['lõpetasin', 'lõpetan', 'lõpetama', 'lõpetas'], 0,
     'lõpetama → lõpetasin («закончил»).', 'lõpetama → lõpetasin (“graduated”).'),
-  m('Ma õpin ___. (в университете)', 'Ma õpin ___. (at university)', ['ülikoolis', 'ülikool', 'ülikooli', 'ülikoolist'], 0,
-    'ülikool → ülikoolis.', 'ülikool → ülikoolis.'),
+  m('Ma lähen ___. (на лекцию)', 'Ma lähen ___. (to a lecture)', ['loengusse', 'loengus', 'loengust', 'loeng'], 0,
+    'loeng → loengusse.', 'loeng → loengusse.'),
   ty('Напишите: «Я учусь в университете» (3 слова)', 'Write: “I study at university” (3 words)', ['ma õpin ülikoolis'], 'Ma õpin ülikoolis.', 'Ma õpin ülikoolis.'),
 ];
 
@@ -99,7 +99,7 @@ export const shopping2: Question[] = [
     'vaja + партитив: suuremat numbrit vaja.', 'vaja + partitive: suuremat numbrit vaja.'),
   m('Ma tahaksin selle ___. (вернуть)', 'Ma tahaksin selle ___. (to return)', ['tagastada', 'tagastan', 'tagastab', 'tagastama'], 0,
     'ma tahaksin + -da: tagastada.', 'ma tahaksin + -da: tagastada.'),
-  typeEt('скидка', 'discount', ['allahindlus']),
+  typeEt('обменивать', 'to exchange', ['vahetama']),
 ];
 
 export const health2: Question[] = [

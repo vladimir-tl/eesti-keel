@@ -27,7 +27,7 @@ export const genitive: Question[] = [
 ];
 
 export const pronouns: Question[] = [
-  m('Ma näen ___. (тебя)', 'Ma näen ___. (you)', ['sina', 'sind', 'sulle', 'sinu'], 1,
+  m('Me otsime ___. (вас)', 'Me otsime ___. (you, plural)', ['teie', 'teid', 'teile', 'teil'], 1,
     'Дополнение: mind (меня), sind (тебя), teda (его/её), meid (нас), teid (вас), neid (их).', 'Objects: mind (me), sind (you), teda (him/her), meid (us), teid (you pl.), neid (them).'),
   m('Ta armastab ___. (меня)', 'Ta armastab ___. (me)', ['mina', 'mind', 'mulle', 'minu'], 1,
     'mind — «меня».', 'mind — “me”.'),
@@ -303,7 +303,7 @@ export const numbers2: Question[] = [
   fromEt('viissada', ['500', '50', '5000', '15'], ['500', '50', '5000', '15'], 0),
   typeEt('300', '300', ['kolmsada']),
   fromEt('kümme tuhat', ['10 000', '1000', '100 000', '110'], ['10,000', '1000', '100,000', '110'], 0),
-  typeEt('миллион', 'million', ['miljon']),
+  typeEt('две тысячи', 'two thousand', ['kaks tuhat']),
   m('Как по-эстонски 1500?', 'How do you say 1500 in Estonian?', ['tuhat viissada', 'viissada tuhat', 'viisteist', 'tuhat viiskümmend'], 0,
     'tuhat + viissada.', 'tuhat + viissada.'),
   fromEt('kakskümmend viis eurot', ['25 €', '52 €', '205 €', '250 €'], ['€25', '€52', '€205', '€250'], 0),
@@ -318,10 +318,10 @@ export const numbers2: Question[] = [
 export const infinitive: Question[] = [
   m('Ma lähen ___. (плавать)', 'Ma lähen ___. (swimming)', ['ujuma', 'ujuda', 'ujumas', 'ujun'], 0,
     'minema, tulema, hakkama, pidama + инфинитив на -ma: lähen ujuma.', 'minema, tulema, hakkama, pidama + the -ma infinitive: lähen ujuma.'),
-  m('Mulle meeldib ___. (читать)', 'Mulle meeldib ___. (to read)', ['lugeda', 'lugema', 'loen', 'lugemas'], 0,
-    'meeldima + -da: meeldib lugeda.', 'meeldima + -da: meeldib lugeda.'),
-  m('Ma pean ___. (работать)', 'Ma pean ___. (to work)', ['töötama', 'töötada', 'töötan', 'töötamas'], 0,
-    'pidama + -ma: pean töötama.', 'pidama + -ma: pean töötama.'),
+  m('Mulle meeldib ___. (танцевать)', 'Mulle meeldib ___. (to dance)', ['tantsida', 'tantsima', 'tantsin', 'tantsimas'], 0,
+    'meeldima + -da: meeldib tantsida.', 'meeldima + -da: meeldib tantsida.'),
+  m('Ma pean poodi ___. (сходить)', 'Ma pean poodi ___. (to go)', ['minema', 'minna', 'lähen', 'minemas'], 0,
+    'pidama + -ma: pean minema.', 'pidama + -ma: pean minema.'),
   m('Kas sa oskad ___? (плавать)', 'Kas sa oskad ___? (to swim)', ['ujuda', 'ujuma', 'ujumas', 'ujud'], 0,
     'oskama + -da: oskan ujuda.', 'oskama + -da: oskan ujuda.'),
   m('Ma hakkan homme ___. (работать)', 'Ma hakkan homme ___. (to work)', ['töötama', 'töötada', 'töötamas', 'töötan'], 0,

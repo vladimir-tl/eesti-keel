@@ -19,7 +19,7 @@ export const society: Question[] = [
     ['kes — относительное местоимение для людей-подлежащих: inimesed, kes on erinevad.', 'kes — the relative pronoun for people as subject: inimesed, kes on erinevad.', 'kes — inimesi puhul, kes on alus: inimesed, kes on erinevad.']),
   gap('Noored ja eakad peaksid üksteist ___.', 'понимать', 'to understand', ['mõistma', 'mõistes', 'mõistmas', 'mõistmata'], 0,
     ['peaksid («должны бы») + ma-инфинитив: peaksid mõistma.', 'peaksid (“ought to”) + the ma-infinitive: peaksid mõistma.', 'peaksid + ma-tegevusnimi: peaksid mõistma.']),
-  typeEt('общество', 'society', ['ühiskond']),
+  typeEt('население', 'population', ['rahvastik', 'elanikkond']),
 ];
 
 export const opinions: Question[] = [
@@ -66,14 +66,14 @@ export const politics: Question[] = [
 ];
 
 export const news: Question[] = [
-  fromEt('uudised', ['новости', 'газета', 'программа', 'письмо'], ['news', 'newspaper', 'programme', 'letter'], 0),
+  fromEt('pealkiri', ['заголовок', 'статья', 'подпись', 'страница'], ['headline', 'article', 'caption', 'page'], 0),
   fromEt('ajakirjanik', ['журналист', 'редактор', 'читатель', 'писатель'], ['journalist', 'editor', 'reader', 'writer'], 0),
   fromEt('sündmus', ['событие', 'новость', 'место', 'ответ'], ['event', 'piece of news', 'place', 'answer'], 0),
   fromEt('õnnetus', ['несчастный случай', 'праздник', 'решение', 'слух'], ['accident, misfortune', 'celebration', 'decision', 'rumour'], 0),
   fromEt('avarii', ['авария', 'пожар', 'буря', 'выставка'], ['crash', 'fire', 'storm', 'exhibition'], 0),
   fromEt('tulekahju', ['пожар', 'авария', 'наводнение', 'выборы'], ['fire', 'crash', 'flood', 'elections'], 0),
   typeEt('интервью', 'interview', ['intervjuu']),
-  typeEt('газета', 'newspaper', ['ajaleht']),
+  typeEt('статья', 'article', ['artikkel']),
   fromEt('teatama', ['сообщать', 'спрашивать', 'слушать', 'просить'], ['to announce, to report', 'to ask', 'to listen', 'to request'], 0),
   fromEt('juhtuma', ['случаться', 'начинаться', 'проходить', 'уходить'], ['to happen', 'to begin', 'to pass', 'to leave'], 0),
   gap('Ajalehes ___, et uus sild avatakse sügisel.', 'пишут', 'it says', ['kirjutatakse', 'kirjutab', 'kirjutas', 'kirjutama'], 0,
@@ -91,7 +91,7 @@ export const economy: Question[] = [
   fromEt('tõusma', ['расти, подниматься', 'падать', 'стоять', 'покупать'], ['to rise', 'to fall', 'to stand', 'to buy'], 0),
   fromEt('langema', ['снижаться, падать', 'расти', 'стоять', 'платить'], ['to fall, to decrease', 'to rise', 'to stand', 'to pay'], 0),
   fromEt('tööpuudus', ['безработица', 'зарплата', 'отпуск', 'карьера'], ['unemployment', 'salary', 'holiday', 'career'], 0),
-  fromEt('laen', ['кредит, заём', 'вклад', 'счёт', 'налог'], ['loan', 'deposit', 'account', 'tax'], 0),
+  fromEt('inflatsioon', ['инфляция', 'безработица', 'налог', 'рост зарплат'], ['inflation', 'unemployment', 'tax', 'wage growth'], 0),
   fromEt('säästma', ['экономить, копить', 'тратить', 'красть', 'считать'], ['to save', 'to spend', 'to steal', 'to count'], 0),
   fromEt('eelarve', ['бюджет', 'расход', 'договор', 'доход'], ['budget', 'expense', 'contract', 'income'], 0),
   toEt('доход', 'income', ['sissetulek', 'kulu', 'maks', 'laen'], 0),
@@ -114,9 +114,9 @@ export const law: Question[] = [
   fromEt('kohus', ['суд', 'закон', 'адвокат', 'полиция'], ['court', 'law', 'lawyer', 'police'], 0),
   fromEt('advokaat', ['адвокат', 'судья', 'свидетель', 'полицейский'], ['lawyer', 'judge', 'witness', 'police officer'], 0),
   fromEt('allkirjastama', ['подписывать', 'читать', 'отправлять', 'оплачивать'], ['to sign', 'to read', 'to send', 'to pay'], 0),
-  fromEt('tähtaeg', ['срок', 'задание', 'паспорт', 'договор'], ['deadline', 'task', 'passport', 'contract'], 0),
+  fromEt('kohtunik', ['судья', 'адвокат', 'свидетель', 'прокурор'], ['judge', 'lawyer', 'witness', 'prosecutor'], 0),
   typeEt('жалоба', 'complaint', ['kaebus']),
-  fromEt('tagastama', ['возвращать', 'покупать', 'терять', 'получать'], ['to return', 'to buy', 'to lose', 'to receive'], 0),
+  fromEt('rikkuma', ['нарушать (закон, договор)', 'соблюдать', 'подписывать', 'менять'], ['to break (a law, a contract)', 'to obey', 'to sign', 'to change'], 0),
   gap('Leping tuleb ___ kahe nädala jooksul.', 'подписать', 'to sign', ['allkirjastada', 'allkirjastama', 'allkirjastades', 'allkirjastamata'], 0,
     ['tuleb («нужно») + da-инфинитив: tuleb allkirjastada.', 'tuleb (“has to”) + the da-infinitive: tuleb allkirjastada.', 'tuleb + da-tegevusnimi: tuleb allkirjastada.']),
   gap('Autojuhile määrati ___.', 'штраф', 'a fine', ['trahv', 'trahvi', 'trahvile', 'trahviga'], 0,
