@@ -1,9 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Quiz, { type Placement } from '../../components/Quiz.astro';
+import Notes from '../../components/Notes.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 import { topicsOf } from '../../data/topics';
 import { t } from '../../data/questions';
+import { levelTestNotes } from '../../data/test-notes';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
@@ -33,4 +35,5 @@ const placement: Placement = {
 <Base lang={lang} path="level-test" title={s.seoLevelTitle} description={s.seoLevelDesc}>
   <Quiz lang={lang} title={s.levelTestTitle} intro={s.levelTestIntro} questions={questions} verdicts={[]}
     placement={placement} />
+  <Notes lang={lang} sections={levelTestNotes[lang]} hideInQuiz />
 </Base>

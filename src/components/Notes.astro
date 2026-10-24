@@ -8,15 +8,16 @@ import { t } from '../data/questions';
 interface Props {
   lang: Lang;
   sections: NoteSection[];
+  hideInQuiz?: boolean; // hidden while the quiz questions are on screen
 }
-const { lang, sections } = Astro.props;
+const { lang, sections, hideInQuiz } = Astro.props;
 
 // **bold** marks Estonian forms, as in the hints.
 const esc = (x: string) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const md = (x: string) => esc(x).replace(/\*\*(.+?)\*\*/g, '<strong lang="et">$1</strong>');
 const topicById = (id: string) => topics.find((x) => x.id === id)!;
 ---
-<article class="notes">
+<article class="notes" data-quiz-hide={hideInQuiz || undefined}>
   {sections.map((sec) => (
     <section>
       <h2>{sec.h}</h2>

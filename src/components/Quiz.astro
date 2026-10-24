@@ -290,6 +290,8 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     (['intro', 'loader', 'quiz', 'result'] as const).forEach((n) => ($(n).hidden = n !== name));
     const hint = document.getElementById('hint');
     if (hint) hint.hidden = name === 'loader' || name === 'result';
+    // Text under the quiz marked data-quiz-hide steps aside while the questions are on screen.
+    document.querySelectorAll<HTMLElement>('[data-quiz-hide]').forEach((el) => (el.hidden = name === 'loader' || name === 'quiz'));
   };
 
   const norm = (v: string) =>

@@ -266,3 +266,160 @@ export const testNotes: Record<Level, Record<Lang, { sections: NoteSection[]; to
     },
   },
 };
+
+/** Text under the level test: how the test works, how the level is scored, what the levels mean and where to go next. */
+export const levelTestNotes: Record<Lang, NoteSection[]> = {
+  ru: [
+    {
+      h: 'Как устроен тест на уровень эстонского языка',
+      p: [
+        'Тест состоит из 30 вопросов: 10 на уровень A1, 10 на A2 и 10 на B1. Вопросы идут от простого к сложному, и каждый взят из отдельной темы: на A1 — из 49 тем, на A2 — из 52, на B1 — из 36. При каждом запуске темы и вопросы подбираются заново, поэтому тест можно проходить много раз.',
+        'В вопросах есть и грамматика — спряжение глаголов, падежи, прошедшее время, условное наклонение, безличные формы, — и лексика повседневных тем: семья, работа, покупки, здоровье, поездки, общество. Если ответ неизвестен, нажмите «Не знаю»: случайная догадка завышает результат, и тест посоветует не те темы.',
+        'Тест бесплатный, без регистрации и занимает около 10–15 минут.',
+      ],
+    },
+    {
+      h: 'Как определяется уровень',
+      p: [
+        'Уровень засчитывается, если правильно отвечено хотя бы на 7 вопросов из 10 (70%). Уровни идут по порядку: A2 засчитывается, только если засчитан A1, а B1 — только если засчитаны A1 и A2. Так случайные верные ответы на сложные вопросы не поднимают результат выше реального.',
+      ],
+      table: {
+        head: ['Результат', 'Что это значит', 'Что делать дальше'],
+        rows: [
+          ['Начало A1', 'Меньше 7 из 10 на A1', 'Темы A1 по порядку и тест A1'],
+          ['A1', 'A1 засчитан, A2 — нет', 'Темы A2 и тест A2'],
+          ['A2', 'A1 и A2 засчитаны, B1 — нет', 'Экзамен A2 и темы B1'],
+          ['B1', 'Засчитаны все три уровня', 'Тест B1 и экзамен B1'],
+        ],
+      },
+    },
+    {
+      h: 'Что означают уровни A1, A2 и B1',
+      p: [
+        'Уровни взяты из общеевропейской шкалы CEFR, по которой в Эстонии проводятся государственные экзамены по эстонскому языку.',
+      ],
+      list: [
+        'A1 — начальный уровень: вы представляетесь, рассказываете о себе и семье, понимаете простые вопросы, числа, время и цены, справляетесь в магазине и кафе.',
+        'A2 — базовый уровень: вы общаетесь в привычных ситуациях — на работе, у врача, в банке, в транспорте, рассказываете о прошлом и планах, пишете короткие записки и письма. A2 нужен для статуса долгосрочного резидента и для некоторых должностей.',
+        'B1 — средний уровень: вы понимаете главное в разговорах и текстах на знакомые темы, высказываете и обосновываете мнение, пишете связный текст. B1 нужен для гражданства Эстонии и для многих работ в сфере обслуживания и в государственных учреждениях.',
+      ],
+    },
+    {
+      h: 'Тест уровня и экзамен Harno',
+      p: [
+        'Результат теста — это ориентир, а не официальный сертификат. Государственные экзамены на уровни A2, B1, B2 и C1 проводит Harno, и в каждом из них четыре части: письмо, аудирование, чтение и говорение. Этот тест проверяет грамматику и словарный запас, на которых держатся все части экзамена, но письмо и говорение нужно тренировать отдельно.',
+        'Если тест показал A2 или B1, посмотрите, как устроен соответствующий экзамен: сколько баллов нужно набрать, как проходит каждая часть и как зарегистрироваться.',
+      ],
+      pages: [['Как устроен экзамен A2: части, баллы, регистрация', 'exam-a2'], ['Как устроен экзамен B1: части, баллы, регистрация', 'exam-b1']],
+    },
+    {
+      h: 'Что делать после теста',
+      p: [
+        'В конце теста вы увидите результат по каждому уровню и список тем, в которых были ошибки. Откройте эти темы: в каждой есть упражнения с объяснениями и правило. Когда темы повторены, пройдите полный тест своего уровня — в нём по одному вопросу из каждой темы — и через пару недель снова пройдите тест уровня.',
+      ],
+      pages: [['Тест A1 по эстонскому языку', 'test'], ['Тест A2 по эстонскому языку', 'test-a2'], ['Тест B1 по эстонскому языку', 'test-b1'], ['Все темы A1, A2 и B1', 'topics']],
+    },
+  ],
+  en: [
+    {
+      h: 'How the Estonian level test works',
+      p: [
+        'The test has 30 questions: 10 at A1, 10 at A2 and 10 at B1. They go from easy to hard, and each comes from a different topic: 49 topics at A1, 52 at A2 and 36 at B1. Topics and questions are drawn afresh every time, so you can take the test again and again.',
+        'The questions cover grammar — verb endings, cases, the past tense, the conditional, impersonal forms — and the vocabulary of everyday topics: family, work, shopping, health, travel, society. If you don’t know an answer, press “I don’t know”: a lucky guess inflates the result and the test then suggests the wrong topics.',
+        'The test is free, needs no sign-up and takes about 10–15 minutes.',
+      ],
+    },
+    {
+      h: 'How your level is scored',
+      p: [
+        'A level counts as passed when you get at least 7 of its 10 questions right (70%). Levels count in order: A2 counts only if A1 is passed, and B1 only if A1 and A2 are. That way lucky answers on hard questions don’t push your result above your real level.',
+      ],
+      table: {
+        head: ['Result', 'What it means', 'What to do next'],
+        rows: [
+          ['Early A1', 'Fewer than 7 of 10 at A1', 'The A1 topics in order and the A1 test'],
+          ['A1', 'A1 passed, A2 not', 'The A2 topics and the A2 test'],
+          ['A2', 'A1 and A2 passed, B1 not', 'The A2 exam and the B1 topics'],
+          ['B1', 'All three levels passed', 'The B1 test and the B1 exam'],
+        ],
+      },
+    },
+    {
+      h: 'What A1, A2 and B1 mean',
+      p: [
+        'The levels come from the Common European Framework of Reference (CEFR), the scale Estonia’s state language exams use.',
+      ],
+      list: [
+        'A1 — beginner: you can introduce yourself, talk about yourself and your family, understand simple questions, numbers, times and prices, and get by in a shop or café.',
+        'A2 — elementary: you can handle familiar situations — at work, at the doctor’s, at the bank, on public transport — talk about the past and your plans, and write short notes and letters. A2 is required for long-term resident status and for some jobs.',
+        'B1 — intermediate: you understand the main points of conversations and texts on familiar topics, can give and justify an opinion, and write connected text. B1 is required for Estonian citizenship and for many jobs in services and the public sector.',
+      ],
+    },
+    {
+      h: 'The level test and the Harno exam',
+      p: [
+        'The result is a guide, not an official certificate. The state exams at A2, B1, B2 and C1 are run by Harno, and each has four parts: writing, listening, reading and speaking. This test checks the grammar and vocabulary all the parts rest on, but writing and speaking need practice of their own.',
+        'If the test puts you at A2 or B1, see how that exam works: the points you need, what happens in each part and how to register.',
+      ],
+      pages: [['How the A2 exam works: parts, points, registration', 'exam-a2'], ['How the B1 exam works: parts, points, registration', 'exam-b1']],
+    },
+    {
+      h: 'What to do after the test',
+      p: [
+        'At the end you will see your score at each level and a list of the topics where you made mistakes. Open those topics: each has exercises with explanations and a written-out rule. Once you have gone over them, take the full test for your level — it asks one question from every topic — and take the level test again in a couple of weeks.',
+      ],
+      pages: [['Estonian A1 test', 'test'], ['Estonian A2 test', 'test-a2'], ['Estonian B1 test', 'test-b1'], ['All A1, A2 and B1 topics', 'topics']],
+    },
+  ],
+  et: [
+    {
+      h: 'Kuidas eesti keele tasemetest käib',
+      p: [
+        'Testis on 30 küsimust: 10 A1, 10 A2 ja 10 B1 tasemel. Need lähevad kergemast raskemani ja iga küsimus on eri teemast: A1 tasemel 49 teema, A2 tasemel 52 ja B1 tasemel 36 teema seast. Teemad ja küsimused valitakse iga kord uuesti, nii et testi saab teha mitu korda.',
+        'Küsimustes on grammatikat — verbide pööramine, käänded, minevik, tingiv kõneviis, umbisikuline tegumood — ja igapäevaste teemade sõnavara: pere, töö, poes käimine, tervis, reisimine, ühiskond. Kui sa vastust ei tea, vajuta „Ei tea“: juhuslik arvamine tõstab tulemust ja test soovitab siis valesid teemasid.',
+        'Test on tasuta, registreerimata ja võtab umbes 10–15 minutit.',
+      ],
+    },
+    {
+      h: 'Kuidas tase määratakse',
+      p: [
+        'Tase loetakse sooritatuks, kui vähemalt 7 küsimust 10-st on õiged (70%). Tasemed lähevad järjest: A2 loetakse ainult siis, kui A1 on sooritatud, ja B1 ainult siis, kui A1 ja A2 on sooritatud. Nii ei tõsta juhuslikud õiged vastused rasketele küsimustele tulemust tegelikust kõrgemale.',
+      ],
+      table: {
+        head: ['Tulemus', 'Mida see tähendab', 'Mida edasi teha'],
+        rows: [
+          ['A1 algus', 'A1 tasemel alla 7 õige 10-st', 'A1 teemad järjest ja A1 test'],
+          ['A1', 'A1 sooritatud, A2 mitte', 'A2 teemad ja A2 test'],
+          ['A2', 'A1 ja A2 sooritatud, B1 mitte', 'A2 eksam ja B1 teemad'],
+          ['B1', 'Kõik kolm taset sooritatud', 'B1 test ja B1 eksam'],
+        ],
+      },
+    },
+    {
+      h: 'Mida tähendavad A1, A2 ja B1',
+      p: [
+        'Tasemed tulevad Euroopa keeleõppe raamdokumendist (CEFR), mille järgi on üles ehitatud ka Eesti riiklikud keeleeksamid.',
+      ],
+      list: [
+        'A1 — algtase: saad end tutvustada, rääkida endast ja perest, mõistad lihtsaid küsimusi, arve, kellaaegu ja hindu ning saad hakkama poes ja kohvikus.',
+        'A2 — põhitase: saad hakkama tuttavates olukordades — tööl, arsti juures, pangas, ühistranspordis —, räägid minevikust ja plaanidest ning kirjutad lühikesi teateid ja kirju. A2 on vajalik pikaajalise elaniku staatuse ja mõne ametikoha jaoks.',
+        'B1 — kesktase: mõistad tuttavatel teemadel vestluste ja tekstide põhisisu, avaldad ja põhjendad arvamust ning kirjutad seotud teksti. B1 on vajalik Eesti kodakondsuse ja paljude teenindus- ja avaliku sektori ametikohtade jaoks.',
+      ],
+    },
+    {
+      h: 'Tasemetest ja Harno eksam',
+      p: [
+        'Testi tulemus on suunanäitaja, mitte ametlik tunnistus. Riiklikke A2, B1, B2 ja C1 taseme eksameid korraldab Harno ja igas on neli osa: kirjutamine, kuulamine, lugemine ja rääkimine. See test kontrollib grammatikat ja sõnavara, millele kõik eksami osad toetuvad, kuid kirjutamist ja rääkimist tuleb harjutada eraldi.',
+        'Kui test näitas A2 või B1 taset, vaata, kuidas see eksam käib: mitu punkti on vaja, mis igas osas toimub ja kuidas registreerida.',
+      ],
+      pages: [['Kuidas A2 eksam käib: osad, punktid, registreerimine', 'exam-a2'], ['Kuidas B1 eksam käib: osad, punktid, registreerimine', 'exam-b1']],
+    },
+    {
+      h: 'Mida pärast testi teha',
+      p: [
+        'Lõpus näed tulemust iga taseme kohta ja teemasid, kus tuli vigu. Ava need teemad: igas on harjutused selgitustega ja reegel. Kui teemad on korratud, tee oma taseme täielik test — selles on üks küsimus igast teemast — ja paari nädala pärast tee tasemetest uuesti.',
+      ],
+      pages: [['Eesti keele A1 test', 'test'], ['Eesti keele A2 test', 'test-a2'], ['Eesti keele B1 test', 'test-b1'], ['Kõik A1, A2 ja B1 teemad', 'topics']],
+    },
+  ],
+};
