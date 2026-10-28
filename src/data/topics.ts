@@ -22,6 +22,7 @@ import { serviceTalk, complaints, homePlace, housekeeping, illness, healthcare }
 import { selfIntro, character, studies, schoolLife, career, workplace } from './content-b1-life';
 import { society, opinions, politics, news, economy, law } from './content-b1-society';
 import { impersonal, quotative, participles, condPast, government, relative } from './content-b1-grammar';
+import { courierA2, courierB1 } from './content-courier';
 import { travel, cooking, forecast, family2, describing, leisure, culture, tech, letters, phrases } from './content-a2-world';
 
 export interface Topic {
@@ -216,6 +217,7 @@ const a2Groups: Omit<Group, 'level'>[] = [
       topic('bank', tr('Банк и почта', 'Bank and post'), 'konto, ülekanne, pakk, saatma', bank),
       topic('official', tr('Документы и учреждения', 'Documents and offices'), 'avaldus, allkiri, isikukood', official),
       topic('services', tr('Парикмахерская, ремонт, очередь', 'Hairdresser, repairs, queue'), 'juuksur, järjekord, katki, avatud', services),
+      topic('courier-a2', tr('Разговор с курьером', 'Talking to a courier', 'Vestlus kulleriga'), 'Kas te olete kodus? 15 minuti pärast, ukse juurde', courierA2),
     ],
   },
   {
@@ -340,6 +342,7 @@ const b1Groups: Omit<Group, 'level'>[] = [
     title: tr('4. Услуги и обслуживание', '4. Services', '4. Teenindus'),
     topics: [
       topic('service-talk', tr('Услуги: звонок, запись, вопросы', 'Services: calls, bookings, questions', 'Teenused: kõned, broneeringud, küsimused'), 'seoses, kohta, saaksin broneerida, tühistage', serviceTalk),
+      topic('courier-b1', tr('Курьер: перенос и проблемы с доставкой', 'Courier: rescheduling and delivery problems', 'Kuller: ümberplaneerimine ja tarneprobleemid'), 'saaksite tuua, asemel, kinni, teatage', courierB1),
       topic('complaints', tr('Жалоба и решение проблемы', 'Complaints and solving problems', 'Kaebus ja probleemi lahendamine'), 'vigane, vahetage, hüvitis, garantii, rahul', complaints),
     ],
   },

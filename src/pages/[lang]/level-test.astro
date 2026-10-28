@@ -14,7 +14,7 @@ const s = ui[lang];
 // Every level comes from its topic banks: the test draws one question per topic, ten topics per level.
 const levels = ['A1', 'A2', 'B1'] as const;
 const questions = levels.flatMap((level) =>
-  topicsOf(level).flatMap((tp) => tp.questions.map((q) => ({ ...q, level, group: tp.id }))),
+  topicsOf(level).flatMap((tp) => tp.questions.filter((q) => !q.dialog).map((q) => ({ ...q, level, group: tp.id }))),
 );
 
 const href = (p: string) => `/${lang}/${p}`;

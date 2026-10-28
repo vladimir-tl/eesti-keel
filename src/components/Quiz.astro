@@ -43,6 +43,7 @@ const config = {
     audio: q.audio ?? '',
     image: q.image ?? '',
     pics: q.pics ?? [],
+    dialog: (q.dialog ?? []).map((d) => ({ who: d.who, text: d.text, options: d.options, answer: d.answer, tr: t(d.tr, lang) })),
     group: (q as Question & { group?: string }).group ?? '',
   })),
 };
@@ -72,6 +73,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     </div>
     <div class="pic-box" id="pic" hidden></div>
     <p class="prompt" id="prompt"></p>
+    <div class="dialog" id="dialog" hidden></div>
     <p class="muted drag-hint" id="dragHint" hidden>{s.dragHint}</p>
     <div class="options" id="options"></div>
     <div id="typing" hidden>
@@ -158,6 +160,12 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   .player { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
   #audio { flex: 1; min-width: 0; }
   #slow[aria-pressed='true'] { border-color: var(--accent); color: var(--accent); }
+  .dialog { margin: 16px 0 12px; display: grid; gap: 10px; }
+  :global(.turn) { display: grid; grid-template-columns: 5.5em 1fr; gap: 10px; align-items: baseline; line-height: 1.9; }
+  :global(.turn b) { color: var(--muted); font-weight: 600; font-size: .9rem; }
+  :global(.turn .blank) { cursor: pointer; background: none; border-top: 0; border-left: 0; border-right: 0; font: inherit; color: inherit; }
+  :global(.turn .blank.active) { background: color-mix(in srgb, var(--accent) 15%, transparent); }
+  :global(.turn .tr) { grid-column: 2; font-size: .85rem; line-height: 1.4; margin-top: -6px; }
   .drag-hint { font-size: .85rem; margin: 8px 0 0; }
   :global(.options.bank) { display: flex; flex-wrap: wrap; gap: 8px; }
   :global(.options.bank .opt) { width: auto; touch-action: none; user-select: none; cursor: grab; }
@@ -250,7 +258,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
 </style>
 
 <script>
-  interface Q { level: string; prompt: string; options: string[]; answer: number; accept: string[]; explain: string; audio: string; image: string; pics: string[]; group: string }
+  interface Q { level: string; prompt: string; options: string[]; answer: number; accept: string[]; explain: string; audio: string; image: string; pics: string[]; group: string; dialog: { who: string; text: string; options: string[]; answer: number; tr: string }[]; picks?: (number | null)[] }
   interface Placement {
     perLevel: number;
     pass: number;
@@ -304,6 +312,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       .trim();
 
   const isCorrect = (q: Q, a: Ans) =>
+    q.dialog.length ? q.dialog.every((d, k) => !d.options.length || q.picks?.[k] === d.answer) :
     q.answer >= 0 ? a === q.answer : typeof a === 'string' && q.accept.some((x) => norm(x) === norm(a));
 
   let i = 0;
@@ -311,6 +320,8 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   let checked: boolean[] = [];
 
   const setNext = () => {
+    const q = questions[i];
+    if (q.dialog.length) answers[i] = q.dialog.every((d, k) => !d.options.length || q.picks?.[k] != null) ? 0 : null;
     const a = answers[i];
     const next = $<HTMLButtonElement>('next');
     next.disabled = a === null || (typeof a === 'string' && !a.trim());
@@ -329,6 +340,24 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     const fb = $('feedback');
     fb.hidden = !checked[i];
     if (!checked[i]) return;
+    if (q.dialog.length) {
+      $('options').classList.add('done');
+      $('options').hidden = true;
+      $('dialog').querySelectorAll('.blank').forEach((el) => {
+        const k = Number((el as HTMLElement).dataset.turn);
+        const right = q.picks?.[k] === q.dialog[k].answer;
+        el.classList.remove('active');
+        el.classList.toggle('is-right', right);
+        el.classList.toggle('is-wrong', !right);
+        if (!right) el.textContent = `${q.dialog[k].options[q.picks?.[k] ?? -1] ?? ''} → ${q.dialog[k].options[q.dialog[k].answer]}`.trim();
+      });
+      $('dialog').querySelectorAll<HTMLElement>('.tr').forEach((el) => (el.hidden = false));
+      const head = document.createElement('strong');
+      head.className = ok ? 'ok' : 'bad';
+      head.textContent = ok ? `✓ ${ui.rightNow}` : `✗ ${ui.wrongNow.split(/[.:]/)[0]}`;
+      fb.replaceChildren(head);
+      return;
+    }
     if (q.options.length) {
       $('options').classList.add('done');
       const gap = $('prompt').querySelector('.blank');
@@ -427,6 +456,70 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     });
   }
 
+  // Dialogue card: tap a gap, then a word; the next empty gap opens by itself. "Check" marks every line at once.
+  function renderDialog(q: Q) {
+    const box = $('dialog');
+    const opts = $('options');
+    q.picks ??= q.dialog.map(() => null);
+    const picks = q.picks;
+    let active = Math.max(0, picks.findIndex((p, k) => p === null && q.dialog[k].options.length));
+    const showOptions = () => {
+      box.querySelectorAll('.blank').forEach((el) => el.classList.toggle('active', !checked[i] && Number((el as HTMLElement).dataset.turn) === active));
+      opts.replaceChildren();
+      opts.hidden = checked[i];
+      opts.classList.add('bank');
+      opts.classList.remove('pics', 'done');
+      q.dialog[active].options.forEach((label, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opt';
+        b.textContent = label;
+        b.setAttribute('aria-pressed', String(picks[active] === idx));
+        b.onclick = () => {
+          if (checked[i]) return;
+          picks[active] = idx;
+          const blank = box.querySelector(`.blank[data-turn="${active}"]`)!;
+          blank.textContent = label;
+          const nextGap = q.dialog.findIndex((d, k) => d.options.length && picks[k] === null);
+          if (nextGap >= 0) active = nextGap;
+          setNext();
+          showOptions();
+        };
+        opts.append(b);
+      });
+    };
+    box.replaceChildren(...q.dialog.map((d, k) => {
+      const row = document.createElement('div');
+      row.className = 'turn';
+      const who = document.createElement('b');
+      who.textContent = d.who;
+      const line = document.createElement('span');
+      if (d.options.length) {
+        const [a, b] = d.text.split('___');
+        const gap = document.createElement('button');
+        gap.type = 'button';
+        gap.className = 'blank';
+        gap.dataset.turn = String(k);
+        gap.textContent = picks[k] === null ? '' : d.options[picks[k] as number];
+        gap.onclick = () => {
+          if (checked[i]) return;
+          active = k;
+          showOptions();
+        };
+        line.append(a, gap, b);
+      } else {
+        line.textContent = d.text;
+      }
+      const tr = document.createElement('div');
+      tr.className = 'tr muted';
+      tr.textContent = d.tr;
+      tr.hidden = true;
+      row.append(who, line, tr);
+      return row;
+    }));
+    if (active >= 0 && q.dialog[active]?.options.length) showOptions();
+  }
+
   function renderQuestion() {
     const q = questions[i];
     $<HTMLProgressElement>('bar').value = i;
@@ -434,6 +527,8 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     $('counter').textContent = `${ui.question} ${i + 1} ${ui.of} ${questions.length}`;
     const parts = gapParts(q);
     const prompt = $('prompt');
+    $('dialog').hidden = !q.dialog.length;
+    if (q.dialog.length) renderDialog(q);
     if (parts) {
       const gap = document.createElement('span');
       gap.className = 'blank';
@@ -454,7 +549,15 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     pic.hidden = !q.image;
     pic.innerHTML = q.image;
 
+    if (q.dialog.length) {
+      $('typing').hidden = true;
+      $('dragHint').hidden = true;
+      showFeedback();
+      setNext();
+      return;
+    }
     const opts = $('options');
+    opts.hidden = false;
     opts.classList.toggle('bank', !!parts);
     opts.classList.toggle('pics', q.pics.length > 0);
     opts.classList.remove('done');
@@ -575,8 +678,10 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     questions.forEach((q, k) => {
       const ok = isCorrect(q, answers[k]);
       const a = answers[k];
-      const given = a === null || a === '' || a === SKIPPED ? ui.noAnswer : typeof a === 'number' ? q.options[a] : a;
-      const right = q.answer >= 0 ? q.options[q.answer] : q.accept[0];
+      const gaps = q.dialog.filter((d) => d.options.length);
+      const given = q.dialog.length ? gaps.map((d) => d.options[q.picks?.[q.dialog.indexOf(d)] ?? -1] ?? '–').join(' / ')
+        : a === null || a === '' || a === SKIPPED ? ui.noAnswer : typeof a === 'number' ? q.options[a] : a;
+      const right = q.dialog.length ? gaps.map((d) => d.options[d.answer]).join(' / ') : q.answer >= 0 ? q.options[q.answer] : q.accept[0];
 
       const row = document.createElement('div');
       row.className = 'rev';
@@ -609,6 +714,12 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
 
   // New random order every attempt: questions, and the options inside each question.
   const shuffleOptions = (q: Q): Q => {
+    if (q.dialog.length) {
+      return { ...q, picks: q.dialog.map(() => null), dialog: q.dialog.map((d) => {
+        const order = shuffled(d.options.map((_, k) => k));
+        return { ...d, options: order.map((k) => d.options[k]), answer: order.indexOf(d.answer) };
+      }) };
+    }
     if (!q.options.length) return q;
     const order = shuffled(q.options.map((_, k) => k));
     const pics = q.pics.length ? order.map((k) => q.pics[k]) : q.pics;

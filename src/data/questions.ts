@@ -7,6 +7,15 @@ export type Tr = { ru: string; en: string; et?: string };
 /** Text that is either identical in every language or translated. */
 export type L = string | Tr;
 
+/** One line of a dialogue card. With `options` the text holds one "___" to fill; without, it is shown as it is. */
+export interface DialogTurn {
+  who: string;
+  text: string;
+  options: string[]; // Estonian words, the right one first in the source (shuffled at run time)
+  answer: number;
+  tr: Tr; // translation of the finished line, shown after checking
+}
+
 export interface Question {
   level: Level;
   prompt: L;
@@ -17,6 +26,7 @@ export interface Question {
   audio?: string; // listening question: file under /audio, played above the prompt
   image?: string; // picture shown above the prompt: markup from pictures.ts
   pics?: string[]; // picture options, one per option; `options` then hold their captions, shown after checking
+  dialog?: DialogTurn[]; // dialogue card: one gap per line, all on one card (`options` is then empty and `answer` -1)
   pair?: { et: string; tr: Tr }; // the word or phrase being practised, for the topic word list
 }
 
