@@ -136,11 +136,17 @@ const a1Groups: Omit<Group, 'level'>[] = [
   },
   {
     id: 'vocab',
-    title: tr('Ещё слова и фразы', 'More words and phrases'),
+    title: tr('Связки, указатели и глаголы', 'Linking words, pointers and verbs'),
     topics: [
       topic('connectors', tr('Союзы и наречия', 'Conjunctions and adverbs'), 'ja, aga, või, sest, väga, ka', connectors),
       topic('pointing', tr('Это, то, вопросы', 'This, that, questions'), 'see, too, need, mitu, milline', pointing),
       topic('verbs2', tr('Глаголы: идти, делать, знать', 'Verbs: go, do, know'), 'lähen, tulen, teen, tean', verbs2),
+    ],
+  },
+  {
+    id: 'vocab-themes',
+    title: tr('Лексика: чувства, природа, дом, еда', 'Vocabulary: feelings, nature, home, food'),
+    topics: [
       topic('feelings', tr('Чувства и состояния', 'Feelings and states'), 'väsinud, mul on nälg', feelings),
       topic('school', tr('Школа и технологии', 'School and technology'), 'õpik, pastakas, arvuti', school),
       topic('nature', tr('Природа и животные', 'Nature and animals'), 'koer, kass, mets, meri', nature),

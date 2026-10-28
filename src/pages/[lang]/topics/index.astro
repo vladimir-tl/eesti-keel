@@ -32,8 +32,8 @@ const number = (level: Level, id: string) =>
             <span class="muted small">{topicsOf(lv.level).length}</span>
           </a>
           <ul>
-            {groupsOf(lv.level).map((g) => (
-              <li><a href={`#${g.id}`}>{t(g.title, lang)}</a> <span class="muted small">{g.topics.length}</span></li>
+            {groupsOf(lv.level).map((g, i) => (
+              <li><a href={`#${g.id}`}>{lv.level === 'A1' && `${i + 1}. `}{t(g.title, lang)}</a> <span class="muted small">{g.topics.length}</span></li>
             ))}
           </ul>
         </div>
