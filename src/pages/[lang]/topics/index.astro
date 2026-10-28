@@ -1,8 +1,11 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import Notes from '../../../components/Notes.astro';
 import { fill, langs, ui, type Lang } from '../../../i18n/ui';
 import { groupsOf, topics, topicsOf } from '../../../data/topics';
 import { t, type Level } from '../../../data/questions';
+import { topicsPageNotes } from '../../../data/topics-page-notes';
+import { notesFaq } from '../../../data/test-notes';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
@@ -16,9 +19,10 @@ const levels: { level: Level; label: string; test?: string; testTitle?: string; 
 const number = (level: Level, id: string) =>
   groupsOf(level).flatMap((g) => g.topics).findIndex((x) => x.id === id) + 1;
 ---
-<Base lang={lang} path="topics" title={s.seoTopicsTitle} description={fill(s.seoTopicsDesc, { n: topics.length })}>
+<Base lang={lang} path="topics" title={s.seoTopicsTitle} description={fill(s.seoTopicsDesc, { n: topics.length })} jsonLd={[notesFaq(topicsPageNotes[lang])]}>
   <div class="head">
     <h1>{s.topicsHeading}</h1>
+    <p class="lead">{s.topicsLead}</p>
     <p class="muted">{topics.length} {s.topicsCount} · {s.topicsSub}</p>
   </div>
 
@@ -32,7 +36,7 @@ const number = (level: Level, id: string) =>
             <span class="muted small">{topicsOf(lv.level).length}</span>
           </a>
           <ul>
-            {groupsOf(lv.level).map((g, i) => (
+            {groupsOf(lv.level).filter((g) => !['a2-grammar', 'b1-grammar'].includes(g.id)).map((g, i) => (
               <li><a href={`#${g.id}`}>{lv.level === 'A1' && `${i + 1}. `}{t(g.title, lang)}</a></li>
             ))}
           </ul>
@@ -72,10 +76,13 @@ const number = (level: Level, id: string) =>
       </section>}
     </section>
   ))}
+
+  <Notes lang={lang} sections={topicsPageNotes[lang]} />
 </Base>
 
 <style>
   .head { margin: 0 0 24px; }
+  .lead { font-size: 1.05rem; line-height: 1.55; margin: 0 0 8px; max-width: 720px; }
   .toc { max-width: none; margin: 0 0 40px; padding: 20px; }
   .toc-title { font-size: 1.1rem; margin: 0 0 14px; }
   .toc-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }

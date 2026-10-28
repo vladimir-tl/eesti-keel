@@ -57,7 +57,7 @@ const a1Groups: Omit<Group, 'level'>[] = [
   },
   {
     id: 'grammar',
-    title: tr('Грамматика', 'Grammar'),
+    title: tr('Грамматика: глаголы, падежи, вопросы', 'Grammar: verbs, cases, questions'),
     topics: [
       topic('olla', tr('Глагол olla и местоимения', 'The verb olla and pronouns'), 'mina olen, sina oled, ta ei ole', olla),
       topic('verbs', tr('Базовые глаголы', 'Basic verbs'), 'elama, sööma, jooma, õppima, rääkima', verbs),
@@ -108,7 +108,7 @@ const a1Groups: Omit<Group, 'level'>[] = [
   },
   {
     id: 'grammar2',
-    title: tr('Грамматика 2', 'Grammar 2'),
+    title: tr('Грамматика: мн. число, партитив, прошедшее', 'Grammar: plural, partitive, past tense'),
     topics: [
       topic('plural', tr('Множественное число', 'Plural'), 'raamat → raamatud, laps → lapsed', plural),
       topic('partitive', tr('Партитив: кофе, два яблока', 'Partitive: coffee, two apples'), 'kohvi, leiba, kaks õuna', partitive),
