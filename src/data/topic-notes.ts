@@ -794,7 +794,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Полезные фразы',
         examples: [
-          ['Ma olen pärit Ukrainast / Venemaalt.', 'Я родом из Украины / России.'],
+          ['Ma olen pärit Lätist / Soomest.', 'Я родом из Латвии / Финляндии.'],
           ['Ma elan Eestis juba kümme aastat.', 'Я живу в Эстонии уже десять лет.'],
           ['Ma olen abielus. Mul on kaks last.', 'Я женат / замужем. У меня двое детей.'],
           ['Mu elukaaslane töötab õpetajana.', 'Мой партнёр работает учителем.'],
@@ -804,7 +804,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Частые ошибки',
         list: [
-          '**Venemaalt**, а не «Venemaast»: у названий стран на -maa — внешний падеж (Soomest, но Venemaalt, Inglismaalt).',
+          '**Inglismaalt**, а не «Inglismaast»: у названий стран на -maa — внешний падеж (Soomest, но Inglismaalt, Saksamaalt).',
           '**kaks last**, а не «kaks lapsed»: после числа — партитив единственного числа.',
           '**Ma tutvusin temaga**, а не «Ma tutvusin teda»: tutvuma требует -ga.',
           '**töötan õpetajana** — профессия после töötama стоит в форме на **-na** («кем?»).',
@@ -824,7 +824,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Useful phrases',
         examples: [
-          ['Ma olen pärit Ukrainast / Venemaalt.', 'I am from Ukraine / Russia.'],
+          ['Ma olen pärit Lätist / Soomest.', 'I am from Latvia / Finland.'],
           ['Ma elan Eestis juba kümme aastat.', 'I have lived in Estonia for ten years.'],
           ['Ma olen abielus. Mul on kaks last.', 'I am married. I have two children.'],
           ['Mu elukaaslane töötab õpetajana.', 'My partner works as a teacher.'],
@@ -834,7 +834,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Common mistakes',
         list: [
-          '**Venemaalt**, not “Venemaast”: country names ending in -maa take the outer case (Soomest, but Venemaalt, Inglismaalt).',
+          '**Inglismaalt**, not “Inglismaast”: country names ending in -maa take the outer case (Soomest, but Inglismaalt, Saksamaalt).',
           '**kaks last**, not “kaks lapsed”: after a number, use the partitive singular.',
           '**Ma tutvusin temaga**, not “Ma tutvusin teda”: tutvuma takes -ga.',
           '**töötan õpetajana** — after töötama the job takes the **-na** ending (“as”).',
@@ -854,7 +854,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Kasulikud laused',
         examples: [
-          ['Ma olen pärit Ukrainast / Venemaalt.', 'päritolu'],
+          ['Ma olen pärit Lätist / Soomest.', 'päritolu'],
           ['Ma elan Eestis juba kümme aastat.', 'kui kaua'],
           ['Ma olen abielus. Mul on kaks last.', 'pere'],
           ['Mu elukaaslane töötab õpetajana.', 'töö: -na'],
@@ -864,7 +864,7 @@ export const topicNotes: Record<string, Record<Lang, NoteSection[]>> = {
       {
         h: 'Sagedased vead',
         list: [
-          '**Venemaalt**, mitte „Venemaast“: maa-lõpulised riiginimed saavad välise kohakäände (Soomest, aga Venemaalt, Inglismaalt).',
+          '**Inglismaalt**, mitte „Inglismaast“: maa-lõpulised riiginimed saavad välise kohakäände (Soomest, aga Inglismaalt, Saksamaalt).',
           '**kaks last**, mitte „kaks lapsed“: arvsõna järel on ainsuse osastav.',
           '**Ma tutvusin temaga**, mitte „Ma tutvusin teda“: tutvuma nõuab kaasaütlevat.',
           '**töötan õpetajana** — ameti nimetus on olevas käändes (-na).',

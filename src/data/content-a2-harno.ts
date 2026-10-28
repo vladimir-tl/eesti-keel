@@ -10,7 +10,7 @@ export const aboutMe: Question[] = [
   m('Ma olen ___ Tallinnas. (родился)', 'Ma olen ___ Tallinnas. (born)', ['sündinud', 'sünnib', 'sündima', 'sündis'], 0,
     'sündima → olen sündinud («я родился»).', 'sündima → olen sündinud (“I was born”).'),
   fromEt('Kus sa sündisid?', ['Где ты родился?', 'Когда ты родился?', 'Где ты живёшь?', 'Сколько тебе лет?'], ['Where were you born?', 'When were you born?', 'Where do you live?', 'How old are you?'], 0),
-  m('Ma olen Ukraina ___. (гражданин)', 'Ma olen Ukraina ___. (citizen)', ['kodanik', 'kodakondsus', 'kodu', 'rahvus'], 0,
+  m('Ma olen Soome ___. (гражданин)', 'Ma olen Soome ___. (citizen)', ['kodanik', 'kodakondsus', 'kodu', 'rahvus'], 0,
     'kodanik — гражданин.', 'kodanik — citizen.'),
   m('Ma huvitun ___. (музыкой)', 'Ma huvitun ___. (I am interested in music)', ['muusikast', 'muusikat', 'muusika', 'muusikas'], 0,
     'huvituma + -st: muusikast, spordist.', 'huvituma + -st: muusikast, spordist.'),

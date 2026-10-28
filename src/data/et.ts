@@ -579,7 +579,7 @@ export const etText: Record<string, string> = {
   "Where you were born — sünnikoht.": "Kus sa sündisid — sünnikoht.",
   "A passport → citizenship: kodakondsus.": "Pass → kodakondsus: kodakondsus.",
   "Interested in sport → jalgpall.": "Huvitub spordist → jalgpall.",
-  "Coming from — olen pärit Ukrainast.": "Päritolu — olen pärit Ukrainast.",
+  "Coming from — olen pärit Lätist.": "Päritolu — olen pärit Lätist.",
   "Age: 36 aastat vana (partitive).": "Vanus: 36 aastat vana (osastav).",
   "Family and relationships": "Perekond ja suhted",
   "After numerals — partitive: kaks last (laps → last).": "Pärast arvsõna — osastav: kaks last (laps → last).",
