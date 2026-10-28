@@ -73,9 +73,11 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     </div>
     <div class="pic-box" id="pic" hidden></div>
     <p class="prompt" id="prompt"></p>
-    <div class="dialog" id="dialog" hidden></div>
-    <p class="muted drag-hint" id="dragHint" hidden>{s.dragHint}</p>
-    <div class="options" id="options"></div>
+    <div class="stage" id="stage">
+      <div class="dialog" id="dialog" hidden></div>
+      <p class="muted drag-hint" id="dragHint" hidden>{s.dragHint}</p>
+      <div class="options" id="options"></div>
+    </div>
     <div id="typing" hidden>
       <input class="field" id="text" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder={s.inputPlaceholder} />
       <div class="letters muted">
@@ -160,6 +162,13 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   .player { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
   #audio { flex: 1; min-width: 0; }
   #slow[aria-pressed='true'] { border-color: var(--accent); color: var(--accent); }
+  /* Dialogue card: the card grows and the word choices stand to the right of the line being filled. */
+  #app.wide { max-width: 920px; }
+  .stage { position: relative; }
+  @media (min-width: 760px) {
+    .stage.side .dialog { padding-right: 14em; }
+    .stage.side :global(#options) { position: absolute; right: 0; width: 13em; margin: 0; display: grid; gap: 6px; }
+  }
   .dialog { margin: 16px 0 12px; display: grid; gap: 10px; }
   :global(.turn) { display: grid; grid-template-columns: 5.5em 1fr; gap: 10px; align-items: baseline; line-height: 1.9; }
   :global(.turn b) { color: var(--muted); font-weight: 600; font-size: .9rem; }
@@ -295,6 +304,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   };
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const show = (name: 'intro' | 'loader' | 'quiz' | 'result') => {
+    if (name !== 'quiz') root.classList.remove('wide');
     (['intro', 'loader', 'quiz', 'result'] as const).forEach((n) => ($(n).hidden = n !== name));
     const hint = document.getElementById('hint');
     if (hint) hint.hidden = name === 'loader' || name === 'result';
@@ -463,12 +473,17 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     q.picks ??= q.dialog.map(() => null);
     const picks = q.picks;
     let active = Math.max(0, picks.findIndex((p, k) => p === null && q.dialog[k].options.length));
+    const place = () => {
+      const row = box.querySelector('.blank.active')?.closest('.turn') as HTMLElement | null;
+      if (!row) return;
+      const top = Math.min(row.offsetTop, box.offsetTop + box.offsetHeight - opts.offsetHeight);
+      opts.style.top = `${Math.max(0, top)}px`;
+    };
     const showOptions = () => {
       box.querySelectorAll('.blank').forEach((el) => el.classList.toggle('active', !checked[i] && Number((el as HTMLElement).dataset.turn) === active));
       opts.replaceChildren();
       opts.hidden = checked[i];
-      opts.classList.add('bank');
-      opts.classList.remove('pics', 'done');
+      opts.classList.remove('bank', 'pics', 'done');
       q.dialog[active].options.forEach((label, idx) => {
         const b = document.createElement('button');
         b.type = 'button';
@@ -487,6 +502,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
         };
         opts.append(b);
       });
+      place();
     };
     box.replaceChildren(...q.dialog.map((d, k) => {
       const row = document.createElement('div');
@@ -528,6 +544,9 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
     const parts = gapParts(q);
     const prompt = $('prompt');
     $('dialog').hidden = !q.dialog.length;
+    $('stage').classList.toggle('side', q.dialog.length > 0);
+    root.classList.toggle('wide', q.dialog.length > 0);
+    if (!q.dialog.length) $('options').style.top = '';
     if (q.dialog.length) renderDialog(q);
     if (parts) {
       const gap = document.createElement('span');
