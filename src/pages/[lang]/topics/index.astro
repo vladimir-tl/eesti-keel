@@ -33,7 +33,7 @@ const number = (level: Level, id: string) =>
           </a>
           <ul>
             {groupsOf(lv.level).map((g, i) => (
-              <li><a href={`#${g.id}`}>{lv.level === 'A1' && `${i + 1}. `}{t(g.title, lang)}</a> <span class="muted small">{g.topics.length}</span></li>
+              <li><a href={`#${g.id}`}>{lv.level === 'A1' && `${i + 1}. `}{t(g.title, lang)}</a></li>
             ))}
           </ul>
         </div>
@@ -104,6 +104,6 @@ const number = (level: Level, id: string) =>
   @media (prefers-reduced-motion: reduce) { .topic { transition: none; } .topic:hover { transform: none; } }
   .topic h4 { margin: 4px 0; font-size: 1.05rem; }
   .topic p { margin: 0; font-size: .875rem; }
-  .num { color: var(--accent); font-weight: 700; font-size: .8rem; }
+  .num { color: var(--accent); font-weight: 700; font-size: 2.1rem; }
   .small { font-size: .8rem; font-weight: 400; }
 </style>
