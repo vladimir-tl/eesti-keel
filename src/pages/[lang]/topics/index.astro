@@ -45,6 +45,17 @@ const number = (level: Level, id: string) =>
     </div>
   </nav>
 
+  <section class="group">
+    <h2 class="group-title">{s.topicsUnsure}</h2>
+    <div class="grid">
+      <a class="card topic" href={`/${lang}/level-test`}>
+        <span class="num">★</span>
+        <h4>{s.levelTestTitle}</h4>
+        <p class="muted">{s.levelTestIntro}</p>
+      </a>
+    </div>
+  </section>
+
   {levels.map((lv) => (
     <section class="level" id={lv.level.toLowerCase()}>
       <h2 class="level-title"><span class="chip">{lv.level}</span> {lv.label}</h2>
