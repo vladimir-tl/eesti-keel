@@ -48,7 +48,7 @@ const number = (level: Level, id: string) =>
   <section class="group">
     <h2 class="group-title">{s.topicsUnsure}</h2>
     <div class="grid">
-      <a class="card topic" href={`/${lang}/level-test`}>
+      <a class="card topic level-test-card" href={`/${lang}/level-test`}>
         <span class="num">★</span>
         <h4>{s.levelTestTitle}</h4>
         <p class="muted">{s.levelTestIntro}</p>
@@ -112,6 +112,7 @@ const number = (level: Level, id: string) =>
   .chip { padding: 2px 12px; border-radius: 10px; background: var(--accent); color: #fff; font-size: 1.1rem; }
   .group-title { font-size: 1.35rem; font-weight: 700; margin: 0 0 14px; }
   .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .level-test-card { grid-column: 1 / -1; }
   .topic { max-width: none; margin: 0; padding: 16px; color: inherit; text-decoration: none; }
   .topic { transition: transform .15s, border-color .15s, box-shadow .15s, background-color .15s; }
   .topic:hover, .topic:focus-visible {
