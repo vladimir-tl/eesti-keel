@@ -60,7 +60,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   </section>
 
   <section id="loader" hidden aria-live="polite">
-    <div class="deck" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="deck" aria-hidden="true"><i>tere</i><i>esmaspäev</i><i>mõnikord</i><i>rong</i></div>
     <p class="muted">{s.shuffling}</p>
   </section>
 
@@ -132,21 +132,24 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   .hint-body { padding: 0 14px 4px; font-size: .9rem; }
   .hint-body :global(p) { margin: 0 0 10px; line-height: 1.5; }
   #loader { text-align: center; padding: 32px 0; }
-  .deck { position: relative; width: 120px; height: 84px; margin: 0 auto 16px; }
+  .deck { position: relative; width: 160px; height: 84px; margin: 0 auto 16px; }
   .deck i {
-    position: absolute; left: 50%; top: 0; width: 64px; height: 84px; margin-left: -32px;
+    position: absolute; left: 50%; top: 0; width: 76px; height: 84px; margin-left: -38px;
+    display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    font-style: normal; font-size: .75rem; font-weight: 600; color: var(--accent);
     border: 2px solid var(--accent); border-radius: 10px; background: var(--card);
-    animation: shuffle 1s ease-in-out infinite;
+    animation: shuffle 2s ease-in-out infinite;
   }
-  .deck i:nth-child(2) { animation-delay: .15s; }
-  .deck i:nth-child(3) { animation-delay: .3s; }
+  .deck i:nth-child(2) { animation-delay: .2s; }
+  .deck i:nth-child(3) { animation-delay: .4s; }
+  .deck i:nth-child(4) { animation-delay: .6s; }
   @keyframes shuffle {
     0%, 100% { transform: translateX(0) rotate(0); }
-    25% { transform: translateX(-44px) rotate(-14deg); z-index: 1; }
+    25% { transform: translateX(-52px) rotate(-14deg); z-index: 1; }
     50% { transform: translateX(0) rotate(0); }
-    75% { transform: translateX(44px) rotate(14deg); z-index: 1; }
+    75% { transform: translateX(52px) rotate(14deg); z-index: 1; }
   }
-  @media (prefers-reduced-motion: reduce) { .deck i { animation-duration: 2.4s; } }
+  @media (prefers-reduced-motion: reduce) { .deck i { animation-duration: 4s; } }
   :global(.options .opt:disabled) { cursor: default; }
   :global(.options .opt:disabled:hover) { border-color: var(--line); background: transparent; }
   :global(.options .opt.is-right), :global(.options .opt.is-right:hover) {
@@ -765,7 +768,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   };
 
   // Short shuffling animation before the first question.
-  const LOADER_MS = matchMedia('(prefers-reduced-motion: reduce)').matches ? 800 : 2600;
+  const LOADER_MS = matchMedia('(prefers-reduced-motion: reduce)').matches ? 800 : 3600;
   let starting = false;
   $('start').onclick = () => {
     if (starting) return;
