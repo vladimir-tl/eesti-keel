@@ -529,7 +529,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
       const tr = document.createElement('div');
       tr.className = 'tr muted';
       tr.textContent = d.tr;
-      tr.hidden = true;
+      tr.hidden = q.level !== 'A2'; // A2: translation under the line from the start; other levels after checking
       row.append(who, line, tr);
       return row;
     }));
