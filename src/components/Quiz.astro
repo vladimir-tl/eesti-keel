@@ -2,6 +2,7 @@
 import { ui, type Lang } from '../i18n/ui';
 import type { Question } from '../data/questions';
 import { t } from '../data/questions';
+import { choicify } from '../data/choicify';
 
 interface Props {
   lang: Lang;
@@ -33,7 +34,7 @@ const config = {
   verdicts,
   perGroup,
   placement: placement ?? null,
-  questions: questions.map((q) => ({
+  questions: choicify(questions).map((q) => ({
     level: q.level,
     prompt: t(q.prompt, lang),
     options: q.options.map((o) => t(o, lang)),
