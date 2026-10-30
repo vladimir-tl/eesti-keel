@@ -6,14 +6,14 @@ const site = 'https://eestikeeletest.ee';
 
 export default defineConfig({
   site,
-  // Clean URLs without a trailing slash (/ru/topics) — the same form every internal link uses.
+  // Clean URLs without a trailing slash (/et/topics) — the same form every internal link uses.
   trailingSlash: 'never',
   build: { format: 'file' },
   integrations: [
     sitemap({
-      // The root page only redirects to /ru.
+      // The root page only redirects to /et.
       filter: (page) => page !== site && page !== `${site}/`,
-      i18n: { defaultLocale: 'ru', locales: { ru: 'ru', en: 'en', et: 'et' } },
+      i18n: { defaultLocale: 'et', locales: { ru: 'ru', en: 'en', et: 'et' } },
     }),
   ],
 });

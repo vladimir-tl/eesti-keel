@@ -5,24 +5,24 @@ import { defaultLang, ui } from '../i18n/ui';
 // One page for every language: the host serves it for any unknown address.
 const s = ui[defaultLang];
 const en = ui.en;
-const et = ui.et;
+const ru = ui.ru;
 ---
 <Base lang={defaultLang} path="404" title={`404 · ${s.siteName}`} description={s.seoHomeDesc} noindex>
   <section class="nf">
     <div class="code">404</div>
-    <h1>Страница не найдена</h1>
-    <p class="muted">Возможно, адрес изменился. Начните с тем или проверьте свой уровень.</p>
+    <h1>Lehte ei leitud</h1>
+    <p class="muted">Aadress võib olla muutunud. Alusta teemadest või kontrolli oma taset.</p>
     <div class="cta">
-      <a class="btn" href="/ru/topics">{s.topicsTitle}</a>
-      <a href="/ru/test">{s.introTitle}</a>
-      <a href="/ru/test-a2">{s.introTitleA2}</a>
-      <a href="/ru">{s.home}</a>
+      <a class="btn" href="/et/topics">{s.topicsTitle}</a>
+      <a href="/et/test">{s.introTitle}</a>
+      <a href="/et/test-a2">{s.introTitleA2}</a>
+      <a href="/et">{s.home}</a>
     </div>
     <p class="en muted" lang="en">
       Page not found. <a href="/en/topics">{en.topicsTitle}</a> · <a href="/en/test">{en.introTitle}</a> · <a href="/en">{en.home}</a>
     </p>
-    <p class="en muted" lang="et">
-      Lehte ei leitud. <a href="/et/topics">{et.topicsTitle}</a> · <a href="/et/test">{et.introTitle}</a> · <a href="/et">{et.home}</a>
+    <p class="en muted" lang="ru">
+      Страница не найдена. <a href="/ru/topics">{ru.topicsTitle}</a> · <a href="/ru/test">{ru.introTitle}</a> · <a href="/ru">{ru.home}</a>
     </p>
   </section>
 </Base>

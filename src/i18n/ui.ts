@@ -1,6 +1,6 @@
 export const langs = ['ru', 'en', 'et'] as const;
 export type Lang = (typeof langs)[number];
-export const defaultLang: Lang = 'ru';
+export const defaultLang: Lang = 'et';
 
 export const ui = {
   ru: {
