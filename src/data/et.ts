@@ -803,7 +803,7 @@ export const etText: Record<string, string> = {
   "24 February — Independence Day. 23 June — Victory Day, 24 June — Midsummer Day.": "24. veebruar — iseseisvuspäev. 23. juuni — võidupüha, 24. juuni — jaanipäev.",
   "pealinn — capital.": "pealinn — capital.",
   "ääres — a postposition with the genitive: Läänemere ääres.": "ääres — tagasõna omastavaga: Läänemere ääres.",
-  "Tallinn — pealinn (capital).": "Tallinn — pealinn.",
+  "The top stripe is blue: sinine.": "Ülemine triip on sinine.",
   "Sea all around → saar (island).": "Ümberringi meri → saar.",
   "Singing together → laulupidu (song festival).": "Koos laulmine → laulupidu.",
   "A summer festival → lõke (bonfire).": "Suvine püha → lõke.",
