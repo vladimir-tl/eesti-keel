@@ -1,11 +1,12 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
 export const numbers: Question[] = [
   toEt('пять', 'five', ['kuus', 'viis', 'neli', 'seitse'], 1),
   fromEt('üheksa', ['7', '8', '9', '10'], ['7', '8', '9', '10'], 2),
-  typeEt('десять', 'ten', ['kümme']),
+  typeEtPic(emoji('🔟'), 'десять', 'ten', ['kümme']),
   typeEt('двадцать', 'twenty', ['kakskümmend']),
   fromEt('sada', ['10', '100', '1000', '20'], ['10', '100', '1000', '20'], 1),
   mc(tr('Как по-эстонски 15?', 'How do you say 15 in Estonian?'), ['viisteist', 'viiskümmend', 'kuusteist', 'neliteist'], 0,
@@ -57,12 +58,11 @@ export const time: Question[] = [
 export const colors: Question[] = [
   fromEt('roheline', ['красный', 'зелёный', 'синий', 'жёлтый'], ['red', 'green', 'blue', 'yellow'], 1),
   toEt('жёлтый', 'yellow', ['kollane', 'punane', 'roheline', 'sinine'], 0),
-  typeEt('белый', 'white', ['valge']),
-  typeEt('чёрный', 'black', ['must']),
+  typeEtPic(swatch('#ffffff'), 'белый', 'white', ['valge']),
   fromEt('sinine', ['синий', 'серый', 'зелёный', 'красный'], ['blue', 'grey', 'green', 'red'], 0),
   toEt('серый', 'grey', ['hall', 'pruun', 'roosa', 'must'], 0),
   fromEt('pruun', ['розовый', 'коричневый', 'оранжевый', 'фиолетовый'], ['pink', 'brown', 'orange', 'purple'], 1),
-  typeEt('красный', 'red', ['punane']),
+  typeEtPic(swatch('#e03131'), 'красный', 'red', ['punane']),
   fromEt('roosa', ['розовый', 'коричневый', 'серый', 'белый'], ['pink', 'brown', 'grey', 'white'], 0),
   mc(tr('Taevas on ___. (Небо синее.)', 'Taevas on ___. (The sky is blue.)'), ['sinine', 'punane', 'roheline', 'must'], 0, tr('taevas — небо; sinine — синий.', 'taevas — sky; sinine — blue.')),
   typed(tr('Lumi on ___. (Снег белый.) Впишите слово.', 'Lumi on ___. (Snow is white.) Type the word.'), ['valge'], tr('lumi — снег; valge — белый.', 'lumi — snow; valge — white.')),
@@ -72,8 +72,8 @@ export const colors: Question[] = [
 export const weather: Question[] = [
   fromEt('ilm', ['погода', 'время', 'день', 'цвет'], ['weather', 'time', 'day', 'colour'], 0),
   toEt('дождь', 'rain', ['lumi', 'vihm', 'tuul', 'päike'], 1),
-  typeEt('снег', 'snow', ['lumi']),
-  typeEt('солнце', 'sun', ['päike']),
+  typeEtPic(emoji('❄️'), 'снег', 'snow', ['lumi']),
+  typeEtPic(emoji('☀️'), 'солнце', 'sun', ['päike']),
   fromEt('tuul', ['дождь', 'снег', 'ветер', 'облако'], ['rain', 'snow', 'wind', 'cloud'], 2),
   fromEt('külm', ['холодный', 'тёплый', 'жаркий', 'красивый'], ['cold', 'warm', 'hot', 'beautiful'], 0),
   toEt('тёплый', 'warm', ['külm', 'kuum', 'soe', 'ilus'], 2),

@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, m, ty } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, m, ty } from './helpers';
+import { emoji, swatch } from './pictures';
 import type { Question } from './questions';
 
 export const travel: Question[] = [
@@ -8,7 +9,7 @@ export const travel: Question[] = [
   fromEt('lend', ['рейс, полёт', 'самолёт', 'аэропорт', 'посадка'], ['flight', 'plane', 'airport', 'boarding'], 0),
   fromEt('hotell', ['гостиница', 'квартира', 'хостел', 'ресторан'], ['hotel', 'flat', 'hostel', 'restaurant'], 0),
   fromEt('broneerima', ['бронировать', 'отменять', 'платить', 'ехать'], ['to book', 'to cancel', 'to pay', 'to travel'], 0),
-  typeEt('завтрак', 'breakfast', ['hommikusöök']),
+  typeEtPic(emoji('🍳'), 'завтрак', 'breakfast', ['hommikusöök']),
   m('Ma tahaksin ___ toa. (забронировать)', 'Ma tahaksin ___ toa. (to book)', ['broneerida', 'broneerin', 'broneerib', 'broneerima'], 0,
     'Ma tahaksin broneerida toa. — «Я бы хотел забронировать номер».', 'Ma tahaksin broneerida toa. — “I would like to book a room”.'),
   m('Ma tahaksin toa ___. (на две ночи)', 'Ma tahaksin toa ___. (for two nights)', ['kaheks ööks', 'kaks ööd', 'kahes öös', 'kahe öö'], 0,

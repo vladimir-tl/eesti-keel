@@ -57,3 +57,10 @@ export const m = (ru: string, en: string, options: string[], answer: number, eru
 /** Typed answer with RU/EN prompt + explanation. */
 export const ty = (ru: string, en: string, accept: string[], eru: string, een: string): Question =>
   typed(tr(ru, en), accept, tr(eru, een));
+
+/** Typed: a picture above the prompt, write its Estonian word. */
+export const typeEtPic = (image: string, ru: string, en: string, accept: string[]): Question => ({
+  ...typeEt(ru, en, accept),
+  prompt: tr('Что на картинке? Напишите по-эстонски.', 'What is in the picture? Write it in Estonian.', 'Mis on pildil? Kirjuta eesti keeles.'),
+  image,
+});

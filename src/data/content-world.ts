@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
@@ -37,11 +38,11 @@ export const adjectives: Question[] = [
 export const body: Question[] = [
   fromEt('pea', ['голова', 'рука', 'нога', 'глаз'], ['head', 'hand', 'leg', 'eye'], 0),
   toEt('рука', 'hand', ['jalg', 'käsi', 'pea', 'nina'], 1),
-  typeEt('нога', 'leg', ['jalg']),
-  typeEt('глаз', 'eye', ['silm']),
+  typeEtPic(emoji('🦵'), 'нога', 'leg', ['jalg']),
+  typeEtPic(emoji('👁️'), 'глаз', 'eye', ['silm']),
   fromEt('kõrv', ['ухо', 'нос', 'рот', 'зуб'], ['ear', 'nose', 'mouth', 'tooth'], 0),
   toEt('нос', 'nose', ['suu', 'silm', 'nina', 'kõrv'], 2),
-  typeEt('рот', 'mouth', ['suu']),
+  typeEtPic(emoji('👄'), 'рот', 'mouth', ['suu']),
   fromEt('kõht', ['живот', 'спина', 'сердце', 'рука'], ['stomach', 'back', 'heart', 'hand'], 0),
   fromEt('haige', ['больной', 'здоровый', 'усталый', 'голодный'], ['ill', 'healthy', 'tired', 'hungry'], 0),
   typeEt('здоровый', 'healthy', ['terve']),
@@ -52,14 +53,14 @@ export const body: Question[] = [
 export const clothes: Question[] = [
   fromEt('särk', ['рубашка', 'платье', 'юбка', 'шапка'], ['shirt', 'dress', 'skirt', 'hat'], 0),
   toEt('платье', 'dress', ['särk', 'kleit', 'seelik', 'mantel'], 1),
-  typeEt('брюки', 'trousers', ['püksid']),
-  typeEt('туфли', 'shoes', ['kingad', 'king']),
+  typeEtPic(emoji('👖'), 'брюки', 'trousers', ['püksid']),
+  typeEtPic(emoji('👞'), 'туфли', 'shoes', ['kingad', 'king']),
   fromEt('müts', ['шапка', 'шарф', 'перчатки', 'куртка'], ['hat', 'scarf', 'gloves', 'jacket'], 0),
   toEt('пальто', 'coat', ['jope', 'mantel', 'kleit', 'sall'], 1),
-  typeEt('куртка', 'jacket', ['jope']),
+  typeEtPic(emoji('🧥'), 'куртка', 'jacket', ['jope']),
   fromEt('sokid', ['носки', 'брюки', 'туфли', 'юбка'], ['socks', 'trousers', 'shoes', 'skirt'], 0),
   fromEt('kindad', ['перчатки', 'шарф', 'носки', 'шапка'], ['gloves', 'scarf', 'socks', 'hat'], 0),
   toEt('юбка', 'skirt', ['seelik', 'kleit', 'püksid', 'särk'], 0),
   fromEt('kott', ['сумка', 'шапка', 'пальто', 'ботинок'], ['bag', 'hat', 'coat', 'shoe'], 0),
-  typeEt('шарф', 'scarf', ['sall']),
+  typeEtPic(emoji('🧣'), 'шарф', 'scarf', ['sall']),
 ];

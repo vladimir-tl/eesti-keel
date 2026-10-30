@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
@@ -103,8 +104,8 @@ export const extra: Record<string, Question[]> = {
     fromEt('kord kuus', ['раз в месяц', 'раз в день', 'раз в год', 'раз в неделю'], ['once a month', 'once a day', 'once a year', 'once a week'], 0),
   ],
   colors: [
-    typeEt('оранжевый', 'orange', ['oranž']),
-    typeEt('фиолетовый', 'purple', ['lilla']),
+    typeEtPic(swatch('#f76707'), 'оранжевый', 'orange', ['oranž']),
+    typeEtPic(swatch('#7048e8'), 'фиолетовый', 'purple', ['lilla']),
     m('Mis värvi on rohi? (Какого цвета трава?)', 'Mis värvi on rohi? (What colour is grass?)', ['roheline', 'must', 'punane', 'valge'], 0,
       'Mis värvi …? — «Какого цвета …?»', 'Mis värvi …? — “What colour …?”'),
   ],
@@ -125,19 +126,19 @@ export const extra: Record<string, Question[]> = {
     fromEt('süda', ['сердце', 'живот', 'рука', 'голова'], ['heart', 'stomach', 'hand', 'head'], 0),
   ],
   clothes: [
-    typeEt('сапоги', 'boots', ['saapad']),
+    typeEtPic(emoji('🥾'), 'сапоги', 'boots', ['saapad']),
     fromEt('king', ['ботинок, туфля', 'шапка', 'шарф', 'куртка'], ['shoe', 'hat', 'scarf', 'jacket'], 0),
     fromEt('T-särk', ['футболка', 'рубашка', 'платье', 'юбка'], ['T-shirt', 'shirt', 'dress', 'skirt'], 0),
   ],
   food: [
-    typeEt('масло (сливочное)', 'butter', ['või']),
+    typeEtPic(emoji('🧈'), 'масло (сливочное)', 'butter', ['või']),
     fromEt('kohv', ['кофе', 'чай', 'молоко', 'сок'], ['coffee', 'tea', 'milk', 'juice'], 0),
     m('Ma ___ leiba. (Я не ем хлеб.)', 'Ma ___ leiba. (I do not eat bread.)', ['ei söö', 'ei söön', 'ei sööd', 'ei sööb'], 0,
       'ma ei söö.', 'ma ei söö.'),
   ],
   shopping: [
     fromEt('rahakott', ['кошелёк', 'сумка', 'карман', 'чек'], ['wallet', 'bag', 'pocket', 'receipt'], 0),
-    typeEt('карта (банковская)', 'card', ['kaart']),
+    typeEtPic(emoji('💳'), 'карта (банковская)', 'card', ['kaart']),
     m('Как сказать «Вот, пожалуйста» (протягивая деньги/товар)?', 'How do you say “Here you are”?', ['Palun', 'Aitäh', 'Vabandust', 'Head aega'], 0,
       'Palun — «пожалуйста / вот, возьмите».', 'Palun — “please / here you are”.'),
   ],
@@ -148,13 +149,13 @@ export const extra: Record<string, Question[]> = {
   ],
   transport: [
     fromEt('praam', ['паром', 'лодка', 'поезд', 'самолёт'], ['ferry', 'boat', 'train', 'plane'], 0),
-    typeEt('такси', 'taxi', ['takso']),
+    typeEtPic(emoji('🚕'), 'такси', 'taxi', ['takso']),
     m('Nad ___ trammiga tööle. (ездят)', 'Nad ___ trammiga tööle. (go)', ['sõidavad', 'sõidan', 'sõidab', 'sõidame'], 0,
       'sõitma: sõidan, sõidad, sõidab, sõidame, sõidate, sõidavad.', 'sõitma: sõidan, sõidad, sõidab, sõidame, sõidate, sõidavad.'),
   ],
   hobbies: [
     fromEt('kuulama', ['слушать', 'смотреть', 'читать', 'петь'], ['to listen', 'to watch', 'to read', 'to sing'], 0),
-    typeEt('музыка', 'music', ['muusika']),
+    typeEtPic(emoji('🎵'), 'музыка', 'music', ['muusika']),
     m('Mulle ___ muusika. (Мне нравится музыка.)', 'Mulle ___ muusika. (I like music.)', ['meeldib', 'meeldin', 'meeldid', 'meeldivad'], 0,
       'Mulle meeldib + что нравится: mulle meeldib muusika; mulle meeldivad raamatud.', 'Mulle meeldib + what I like: mulle meeldib muusika; mulle meeldivad raamatud.'),
   ],

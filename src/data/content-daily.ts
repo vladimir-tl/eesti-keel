@@ -1,17 +1,18 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
 export const food: Question[] = [
   fromEt('leib', ['хлеб', 'молоко', 'вода', 'сыр'], ['bread', 'milk', 'water', 'cheese'], 0),
   toEt('молоко', 'milk', ['piim', 'vesi', 'tee', 'kohv'], 0),
-  typeEt('вода', 'water', ['vesi']),
-  typeEt('чай', 'tea', ['tee']),
+  typeEtPic(emoji('💧'), 'вода', 'water', ['vesi']),
+  typeEtPic(emoji('🍵'), 'чай', 'tea', ['tee']),
   fromEt('liha', ['мясо', 'рыба', 'яйцо', 'сыр'], ['meat', 'fish', 'egg', 'cheese'], 0),
   toEt('рыба', 'fish', ['liha', 'kala', 'muna', 'juust'], 1),
-  typeEt('сыр', 'cheese', ['juust']),
+  typeEtPic(emoji('🧀'), 'сыр', 'cheese', ['juust']),
   fromEt('muna', ['яйцо', 'мясо', 'суп', 'масло'], ['egg', 'meat', 'soup', 'butter'], 0),
-  typeEt('яблоко', 'apple', ['õun']),
+  typeEtPic(emoji('🍎'), 'яблоко', 'apple', ['õun']),
   fromEt('supp', ['суп', 'сахар', 'соль', 'картофель'], ['soup', 'sugar', 'salt', 'potato'], 0),
   fromEt('Maitsev!', ['Вкусно!', 'Дорого!', 'Горячо!', 'Спасибо!'], ['Tasty!', 'Expensive!', 'Hot!', 'Thanks!'], 0),
   mc(tr('Что значит «Ma tahan kohvi»?', 'What does “Ma tahan kohvi” mean?'), [tr('Я хочу кофе', 'I want coffee', 'I want coffee'), tr('Я пью кофе', 'I am drinking coffee', 'I am drinking coffee'), tr('У меня нет кофе', 'I have no coffee', 'I have no coffee'), tr('Кофе дорогой', 'Coffee is expensive', 'Coffee is expensive')], 0,
@@ -20,7 +21,7 @@ export const food: Question[] = [
 
 export const shopping: Question[] = [
   fromEt('kauplus', ['магазин', 'касса', 'деньги', 'цена'], ['shop', 'till', 'money', 'price'], 0),
-  typeEt('деньги', 'money', ['raha']),
+  typeEtPic(emoji('💶'), 'деньги', 'money', ['raha']),
   toEt('цена', 'price', ['raha', 'hind', 'pood', 'kassa'], 1),
   fromEt('Kui palju see maksab?', ['Сколько это стоит?', 'Где это?', 'Что это?', 'Кто это?'], ['How much does it cost?', 'Where is it?', 'What is it?', 'Who is it?'], 0),
   fromEt('kassa', ['касса', 'магазин', 'цена', 'чек'], ['till', 'shop', 'price', 'receipt'], 0),
@@ -29,7 +30,7 @@ export const shopping: Question[] = [
   typeEt('платить', 'to pay', ['maksma']),
   typeEt('покупать', 'to buy', ['ostma']),
   fromEt('sularaha', ['наличные', 'карта', 'чек', 'сдача'], ['cash', 'card', 'receipt', 'change'], 0),
-  typeEt('чек', 'receipt', ['tšekk']),
+  typeEtPic(emoji('🧾'), 'чек', 'receipt', ['tšekk']),
   fromEt('Ma ei taha seda', ['Я этого не хочу', 'Я хочу это', 'Я не знаю', 'Это дорого'], ['I do not want this', 'I want this', 'I do not know', 'This is expensive'], 0),
   mc(tr('Как спросить «Сколько это стоит?»', 'How do you ask “How much does this cost?”'), ['Kui palju see maksab?', 'Kus see on?', 'Mis see on?', 'Kes see on?'], 0,
     tr('Kui palju — «сколько», maksab — «стоит».', 'Kui palju — “how much”, maksab — “costs”.')),
@@ -39,10 +40,10 @@ export const home: Question[] = [
   fromEt('korter', ['квартира', 'дом', 'комната', 'кухня'], ['flat', 'house', 'room', 'kitchen'], 0),
   toEt('комната', 'room', ['köök', 'tuba', 'uks', 'aken'], 1),
   typeEt('кухня', 'kitchen', ['köök']),
-  typeEt('дверь', 'door', ['uks']),
+  typeEtPic(emoji('🚪'), 'дверь', 'door', ['uks']),
   fromEt('aken', ['окно', 'дверь', 'стена', 'пол'], ['window', 'door', 'wall', 'floor'], 0),
   toEt('улица', 'street', ['linn', 'tänav', 'maja', 'kool'], 1),
-  typeEt('город', 'city', ['linn']),
+  typeEtPic(emoji('🏙️'), 'город', 'city', ['linn']),
   fromEt('siin', ['здесь', 'там', 'где', 'туда'], ['here', 'there', 'where', 'to there'], 0),
   typeEt('там', 'there', ['seal']),
   mc(tr('Как спросить «Где магазин?»', 'How do you ask “Where is the shop?”'), ['Kus on pood?', 'Kes on pood?', 'Mis on pood?', 'Millal on pood?'], 0,
@@ -54,7 +55,7 @@ export const home: Question[] = [
 export const transport: Question[] = [
   fromEt('rong', ['поезд', 'автобус', 'самолёт', 'машина'], ['train', 'bus', 'plane', 'car'], 0),
   toEt('самолёт', 'plane', ['rong', 'lennuk', 'buss', 'auto'], 1),
-  typeEt('билет', 'ticket', ['pilet']),
+  typeEtPic(emoji('🎫'), 'билет', 'ticket', ['pilet']),
   typeEt('остановка', 'stop', ['peatus']),
   fromEt('auto', ['машина', 'велосипед', 'автобус', 'поезд'], ['car', 'bicycle', 'bus', 'train'], 0),
   toEt('велосипед', 'bicycle', ['auto', 'jalgratas', 'rong', 'tramm'], 1),

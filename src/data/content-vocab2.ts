@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
@@ -87,7 +88,7 @@ export const school: Question[] = [
   fromEt('õpik', ['учебник', 'тетрадь', 'ручка', 'доска'], ['textbook', 'notebook', 'pen', 'board'], 0),
   fromEt('vihik', ['тетрадь', 'учебник', 'книга', 'письмо'], ['notebook', 'textbook', 'book', 'letter'], 0),
   toEt('ручка', 'pen', ['pastakas', 'pliiats', 'vihik', 'raamat'], 0),
-  typeEt('карандаш', 'pencil', ['pliiats']),
+  typeEtPic(emoji('✏️'), 'карандаш', 'pencil', ['pliiats']),
   fromEt('kodutöö', ['домашнее задание', 'экзамен', 'урок', 'класс'], ['homework', 'exam', 'lesson', 'class'], 0),
   fromEt('eksam', ['экзамен', 'урок', 'вопрос', 'ответ'], ['exam', 'lesson', 'question', 'answer'], 0),
   typeEt('слово', 'word', ['sõna']),
@@ -102,11 +103,11 @@ export const school: Question[] = [
 export const nature: Question[] = [
   fromEt('koer', ['собака', 'кошка', 'лошадь', 'птица'], ['dog', 'cat', 'horse', 'bird'], 0),
   toEt('кошка', 'cat', ['kass', 'koer', 'lind', 'hobune'], 0),
-  typeEt('птица', 'bird', ['lind']),
-  typeEt('лошадь', 'horse', ['hobune']),
+  typeEtPic(emoji('🐦'), 'птица', 'bird', ['lind']),
+  typeEtPic(emoji('🐴'), 'лошадь', 'horse', ['hobune']),
   fromEt('lehm', ['корова', 'лошадь', 'свинья', 'овца'], ['cow', 'horse', 'pig', 'sheep'], 0),
   fromEt('puu', ['дерево', 'цветок', 'лес', 'трава'], ['tree', 'flower', 'forest', 'grass'], 0),
-  typeEt('цветок', 'flower', ['lill']),
+  typeEtPic(emoji('🌸'), 'цветок', 'flower', ['lill']),
   fromEt('mets', ['лес', 'море', 'озеро', 'река'], ['forest', 'sea', 'lake', 'river'], 0),
   toEt('море', 'sea', ['meri', 'järv', 'jõgi', 'mets'], 0),
   typeEt('озеро', 'lake', ['järv']),
@@ -134,7 +135,7 @@ export const holidays: Question[] = [
 export const furniture: Question[] = [
   fromEt('laud', ['стол', 'стул', 'кровать', 'шкаф'], ['table', 'chair', 'bed', 'cupboard'], 0),
   toEt('стул', 'chair', ['tool', 'laud', 'voodi', 'kapp'], 0),
-  typeEt('кровать', 'bed', ['voodi']),
+  typeEtPic(emoji('🛏️'), 'кровать', 'bed', ['voodi']),
   typeEt('шкаф', 'cupboard, wardrobe', ['kapp']),
   fromEt('diivan', ['диван', 'кресло', 'стол', 'полка'], ['sofa', 'armchair', 'table', 'shelf'], 0),
   fromEt('lamp', ['лампа', 'окно', 'дверь', 'картина'], ['lamp', 'window', 'door', 'picture'], 0),
@@ -142,7 +143,7 @@ export const furniture: Question[] = [
   fromEt('magamistuba', ['спальня', 'ванная', 'гостиная', 'кухня'], ['bedroom', 'bathroom', 'living room', 'kitchen'], 0),
   toEt('гостиная', 'living room', ['elutuba', 'köök', 'tuba', 'vannituba'], 0),
   typeEt('полка', 'shelf', ['riiul']),
-  typeEt('картина', 'picture', ['pilt']),
+  typeEtPic(emoji('🖼️'), 'картина', 'picture', ['pilt']),
   m('Ma magan ___. (Я сплю в спальне.)', 'Ma magan ___. (I sleep in the bedroom.)', ['magamistoas', 'magamistuba', 'magamistoast', 'magamistuppa'], 0,
     'tuba → toas: magamistoas («в спальне»).', 'tuba → toas: magamistoas (“in the bedroom”).'),
 ];
@@ -150,14 +151,14 @@ export const furniture: Question[] = [
 export const food2: Question[] = [
   fromEt('kartul', ['картофель', 'морковь', 'помидор', 'огурец'], ['potato', 'carrot', 'tomato', 'cucumber'], 0),
   toEt('морковь', 'carrot', ['porgand', 'kartul', 'tomat', 'kurk'], 0),
-  typeEt('огурец', 'cucumber', ['kurk']),
-  typeEt('помидор', 'tomato', ['tomat']),
+  typeEtPic(emoji('🥒'), 'огурец', 'cucumber', ['kurk']),
+  typeEtPic(emoji('🍅'), 'помидор', 'tomato', ['tomat']),
   fromEt('banaan', ['банан', 'яблоко', 'апельсин', 'груша'], ['banana', 'apple', 'orange', 'pear'], 0),
   fromEt('mahl', ['сок', 'молоко', 'пиво', 'вино'], ['juice', 'milk', 'beer', 'wine'], 0),
   fromEt('õlu', ['пиво', 'вино', 'сок', 'вода'], ['beer', 'wine', 'juice', 'water'], 0),
-  typeEt('вино', 'wine', ['vein']),
+  typeEtPic(emoji('🍷'), 'вино', 'wine', ['vein']),
   fromEt('suhkur', ['сахар', 'соль', 'масло', 'мёд'], ['sugar', 'salt', 'butter', 'honey'], 0),
   toEt('соль', 'salt', ['sool', 'suhkur', 'või', 'riis'], 0),
-  typeEt('рис', 'rice', ['riis']),
+  typeEtPic(emoji('🍚'), 'рис', 'rice', ['riis']),
   fromEt('jäätis', ['мороженое', 'торт', 'шоколад', 'печенье'], ['ice cream', 'cake', 'chocolate', 'biscuit'], 0),
 ];

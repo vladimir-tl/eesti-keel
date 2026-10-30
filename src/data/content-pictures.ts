@@ -12,6 +12,17 @@ const look = (image: string, prompt: Tr, options: L[], answer: number, explain: 
   explain,
 });
 
+/** Picture above the prompt, typed answer: "what is in the picture?" — write the word. */
+const lookType = (image: string, prompt: Tr, accept: string[], explain: Tr): Question => ({
+  level: 'A1',
+  prompt,
+  image,
+  options: [],
+  answer: -1,
+  accept,
+  explain,
+});
+
 /** Text prompt, picture options: "choose the picture". Each picture comes with a caption shown after checking. */
 const pick = (prompt: L, pics: [string, L][], answer: number, explain: Tr): Question => ({
   level: 'A1',
@@ -71,6 +82,8 @@ export const pictures: Record<string, Question[]> = {
       tr('roheline — зелёный; punane — красный, sinine — синий, kollane — жёлтый.', 'roheline — green; punane — red, sinine — blue, kollane — yellow.', 'roheline; punane, sinine, kollane.')),
     look(swatch('#f783ac'), tr('Mis värv see on? Какой это цвет?', 'Mis värv see on? What colour is it?', 'Mis värv see on?'), ['roosa', 'punane', 'pruun', 'lilla'], 0,
       tr('roosa — розовый; pruun — коричневый, lilla — фиолетовый.', 'roosa — pink; pruun — brown, lilla — purple.', 'roosa; pruun, lilla.')),
+    lookType(swatch('#111111'), tr('Mis värv see on? Какой это цвет? Впишите слово.', 'Mis värv see on? What colour is it? Type the word.', 'Mis värv see on? Kirjuta sõna.'), ['must'],
+      tr('must — чёрный.', 'must — black.', 'must.')),
   ],
   weather: [
     look(emoji('🌧️'), asked('Mis ilm täna on?'), ['Sajab vihma', 'Sajab lund', 'Päike paistab', 'Tuul puhub'], 0,

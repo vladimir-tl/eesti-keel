@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
@@ -25,10 +26,10 @@ export const family: Question[] = [
   fromEt('isa', ['мама', 'папа', 'дедушка', 'сын'], ['mum', 'dad', 'grandfather', 'son'], 1),
   toEt('сестра', 'sister', ['vend', 'õde', 'ema', 'vanaema'], 1),
   typeEt('брат', 'brother', ['vend']),
-  typeEt('бабушка', 'grandmother', ['vanaema']),
+  typeEtPic(emoji('👵'), 'бабушка', 'grandmother', ['vanaema']),
   toEt('дедушка', 'grandfather', ['vanaisa', 'vanaema', 'isa', 'onu'], 0),
   fromEt('laps', ['ребёнок', 'мама', 'друг', 'сын'], ['child', 'mum', 'friend', 'son'], 0),
-  typeEt('семья', 'family', ['pere']),
+  typeEtPic(emoji('👨‍👩‍👧'), 'семья', 'family', ['pere']),
   typeEt('дочь', 'daughter', ['tütar']),
   mc(tr('Как сказать «моя мама»?', 'How do you say “my mum”?'), ['minu ema', 'sinu ema', 'tema ema', 'meie ema'], 0,
     tr('minu — мой, sinu — твой, tema — его/её, meie — наш.', 'minu — my, sinu — your, tema — his/her, meie — our.')),
@@ -41,11 +42,11 @@ export const professions: Question[] = [
   fromEt('õpetaja', ['учитель', 'врач', 'студент', 'повар'], ['teacher', 'doctor', 'student', 'cook'], 0),
   toEt('врач', 'doctor', ['arst', 'õpetaja', 'kokk', 'müüja'], 0),
   typeEt('студент', 'student', ['tudeng', 'üliõpilane']),
-  typeEt('повар', 'cook', ['kokk']),
+  typeEtPic(emoji('👨‍🍳'), 'повар', 'cook', ['kokk']),
   fromEt('müüja', ['продавец', 'водитель', 'учитель', 'врач'], ['shop assistant', 'driver', 'teacher', 'doctor'], 0),
   toEt('водитель', 'driver', ['autojuht', 'arst', 'kokk', 'õpetaja'], 0),
   fromEt('töö', ['работа', 'школа', 'дом', 'время'], ['work', 'school', 'home', 'time'], 0),
-  typeEt('школа', 'school', ['kool']),
+  typeEtPic(emoji('🏫'), 'школа', 'school', ['kool']),
   mc(tr('Ma ___ koolis. (Я работаю в школе.)', 'Ma ___ koolis. (I work at a school.)'), ['töötan', 'töötad', 'töötab', 'töötame'], 0,
     tr('töötama: ma töötan, sa töötad, ta töötab, me töötame, te töötate, nad töötavad.', 'töötama: ma töötan, sa töötad, ta töötab, me töötame, te töötate, nad töötavad.')),
   mc(tr('Mis sinu amet on? — Выберите ответ.', 'Mis sinu amet on? — Choose a reply.'), ['Ma olen arst', 'Ma olen Mari', 'Ma elan Tartus', 'Ma olen kolm'], 0,

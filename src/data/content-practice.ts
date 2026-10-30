@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, mc, typed } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, mc, typed } from './helpers';
+import { emoji, swatch } from './pictures';
 import { tr } from './questions';
 import type { Question } from './questions';
 
@@ -30,13 +31,13 @@ export const personal: Question[] = [
 export const places: Question[] = [
   fromEt('apteek', ['аптека', 'больница', 'банк', 'магазин'], ['pharmacy', 'hospital', 'bank', 'shop'], 0),
   toEt('больница', 'hospital', ['haigla', 'apteek', 'kool', 'pank'], 0),
-  typeEt('банк', 'bank', ['pank']),
-  typeEt('почта', 'post office', ['postkontor', 'post']),
+  typeEtPic(emoji('🏦'), 'банк', 'bank', ['pank']),
+  typeEtPic(emoji('📮'), 'почта', 'post office', ['postkontor', 'post']),
   fromEt('raamatukogu', ['библиотека', 'книжный магазин', 'школа', 'музей'], ['library', 'bookshop', 'school', 'museum'], 0),
   fromEt('kohvik', ['кафе', 'ресторан', 'магазин', 'парк'], ['café', 'restaurant', 'shop', 'park'], 0),
   toEt('вокзал, станция', 'station', ['jaam', 'turg', 'kino', 'park'], 0),
   typeEt('рынок', 'market', ['turg']),
-  typeEt('кино', 'cinema', ['kino']),
+  typeEtPic(emoji('🎬'), 'кино', 'cinema', ['kino']),
   fromEt('lennujaam', ['аэропорт', 'вокзал', 'порт', 'остановка'], ['airport', 'railway station', 'port', 'bus stop'], 0),
   fromEt('muuseum', ['музей', 'театр', 'кино', 'библиотека'], ['museum', 'theatre', 'cinema', 'library'], 0),
   m('Где купить лекарство?', 'Where do you buy medicine?', ['apteegis', 'raamatukogus', 'kinos', 'pangas'], 0,

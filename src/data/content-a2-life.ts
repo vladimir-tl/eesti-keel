@@ -1,4 +1,5 @@
-import { toEt, fromEt, typeEt, m, ty } from './helpers';
+import { toEt, fromEt, typeEt, typeEtPic, m, ty } from './helpers';
+import { emoji, swatch } from './pictures';
 import type { Question } from './questions';
 
 export const work: Question[] = [
@@ -58,7 +59,7 @@ export const bank: Question[] = [
   fromEt('ülekanne', ['перевод (денег)', 'взнос', 'кредит', 'проценты'], ['transfer', 'deposit', 'loan', 'interest'], 0),
   fromEt('laen', ['кредит, заём', 'счёт', 'наличные', 'налог'], ['loan', 'account', 'cash', 'tax'], 0),
   fromEt('pakk', ['посылка', 'письмо', 'марка', 'адрес'], ['parcel', 'letter', 'stamp', 'address'], 0),
-  typeEt('письмо', 'letter', ['kiri']),
+  typeEtPic(emoji('✉️'), 'письмо', 'letter', ['kiri']),
   typeEt('марка (почтовая)', 'stamp', ['mark']),
   fromEt('saatma', ['отправлять', 'получать', 'платить', 'писать'], ['to send', 'to receive', 'to pay', 'to write'], 0),
   fromEt('pangaautomaat', ['банкомат', 'касса', 'банк', 'карта'], ['ATM', 'till', 'bank', 'card'], 0),
@@ -72,13 +73,13 @@ export const official: Question[] = [
   fromEt('dokument', ['документ', 'заявление', 'паспорт', 'справка'], ['document', 'application', 'passport', 'certificate'], 0),
   fromEt('avaldus', ['заявление', 'документ', 'подпись', 'анкета'], ['application (form)', 'document', 'signature', 'questionnaire'], 0),
   fromEt('allkiri', ['подпись', 'печать', 'имя', 'адрес'], ['signature', 'stamp', 'name', 'address'], 0),
-  typeEt('паспорт', 'passport', ['pass']),
+  typeEtPic(emoji('🛂'), 'паспорт', 'passport', ['pass']),
   fromEt('isikukood', ['личный код', 'номер телефона', 'адрес', 'фамилия'], ['personal ID code', 'phone number', 'address', 'surname'], 0),
   fromEt('elamisluba', ['вид на жительство', 'виза', 'паспорт', 'разрешение на работу'], ['residence permit', 'visa', 'passport', 'work permit'], 0),
   fromEt('tähtaeg', ['срок, дедлайн', 'приём', 'время', 'дата'], ['deadline', 'appointment', 'time', 'date'], 0),
   fromEt('registreerima', ['регистрировать', 'подписывать', 'платить', 'заполнять'], ['to register', 'to sign', 'to pay', 'to fill in'], 0),
   fromEt('täitma', ['заполнять; выполнять', 'подписывать', 'терять', 'находить'], ['to fill in; to fulfil', 'to sign', 'to lose', 'to find'], 0),
-  typeEt('полиция', 'police', ['politsei']),
+  typeEtPic(emoji('👮'), 'полиция', 'police', ['politsei']),
   m('Ma tahaksin ___ aja. (записаться на приём)', 'Ma tahaksin ___ aja. (to book an appointment)', ['broneerida', 'broneerin', 'broneerib', 'broneerima'], 0,
     'aja broneerima — «записаться на приём». После tahaksin — инфинитив на -da: broneerida.', 'aja broneerima — “to book an appointment”. After tahaksin — the -da infinitive: broneerida.'),
   m('Palun ___ see vorm. (заполните)', 'Palun ___ see vorm. (fill in)', ['täitke', 'täidan', 'täidab', 'täitma'], 0,

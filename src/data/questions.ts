@@ -1,5 +1,6 @@
 import type { Lang } from '../i18n/ui';
 import { etText } from './et';
+import { emoji } from './pictures';
 
 export type Level = 'A1' | 'A2' | 'B1';
 /** Translated text. Estonian is optional here: a missing `et` comes from the dictionary in et.ts. */
@@ -130,7 +131,8 @@ export const a1: Question[] = [
   },
   {
     level: 'A1',
-    prompt: tr('Напишите по-эстонски: «молоко»', 'Write in Estonian: “milk”'),
+    prompt: tr('Что на картинке? Напишите по-эстонски.', 'What is in the picture? Write it in Estonian.', 'Mis on pildil? Kirjuta eesti keeles.'),
+    image: emoji('🥛'),
     options: [],
     answer: -1,
     accept: ['piim'],
