@@ -1,10 +1,11 @@
 import type { L, Question } from './questions';
 import { etText } from './et';
+import { wrongAnswers } from './wrong-answers';
 
 const verbs: [RegExp, string][] = [
-  [/^(Напишите|Впишите|Введите)(?=[\s:.])/, 'Выберите'],
-  [/^(Write|Type)(?=[\s:.])/, 'Choose'],
-  [/^(Kirjuta|Sisesta)(?=[\s:.])/, 'Vali'],
+  [/(?<![\p{L}])(Напишите|Впишите|Введите)(?=[\s:.])/u, 'Выберите'],
+  [/(?<![\p{L}])(Write|Type)(?=[\s:.])/u, 'Choose'],
+  [/(?<![\p{L}])(Kirjuta|Sisesta)(?=[\s:.])/u, 'Vali'],
 ];
 const reword = (s: string) => verbs.reduce((acc, [re, to]) => acc.replace(re, to), s);
 const rewordL = (p: L): L => (typeof p === 'string' ? reword(p) : { ...p, ru: reword(p.ru), en: reword(p.en), et: (p.et ?? etText[p.en]) !== undefined ? reword((p.et ?? etText[p.en])!) : undefined });
@@ -19,17 +20,23 @@ const hash = (s: string) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >
 
 /** Typed answers become multiple choice: the right answer plus the closest-looking Estonian answers from the same set. */
 export const choicify = (questions: Question[]): Question[] => {
-  const pool = new Set<string>();
+  const pool = new Map<string, string>(); // lower case → as written
+  const picPool = new Map<string, string>();
+  const add = (m: Map<string, string>, s: string) => m.has(s.toLowerCase()) || m.set(s.toLowerCase(), s);
   for (const q of questions) {
-    if (q.accept?.length) pool.add(q.accept[0]);
-    else if (q.answer >= 0 && !q.pics && typeof q.options[q.answer] === 'string') pool.add(q.options[q.answer] as string);
+    // Forms and sentences have their own wrong options; they would be odd ones out next to plain words.
+    if (q.accept?.length) {
+      if (!wrongAnswers[q.accept[0]]) add(q.image ? picPool : pool, q.accept[0]);
+    } else if (q.answer >= 0 && !q.pics && typeof q.options[q.answer] === 'string') add(pool, q.options[q.answer] as string);
   }
   return questions.map((q) => {
     if (!q.accept?.length || q.answer >= 0) return q;
     const right = q.accept[0];
+    const own = wrongAnswers[right];
     const taken = new Set(q.accept.map((a) => a.toLowerCase()));
     const rank = (c: string) => (words(c) === words(right) ? 0 : 100) - common(c, right) * 3 + Math.abs(c.length - right.length);
-    const wrong = [...pool]
+    const from = q.image && picPool.size > 3 ? picPool : pool;
+    const wrong = own ?? [...from.values()]
       .filter((c) => !taken.has(c.toLowerCase()))
       .sort((a, b) => rank(a) - rank(b) || hash(a + right) - hash(b + right))
       .slice(0, 3);
