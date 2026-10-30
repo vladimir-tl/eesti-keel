@@ -12,6 +12,7 @@ import { connectors, pointing, verbs2, feelings, school, nature, holidays, furni
 import { kuhu } from './content-kuhu';
 import { extra } from './content-extra';
 import { a1More } from './content-a1-more';
+import { a2More } from './content-a2-more';
 import { context } from './content-a2-context';
 import { pictures } from './content-pictures';
 import { genitive, pronouns, comitative, translative, comparison, imperative, past2, perfect, conditional, future, verbs3, infinitive, object, kaima, plural2, postpos, complex, timeExpr, numbers2 } from './content-a2-grammar';
@@ -44,7 +45,7 @@ const topic = (id: string, title: L, desc: string, questions: Question[]): Topic
   id,
   title,
   desc,
-  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? []), ...(pictures[id] ?? []), ...(a1More[id] ?? [])],
+  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? []), ...(pictures[id] ?? []), ...(a1More[id] ?? []), ...(a2More[id] ?? [])],
 });
 
 const a1Groups: Omit<Group, 'level'>[] = [
@@ -446,7 +447,7 @@ const wordOf = (q: Question): string | undefined => {
   return text?.toLowerCase();
 };
 
-/** A1 topics teach each word once: a later picture or sentence about the same word is dropped. */
+/** A1 and A2 topics teach each word once: a later picture or sentence about the same word is dropped. */
 const uniqueWords = (questions: Question[]): Question[] => {
   const seen = new Set<string>();
   return questions.filter((q) => {
@@ -462,7 +463,7 @@ const withLevel = (level: Level, list: Omit<Group, 'level'>[]): Group[] =>
   list.filter((g) => g.topics.length > 0).map((g) => ({
     ...g,
     level,
-    topics: g.topics.map((tp) => ({ ...tp, questions: (level === 'A1' ? uniqueWords(tp.questions) : tp.questions).map((q) => ({ ...q, level })) })),
+    topics: g.topics.map((tp) => ({ ...tp, questions: (level !== 'B1' ? uniqueWords(tp.questions) : tp.questions).map((q) => ({ ...q, level })) })),
   }));
 
 /** Course structure: groups in study order (A1, A2, then B1), topics inside each group. */
