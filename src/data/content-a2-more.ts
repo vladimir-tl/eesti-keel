@@ -51,7 +51,7 @@ export const a2More: Record<string, Question[]> = {
   comitative: [
     g('Ma jalutan ___.', 'с собакой', 'with the dog', 'koeraga', ['koer', 'koerata', 'koeral'], 'koer → koeraga.'),
     g('Supp ___.', 'суп без соли', 'soup without salt', 'soolata', ['soolaga', 'soola', 'soolale'], 'sool → soolata.'),
-    g('Ma lähen kinno ___.', 'с коллегой', 'with a colleague', 'kolleegiga', ['kolleeg', 'kolleegita', 'kolleegile'], 'kolleeg → kolleegiga.'),
+    g('Ma lähen kinno ___.', 'с другом', 'with a friend', 'sõbraga', ['sõber', 'sõbrata', 'sõbrale'], 'sõber → sõbraga.'),
     g('Ta kirjutab ___.', 'ручкой', 'with a pen', 'pastakaga', ['pastakas', 'pastakat', 'pastakale'], 'pastakas → pastakaga.'),
     g('Ma sõidan ___.', 'на поезде', 'by train', 'rongiga', ['rong', 'rongis', 'rongist'], 'rong → rongiga.'),
     g('Ma lähen õue ___.', 'без пальто', 'without a coat', 'mantlita', ['mantliga', 'mantel', 'mantlis'], 'mantel → mantlita.'),

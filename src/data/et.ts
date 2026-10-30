@@ -394,7 +394,7 @@ export const etText: Record<string, string> = {
   "Comparison: bigger, biggest": "Võrdlemine: suurem, suurim",
   "Comparative: stem + -m / -em: suur → suurem.": "Keskvõrre: tüvi + -m / -em: suur → suurem.",
   "Special form: hea → parem.": "Eriline vorm: hea → parem.",
-  "“Than” — kui: suurem kui Tartu.": "„Kui“ võrdluses: suurem kui Tartu.",
+  "“Than” — kui: kiirem kui jalgratas.": "„Kui“ võrdluses: kiirem kui jalgratas.",
   "sama … kui — “as … as”.": "sama … kui — “as … as”.",
   "Superlative: kõige + comparative: kõige huvitavam.": "Ülivõrre: kõige + keskvõrre: kõige huvitavam.",
   "Tallinn has more people → suurem. Tartust (-st) = “than Tartu”.": "Tallinnas on rohkem inimesi → suurem. Tartust (-st) = „kui Tartu“.",
