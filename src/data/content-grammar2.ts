@@ -160,7 +160,7 @@ export const past: Question[] = [
   m('Eile ta ___ raamatut. (Вчера он читал книгу.)', 'Eile ta ___ raamatut. (Yesterday he read a book.)', ['luges', 'lugesin', 'loeb', 'lugeb'], 0,
     'lugema → ta luges (в прошедшем времени основа меняется).', 'lugema → ta luges (the stem changes in the past).'),
   ty('Ma ___ eile. (Я вчера работал.) Форма töötama.', 'Ma ___ eile. (I worked yesterday.) Form of töötama.', ['töötasin'], 'ma töötasin.', 'ma töötasin.'),
-  ty('Me ___ Tartus. (Мы жили в Тарту.) Форма elama.', 'Me ___ Tartus. (We lived in Tartu.) Form of elama.', ['elasime'], 'me elasime.', 'me elasime.'),
+  ty('Me ___ Pärnus. (Мы жили в Пярну.) Форма elama.', 'Me ___ Pärnus. (We lived in Pärnu.) Form of elama.', ['elasime'], 'me elasime.', 'me elasime.'),
   ty('Ma ___ eesti keelt. (Я учил эстонский.) Форма õppima.', 'Ma ___ eesti keelt. (I studied Estonian.) Form of õppima.', ['õppisin'], 'õppima → ma õppisin.', 'õppima → ma õppisin.'),
   fromEt('Ta töötas eile', ['Он вчера работал', 'Он завтра работает', 'Он сегодня работает', 'Он не работал'], ['He worked yesterday', 'He works tomorrow', 'He works today', 'He did not work'], 0),
   m('Как сказать «Я не был дома»?', 'How do you say “I was not at home”?', ['Ma ei olnud kodus', 'Ma ei olin kodus', 'Ma ei ole kodus', 'Ma pole olin'], 0,

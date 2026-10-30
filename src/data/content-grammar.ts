@@ -34,7 +34,7 @@ export const verbs: Question[] = [
   mc(tr('Ta ___ leiba. (Он ест хлеб.)', 'Ta ___ leiba. (He eats bread.)'), ['söön', 'sööd', 'sööb', 'sööme'], 2,
     tr('sööma: ma söön, sa sööd, ta sööb, me sööme.', 'sööma: ma söön, sa sööd, ta sööb, me sööme.')),
   typed(tr('Ma ___ eesti keelt. (Я учу эстонский.) Впишите форму глагола õppima.', 'Ma ___ eesti keelt. (I am learning Estonian.) Type the form of “õppima”.'), ['õpin'], 'ma õpin.'),
-  mc(tr('Meie ___ Tartus. (Мы работаем в Тарту.)', 'Meie ___ Tartus. (We work in Tartu.)'), ['töötan', 'töötad', 'töötab', 'töötame'], 3,
+  mc(tr('Meie ___ Rakveres. (Мы работаем в Раквере.)', 'Meie ___ Rakveres. (We work in Rakvere.)'), ['töötan', 'töötad', 'töötab', 'töötame'], 3,
     tr('meie töötame.', 'meie töötame.')),
   mc(tr('Nad ___ hästi eesti keelt. (Они хорошо говорят по-эстонски.)', 'Nad ___ hästi eesti keelt. (They speak Estonian well.)'), ['räägin', 'räägid', 'räägib', 'räägivad'], 3,
     tr('rääkima: ma räägin, sa räägid, ta räägib, me räägime, te räägite, nad räägivad.', 'rääkima: ma räägin, sa räägid, ta räägib, me räägime, te räägite, nad räägivad.')),
@@ -62,7 +62,8 @@ export const cases: Question[] = [
   mc(tr('Ma lähen ___. (домой)', 'Ma lähen ___. (home, going to)'), ['kodus', 'kodust', 'koju', 'kodu'], 2,
     tr('koju — домой (куда?).', 'koju — homewards (where to?).')),
   fromEt('Ma olen Soomes', ['Я в Финляндии', 'Я из Финляндии', 'Я еду в Финляндию', 'Я финн'], ['I am in Finland', 'I am from Finland', 'I am going to Finland', 'I am a Finn'], 0),
-  typed(tr('Ma tulen ___. (из Финляндии) Форма слова Soome.', 'Ma tulen ___. (from Finland) Form of “Soome”.'), ['soomest'], 'Soome → Soomest.'),
+  mc(tr('Ma tulen ___. (из Швеции)', 'Ma tulen ___. (from Sweden)'), ['Rootsis', 'Rootsist', 'Rootsi', 'Rootsiga'], 1,
+    tr('Rootsi → Rootsist.', 'Rootsi → Rootsist.')),
 ];
 
 export const questions: Question[] = [

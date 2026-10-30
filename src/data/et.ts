@@ -233,7 +233,7 @@ export const etText: Record<string, string> = {
   "Past: stem + -sin, -sid, -s, -sime, -site, -sid: ma elasin, ta elas.": "Minevik: tüvi + -sin, -sid, -s, -sime, -site, -sid: ma elasin, ta elas.",
   "lugema → ta luges (the stem changes in the past).": "lugema → ta luges (minevikus tüvi muutub).",
   "Ma ___ eile. (I worked yesterday.) Form of töötama.": "Ma ___ eile. (I worked yesterday.) Verbi „töötama“ vorm.",
-  "Me ___ Tartus. (We lived in Tartu.) Form of elama.": "Me ___ Tartus. (We lived in Tartu.) Verbi „elama“ vorm.",
+  "Me ___ Pärnus. (We lived in Pärnu.) Form of elama.": "Me ___ Pärnus. (We lived in Pärnu.) Verbi „elama“ vorm.",
   "Ma ___ eesti keelt. (I studied Estonian.) Form of õppima.": "Ma ___ eesti keelt. (I studied Estonian.) Verbi „õppima“ vorm.",
   "How do you say “I was not at home”?": "Kuidas öelda “I was not at home”?",
   "Past negation: ei + the -nud form: ma ei olnud.": "Mineviku eitus: ei + nud-vorm: ma ei olnud.",

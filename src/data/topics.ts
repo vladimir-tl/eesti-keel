@@ -1,5 +1,5 @@
 import type { L, Level, Question } from './questions';
-import { tr } from './questions';
+import { tr, t } from './questions';
 import { greetings, family, professions } from './content-intro';
 import { olla, verbs, cases, questions as questionWords } from './content-grammar';
 import { numbers, days, time, colors, weather } from './content-core';
@@ -11,6 +11,7 @@ import { personal, places, directions, prepos, cafe, doctor, phone, dates } from
 import { connectors, pointing, verbs2, feelings, school, nature, holidays, furniture, food2 } from './content-vocab2';
 import { kuhu } from './content-kuhu';
 import { extra } from './content-extra';
+import { a1More } from './content-a1-more';
 import { context } from './content-a2-context';
 import { pictures } from './content-pictures';
 import { genitive, pronouns, comitative, translative, comparison, imperative, past2, perfect, conditional, future, verbs3, infinitive, object, kaima, plural2, postpos, complex, timeExpr, numbers2 } from './content-a2-grammar';
@@ -43,7 +44,7 @@ const topic = (id: string, title: L, desc: string, questions: Question[]): Topic
   id,
   title,
   desc,
-  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? []), ...(pictures[id] ?? [])],
+  questions: [...questions, ...(extra[id] ?? []), ...(context[id] ?? []), ...(pictures[id] ?? []), ...(a1More[id] ?? [])],
 });
 
 const a1Groups: Omit<Group, 'level'>[] = [
@@ -436,11 +437,32 @@ const b1Groups: Omit<Group, 'level'>[] = [
   },
 ];
 
+/** The word a question practises, or undefined for a gap-fill that practises a form instead. */
+const wordOf = (q: Question): string | undefined => {
+  if (q.pair) return q.pair.et.toLowerCase();
+  if (t(q.prompt, 'en').includes('___')) return undefined;
+  const right = q.options[q.answer];
+  const text = q.accept?.[0] ?? (right === undefined ? undefined : t(right, 'en'));
+  return text?.toLowerCase();
+};
+
+/** A1 topics teach each word once: a later picture or sentence about the same word is dropped. */
+const uniqueWords = (questions: Question[]): Question[] => {
+  const seen = new Set<string>();
+  return questions.filter((q) => {
+    const word = wordOf(q);
+    if (word === undefined) return true;
+    if (seen.has(word)) return false;
+    seen.add(word);
+    return true;
+  });
+};
+
 const withLevel = (level: Level, list: Omit<Group, 'level'>[]): Group[] =>
   list.filter((g) => g.topics.length > 0).map((g) => ({
     ...g,
     level,
-    topics: g.topics.map((tp) => ({ ...tp, questions: tp.questions.map((q) => ({ ...q, level })) })),
+    topics: g.topics.map((tp) => ({ ...tp, questions: (level === 'A1' ? uniqueWords(tp.questions) : tp.questions).map((q) => ({ ...q, level })) })),
   }));
 
 /** Course structure: groups in study order (A1, A2, then B1), topics inside each group. */
