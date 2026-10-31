@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import LevelSteps from '../../components/LevelSteps.astro';
+import PopularTopics from '../../components/PopularTopics.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
@@ -91,6 +92,8 @@ const faqLd = {
       <rect x="60" y="175" width="190" height="6" rx="3" fill="var(--line)" />
     </svg>
   </section>
+
+  <PopularTopics lang={lang} />
 
   <section class="faq-block panel">
     <h2>{s.faqTitle}</h2>

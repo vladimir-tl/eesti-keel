@@ -3,7 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import Quiz from '../../../components/Quiz.astro';
 import Notes from '../../../components/Notes.astro';
 import { fill, langs, ui, type Lang } from '../../../i18n/ui';
-import { groups, topics } from '../../../data/topics';
+import { groups, topics, topicsOf } from '../../../data/topics';
 import { t } from '../../../data/questions';
 import { hints } from '../../../data/hints';
 import { topicSeo } from '../../../data/topic-seo';
@@ -17,14 +17,21 @@ const s = ui[lang];
 
 const group = groups.find((g) => g.topics.some((x) => x.id === tp.id))!;
 const title = t(tp.title, lang);
-const topicIndex = group.topics.findIndex((item) => item.id === tp.id);
-const relatedTopics = group.topics
-  .map((item, index) => ({ item, index }))
-  .filter(({ index }) => index !== topicIndex)
-  .sort((a, b) => Math.abs(a.index - topicIndex) - Math.abs(b.index - topicIndex) || a.index - b.index)
-  .slice(0, 3)
+const levelTopics = topicsOf(group.level);
+const here = levelTopics.findIndex((item) => item.id === tp.id);
+// Same-group topics first, then the nearest ones of the same level, so small groups still link out.
+const relatedTopics = levelTopics
+  .map((item, index) => ({ item, index, other: group.topics.includes(item) ? 0 : 1 }))
+  .filter(({ item }) => item.id !== tp.id)
+  .sort((a, b) => a.other - b.other || Math.abs(a.index - here) - Math.abs(b.index - here) || a.index - b.index)
+  .slice(0, 4)
   .sort((a, b) => a.index - b.index)
   .map(({ item }) => item);
+const nextSteps = [
+  { href: `/${lang}/${{ A1: 'test', A2: 'test-a2', B1: 'test-b1' }[group.level]}`, label: { A1: s.testCta, A2: s.testCtaA2, B1: s.testCtaB1 }[group.level] },
+  ...(group.level === 'A2' ? [{ href: `/${lang}/exam-a2`, label: s.examCta }] : []),
+  ...(group.level === 'B1' ? [{ href: `/${lang}/exam-b1`, label: s.examCtaB1 }] : []),
+];
 const seo = { topic: title, level: group.level, desc: t(tp.desc, lang), n: tp.questions.length };
 const snippet = topicSeo[tp.id]?.[lang] ?? { title: s.seoTopicTitle, desc: s.seoTopicDesc };
 const abs = (p: string) => new URL(p, Astro.site).href;
@@ -83,6 +90,13 @@ const breadcrumbs = {
       </ul>
     </nav>
   )}
+
+  <nav class="related" aria-label={s.nextStep}>
+    <h2>{s.nextStep}</h2>
+    <ul>
+      {nextSteps.map((n) => (<li><a href={n.href}>{n.label}</a></li>))}
+    </ul>
+  </nav>
 
 </Base>
 

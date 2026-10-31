@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Quiz, { type Placement } from '../../components/Quiz.astro';
 import Notes from '../../components/Notes.astro';
+import PopularTopics from '../../components/PopularTopics.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 import { topicsOf } from '../../data/topics';
 import { t } from '../../data/questions';
@@ -36,4 +37,5 @@ const placement: Placement = {
   <Quiz lang={lang} title={s.levelTestTitle} intro={s.levelTestIntro} questions={questions} verdicts={[]}
     placement={placement} />
   <Notes lang={lang} sections={levelTestNotes[lang]} hideInQuiz />
+  <PopularTopics lang={lang} />
 </Base>
