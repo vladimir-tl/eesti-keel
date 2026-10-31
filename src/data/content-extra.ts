@@ -88,7 +88,7 @@ export const extra: Record<string, Question[]> = {
     fromEt('kell', ['часы; время (на часах)', 'день', 'минута', 'утро'], ['clock; o’clock', 'day', 'minute', 'morning'], 0),
     m('Как сказать «10:00 утра»?', 'How do you say “10:00 a.m.”?', ['Kell on kümme hommikul', 'Kell on kümme õhtul', 'Kell on pool kümme', 'Kell on kümme minutit'], 0,
       'hommikul — утром; kümme — десять.', 'hommikul — in the morning; kümme — ten.'),
-    typeEt('день (время суток)', 'daytime', ['päev']),
+    typeEt('день', 'day', ['päev']),
   ],
   months: [
     typeEt('январь', 'January', ['jaanuar']),

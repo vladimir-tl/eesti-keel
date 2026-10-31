@@ -78,8 +78,8 @@ export const a1More: Record<string, Question[]> = {
   kuhu: [
     g('Ma lähen ___.', 'в Валгу', 'to Valga', ['Valgas', 'Valgast', 'Valga', 'Valgaga'], 2, 'Valga → Valga (kuhu?), Valgas — kus?'),
     g('Ma sõidan ___.', 'в Вильянди', 'to Viljandi', ['Viljandis', 'Viljandist', 'Viljandisse', 'Viljandiga'], 2, 'Viljandi → Viljandisse.'),
-    g('Ma lähen ___.', 'в школу', 'to school', ['koolis', 'koolist', 'kooli', 'kool'], 2, 'kool → kooli.'),
-    g('Ma lähen ___.', 'в магазин', 'to the shop', ['poes', 'poest', 'poodi', 'pood'], 2, 'pood → poodi.'),
+    g('Ma sõidan ___.', 'в аэропорт', 'to the airport', ['lennujaamas', 'lennujaamast', 'lennujaama', 'lennujaam'], 2, 'lennujaam → lennujaama.'),
+    g('Ma lähen ___.', 'на автовокзал', 'to the bus station', ['bussijaamas', 'bussijaamast', 'bussijaama', 'bussijaam'], 2, 'bussijaam → bussijaama.'),
     g('Ma sõidan ___.', 'в Раквере', 'to Rakvere', ['Rakveres', 'Rakverest', 'Rakverre', 'Rakverega'], 2, 'Rakvere → Rakverre.'),
     g('Ma lähen ___.', 'в сауну', 'to the sauna', ['saunas', 'saunast', 'sauna', 'saunaga'], 2, 'saun → sauna.'),
     g('Ma sõidan ___.', 'в Хаапсалу', 'to Haapsalu', ['Haapsalus', 'Haapsalust', 'Haapsallu', 'Haapsaluga'], 2, 'Haapsalu → Haapsallu.'),
