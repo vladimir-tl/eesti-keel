@@ -1,6 +1,6 @@
 import { toEt, fromEt, mc } from './helpers';
 import { tr } from './questions';
-import type { Question } from './questions';
+import type { L, Question } from './questions';
 
 /** Estonian word, Russian, English. */
 type W = [string, string, string];
@@ -20,10 +20,10 @@ const vocab = (list: W[]): Question[] =>
 let seat = 0;
 
 /** Fill the gap: the right form goes to a different seat each time, three wrong forms fill the rest. */
-const g = (sentence: string, ru: string, en: string, right: string, wrong: [string, string, string], explain: string): Question => {
+const g = (sentence: string, ru: string, en: string, right: string, wrong: [string, string, string], explain: L): Question => {
   const at = seat++ % 4;
   const options = [...wrong.slice(0, at), right, ...wrong.slice(at)];
-  return mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, at, tr(explain, explain));
+  return mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, at, explain);
 };
 
 /** More B1 questions so every topic has at least 24, each on a word or form that the topic does not use yet. */
@@ -116,20 +116,20 @@ export const b1More: Record<string, Question[]> = {
   ],
   relative: [
     g('See on tüdruk, ___ ma eile kohtusin.', 'с которой', 'with whom', 'kellega', ['kellel', 'kellest', 'kelle'], 'kohtuma + -ga.'),
-    g('See on maja, ___ me elame.', 'где', 'where', 'kus', ['kust', 'kuhu', 'mis'], 'kus — «где».'),
-    g('Tore, ___ sa tulid.', 'что', 'that', 'et', ['kes', 'mis', 'kui'], 'et — «что».'),
-    g('See on mees, ___ on kaks last.', 'у которого', 'who has', 'kellel', ['kellega', 'kellest', 'kelle'], 'kellel on — «у кого есть».'),
+    g('See on maja, ___ me elame.', 'где', 'where', 'kus', ['kust', 'kuhu', 'mis'], tr('kus — «где».', 'kus — “where”.', 'kus — “where”.')),
+    g('Tore, ___ sa tulid.', 'что', 'that', 'et', ['kes', 'mis', 'kui'], tr('et — «что».', 'et — “that”.', 'et — “that”.')),
+    g('See on mees, ___ on kaks last.', 'у которого', 'who has', 'kellel', ['kellega', 'kellest', 'kelle'], tr('kellel on — «у кого есть».', 'kellel on — “who has”.', 'kellel on — “who has”.')),
     g('Mees, ___ ma helistasin, ei vastanud.', 'которому', 'to whom', 'kellele', ['kellel', 'kellest', 'keda'], 'helistama + -le.'),
     g('See on päev, ___ ma ei unusta.', 'который', 'that', 'mida', ['kes', 'kus', 'kuhu'], 'unustama + partitiiv.'),
     g('Ma ostan seda, ___ mulle meeldib.', 'что', 'what', 'mis', ['mida', 'kes', 'kus'], 'mis meeldib — alus.'),
-    g('Ma jäin koju, ___ oli külm.', 'так как', 'since', 'kuna', ['kuigi', 'kuni', 'et'], 'kuna — «так как».'),
-    g('___ ma tulen, toon leiba.', 'когда', 'when', 'Kui', ['Kuigi', 'Kuni', 'Et'], 'kui — «когда».'),
-    g('Ta räägib nii, ___ kõik saavad aru.', 'чтобы', 'so that', 'et', ['kuigi', 'sest', 'kuni'], 'et — «чтобы».'),
-    g('Ma ei tea, ___ ta nimi on.', 'как', 'what', 'mis', ['mida', 'kes', 'kus'], 'mis nimi — «какое имя».'),
-    g('Küsi, ___ pood avatakse.', 'когда', 'when', 'millal', ['kuhu', 'kes', 'mis'], 'millal — «когда».'),
-    g('Ma tahan teada, ___ ta nii ütles.', 'почему', 'why', 'miks', ['kus', 'kes', 'kuni'], 'miks — «почему».'),
+    g('Ma jäin koju, ___ oli külm.', 'так как', 'since', 'kuna', ['kuigi', 'kuni', 'et'], tr('kuna — «так как».', 'kuna — “since”.', 'kuna — “since”.')),
+    g('___ ma tulen, toon leiba.', 'когда', 'when', 'Kui', ['Kuigi', 'Kuni', 'Et'], tr('kui — «когда».', 'kui — “when”.', 'kui — “when”.')),
+    g('Ta räägib nii, ___ kõik saavad aru.', 'чтобы', 'so that', 'et', ['kuigi', 'sest', 'kuni'], tr('et — «чтобы».', 'et — “so that”.', 'et — “so that”.')),
+    g('Ma ei tea, ___ ta nimi on.', 'как', 'what', 'mis', ['mida', 'kes', 'kus'], tr('mis nimi — «какое имя».', 'mis nimi — “what name”.', 'mis nimi — “what name”.')),
+    g('Küsi, ___ pood avatakse.', 'когда', 'when', 'millal', ['kuhu', 'kes', 'mis'], tr('millal — «когда».', 'millal — “when”.', 'millal — “when”.')),
+    g('Ma tahan teada, ___ ta nii ütles.', 'почему', 'why', 'miks', ['kus', 'kes', 'kuni'], tr('miks — «почему».', 'miks — “why”.', 'miks — “why”.')),
     g('Raamat, ___ ma lugesin, oli huvitav.', 'которую', 'that', 'mida', ['kes', 'kus', 'kuhu'], 'lugema + partitiiv.'),
-    g('Inimesed, ___ elavad siin, on lahked.', 'которые', 'who', 'kes', ['mida', 'kus', 'kellel'], 'kes — «кто, которые».'),
+    g('Inimesed, ___ elavad siin, on lahked.', 'которые', 'who', 'kes', ['mida', 'kus', 'kellel'], tr('kes — «кто, которые».', 'kes — “who, which”.', 'kes — “who, which”.')),
   ],
   'self-intro': vocab([
     ['sünniaasta', 'год рождения', 'year of birth'],

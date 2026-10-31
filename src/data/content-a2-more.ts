@@ -1,6 +1,6 @@
 import { toEt, fromEt, mc } from './helpers';
 import { tr } from './questions';
-import type { Question } from './questions';
+import type { L, Question } from './questions';
 
 /** Estonian word, Russian, English. */
 type W = [string, string, string];
@@ -20,10 +20,10 @@ const vocab = (list: W[]): Question[] =>
 let seat = 0;
 
 /** Fill the gap: the right form goes to a different seat each time, three wrong forms fill the rest. */
-const g = (sentence: string, ru: string, en: string, right: string, wrong: [string, string, string], explain: string): Question => {
+const g = (sentence: string, ru: string, en: string, right: string, wrong: [string, string, string], explain: L): Question => {
   const at = seat++ % 4;
   const options = [...wrong.slice(0, at), right, ...wrong.slice(at)];
-  return mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, at, tr(explain, explain));
+  return mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, at, explain);
 };
 
 /** More A2 questions so every topic has at least 24, each on a word or form that the topic does not use yet. */
@@ -180,25 +180,25 @@ export const a2More: Record<string, Question[]> = {
     g('Mari töötab ___.', 'в магазинах', 'in shops', 'poodides', ['poed', 'poode', 'poodidesse'], 'pood → poodides.'),
   ],
   postpos: [
-    g('Kool on raudteejaama ___.', 'рядом', 'near', 'lähedal', ['kaugel', 'vastu', 'läbi'], 'lähedal — «рядом».'),
-    g('Ma jään siia ___ õhtuni.', 'до', 'until', 'kuni', ['alates', 'pärast', 'enne'], 'kuni — «до».'),
-    g('Ma ootan sind maja ___.', 'за', 'behind', 'taga', ['ees', 'peal', 'all'], 'taga — «за».'),
-    g('Jalgrattad seisavad värava ___.', 'перед', 'in front of', 'ees', ['taga', 'all', 'peal'], 'ees — «перед».'),
-    g('Kingad on voodi ___.', 'под', 'under', 'all', ['peal', 'kõrval', 'ees'], 'all — «под».'),
-    g('Telefon on diivani ___.', 'на', 'on', 'peal', ['all', 'taga', 'vastas'], 'peal — «на».'),
-    g('Istu minu ___.', 'рядом со мной', 'next to me', 'kõrvale', ['kõrval', 'kõrvalt', 'kõrvast'], 'kõrvale — куда?'),
-    g('Me jalutame mere ___.', 'у моря', 'by the sea', 'ääres', ['äärde', 'äärest', 'ümber'], 'ääres — где?'),
+    g('Kool on raudteejaama ___.', 'рядом', 'near', 'lähedal', ['kaugel', 'vastu', 'läbi'], tr('lähedal — «рядом».', 'lähedal — “near”.', 'lähedal — “near”.')),
+    g('Ma jään siia ___ õhtuni.', 'до', 'until', 'kuni', ['alates', 'pärast', 'enne'], tr('kuni — «до».', 'kuni — “until”.', 'kuni — “until”.')),
+    g('Ma ootan sind maja ___.', 'за', 'behind', 'taga', ['ees', 'peal', 'all'], tr('taga — «за».', 'taga — “behind”.', 'taga — “behind”.')),
+    g('Jalgrattad seisavad värava ___.', 'перед', 'in front of', 'ees', ['taga', 'all', 'peal'], tr('ees — «перед».', 'ees — “in front of”.', 'ees — “in front of”.')),
+    g('Kingad on voodi ___.', 'под', 'under', 'all', ['peal', 'kõrval', 'ees'], tr('all — «под».', 'all — “under”.', 'all — “under”.')),
+    g('Telefon on diivani ___.', 'на', 'on', 'peal', ['all', 'taga', 'vastas'], tr('peal — «на».', 'peal — “on”.', 'peal — “on”.')),
+    g('Istu minu ___.', 'рядом со мной', 'next to me', 'kõrvale', ['kõrval', 'kõrvalt', 'kõrvast'], tr('kõrvale — куда?', 'kõrvale — “where to?”', 'kõrvale — “where to?”')),
+    g('Me jalutame mere ___.', 'у моря', 'by the sea', 'ääres', ['äärde', 'äärest', 'ümber'], tr('ääres — где?', 'ääres — “where?”', 'ääres — “where?”')),
   ],
   complex: [
-    g('Ma ootan, ___ buss tuleb.', 'пока', 'until', 'kuni', ['et', 'sest', 'kuigi'], 'kuni — «пока».'),
-    g('Ma tahan minna, ___ mul ei ole aega.', 'но', 'but', 'aga', ['või', 'sest', 'et'], 'aga — «но».'),
-    g('Kas sa tahad teed ___ kohvi?', 'или', 'or', 'või', ['ja', 'aga', 'et'], 'või — «или».'),
-    g('Ma ostsin leiba ___ piima.', 'и', 'and', 'ja', ['või', 'aga', 'sest'], 'ja — «и».'),
+    g('Ma ootan, ___ buss tuleb.', 'пока', 'until', 'kuni', ['et', 'sest', 'kuigi'], tr('kuni — «пока».', 'kuni — “until”.', 'kuni — “until”.')),
+    g('Ma tahan minna, ___ mul ei ole aega.', 'но', 'but', 'aga', ['või', 'sest', 'et'], tr('aga — «но».', 'aga — “but”.', 'aga — “but”.')),
+    g('Kas sa tahad teed ___ kohvi?', 'или', 'or', 'või', ['ja', 'aga', 'et'], tr('või — «или».', 'või — “or”.', 'või — “or”.')),
+    g('Ma ostsin leiba ___ piima.', 'и', 'and', 'ja', ['või', 'aga', 'sest'], tr('ja — «и».', 'ja — “and”.', 'ja — “and”.')),
     g('Kui ma koju jõuan, ___ ma helistan sulle.', 'то', 'then', 'siis', ['sest', 'või', 'aga'], 'kui … siis.'),
-    g('Ma ei tea, ___ ta elab.', 'где', 'where', 'kus', ['et', 'kui', 'sest'], 'kus — «где».'),
-    g('Ma ei tea, ___ ta tuleb.', 'когда', 'when', 'millal', ['kus', 'kes', 'miks'], 'millal — «когда».'),
-    g('Ütle mulle, ___ sa nutad.', 'почему', 'why', 'miks', ['kes', 'kus', 'millal'], 'miks — «почему».'),
-    g('___ sajab, jään ma koju.', 'так как', 'since', 'Kuna', ['Kuigi', 'Et', 'Või'], 'kuna — «так как».'),
+    g('Ma ei tea, ___ ta elab.', 'где', 'where', 'kus', ['et', 'kui', 'sest'], tr('kus — «где».', 'kus — “where”.', 'kus — “where”.')),
+    g('Ma ei tea, ___ ta tuleb.', 'когда', 'when', 'millal', ['kus', 'kes', 'miks'], tr('millal — «когда».', 'millal — “when”.', 'millal — “when”.')),
+    g('Ütle mulle, ___ sa nutad.', 'почему', 'why', 'miks', ['kes', 'kus', 'millal'], tr('miks — «почему».', 'miks — “why”.', 'miks — “why”.')),
+    g('___ sajab, jään ma koju.', 'так как', 'since', 'Kuna', ['Kuigi', 'Et', 'Või'], tr('kuna — «так как».', 'kuna — “since”.', 'kuna — “since”.')),
   ],
   'time-expr': [
     g('Ma tõusen ___.', 'утром', 'in the morning', 'hommikul', ['hommik', 'hommikut', 'hommikule'], 'hommik → hommikul.'),

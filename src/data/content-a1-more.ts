@@ -1,6 +1,6 @@
 import { toEt, fromEt, mc } from './helpers';
 import { tr } from './questions';
-import type { Question } from './questions';
+import type { L, Question } from './questions';
 
 /** Estonian word, Russian, English. */
 type W = [string, string, string];
@@ -18,8 +18,8 @@ const vocab = (list: W[]): Question[] =>
   });
 
 /** Fill the gap: sentence with ___, a gloss in brackets, and an Estonian-only explanation. */
-const g = (sentence: string, ru: string, en: string, options: string[], answer: number, explain: string): Question =>
-  mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, answer, tr(explain, explain));
+const g = (sentence: string, ru: string, en: string, options: string[], answer: number, explain: L): Question =>
+  mc(tr(`${sentence} (${ru})`, `${sentence} (${en})`), options, answer, explain);
 
 /** More A1 questions so every topic has at least 20, each on a word or form that the topic does not use yet. */
 export const a1More: Record<string, Question[]> = {
@@ -86,9 +86,9 @@ export const a1More: Record<string, Question[]> = {
     g('Ma lähen ___.', 'на почту', 'to the post office', ['postkontoris', 'postkontorist', 'postkontorisse', 'postkontor'], 2, 'postkontor → postkontorisse.'),
   ],
   questions: [
-    g('___ on see? — See on raamat.', 'что это?', 'what is this?', ['Kes', 'Mis', 'Kus', 'Millal'], 1, 'Mis = что.'),
-    g('___ sa tuled? — Homme.', 'когда ты придёшь?', 'when are you coming?', ['Kus', 'Kes', 'Millal', 'Miks'], 2, 'Millal = когда.'),
-    g('___ ta on? — Ta on minu õde.', 'кто она?', 'who is she?', ['Mis', 'Kes', 'Kus', 'Kuidas'], 1, 'Kes = кто.'),
+    g('___ on see? — See on raamat.', 'что это?', 'what is this?', ['Kes', 'Mis', 'Kus', 'Millal'], 1, tr('Mis = что.', 'Mis = what.', 'Mis = what.')),
+    g('___ sa tuled? — Homme.', 'когда ты придёшь?', 'when are you coming?', ['Kus', 'Kes', 'Millal', 'Miks'], 2, tr('Millal = когда.', 'Millal = when.', 'Millal = when.')),
+    g('___ ta on? — Ta on minu õde.', 'кто она?', 'who is she?', ['Mis', 'Kes', 'Kus', 'Kuidas'], 1, tr('Kes = кто.', 'Kes = who.', 'Kes = who.')),
   ],
   days: vocab([
     ['eile', 'вчера', 'yesterday'],
@@ -116,12 +116,12 @@ export const a1More: Record<string, Question[]> = {
     ['järgmine aasta', 'следующий год', 'next year'],
   ]),
   frequency: [
-    g('Ta sööb ___ hommikusööki.', 'он всегда завтракает', 'he always has breakfast', ['alati', 'harva', 'mitte', 'ei'], 0, 'alati = всегда.'),
-    g('Ma ei joo ___ alkoholi.', 'никогда', 'never', ['kunagi', 'alati', 'tihti', 'sageli'], 0, 'ei … kunagi = никогда.'),
-    g('Me käime ___ jalutamas.', 'часто', 'often', ['tihti', 'harva', 'mitte', 'ei'], 0, 'tihti = часто.'),
-    g('Ta jääb ___ hiljaks.', 'иногда', 'sometimes', ['mõnikord', 'alati', 'ei', 'mitte'], 0, 'mõnikord = иногда.'),
-    g('Ma loen raamatuid ___.', 'обычно', 'usually', ['tavaliselt', 'mitte', 'ei', 'kunagi'], 0, 'tavaliselt = обычно.'),
-    g('Ma käin kinos väga ___.', 'редко', 'rarely', ['harva', 'alati', 'tihti', 'sageli'], 0, 'harva = редко.'),
+    g('Ta sööb ___ hommikusööki.', 'он всегда завтракает', 'he always has breakfast', ['alati', 'harva', 'mitte', 'ei'], 0, tr('alati = всегда.', 'alati = always.', 'alati = always.')),
+    g('Ma ei joo ___ alkoholi.', 'никогда', 'never', ['kunagi', 'alati', 'tihti', 'sageli'], 0, tr('ei … kunagi = никогда.', 'ei … kunagi = never.', 'ei … kunagi = never.')),
+    g('Me käime ___ jalutamas.', 'часто', 'often', ['tihti', 'harva', 'mitte', 'ei'], 0, tr('tihti = часто.', 'tihti = often.', 'tihti = often.')),
+    g('Ta jääb ___ hiljaks.', 'иногда', 'sometimes', ['mõnikord', 'alati', 'ei', 'mitte'], 0, tr('mõnikord = иногда.', 'mõnikord = sometimes.', 'mõnikord = sometimes.')),
+    g('Ma loen raamatuid ___.', 'обычно', 'usually', ['tavaliselt', 'mitte', 'ei', 'kunagi'], 0, tr('tavaliselt = обычно.', 'tavaliselt = usually.', 'tavaliselt = usually.')),
+    g('Ma käin kinos väga ___.', 'редко', 'rarely', ['harva', 'alati', 'tihti', 'sageli'], 0, tr('harva = редко.', 'harva = rarely.', 'harva = rarely.')),
   ],
   regularity: [
     g('Ma käin tööl ___ päev.', 'каждый', 'every', ['iga', 'igal', 'igas', 'igalt'], 0, 'iga päev.'),
@@ -275,10 +275,10 @@ export const a1More: Record<string, Question[]> = {
     g('Ma elan ___.', 'на острове', 'on an island', ['saarel', 'saarelt', 'saarele', 'saar'], 0, 'saar → saarel.'),
   ],
   have: [
-    g('___ on kaks last.', 'у неё', 'she has', ['Mul', 'Sul', 'Tal', 'Meil'], 2, 'tal on = у неё / у него.'),
-    g('___ on uus auto.', 'у тебя', 'you have', ['Mul', 'Sul', 'Tal', 'Meil'], 1, 'sul on = у тебя.'),
-    g('___ on suur pere.', 'у вас', 'you all have', ['Mul', 'Teil', 'Neil', 'Tal'], 1, 'teil on = у вас.'),
-    g('___ on kaks koera.', 'у них', 'they have', ['Mul', 'Teil', 'Neil', 'Tal'], 2, 'neil on = у них.'),
+    g('___ on kaks last.', 'у неё', 'she has', ['Mul', 'Sul', 'Tal', 'Meil'], 2, tr('tal on = у неё / у него.', 'tal on = she has / he has.', 'tal on = she has / he has.')),
+    g('___ on uus auto.', 'у тебя', 'you have', ['Mul', 'Sul', 'Tal', 'Meil'], 1, tr('sul on = у тебя.', 'sul on = you have.', 'sul on = you have.')),
+    g('___ on suur pere.', 'у вас', 'you all have', ['Mul', 'Teil', 'Neil', 'Tal'], 1, tr('teil on = у вас.', 'teil on = you (plural) have.', 'teil on = you (plural) have.')),
+    g('___ on kaks koera.', 'у них', 'they have', ['Mul', 'Teil', 'Neil', 'Tal'], 2, tr('neil on = у них.', 'neil on = they have.', 'neil on = they have.')),
     g('Mul ___ aega.', 'нет', 'I have no', ['ei ole', 'ei olen', 'ei oled', 'ei oleks'], 0, 'Mul ei ole.'),
     g('Tal ___ raha.', 'нет', 'he has no', ['ei ole', 'ei olen', 'ei oled', 'ei oleks'], 0, 'Tal ei ole.'),
     g('Kas sinul ___ vend?', 'есть', 'do you have', ['on', 'olen', 'oled', 'ole'], 0, 'Sinul on.'),
@@ -358,17 +358,17 @@ export const a1More: Record<string, Question[]> = {
     ['parkla', 'парковка', 'car park'],
   ]),
   prepos: [
-    g('Pall on diivani ___.', 'под', 'under', ['all', 'peal', 'ees', 'taga'], 0, 'all = под.'),
-    g('Lamp on laua ___.', 'над', 'above', ['kohal', 'all', 'ees', 'taga'], 0, 'kohal = над.'),
-    g('Bussipeatus on kooli ___.', 'рядом с', 'next to', ['kõrval', 'peal', 'all', 'sees'], 0, 'kõrval = рядом.'),
+    g('Pall on diivani ___.', 'под', 'under', ['all', 'peal', 'ees', 'taga'], 0, tr('all = под.', 'all = under.', 'all = under.')),
+    g('Lamp on laua ___.', 'над', 'above', ['kohal', 'all', 'ees', 'taga'], 0, tr('kohal = над.', 'kohal = above.', 'kohal = above.')),
+    g('Bussipeatus on kooli ___.', 'рядом с', 'next to', ['kõrval', 'peal', 'all', 'sees'], 0, tr('kõrval = рядом.', 'kõrval = next to.', 'kõrval = next to.')),
     g('Raha on kotis ___.', 'внутри', 'inside', ['sees', 'peal', 'all', 'taga'], 0, 'kotis sees.'),
-    g('Aed on maja ___.', 'позади', 'behind', ['taga', 'ees', 'peal', 'all'], 0, 'taga = позади.'),
-    g('Küünal on kapi ___.', 'на', 'on', ['peal', 'all', 'ees', 'taga'], 0, 'peal = на.'),
-    g('Buss seisab kooli ___.', 'перед', 'in front of', ['ees', 'taga', 'all', 'sees'], 0, 'ees = перед.'),
-    g('Koer magab tooli ___.', 'под', 'under', ['all', 'peal', 'ees', 'kõrval'], 0, 'all = под.'),
-    g('Peegel on akna ja ukse ___.', 'между', 'between', ['vahel', 'peal', 'all', 'taga'], 0, 'vahel = между.'),
-    g('Koer on aia ___.', 'за', 'behind', ['taga', 'ees', 'peal', 'sees'], 0, 'taga = за.'),
-    g('Mina istun sinu ___.', 'рядом с', 'next to', ['kõrval', 'taga', 'all', 'peal'], 0, 'kõrval = рядом.'),
+    g('Aed on maja ___.', 'позади', 'behind', ['taga', 'ees', 'peal', 'all'], 0, tr('taga = позади.', 'taga = behind.', 'taga = behind.')),
+    g('Küünal on kapi ___.', 'на', 'on', ['peal', 'all', 'ees', 'taga'], 0, tr('peal = на.', 'peal = on.', 'peal = on.')),
+    g('Buss seisab kooli ___.', 'перед', 'in front of', ['ees', 'taga', 'all', 'sees'], 0, tr('ees = перед.', 'ees = in front of.', 'ees = in front of.')),
+    g('Koer magab tooli ___.', 'под', 'under', ['all', 'peal', 'ees', 'kõrval'], 0, tr('all = под.', 'all = under.', 'all = under.')),
+    g('Peegel on akna ja ukse ___.', 'между', 'between', ['vahel', 'peal', 'all', 'taga'], 0, tr('vahel = между.', 'vahel = between.', 'vahel = between.')),
+    g('Koer on aia ___.', 'за', 'behind', ['taga', 'ees', 'peal', 'sees'], 0, tr('taga = за.', 'taga = behind.', 'taga = behind.')),
+    g('Mina istun sinu ___.', 'рядом с', 'next to', ['kõrval', 'taga', 'all', 'peal'], 0, tr('kõrval = рядом.', 'kõrval = next to.', 'kõrval = next to.')),
   ],
   cafe: vocab([
     ['menüü', 'меню', 'menu'],
