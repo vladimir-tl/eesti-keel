@@ -1,12 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Quiz, { type Placement } from '../../components/Quiz.astro';
-import Notes from '../../components/Notes.astro';
 import PopularTopics from '../../components/PopularTopics.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
 import { topicsOf } from '../../data/topics';
 import { t } from '../../data/questions';
-import { levelTestNotes, notesFaq } from '../../data/test-notes';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
@@ -33,9 +31,14 @@ const placement: Placement = {
   ),
 };
 ---
-<Base lang={lang} path="level-test" title={s.seoLevelTitle} description={s.seoLevelDesc} jsonLd={[notesFaq(levelTestNotes[lang])]}>
+<Base lang={lang} path="level-test" title={s.seoLevelTitle} description={s.seoLevelDesc}>
   <Quiz lang={lang} title={s.levelTestTitle} intro={s.levelTestIntro} questions={questions} verdicts={[]}
     placement={placement} />
-  <Notes lang={lang} sections={levelTestNotes[lang]} hideInQuiz />
+  <p class="more" data-quiz-hide><a href={href('guide/level-test')}>{s.levelTestMore}</a></p>
   <PopularTopics lang={lang} />
 </Base>
+
+<style>
+  .more { max-width: 640px; margin: 24px auto 0; }
+  .more a { color: var(--accent); }
+</style>

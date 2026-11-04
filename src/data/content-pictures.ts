@@ -78,7 +78,7 @@ export const pictures: Record<string, Question[]> = {
       tr('kaksteist = 12 (2 + -teist). kakskümmend = 20, kaks = 2, kakskümmend üks = 21.', 'kaksteist = 12 (2 + -teist). kakskümmend = 20, kaks = 2, kakskümmend üks = 21.', 'kaksteist = 12. kakskümmend = 20, kaks = 2, kakskümmend üks = 21.')),
   ],
   colors: [
-    pick(choosePic('roheline'), [[swatch('#2f9e44'), 'roheline'], [swatch('#e03131'), 'punane'], [swatch('#1c7ed6'), 'sinine'], [swatch('#fcc419'), 'kollane']], 0,
+    pick(choosePic('roheline'), [[swatch('#0ecb5a'), 'roheline'], [swatch('#e03131'), 'punane'], [swatch('#0000b4'), 'sinine'], [swatch('#fcc419'), 'kollane']], 0,
       tr('roheline — зелёный; punane — красный, sinine — синий, kollane — жёлтый.', 'roheline — green; punane — red, sinine — blue, kollane — yellow.', 'roheline; punane, sinine, kollane.')),
     look(swatch('#f783ac'), tr('Mis värv see on? Какой это цвет?', 'Mis värv see on? What colour is it?', 'Mis värv see on?'), ['roosa', 'punane', 'pruun', 'lilla'], 0,
       tr('roosa — розовый; pruun — коричневый, lilla — фиолетовый.', 'roosa — pink; pruun — brown, lilla — purple.', 'roosa; pruun, lilla.')),

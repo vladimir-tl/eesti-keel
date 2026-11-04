@@ -154,8 +154,8 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   :global(.options .opt:disabled) { cursor: default; }
   :global(.options .opt:disabled:hover) { border-color: var(--line); background: transparent; }
   :global(.options .opt.is-right), :global(.options .opt.is-right:hover) {
-    border-color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent);
-    box-shadow: 0 0 0 2px var(--ok) inset;
+    border-color: var(--ok-solid); background: color-mix(in srgb, var(--ok-solid) 12%, transparent);
+    box-shadow: 0 0 0 2px var(--ok-solid) inset;
   }
   :global(.options .opt.is-wrong), :global(.options .opt.is-wrong:hover) {
     border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent);
@@ -190,13 +190,13 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   }
   :global(.blank:empty::before) { content: '\00a0'; }
   :global(.blank.over) { background: color-mix(in srgb, var(--accent) 15%, transparent); }
-  :global(.blank.is-right) { border-bottom: 2px solid var(--ok); color: var(--ok); background: color-mix(in srgb, var(--ok) 12%, transparent); }
+  :global(.blank.is-right) { border-bottom: 2px solid var(--ok-solid); color: var(--ok); background: color-mix(in srgb, var(--ok-solid) 12%, transparent); }
   :global(.blank.is-wrong) { border-bottom: 2px solid var(--bad); color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent); }
   :global(.drag-ghost) {
     position: fixed; z-index: 10; pointer-events: none; margin: 0; width: auto;
     background: var(--card); box-shadow: 0 6px 18px rgba(0, 0, 0, .2); transform: rotate(-2deg);
   }
-  #text.is-right { border-color: var(--ok); box-shadow: 0 0 0 2px var(--ok) inset; }
+  #text.is-right { border-color: var(--ok-solid); box-shadow: 0 0 0 2px var(--ok-solid) inset; }
   #text.is-wrong { border-color: var(--bad); box-shadow: 0 0 0 2px var(--bad) inset; }
   .feedback { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); font-size: .95rem; }
   .feedback :global(p) { margin: 4px 0 0; }
@@ -212,7 +212,7 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   :global(.lv b) { font-size: 1.05rem; }
   :global(.lv .track) { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
   :global(.lv .fill) { height: 100%; border-radius: 5px; background: var(--bad); }
-  :global(.lv.pass .fill) { background: var(--ok); }
+  :global(.lv.pass .fill) { background: var(--ok-solid); }
   :global(.lv span:last-child) { text-align: right; font-variant-numeric: tabular-nums; }
   .next-links { margin-bottom: 8px; }
   :global(.next-links .btn:not(:first-child)) {
@@ -247,10 +247,10 @@ const letters = ['ä', 'ö', 'õ', 'ü', 'š', 'ž'];
   :global(.sign b) { font-size: 1.6rem; letter-spacing: .06em; }
   :global(.sign span) { font-size: 1.05rem; font-weight: 600; }
   :global(.sign-red) { border-color: #c92a2a; color: #c92a2a; }
-  :global(.sign-green) { border-color: #2b8a3e; background: #2b8a3e; color: #fff; }
-  :global(.sign-blue) { border-color: #0b5cad; background: #0b5cad; color: #fff; }
+  :global(.sign-green) { border-color: #087a36; background: #087a36; color: #fff; }
+  :global(.sign-blue) { border-color: rgb(0, 0, 180); background: rgb(0, 0, 180); color: #fff; }
   :global(.board) { min-width: 220px; max-width: 100%; border: 2px solid var(--line); border-radius: 10px; overflow: hidden; }
-  :global(.board-title) { padding: 8px 14px; background: var(--accent); color: #fff; font-weight: 700; }
+  :global(.board-title) { padding: 8px 14px; background: var(--accent-solid); color: #fff; font-weight: 700; }
   :global(.board table) { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
   :global(.board th), :global(.board td) { padding: 6px 14px; text-align: left; border-top: 1px solid var(--line); }
   :global(.board td:last-child), :global(.board th:last-child) { text-align: right; }

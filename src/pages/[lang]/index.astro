@@ -1,12 +1,27 @@
 ---
 import Base from '../../layouts/Base.astro';
-import LevelSteps from '../../components/LevelSteps.astro';
-import PopularTopics from '../../components/PopularTopics.astro';
 import { langs, ui, type Lang } from '../../i18n/ui';
+import { topics } from '../../data/topics';
+import { t } from '../../data/questions';
 
 export const getStaticPaths = () => langs.map((lang) => ({ params: { lang } }));
 const lang = Astro.params.lang as Lang;
 const s = ui[lang];
+const examCards = [
+  { level: 'A1', href: 'test', preview: s.examPreviewA1 },
+  { level: 'A2', href: 'test-a2', preview: s.examPreviewA2 },
+  { level: 'B1', href: 'test-b1', preview: s.examPreviewB1 },
+];
+// One everyday topic per level with a sample question.
+const topicCards = [
+  { level: 'A1', id: 'family', sample: 'Mari on Peetri ___.' },
+  { level: 'A2', id: 'housing', sample: 'Mul ei ole oma korterit. Ma ___ korterit.' },
+  { level: 'B1', id: 'society', sample: 'Ma austan inimesi, ___ on minust erinevad.' },
+].map(({ level, id, sample }) => {
+  const tp = topics.find((x) => x.id === id)!;
+  const q = tp.questions.find((x) => t(x.prompt, 'en').includes(sample))!;
+  return { level, href: `topics/${id}`, title: t(tp.title, lang), preview: t(q.prompt, lang) };
+});
 const faqLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -14,31 +29,76 @@ const faqLd = {
 };
 ---
 <Base lang={lang} title={s.seoHomeTitle} description={s.seoHomeDesc} jsonLd={[faqLd]}>
-  <section class="hero">
-    <div>
-      <span class="badge">{s.badge}</span>
+  <section class="hero panel">
+    <div class="hero-text">
       <h1>{s.heroBefore} <em>{s.heroAccent}</em></h1>
-      <p class="muted">{s.heroSub}</p>
+      <p class="hero-sub muted">{s.heroSub}</p>
       <a class="btn hero-cta" href={`/${lang}/level-test`}>{s.promoCta}</a>
-      <p class="hero-note muted">{s.promoCtaNote}</p>
-      <div class="hero-links">
-        {[
-          { href: 'test', label: s.testCta, note: s.testCtaNote },
-          { href: 'test-a2', label: s.testCtaA2, note: s.testCtaA2Note },
-          { href: 'test-b1', label: s.testCtaB1, note: s.testCtaB1Note },
-          { href: 'topics#a1', label: s.topicsCtaA1, note: s.topicsCtaA1Note },
-          { href: 'topics#a2', label: s.topicsCtaA2, note: s.topicsCtaA2Note },
-          { href: 'topics#b1', label: s.topicsCtaB1, note: s.topicsCtaB1Note },
-        ].map((l) => (
-          <a href={`/${lang}/${l.href}`}>
-            <span class="hero-link-label">{l.label}</span>
-            <span class="hero-link-note muted">{l.note}</span>
-          </a>
-        ))}
-      </div>
+      <p class="hero-note muted">{s.promoCtaNote} · {s.promoBadge}</p>
     </div>
-    <div class="art">
-      <LevelSteps lang={lang} labels={[s.levelA1, s.levelA2, s.levelB1]} />
+    <!-- A sketch of a quiz card: a pointer picks the right answer, the result goes from a spinner to a tick and the progress bar runs. -->
+    <svg class="hero-art" viewBox="0 0 320 220" aria-hidden="true">
+      <rect x="1" y="1" width="318" height="218" rx="16" fill="var(--card)" stroke="var(--line)" />
+      <rect x="24" y="24" width="272" height="6" rx="3" fill="var(--line)" />
+      <rect class="qa-bar" x="24" y="24" width="272" height="6" rx="3" fill="var(--accent)" />
+      <text x="24" y="66" font-size="20" fill="var(--fg)">Ma elan</text>
+      <line x1="104" y1="74" x2="202" y2="74" stroke="var(--line)" stroke-width="2" />
+      <g class="qa-answer">
+        <rect x="104" y="46" width="98" height="28" rx="6" fill="var(--ok-solid)" fill-opacity=".14" />
+        <line x1="104" y1="74" x2="202" y2="74" stroke="var(--ok-solid)" stroke-width="2" />
+        <text x="153" y="66" font-size="18" font-weight="700" fill="var(--ok)" text-anchor="middle">Tallinnas</text>
+      </g>
+      <text x="208" y="66" font-size="20" fill="var(--fg)">.</text>
+      <rect x="24" y="96" width="86" height="34" rx="10" fill="none" stroke="var(--line)" />
+      <text x="67" y="118" font-size="14" fill="var(--muted)" text-anchor="middle">Tallinn</text>
+      <rect x="118" y="96" width="104" height="34" rx="10" fill="none" stroke="var(--line)" />
+      <text class="qa-idle" x="170" y="118" font-size="14" fill="var(--muted)" text-anchor="middle">Tallinnas</text>
+      <g class="qa-pick">
+        <rect x="118" y="96" width="104" height="34" rx="10" fill="var(--ok-solid)" fill-opacity=".12" stroke="var(--ok-solid)" stroke-width="2" />
+        <text x="170" y="118" font-size="14" fill="var(--ok)" text-anchor="middle">Tallinnas ✓</text>
+      </g>
+      <rect x="230" y="96" width="66" height="34" rx="10" fill="none" stroke="var(--line)" />
+      <text x="263" y="118" font-size="14" fill="var(--muted)" text-anchor="middle">Tartu</text>
+      <rect x="24" y="148" width="272" height="44" rx="10" fill="none" stroke="var(--line)" />
+      <g class="qa-wait">
+        <circle cx="45" cy="170" r="7" fill="none" stroke="var(--line)" stroke-width="2" />
+        <circle class="qa-spin" cx="45" cy="170" r="7" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-dasharray="11 33" />
+      </g>
+      <text class="qa-check" x="40" y="175" font-size="14" font-weight="700" fill="var(--ok)">✓</text>
+      <rect x="60" y="163" width="120" height="6" rx="3" fill="var(--line)" />
+      <rect x="60" y="175" width="190" height="6" rx="3" fill="var(--line)" />
+      <circle class="qa-ripple" cx="176" cy="116" r="14" fill="none" stroke="var(--ok-solid)" stroke-width="2" />
+      <g class="qa-cursor">
+        <path class="qa-press" d="M0 0v17l4.5-4 3 7 3-1.3-3-6.7H13z" fill="var(--fg)" stroke="var(--card)" stroke-width="1.5" stroke-linejoin="round" />
+      </g>
+    </svg>
+    <div class="paths">
+      <section class="path">
+        <h2>{s.pathExam}</h2>
+        <div class="exam-cards">
+          {examCards.map((c) => (
+            <a class="exam-card" href={`/${lang}/${c.href}`}>
+              <h3>{c.level}</h3>
+              <p>{c.preview}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+      <section class="path">
+        <div class="path-head">
+          <h2>{s.pathTopics}</h2>
+          <a href={`/${lang}/topics`}>{s.navTopics} →</a>
+        </div>
+        <div class="path-cards">
+          {topicCards.map((c) => (
+            <a class="path-card" href={`/${lang}/${c.href}`}>
+              <span class="path-tag">{c.level}</span>
+              <h3>{c.title}</h3>
+              <p class="muted">{c.preview}</p>
+            </a>
+          ))}
+        </div>
+      </section>
     </div>
   </section>
 
@@ -60,41 +120,6 @@ const faqLd = {
     </div>
   </section>
 
-  <section class="promo panel">
-    <div class="promo-text">
-      <h2>{s.promoBefore} <em>{s.promoAccent}</em></h2>
-      <p class="muted">{s.promoSub}</p>
-      <span class="badge">{s.promoBadge}</span>
-      <div class="cta">
-        <a class="btn" href={`/${lang}/level-test`}>{s.promoCta}</a>
-        <a class="muted" href={`/${lang}/test-a2`}>{s.promoA2}</a>
-      </div>
-    </div>
-    <!-- A sketch of a quiz card: a gap sentence and the right answer ticked. -->
-    <svg class="promo-art" viewBox="0 0 320 220" aria-hidden="true">
-      <rect x="1" y="1" width="318" height="218" rx="16" fill="var(--card)" stroke="var(--line)" />
-      <rect x="24" y="24" width="272" height="6" rx="3" fill="var(--line)" />
-      <rect x="24" y="24" width="150" height="6" rx="3" fill="var(--accent)" />
-      <text x="24" y="66" font-size="20" fill="var(--fg)">Ma elan</text>
-      <rect x="104" y="46" width="98" height="28" rx="6" fill="var(--ok)" fill-opacity=".14" />
-      <line x1="104" y1="74" x2="202" y2="74" stroke="var(--ok)" stroke-width="2" />
-      <text x="153" y="66" font-size="18" font-weight="700" fill="var(--ok)" text-anchor="middle">Tallinnas</text>
-      <text x="208" y="66" font-size="20" fill="var(--fg)">.</text>
-      <rect x="24" y="96" width="86" height="34" rx="10" fill="none" stroke="var(--line)" />
-      <text x="67" y="118" font-size="14" fill="var(--muted)" text-anchor="middle">Tallinn</text>
-      <rect x="118" y="96" width="104" height="34" rx="10" fill="var(--ok)" fill-opacity=".12" stroke="var(--ok)" stroke-width="2" />
-      <text x="170" y="118" font-size="14" fill="var(--ok)" text-anchor="middle">Tallinnas ✓</text>
-      <rect x="230" y="96" width="66" height="34" rx="10" fill="none" stroke="var(--line)" />
-      <text x="263" y="118" font-size="14" fill="var(--muted)" text-anchor="middle">Tartu</text>
-      <rect x="24" y="148" width="272" height="44" rx="10" fill="none" stroke="var(--line)" />
-      <text x="40" y="175" font-size="14" font-weight="700" fill="var(--ok)">✓</text>
-      <rect x="60" y="163" width="120" height="6" rx="3" fill="var(--line)" />
-      <rect x="60" y="175" width="190" height="6" rx="3" fill="var(--line)" />
-    </svg>
-  </section>
-
-  <PopularTopics lang={lang} />
-
   <section class="faq-block panel">
     <h2>{s.faqTitle}</h2>
     {s.faq.map(([q, a]) => (
@@ -107,24 +132,92 @@ const faqLd = {
 </Base>
 
 <style>
-  .hero { display: grid; gap: 32px; padding-top: 16px; }
-  .badge { display: inline-block; padding: 2px 10px; border: 1px solid var(--line); border-radius: 10px; font-size: .875rem; }
-  h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); line-height: 1.12; margin: 16px 0; }
+  .hero { display: grid; gap: 32px 56px; align-items: center; }
+  h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); line-height: 1.2; margin: 0 0 16px; }
   h1 em { font-style: normal; color: var(--accent); }
-  .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .hero-sub { font-size: 1.1rem; margin: 0 0 16px; }
   .hero-cta { padding: 14px 32px; font-size: 1.15rem; font-weight: 600; margin-top: 8px; }
   .hero-note { margin: 8px 0 0; font-size: .875rem; }
-  .hero-links { display: grid; gap: 28px 32px; margin-top: 32px; }
-  @media (min-width: 560px) { .hero-links { grid-template-columns: repeat(2, 1fr); } }
-  .hero-links a { display: flex; flex-direction: column; gap: 6px; text-decoration: none; }
-  .hero-link-label { color: var(--accent); font-size: .95rem; text-decoration: underline; text-underline-offset: 3px; }
-  .hero-link-note { font-size: .85rem; }
-  .art { max-width: 360px; width: 100%; margin: 0 auto; }
-  /* Shared look of the tinted home blocks ("Who it is for", "Check your Estonian"). */
-  .panel {
-    margin-top: 56px; padding: 32px 24px; border: 1px solid var(--line); border-radius: 20px;
-    background: color-mix(in srgb, var(--accent) 7%, var(--card));
+  .hero-art { width: 100%; max-width: 340px; margin: 0 auto; display: block; }
+  /* Without the animation the card rests on its answered state. */
+  .qa-bar { transform: scaleX(.65); transform-box: fill-box; transform-origin: left center; }
+  .qa-idle, .qa-wait, .qa-ripple, .qa-cursor { opacity: 0; }
+  .qa-ripple, .qa-press, .qa-spin, .qa-check { transform-box: fill-box; }
+  .qa-ripple, .qa-spin, .qa-check { transform-origin: center; }
+  .qa-press { transform-origin: 0 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-art * { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+    .qa-bar { animation-name: qa-bar; }
+    .qa-idle { animation-name: qa-idle; }
+    .qa-pick { animation-name: qa-pick; }
+    .qa-answer { animation-name: qa-answer; }
+    .qa-wait { animation-name: qa-wait; }
+    .qa-check { animation-name: qa-check; }
+    .hero-art .qa-spin { animation: qa-spin 1s linear infinite; }
+    .qa-ripple { animation-name: qa-ripple; }
+    .qa-cursor { animation-name: qa-cursor; }
+    .qa-press { animation-name: qa-press; }
   }
+  @keyframes qa-cursor {
+    0%, 6% { opacity: 0; transform: translate(270px, 176px); }
+    12% { opacity: 1; transform: translate(270px, 176px); }
+    26%, 38% { opacity: 1; transform: translate(176px, 116px); }
+    44%, 100% { opacity: 0; transform: translate(192px, 128px); }
+  }
+  @keyframes qa-press { 0%, 26% { transform: scale(1); } 29% { transform: scale(.82); } 33%, 100% { transform: scale(1); } }
+  @keyframes qa-ripple {
+    0%, 29% { opacity: 0; transform: scale(.4); }
+    30% { opacity: .5; }
+    42%, 100% { opacity: 0; transform: scale(1.6); }
+  }
+  @keyframes qa-idle { 0%, 29% { opacity: 1; } 34%, 90% { opacity: 0; } 97%, 100% { opacity: 1; } }
+  @keyframes qa-pick { 0%, 29% { opacity: 0; } 34%, 90% { opacity: 1; } 97%, 100% { opacity: 0; } }
+  @keyframes qa-answer {
+    0%, 31% { opacity: 0; transform: translateY(6px); }
+    38%, 90% { opacity: 1; transform: none; }
+    97%, 100% { opacity: 0; transform: none; }
+  }
+  @keyframes qa-wait { 0%, 44% { opacity: 1; } 46%, 92% { opacity: 0; } 97%, 100% { opacity: 1; } }
+  @keyframes qa-check {
+    0%, 44% { opacity: 0; transform: scale(.5); }
+    48% { opacity: 1; transform: scale(1.2); }
+    52%, 90% { opacity: 1; transform: scale(1); }
+    97%, 100% { opacity: 0; transform: scale(1); }
+  }
+  @keyframes qa-spin { to { transform: rotate(360deg); } }
+  @keyframes qa-bar { 0%, 46% { transform: scaleX(.3); } 64%, 90% { transform: scaleX(.65); } 97%, 100% { transform: scaleX(.3); } }
+  .paths { grid-column: 1 / -1; display: grid; gap: 40px; margin-top: clamp(24px, 5vw, 48px); }
+  .path-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .path-head a { color: var(--accent); font-size: .95rem; text-underline-offset: 3px; }
+  .panel .path h2 { font-size: 1.5rem; margin: 0 0 16px; }
+  .path-cards { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .path-cards { grid-template-columns: repeat(3, 1fr); } }
+  .path-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px;
+    border: 1px solid var(--line); border-radius: 16px; background: var(--card); color: inherit; text-decoration: none;
+    transition: border-color .15s, transform .15s, box-shadow .15s, background-color .15s;
+  }
+  .path-card:hover, .path-card:focus-visible {
+    border-color: var(--accent); transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+    background: color-mix(in srgb, var(--accent) 6%, var(--card));
+  }
+  @media (prefers-reduced-motion: reduce) { .path-card { transition: none; } .path-card:hover, .path-card:focus-visible { transform: none; } }
+  .path-card h3 { font-size: 1.1rem; line-height: 1.3; margin: 0; }
+  .path-tag {
+    padding: 2px 10px; border-radius: 10px; font-size: .8rem; font-weight: 600; color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+  .path-card p { margin: 0; font-size: .95rem; line-height: 1.5; }
+  .exam-cards { display: grid; gap: 24px 32px; }
+  @media (min-width: 860px) { .exam-cards { grid-template-columns: repeat(3, 1fr); } }
+  .exam-card { display: flex; align-items: flex-start; gap: 24px; color: inherit; text-decoration: none; }
+  .exam-card h3 { flex: none; min-width: 1.7em; margin: 0; font-size: 3rem; line-height: 1; letter-spacing: -.02em; transition: color .15s; }
+  .exam-card p { margin: 0; font-family: 'Manrope Variable', system-ui, sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.5; }
+  .exam-card:hover h3, .exam-card:focus-visible h3 { color: var(--accent); }
+  /* Shared look of the home blocks. */
+  .panel { margin-top: 56px; }
+  .hero.panel { margin-top: clamp(32px, 6vw, 64px); }
   .panel h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.1; margin: 0 0 12px; }
   .panel h2 em { font-style: normal; color: var(--accent); }
   .audience h2 { margin-bottom: 24px; }
@@ -138,19 +231,13 @@ const faqLd = {
   }
   .aud h3 { font-size: 1.1rem; margin: 12px 0 6px; }
   .aud p { margin: 0; font-size: .95rem; line-height: 1.5; }
-  .promo { display: grid; gap: 24px; align-items: center; }
-  .promo p { font-size: 1.1rem; margin: 0 0 16px; max-width: 26em; }
-  .promo .badge { margin-bottom: 20px; }
-  .promo-art { width: 100%; max-width: 340px; margin: 0 auto; display: block; }
   .faq-block h2 { margin-bottom: 16px; }
   .faq { border-bottom: 1px solid var(--line); }
   .faq:last-child { border-bottom: 0; }
   .faq summary { padding: 14px 0; cursor: pointer; }
-  .faq summary h3 { display: inline; font-size: 1.05rem; font-weight: 600; margin: 0; }
+  .faq summary h3 { display: inline; font-size: 1.05rem; font-weight: 700; margin: 0; }
   .faq p { margin: 0 0 14px; line-height: 1.5; }
   @media (min-width: 760px) {
-    .hero { grid-template-columns: 1.1fr 1fr; align-items: center; }
-    .panel { padding: 40px; }
-    .promo { grid-template-columns: 1.1fr 1fr; }
+    .hero { grid-template-columns: 1.1fr 1fr; }
   }
 </style>

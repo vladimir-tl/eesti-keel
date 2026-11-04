@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/manrope';
 import { defaultLang, langs, ui, type Lang } from '../i18n/ui';
 import { guides } from '../data/guides';
 
@@ -35,6 +36,18 @@ const nav = [
   { id: 'test', label: s.introTitle },
   { id: 'test-a2', label: s.introTitleA2 },
   { id: 'test-b1', label: s.introTitleB1 },
+];
+// Header menu; each item stays highlighted across the pages it groups.
+const mainNav = [
+  { id: 'level-test', label: s.navLevelTests, sections: ['level-test', 'test', 'test-a2', 'test-b1'] },
+  { id: 'topics', label: s.navPractice, sections: ['topics'] },
+  { id: 'guide', label: s.navResources, sections: ['guide', 'exam-a2', 'exam-b1'] },
+];
+// The "Level tests" dropdown.
+const levelTests = [
+  { id: 'test', label: s.introTitle, note: s.levelA1 },
+  { id: 'test-a2', label: s.introTitleA2, note: s.levelA2 },
+  { id: 'test-b1', label: s.introTitleB1, note: s.levelB1 },
 ];
 // Footer columns; on phones the burger menu shows them too.
 const articleLinks = [
@@ -108,18 +121,48 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
     <header class="top">
       <a class="brand" href={`/${lang}`}>
         <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="7" fill="var(--accent)" />
+          <rect width="32" height="32" rx="7" fill="var(--accent-solid)" />
           <rect x="7" y="17" width="5" height="8" rx="1.5" fill="#fff" />
           <rect x="13.5" y="12" width="5" height="13" rx="1.5" fill="#fff" />
           <rect x="20" y="7" width="5" height="18" rx="1.5" fill="#fff" fill-opacity=".45" />
         </svg>
-        {s.siteName}
+        <span class="brand-name">{s.siteName}</span>
       </a>
       <nav class="main-nav" aria-label="Main">
-        {nav.map((n) => (
-          <a href={`/${lang}/${n.id}`} aria-current={section === n.id ? 'page' : undefined}>{n.label}</a>
+        {mainNav.map((n) => n.id === 'level-test' ? (
+          <div class="nav-drop" id="nav-drop">
+            <button class="nav-btn" id="nav-btn" type="button" aria-expanded="false" aria-controls="drop"
+              aria-current={n.sections.includes(section) ? 'page' : undefined}>
+              {n.label}
+              <svg class="nav-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" /></svg>
+            </button>
+            <div class="drop" id="drop">
+              <div class="drop-tests">
+                <span class="foot-h">{s.navByLevel}</span>
+                {levelTests.map((x) => (
+                  <a class="drop-link" href={`/${lang}/${x.id}`} aria-current={section === x.id ? 'page' : undefined}>
+                    <span>{x.label}</span>
+                    <span class="drop-note">{x.note}</span>
+                  </a>
+                ))}
+              </div>
+              <a class="drop-find" href={`/${lang}/level-test`} aria-current={section === 'level-test' ? 'page' : undefined}>
+                <span class="drop-find-title">{s.navFindLevel}</span>
+                <span class="drop-note">{s.navFindLevelText}</span>
+                <svg class="drop-art" viewBox="0 0 180 72" aria-hidden="true">
+                  <rect x="2" y="44" width="52" height="26" rx="8" fill="var(--accent)" fill-opacity=".25" />
+                  <rect x="64" y="24" width="52" height="46" rx="8" fill="var(--accent)" fill-opacity=".5" />
+                  <rect x="126" y="2" width="52" height="68" rx="8" fill="var(--accent)" />
+                  <text x="28" y="62" font-size="13" font-weight="700" fill="var(--accent)" text-anchor="middle">A1</text>
+                  <text x="90" y="62" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">A2</text>
+                  <text x="152" y="62" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">B1</text>
+                </svg>
+              </a>
+            </div>
+          </div>
+        ) : (
+          <a href={`/${lang}/${n.id}`} aria-current={n.sections.includes(section) ? 'page' : undefined}>{n.label}</a>
         ))}
-        <a href={`/${lang}/guide`} aria-current={section === 'guide' ? 'page' : undefined}>{s.navArticles}</a>
       </nav>
       <nav class="lang-nav" aria-label="Language">
         {langs.map((l) => (
@@ -173,6 +216,35 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
       </div>
     </div>
     <script>
+      // "Level tests" dropdown: hover comes from CSS; this adds click, keyboard and touch.
+      const navDrop = document.getElementById('nav-drop')!;
+      const navBtn = document.getElementById('nav-btn')!;
+      const setDrop = (open: boolean) => {
+        navDrop.classList.toggle('open', open);
+        navBtn.setAttribute('aria-expanded', String(open));
+      };
+      // "dismissed" lets Escape or a second click close the panel while the mouse is still over it.
+      navBtn.addEventListener('click', () => {
+        const open = !navDrop.classList.contains('open');
+        setDrop(open);
+        navDrop.classList.toggle('dismissed', !open);
+      });
+      navDrop.addEventListener('pointerenter', () => navDrop.classList.remove('dismissed'));
+      navDrop.addEventListener('pointerleave', (e) => {
+        navDrop.classList.remove('dismissed');
+        if (e.pointerType === 'mouse') setDrop(false);
+      });
+      navDrop.addEventListener('focusout', (e) => {
+        if (e.relatedTarget && !navDrop.contains(e.relatedTarget as Node)) setDrop(false);
+      });
+      document.addEventListener('click', (e) => { if (!navDrop.contains(e.target as Node)) setDrop(false); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape' || !navDrop.matches('.open, :hover')) return;
+        setDrop(false);
+        navDrop.classList.add('dismissed');
+        navBtn.focus();
+      });
+
       const banner = document.getElementById('cookie')!;
       let stored: string | null = null;
       try { stored = localStorage.getItem('cookie-consent'); } catch {}
@@ -206,11 +278,13 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
 
 <style is:global>
   :root {
-    --bg: #f7f8fa;
+    --bg: #ffffff;
     --fg: #1c2333;
     --card: #ffffff;
-    --accent: #0072ce;
-    --ok: #2b8a3e;
+    --accent: rgb(0, 0, 180);
+    --accent-solid: rgb(0, 0, 180);
+    --ok: #087a36;
+    --ok-solid: #0ecb5a;
     --bad: #c92a2a;
     --muted: #6b7280;
     --line: #dfe3ea;
@@ -220,8 +294,8 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
       --bg: #12151c;
       --fg: #e8ebf2;
       --card: #1b2030;
-      --accent: #3a93e0;
-      --ok: #51cf66;
+      --accent: #8080ff;
+      --ok: #0ecb5a;
       --bad: #ff6b6b;
       --muted: #9aa3b5;
       --line: #2b3245;
@@ -245,6 +319,7 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
     background: var(--bg);
     color: var(--fg);
   }
+  h1, h2, h3, h4, h5, h6 { font-family: 'Manrope Variable', system-ui, sans-serif; font-weight: 800; }
   /* Keep the footer at the bottom of the screen on short pages. */
   body { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
   main { flex: 1 0 auto; width: 100%; }
@@ -254,15 +329,58 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
     position: sticky; top: 0; z-index: 10;
     max-width: none; margin: 0 0 24px; padding: 14px max(16px, calc((100% - 920px) / 2));
     display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap;
-    background: var(--bg); border-bottom: 1px solid var(--line);
+    background: var(--bg);
   }
   .top a { color: var(--fg); text-decoration: none; }
   .brand { font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
   .logo { width: 28px; height: 28px; flex: none; }
-  .main-nav { display: flex; gap: 4px 20px; flex-wrap: wrap; font-size: .95rem; }
-  .main-nav a { padding: 4px 0; border-bottom: 2px solid transparent; }
-  .main-nav a:hover { color: var(--accent); }
-  .main-nav a[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
+  /* The site name and the nav links share a text baseline; line-height keeps the name centred on the logo. */
+  .brand { align-self: baseline; }
+  .brand-name { align-self: baseline; line-height: 28px; }
+  .main-nav { display: flex; align-self: baseline; gap: 4px 20px; flex-wrap: wrap; font-size: .95rem; }
+  .main-nav > a, .nav-btn { padding: 4px 0; border-bottom: 2px solid transparent; }
+  .main-nav > a:hover, .nav-btn:hover { color: var(--accent); }
+  .main-nav > a[aria-current], .nav-btn[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border-width: 0 0 2px; color: var(--fg); font: inherit; cursor: pointer;
+  }
+  .nav-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .nav-caret { width: 10px; height: 6px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; transition: transform .15s; }
+  /* Opens under the header, measured from the page column rather than from the button. */
+  .drop {
+    position: absolute; top: calc(100% - 2px); left: max(16px, calc((100% - 920px) / 2)); z-index: 11;
+    width: min(680px, calc(100% - 32px)); padding: 12px;
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 12px;
+    border: 1px solid var(--line); border-radius: 20px; background: var(--card);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .12);
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity .15s, transform .15s, visibility .15s;
+  }
+  /* Keeps the pointer inside the dropdown on its way from the button to the panel. */
+  .drop::before { content: ''; position: absolute; left: 0; right: 0; bottom: 100%; height: 16px; }
+  .nav-drop.open .drop { opacity: 1; visibility: visible; transform: none; }
+  .nav-drop.open .nav-caret { transform: rotate(180deg); }
+  @media (hover: hover) {
+    .nav-drop:not(.dismissed):hover .drop { opacity: 1; visibility: visible; transform: none; }
+    .nav-drop:not(.dismissed):hover .nav-caret { transform: rotate(180deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .drop, .nav-caret { transition: none; } }
+  .drop-tests { display: flex; flex-direction: column; gap: 2px; padding: 12px 8px; }
+  .drop-tests .foot-h { padding: 0 8px 6px; }
+  .top .drop a { text-decoration: none; }
+  .drop-link { display: flex; flex-direction: column; padding: 8px; border-radius: 10px; }
+  .drop-link:hover, .drop-link[aria-current] { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .drop-note { color: var(--muted); font-size: .875rem; line-height: 1.4; }
+  .drop-find {
+    display: flex; flex-direction: column; gap: 6px; padding: 20px; border-radius: 12px;
+    background: color-mix(in srgb, var(--accent) 8%, var(--card));
+    transition: background-color .15s;
+  }
+  .drop-find:hover { background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+  .drop-find-title { font: 800 1.15rem/1.3 'Manrope Variable', system-ui, sans-serif; }
+  .drop-art { width: 100%; max-width: 200px; margin: auto 0 0; padding-top: 16px; }
+  .drop a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .lang-nav { display: flex; gap: 8px; margin-left: auto; }
   .lang-nav a { padding: 4px 10px; border: 1px solid var(--line); border-radius: 10px; font-size: .875rem; }
   .lang-nav a[aria-current] { border-color: var(--accent); color: var(--accent); }
@@ -296,6 +414,7 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
   .menu .foot-links a.foot-h { color: var(--muted); }
   @media (max-width: 640px) {
     .top > .main-nav, .top > .lang-nav { display: none; }
+    .brand { align-self: center; }
     .burger { display: flex; }
   }
   @media (min-width: 641px) { .menu { display: none !important; } }
@@ -307,12 +426,12 @@ const langHref = (l: Lang) => (noindex ? `/${l}` : `/${l}${path ? `/${path}` : '
   }
   .btn {
     padding: 10px 20px; border: 0; border-radius: 10px; font: inherit;
-    background: var(--accent); color: #fff; cursor: pointer;
+    background: var(--accent-solid); color: #fff; cursor: pointer;
     display: inline-block; text-decoration: none;
   }
   .btn { transition: background-color .15s, transform .15s, box-shadow .15s; }
   .btn:not(:disabled):hover {
-    background: color-mix(in srgb, var(--accent) 85%, #000);
+    background: color-mix(in srgb, var(--accent-solid) 85%, #000);
     transform: translateY(-2px);
     box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 35%, transparent);
   }
