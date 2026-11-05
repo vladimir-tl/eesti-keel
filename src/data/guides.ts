@@ -1,5 +1,6 @@
 import type { Lang } from '../i18n/ui';
 import { harnoLinks } from './exam-a2';
+import { levelTestNotes } from './test-notes';
 
 /**
  * Articles linked from the footer: what the site does not cover, and guides to the parts of the
@@ -1582,4 +1583,50 @@ const et: Guide[] = [
   },
 ];
 
-export const guides: Record<Lang, Guide[]> = { ru, en, et };
+/** The level test article: the page itself only links here, so the text stays in levelTestNotes. */
+const levelTestGuide = (lang: Lang, nav: string, title: string, description: string, h1: string, lead: string): Guide => ({
+  slug: 'level-test',
+  nav,
+  group: 'help',
+  title,
+  description,
+  h1,
+  lead,
+  sections: levelTestNotes[lang].map(({ h, p, table, list, pages }) => ({ h, p, table, list, links: pages })),
+});
+
+export const guides: Record<Lang, Guide[]> = {
+  ru: [
+    ...ru,
+    levelTestGuide(
+      'ru',
+      'Как работает тест уровня',
+      'Как работает тест на уровень эстонского языка: баллы и уровни A1–B1',
+      'Как устроен бесплатный тест уровня эстонского языка: 30 вопросов, как считается результат, что значат уровни A1, A2 и B1 и что делать после теста.',
+      'Как работает тест уровня',
+      'Из чего состоит тест, как считается результат, что значат уровни A1, A2 и B1 и что делать дальше.',
+    ),
+  ],
+  en: [
+    ...en,
+    levelTestGuide(
+      'en',
+      'How the level test works',
+      'How the Estonian Level Test Works: Scoring and A1–B1 Levels',
+      'How the free Estonian level test works: its 30 questions, how your result is scored, what A1, A2 and B1 mean and what to do after the test.',
+      'How the level test works',
+      'What the test covers, how your result is scored, what A1, A2 and B1 mean and what to do next.',
+    ),
+  ],
+  et: [
+    ...et,
+    levelTestGuide(
+      'et',
+      'Kuidas tasemetest käib',
+      'Kuidas eesti keele tasemetest käib: tulemus ja tasemed A1–B1',
+      'Kuidas tasuta eesti keele tasemetest käib: 30 küsimust, kuidas tulemus arvutatakse, mida tähendavad tasemed A1, A2 ja B1 ning mida pärast testi teha.',
+      'Kuidas tasemetest käib',
+      'Mida test hõlmab, kuidas tulemus arvutatakse, mida tähendavad tasemed A1, A2 ja B1 ning mida edasi teha.',
+    ),
+  ],
+};
